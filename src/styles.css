@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
+  
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+  }
+
+
+.dashboard-mobile-menu-button {
+  display: none;
+}
+@media (max-width: 767px) {
+  .dashboard-mobile-menu-button {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  aside {
+    display: none;
+  }
+}

@@ -1,0 +1,571 @@
+<div class="bg-white pt-20 overflow-x-hidden">
+  <!-- Header: Quiénes Somos -->
+  <div class="relative">
+    <div class="relative h-96">
+      <div class="absolute inset-0">
+        <img
+          class="w-full h-full object-cover shadow-[0_0_20px_rgba(6,182,212,0.2),_0_0_40px_rgba(6,182,212,0.15),_0_0_60px_rgba(6,182,212,0.1),_0_0_80px_rgba(6,182,212,0.05)]"
+          [src]="path + 'about.jpg'"
+          alt="Team working together"
+          loading="eager"
+          (error)="handleImageError($event)"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-cyan-900 via-cyan-800/70 to-transparent opacity-90"
+        ></div>
+      </div>
+      <div class="relative py-20 px-4 sm:py-32 sm:px-6 lg:px-8">
+        <h1
+          class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-xl slide-in-left"
+          [class.loaded]="isHeaderLoaded()"
+        >
+          {{ "about.title" | transloco }}
+        </h1>
+        <p
+          class="mt-6 max-w-3xl text-xl text-cyan-100 leading-relaxed slide-in-right"
+          [class.loaded]="isHeaderLoaded()"
+        >
+          {{ "about.subtitle" | transloco }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Datos de la Empresa -->
+  @defer (on viewport) {
+    @if (companyData().length > 0) {
+      <div #companySection class="company-section bg-white">
+        @for (item of companyData(); track trackByFn(i, item); let i = $index) {
+          <!-- Sección dividida 70/30 -->
+          <section
+            class="bg-white"
+            [ngClass]="{
+              'border-b border-cyan-100': i < companyData().length - 1,
+            }"
+            appScrollReveal
+            [revealAnimation]="i % 2 === 0 ? 'slide-right' : 'slide-left'"
+            [revealDelay]="0"
+          >
+            <div
+              class="flex flex-col lg:flex-row"
+              [ngClass]="{
+                'lg:flex-row': i % 2 === 0,
+                'lg:flex-row-reverse': i % 2 !== 0,
+              }"
+            >
+              <!-- Imagen (70%) -->
+              <div class="w-full lg:w-[70%]">
+                @if (item.imageUrl) {
+                  <img
+                    [src]="item.imageUrl"
+                    [alt]="item.title"
+                    loading="lazy"
+                    class="w-full h-[500px] lg:h-[600px] object-cover"
+                    (error)="handleImageError($event)"
+                  />
+                } @else {
+                  <div
+                    class="w-full h-[500px] lg:h-[600px] bg-gradient-to-r from-cyan-50 to-cyan-100 flex items-center justify-center"
+                  >
+                    <span class="text-cyan-400">Sin imagen</span>
+                  </div>
+                }
+              </div>
+
+              <!-- Contenido (30%) -->
+              <div
+                class="w-full lg:w-[30%] flex items-center lg:h-[600px] border-l-2 lg:border-l-2 border-r-2 lg:border-r-0 border-cyan-500"
+                [ngClass]="{
+                  'lg:border-l-2 lg:border-r-0': i % 2 === 0,
+                  'lg:border-r-2 lg:border-l-0': i % 2 !== 0,
+                }"
+                appBorderBeam
+                [beamColor]="'rgba(6, 182, 212, 0.6)'"
+                [beamWidth]="'2px'"
+                [beamDuration]="'7s'"
+                [beamDelay]="i * 1 + 's'"
+              >
+                <div class="px-8 py-12 lg:px-14 lg:py-14 w-full">
+                  <!-- Título -->
+                  <h2
+                    class="text-3xl lg:text-4xl xl:text-5xl font-bold text-cyan-700 mb-6 tracking-tight"
+                  >
+                    {{ item.title }}
+                  </h2>
+
+                  <!-- Descripción con scroll y efecto fade -->
+                  <div class="relative">
+                    <div
+                      class="max-h-[350px] overflow-y-auto custom-scrollbar pr-2"
+                    >
+                      <p
+                        class="text-base lg:text-lg xl:text-xl font-light text-slate-600 leading-relaxed whitespace-pre-line"
+                      >
+                        {{ item.description }}
+                      </p>
+                    </div>
+                    <!-- Gradiente de fade en la parte inferior -->
+                    <div
+                      class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/80 to-transparent pointer-events-none"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        }
+      </div>
+    } @else {
+      @if (!isCompanyLoading() && isCompanyDataLoaded()) {
+        <div class="py-16 text-center bg-white border-t border-cyan-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-24 w-24 text-cyan-300 mx-auto mb-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+            />
+          </svg>
+          <p class="text-slate-500 text-lg">
+            {{ "about.nodata.company" | transloco }}
+          </p>
+        </div>
+      }
+    }
+  } @placeholder (minimum 300ms) {
+    <div class="py-16 bg-white border-t border-cyan-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        @for (i of [1, 2]; track i) {
+          <div class="relative">
+            <div class="w-full lg:w-[80%]">
+              <div
+                class="w-full h-[400px] lg:h-[500px] bg-gray-200 rounded-2xl animate-pulse"
+              ></div>
+            </div>
+            <div
+              class="relative lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:right-0 mt-6 lg:mt-0 lg:w-[35%]"
+            >
+              <div
+                class="bg-white rounded-2xl p-6 lg:p-8 border border-cyan-100 shadow-lg"
+              >
+                <div
+                  class="h-8 bg-gray-200 rounded w-3/4 mb-4 animate-pulse"
+                ></div>
+                <div class="space-y-3">
+                  <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
+                  <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
+                  <div
+                    class="h-4 bg-gray-200 rounded w-5/6 animate-pulse"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+  <!-- Sección Equipo (Managers)  -->
+  @defer (on viewport; prefetch on idle) {
+    <app-about-team (onZoom)="handleZoomEvent($event)" />
+  } @placeholder {
+    <div class="py-16 bg-white/50 border-t border-cyan-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div
+            class="h-8 bg-gray-200 rounded-full w-48 mx-auto mb-4 animate-pulse"
+          ></div>
+          <div
+            class="h-10 bg-gray-200 rounded w-3/4 mx-auto mb-2 animate-pulse"
+          ></div>
+          <div
+            class="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse"
+          ></div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Modal de Zoom de Imagen -->
+  @if (showMediaZoom()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4 animate-fade-in"
+      (click)="closeMediaZoom()"
+    >
+      <div
+        class="relative max-w-full max-h-full w-full h-full flex items-center justify-center"
+      >
+        <!-- Botón de cerrar -->
+        <button
+          (click)="closeMediaZoom()"
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-cyan-600 hover:bg-cyan-600 hover:text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Cerrar"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 sm:h-6 sm:w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <!-- Imagen ampliada -->
+        <div
+          class="relative w-full h-full flex items-center justify-center"
+          (click)="$event.stopPropagation()"
+        >
+          <img
+            [src]="zoomedMediaUrl()"
+            [alt]="zoomedMediaTitle()"
+            class="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl animate-zoom-in"
+          />
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<style>
+  /* Animaciones para el header */
+  .slide-in-left {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition:
+      transform 0.8s ease-out,
+      opacity 0.8s ease-out;
+  }
+
+  .slide-in-left.loaded {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .slide-in-right {
+    transform: translateX(100%);
+    opacity: 0;
+    transition:
+      transform 0.8s ease-out,
+      opacity 0.8s ease-out;
+    transition-delay: 0.3s;
+  }
+
+  .slide-in-right.loaded {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Animaciones con keyframes para elementos dinámicos */
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Animaciones para el modal de zoom */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .animate-zoom-in {
+    animation: zoom-in 0.4s ease-out;
+  }
+
+  /* Estilos para el grid de equipo */
+  .team-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 640px) {
+    .team-grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Efecto de hojas flotantes suaves para equipo */
+  .wind-effect-wrapper-team {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .leaf {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+  }
+
+  /* Hojas suaves lado izquierdo */
+  .leaf-1 {
+    top: 5%;
+    left: -80px;
+    animation: leaf-float-soft-left 20s ease-in-out infinite;
+  }
+  .leaf-2 {
+    top: 25%;
+    left: -90px;
+    animation: leaf-float-soft-left 22s ease-in-out infinite 2s;
+  }
+  .leaf-3 {
+    top: 45%;
+    left: -85px;
+    animation: leaf-float-soft-left 21s ease-in-out infinite 4s;
+  }
+  .leaf-4 {
+    top: 65%;
+    left: -95px;
+    animation: leaf-float-soft-left 23s ease-in-out infinite 6s;
+  }
+  .leaf-5 {
+    top: 85%;
+    left: -88px;
+    animation: leaf-float-soft-left 19s ease-in-out infinite 1s;
+  }
+
+  /* Hojas suaves lado derecho */
+  .leaf-6 {
+    top: 10%;
+    right: -80px;
+    animation: leaf-float-soft-right 21s ease-in-out infinite 1.5s;
+  }
+  .leaf-7 {
+    top: 30%;
+    right: -90px;
+    animation: leaf-float-soft-right 23s ease-in-out infinite 3.5s;
+  }
+  .leaf-8 {
+    top: 50%;
+    right: -85px;
+    animation: leaf-float-soft-right 20s ease-in-out infinite 5.5s;
+  }
+  .leaf-9 {
+    top: 70%;
+    right: -95px;
+    animation: leaf-float-soft-right 22s ease-in-out infinite 7.5s;
+  }
+  .leaf-10 {
+    top: 90%;
+    right: -88px;
+    animation: leaf-float-soft-right 24s ease-in-out infinite 0.5s;
+  }
+
+  /* Hojas suaves centro superior */
+  .leaf-11 {
+    top: -60px;
+    left: 20%;
+    animation: leaf-float-soft-down 24s ease-in-out infinite 1s;
+  }
+  .leaf-12 {
+    top: -60px;
+    left: 50%;
+    animation: leaf-float-soft-down 22s ease-in-out infinite 3s;
+  }
+  .leaf-13 {
+    top: -60px;
+    left: 80%;
+    animation: leaf-float-soft-down 23s ease-in-out infinite 5s;
+  }
+
+  /* Hojas suaves centro inferior */
+  .leaf-14 {
+    bottom: -60px;
+    left: 25%;
+    animation: leaf-float-soft-up 21s ease-in-out infinite 2s;
+  }
+  .leaf-15 {
+    bottom: -60px;
+    left: 55%;
+    animation: leaf-float-soft-up 23s ease-in-out infinite 4s;
+  }
+  .leaf-16 {
+    bottom: -60px;
+    left: 75%;
+    animation: leaf-float-soft-up 22s ease-in-out infinite 6s;
+  }
+
+  /* Hojas suaves adicionales */
+  .leaf-17 {
+    top: 15%;
+    left: -92px;
+    animation: leaf-float-soft-left 24s ease-in-out infinite 3.5s;
+  }
+  .leaf-18 {
+    top: 55%;
+    right: -92px;
+    animation: leaf-float-soft-right 21s ease-in-out infinite 4.5s;
+  }
+
+  /* Animación suave desde la izquierda */
+  @keyframes leaf-float-soft-left {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(100px) translateY(-15px) rotate(45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1);
+    }
+    70% {
+      transform: translateX(300px) translateY(-15px) rotate(135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde la derecha */
+  @keyframes leaf-float-soft-right {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(-100px) translateY(-15px) rotate(-45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(-200px) translateY(-25px) rotate(-90deg) scale(1);
+    }
+    70% {
+      transform: translateX(-300px) translateY(-15px) rotate(-135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde arriba hacia abajo */
+  @keyframes leaf-float-soft-down {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(-15px) translateY(80px) rotate(45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(15px) translateY(160px) rotate(90deg) scale(1);
+    }
+    70% {
+      transform: translateX(-10px) translateY(240px) rotate(135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) translateY(320px) rotate(180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde abajo hacia arriba */
+  @keyframes leaf-float-soft-up {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(15px) translateY(-80px) rotate(-45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(-15px) translateY(-160px) rotate(-90deg) scale(1);
+    }
+    70% {
+      transform: translateX(10px) translateY(-240px) rotate(-135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) translateY(-320px) rotate(-180deg) scale(0.8);
+    }
+  }
+</style>

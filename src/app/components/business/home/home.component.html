@@ -1,0 +1,2532 @@
+<div class="pt-20 bg-white">
+  <!-- Carrusel con Skeleton -->
+  @if (showCarouselSkeleton()) {
+    <!-- Skeleton del Carrusel -->
+    <div
+      class="relative w-full h-[350px] sm:h-[500px] overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.2),_0_0_40px_rgba(6,182,212,0.15)]"
+    >
+      <div
+        class="w-full h-full bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 skeleton-shimmer"
+      >
+        <div class="relative h-full flex flex-col justify-end p-6 sm:p-12">
+          <!-- Skeleton del gradiente de fondo -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-gray-300 via-gray-200/70 to-transparent opacity-90"
+          ></div>
+
+          <!-- Skeleton del contenido -->
+          <div class="relative z-10 space-y-4 sm:space-y-6">
+            <!-- Skeleton del título -->
+            <div class="space-y-2 sm:space-y-3">
+              <div
+                class="h-6 sm:h-8 lg:h-10 xl:h-12 bg-gray-300 rounded-lg w-3/4 animate-pulse"
+              ></div>
+              <div
+                class="h-6 sm:h-8 lg:h-10 xl:h-12 bg-gray-300 rounded-lg w-1/2 animate-pulse delay-75"
+              ></div>
+            </div>
+
+            <!-- Skeleton de la descripción -->
+            <div class="space-y-2 pt-2 sm:pt-4">
+              <div
+                class="h-3 sm:h-4 lg:h-5 xl:h-6 bg-gray-200 rounded w-full animate-pulse delay-150"
+              ></div>
+              <div
+                class="h-3 sm:h-4 lg:h-5 xl:h-6 bg-gray-200 rounded w-5/6 animate-pulse delay-200"
+              ></div>
+              <div
+                class="h-3 sm:h-4 lg:h-5 xl:h-6 bg-gray-200 rounded w-4/6 animate-pulse delay-300"
+              ></div>
+              <div
+                class="hidden sm:block h-3 sm:h-4 lg:h-5 bg-gray-200 rounded w-3/4 animate-pulse delay-[400ms]"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Skeleton de los botones de navegación -->
+          <div
+            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 rounded-full animate-pulse shadow-lg"
+          ></div>
+          <div
+            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 rounded-full animate-pulse shadow-lg"
+          ></div>
+
+          <!-- Skeleton de los indicadores -->
+          <div
+            class="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center space-x-2 sm:space-x-3"
+          >
+            @for (i of [1, 2, 3]; track i) {
+              <div
+                class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full bg-gray-300 animate-pulse"
+                [style.animation-delay]="i * 100 + 'ms'"
+              ></div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Carrusel Real -->
+    @if (carouselData().length > 0) {
+      <div
+        class="relative w-full h-[350px] sm:h-[500px] overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.2),_0_0_40px_rgba(6,182,212,0.15),_0_0_60px_rgba(6,182,212,0.1),_0_0_80px_rgba(6,182,212,0.05)]"
+      >
+        <div class="w-full h-full">
+          <div class="carrousel-container relative h-full" #carouselSection>
+            @if (carouselData().length) {
+              <div
+                #carrouselSlides
+                class="carrousel-slides flex transition-transform duration-500 ease-in-out h-full"
+                [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'"
+              >
+                @for (
+                  item of carouselData();
+                  track trackByFn(i, item);
+                  let i = $index
+                ) {
+                  <div
+                    class="carrousel-slide w-full flex-shrink-0 relative group h-full"
+                  >
+                    <div class="absolute inset-0 h-full">
+                      @if (getCarouselMediaType(item) === "video") {
+                        <video
+                          #carouselVideo
+                          [src]="getImageUrl(item.imageUrl)"
+                          (error)="handleVideoError($event)"
+                          (loadedmetadata)="forceVideoMute($event)"
+                          [title]="item.title"
+                          class="w-full h-full object-cover"
+                          muted
+                          loop
+                          autoplay
+                          playsinline
+                        >
+                          {{ "common.videoNotSupported" | transloco }}
+                        </video>
+                      } @else {
+                        <img
+                          [src]="getImageUrl(item.imageUrl)"
+                          (error)="handleImageError($event)"
+                          [alt]="item.title"
+                          [loading]="i === 0 ? 'eager' : 'lazy'"
+                          class="w-full h-full object-cover"
+                        />
+                      }
+                      <div
+                        class="absolute inset-0 bg-gradient-to-t from-cyan-900 via-cyan-800/70 to-transparent opacity-90"
+                      ></div>
+                    </div>
+                    <div
+                      class="relative px-12 py-6 sm:px-6 sm:py-8 lg:py-12 lg:px-8 flex flex-col h-full transition-shadow duration-300 shadow-lg group-hover:shadow-2xl"
+                    >
+                      <div class="flex-1"></div>
+                      <div
+                        class="content-container mx-2 sm:mx-8 lg:mx-12 flex flex-col"
+                      >
+                        <div class="title-container flex-shrink-0 mb-2 sm:mb-4">
+                          <h2
+                            class="text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-white drop-shadow-xl overflow-visible leading-tight slide-in-title"
+                            [class.opacity-100]="currentSlide() === i"
+                            [class.opacity-0]="currentSlide() !== i"
+                          >
+                            {{ item.title }}
+                          </h2>
+                        </div>
+                        <div class="description-container mt-2 sm:mt-4">
+                          <p
+                            class="font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-cyan-100 leading-relaxed sm:leading-relaxed lg:leading-loose h-16 sm:h-32 lg:h-40 overflow-y-auto pr-2 custom-scrollbar drop-shadow-lg whitespace-pre-line slide-in-description"
+                            [class.opacity-100]="currentSlide() === i"
+                            [class.opacity-0]="currentSlide() !== i"
+                          >
+                            {{ item.description }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex-shrink-0 h-16 sm:h-12 lg:h-16"></div>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+            <button
+              class="prev absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white text-cyan-600 border border-cyan-400 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
+              (click)="prevSlide()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 left-arrow-bounce text-cyan-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            <button
+              class="next absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white text-cyan-600 border border-cyan-400 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
+              (click)="nextSlide()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 right-arrow-bounce text-cyan-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+            <div
+              class="carrousel-indicators absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center space-x-3"
+            >
+              @for (
+                item of carouselData();
+                track trackByFn(i, item);
+                let i = $index
+              ) {
+                <button
+                  class="w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 hover:scale-125"
+                  [ngClass]="{
+                    'bg-white shadow-lg': currentSlide() === i,
+                    'bg-cyan-200 bg-opacity-60 hover:bg-opacity-80':
+                      currentSlide() !== i,
+                  }"
+                  (click)="goToSlide(i)"
+                ></button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Sección Productos -->
+  <section class="bg-white py-10 overflow-x-hidden">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
+      <!-- Header (carga inmediata ya que es crítico) -->
+      <div class="text-center mb-4 animate-slide-down-on-load relative">
+        <!-- Efecto de hojas flotantes suaves para el header -->
+        <div class="wind-effect-wrapper-header">
+          <div class="leaf-soft leaf-soft-1">🍃</div>
+          <div class="leaf-soft leaf-soft-2">🍃</div>
+          <div class="leaf-soft leaf-soft-3">🍃</div>
+          <div class="leaf-soft leaf-soft-4">🍃</div>
+          <div class="leaf-soft leaf-soft-5">🍃</div>
+          <div class="leaf-soft leaf-soft-6">🍃</div>
+          <div class="leaf-soft leaf-soft-7">🍃</div>
+          <div class="leaf-soft leaf-soft-8">🍃</div>
+          <div class="leaf-soft leaf-soft-9">🍃</div>
+          <div class="leaf-soft leaf-soft-10">🍃</div>
+          <div class="leaf-soft leaf-soft-11">🍃</div>
+          <div class="leaf-soft leaf-soft-12">🍃</div>
+        </div>
+
+        <h1
+          class="text-4xl font-extrabold text-cyan-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
+        >
+          {{ "products.title.first" | transloco }}
+          <span class="text-cyan-700">{{
+            "products.title.second" | transloco
+          }}</span>
+        </h1>
+        <p
+          class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed relative z-10"
+        >
+          {{ "products.text" | transloco }}
+        </p>
+        <!-- Flecha hacia abajo para ir al primer producto -->
+        @if (filteredProducts().length > 0) {
+          <div class="mt-6 flex justify-center relative z-10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 text-cyan-600/75 animate-bounce cursor-pointer hover:text-cyan-600 transition-colors duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              (click)="scrollToFirstProduct()"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 13l-7 7-7-7"
+              />
+            </svg>
+          </div>
+        }
+      </div>
+
+      <!-- Productos con @defer (carga diferida) -->
+      @defer (on viewport; when !isProductsLoading()) {
+        @if (filteredProducts().length > 0) {
+          <!-- Contenedor de productos con efecto de hojas suaves -->
+          <div class="relative">
+            <!-- Efecto de hojas flotantes suaves para todos los productos -->
+            <div class="wind-effect-wrapper-products">
+              <div class="leaf-soft-products leaf-soft-products-1">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-2">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-3">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-4">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-5">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-6">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-7">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-8">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-9">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-10">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-11">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-12">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-13">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-14">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-15">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-16">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-17">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-18">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-19">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-20">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-21">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-22">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-23">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-24">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-25">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-26">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-27">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-28">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-29">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-30">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-31">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-32">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-33">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-34">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-35">🍃</div>
+              <div class="leaf-soft-products leaf-soft-products-36">🍃</div>
+            </div>
+
+            <!-- Secciones Spotlight de Productos -->
+            @for (
+              product of filteredProducts();
+              track trackByProduct($index, product);
+              let i = $index
+            ) {
+              <!-- Borde divisorio entre productos (excepto antes del primero) -->
+              @if (i > 0) {
+                <div
+                  class="border-t-2 border-cyan-300 border-opacity-40 mb-8"
+                ></div>
+              }
+
+              <!-- Sección Spotlight - Alterna entre right (imagen izq) y left (imagen der) -->
+              <section
+                [id]="'product-' + i"
+                class="relative min-h-[600px] flex items-center overflow-hidden bg-white mb-8 rounded-2xl shadow-[0_0_20px_rgba(6,182,212,0.15),_0_0_40px_rgba(6,182,212,0.1)] border border-cyan-100"
+                appScrollReveal
+                [revealAnimation]="i % 2 === 0 ? 'slide-right' : 'slide-left'"
+                [revealDelay]="0"
+                appParallax
+                [parallaxSpeed]="0.3"
+              >
+                <div class="absolute inset-0 w-full h-full">
+                  @if (hasImageToShow(product)) {
+                    @if (getCardMediaType(product) === "video") {
+                      <video
+                        #productVideo
+                        [src]="getCardImageUrl(product)"
+                        [title]="product.title"
+                        class="w-full h-full object-cover brightness-90 rounded-2xl"
+                        (error)="handleVideoError($event)"
+                        (loadedmetadata)="forceVideoMute($event)"
+                        muted
+                        loop
+                        autoplay
+                        playsinline
+                      >
+                        Tu navegador no soporta la etiqueta de video.
+                      </video>
+                    } @else {
+                      <img
+                        [src]="getCardImageUrl(product)"
+                        [alt]="product.title"
+                        loading="lazy"
+                        class="w-full h-full object-cover brightness-90 transition-transform duration-700 hover:scale-105 rounded-2xl"
+                        (error)="onImageError($event)"
+                      />
+                    }
+                  }
+                </div>
+
+                <!-- Overlay con gradiente según posición -->
+                @if (i % 2 === 0) {
+                  <!-- Imagen izquierda, contenido derecha - gradiente de izq a der -->
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-white/70 to-white/95 pointer-events-none"
+                  ></div>
+                } @else {
+                  <!-- Imagen derecha, contenido izquierda - gradiente de der a izq -->
+                  <div
+                    class="absolute inset-0 bg-gradient-to-l from-white/70 to-white/95 pointer-events-none"
+                  ></div>
+                }
+
+                <!-- Contenedor del contenido -->
+                <div class="relative z-10 w-full">
+                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div
+                      class="flex flex-col lg:flex-row items-center"
+                      [ngClass]="{
+                        'lg:flex-row': i % 2 === 0,
+                        'lg:flex-row-reverse': i % 2 !== 0,
+                      }"
+                    >
+                      <!-- Espaciador para la imagen (invisible en móvil) -->
+                      <div class="hidden lg:block lg:w-1/2"></div>
+
+                      <!-- Contenido del producto -->
+                      <div
+                        class="w-full lg:w-1/2 py-16 lg:py-24 flex items-center"
+                      >
+                        <div
+                          class="max-w-xl flex flex-col justify-between min-h-[400px] w-full"
+                          [ngClass]="{
+                            'lg:ml-auto lg:pr-8': i % 2 === 0,
+                            'lg:mr-auto lg:pl-8': i % 2 !== 0,
+                          }"
+                        >
+                          <!-- Fila superior: Badge/Título y Variantes/Precio -->
+                          <div
+                            class="flex flex-col lg:flex-row justify-between gap-6 mb-6"
+                          >
+                            <!-- Columna izquierda: Badge y Título -->
+                            <div class="flex-1 flex-shrink-0">
+                              <!-- Badge de categoría -->
+                              <div class="mb-6">
+                                <span
+                                  class="inline-block text-cyan-600 text-lg lg:text-xl font-bold uppercase tracking-wider"
+                                >
+                                  {{ getCategoryTitle(product.category) }}
+                                </span>
+                              </div>
+
+                              <!-- Título -->
+                              <h2
+                                class="text-3xl lg:text-4xl xl:text-5xl font-light text-cyan-700 leading-tight"
+                              >
+                                {{ product.title }}
+                              </h2>
+                            </div>
+
+                            <!-- Columna derecha: Variantes y Precio -->
+                            @if (
+                              product.variants && product.variants.length > 0
+                            ) {
+                              <div
+                                class="flex-shrink-0 lg:w-64 flex flex-col justify-start"
+                              >
+                                <!-- Selector de variantes -->
+                                <div class="flex items-center gap-2 mb-4">
+                                  <!-- Botón Izquierda -->
+                                  <button
+                                    #cardVariantScrollerLeft
+                                    (click)="
+                                      scrollCardVariantsLeft(
+                                        product.id,
+                                        cardVariantScroller,
+                                        $event
+                                      )
+                                    "
+                                    [disabled]="
+                                      !canScrollCardVariantsLeft(product.id)
+                                    "
+                                    [class.opacity-50]="
+                                      !canScrollCardVariantsLeft(product.id)
+                                    "
+                                    [class.cursor-not-allowed]="
+                                      !canScrollCardVariantsLeft(product.id)
+                                    "
+                                    class="flex-shrink-0 bg-white text-cyan-600 border border-cyan-400 rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
+                                    aria-label="Scroll variants left"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="h-4 w-4 left-arrow-bounce text-cyan-600"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 19l-7-7 7-7"
+                                      />
+                                    </svg>
+                                  </button>
+
+                                  <!-- Contenedor de variantes -->
+                                  <div
+                                    #cardVariantScroller
+                                    (scroll)="
+                                      onCardVariantScroll($event, product.id)
+                                    "
+                                    class="flex items-center overflow-x-auto scrollbar-hide space-x-2 px-1 py-2 scroll-smooth"
+                                    [ngClass]="{
+                                      'flex-1': product.variants.length > 1,
+                                      'justify-center':
+                                        product.variants.length === 1,
+                                    }"
+                                    style="
+                                      scroll-behavior: smooth;
+                                      overflow-y: hidden;
+                                    "
+                                  >
+                                    @for (
+                                      variant of product.variants;
+                                      track trackByVariant($index, variant);
+                                      let vi = $index
+                                    ) {
+                                      <button
+                                        (click)="
+                                          selectCardVariant(product, vi, $event)
+                                        "
+                                        [ngClass]="{
+                                          'bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 text-white shadow-md border-transparent transform scale-105':
+                                            getCardSelectedVariantIndex(
+                                              product.id
+                                            ) === vi,
+                                          'bg-white text-cyan-700 hover:bg-cyan-50 border border-cyan-200 hover:border-cyan-300':
+                                            getCardSelectedVariantIndex(
+                                              product.id
+                                            ) !== vi,
+                                        }"
+                                        class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-opacity-50 min-w-fit"
+                                      >
+                                        {{ variant.description }}
+                                      </button>
+                                    }
+                                  </div>
+
+                                  <!-- Botón Derecha -->
+                                  <button
+                                    (click)="
+                                      scrollCardVariantsRight(
+                                        product.id,
+                                        cardVariantScroller,
+                                        $event
+                                      )
+                                    "
+                                    [disabled]="
+                                      !canScrollCardVariantsRight(product.id)
+                                    "
+                                    [class.opacity-50]="
+                                      !canScrollCardVariantsRight(product.id)
+                                    "
+                                    [class.cursor-not-allowed]="
+                                      !canScrollCardVariantsRight(product.id)
+                                    "
+                                    class="flex-shrink-0 bg-white text-cyan-600 border border-cyan-400 rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
+                                    aria-label="Scroll variants right"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="h-4 w-4 right-arrow-bounce text-cyan-600"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 5l7 7-7 7"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+
+                                <!-- Precio de la variante seleccionada -->
+                                <div
+                                  class="flex justify-start"
+                                  [ngClass]="{
+                                    'lg:justify-end':
+                                      product.variants.length > 1,
+                                    'lg:justify-center':
+                                      product.variants.length === 1,
+                                  }"
+                                >
+                                  <p
+                                    class="text-2xl lg:text-3xl font-extrabold text-cyan-600"
+                                  >
+                                    {{
+                                      getCardSelectedVariant(product)?.price ||
+                                        product.variants[0].price
+                                        | currency: "USD" : "symbol" : "1.2-2"
+                                    }}
+                                  </p>
+                                </div>
+                              </div>
+                            }
+                          </div>
+
+                          <!-- Descripción - Ancho completo debajo de ambas columnas -->
+                          <div class="flex-grow mb-8">
+                            <p
+                              class="text-base lg:text-lg font-light text-slate-600 leading-relaxed"
+                            >
+                              {{
+                                product.description.length > 400
+                                  ? (product.description | slice: 0 : 400) +
+                                    "..."
+                                  : product.description
+                              }}
+                            </p>
+                          </div>
+
+                          <!-- Botones de acción siempre en la parte inferior -->
+                          <div class="flex flex-wrap gap-4 flex-shrink-0">
+                            @if (
+                              product.cal_url && product.cal_url.trim() !== ""
+                            ) {
+                              <button
+                                (click)="
+                                  showProductDetails(product);
+                                  openBookingModal(
+                                    getCardSelectedVariant(product)
+                                  )
+                                "
+                                class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 text-white text-sm font-bold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none group"
+                              >
+                                {{ "products.scheduleAppointment" | transloco }}
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-5 w-5 group-hover:scale-110 transition-transform duration-300"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                  />
+                                </svg>
+                              </button>
+                            }
+
+                            @if (hasImageToShow(product)) {
+                              <button
+                                (click)="
+                                  openMediaZoom(
+                                    getCardImageUrl(product),
+                                    getFirstImageTitle(product),
+                                    getCardMediaType(product),
+                                    product
+                                  )
+                                "
+                                class="flex items-center justify-center bg-cyan-500/10 backdrop-blur-sm border border-cyan-400/20 hover:bg-cyan-500/20 rounded-xl w-12 h-12 transition-all duration-300 outline-none"
+                                [title]="'common.zoomMedia' | transloco"
+                                [attr.aria-label]="
+                                  'common.zoomMedia' | transloco
+                                "
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-5 w-5 text-cyan-600"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  role="img"
+                                  [attr.aria-label]="
+                                    'common.zoomMedia' | transloco
+                                  "
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                                  />
+                                </svg>
+                              </button>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Flecha hacia el siguiente producto -->
+                @if (i < filteredProducts().length - 1) {
+                  <div
+                    class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-8 w-8 text-cyan-600/75 animate-bounce cursor-pointer hover:text-cyan-600 transition-colors duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      (click)="scrollToProduct(i + 1)"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 13l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                }
+              </section>
+            }
+          </div>
+        } @else if (productsData().length === 0 && !isProductsLoading()) {
+          <div
+            class="flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16"
+            appScrollReveal
+            [revealAnimation]="'slide-up'"
+            [revealDelay]="0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100"
+              height="100"
+              fill="currentColor"
+              class="bi bi-emoji-tear text-cyan-300 mb-4 sm:mb-6 sm:w-32 sm:h-32 md:w-36 md:h-36 transform transition-all duration-700 ease-out"
+              viewBox="0 0 16 16"
+              [ngClass]="{
+                'scale-100 rotate-0': isNoDataIconLoaded(),
+                'scale-50 -rotate-12': !isNoDataIconLoaded(),
+              }"
+            >
+              <path
+                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+              />
+              <path
+                d="M6.831 11.43A3.1 3.1 0 0 1 8 11.196c.916 0 1.607.408 2.25.826.212.138.424-.069.282-.277-.564-.83-1.558-2.049-2.532-2.049-.53 0-1.066.361-1.536.824q.126.27.232.535q.069.174.135.373ZM6 11.333C6 12.253 5.328 13 4.5 13S3 12.254 3 11.333c0-.706.882-2.29 1.294-2.99a.238.238 0 0 1 .412 0c.412.7 1.294 2.284 1.294 2.99M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5m-1.5-3A.5.5 0 0 1 10 3c1.162 0 2.35.584 2.947 1.776a.5.5 0 1 1-.894.448C11.649 4.416 10.838 4 10 4a.5.5 0 0 1-.5-.5M7 3.5a.5.5 0 0 0-.5-.5c-1.162 0-2.35.584-2.947 1.776a.5.5 0 1 0 .894.448C4.851 4.416 5.662 4 6.5 4a.5.5 0 0 0 .5-.5"
+              />
+            </svg>
+            <p
+              class="text-slate-500 text-base sm:text-lg max-w-md transform transition-all duration-900 ease-out"
+              [ngClass]="{
+                'translate-x-0 opacity-100': isNoDataTextLoaded(),
+                '-translate-x-8 opacity-0': !isNoDataTextLoaded(),
+              }"
+            >
+              {{
+                selectedCategory() === "Todos"
+                  ? ("products.nodata" | transloco)
+                  : ("products.nodata.category" | transloco)
+              }}
+            </p>
+          </div>
+        }
+      } @placeholder (minimum 500ms) {
+        <!-- Placeholder para productos spotlight -->
+        <div class="bg-white py-16">
+          @for (i of [1, 2, 3]; track i) {
+            <section
+              class="relative min-h-[600px] flex items-center border-b border-cyan-100 animate-pulse mb-8"
+            >
+              <div class="absolute inset-0 bg-gray-200"></div>
+              <div class="relative z-10 w-full">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div class="flex items-center">
+                    <div class="w-1/2"></div>
+                    <div class="w-1/2 py-24 space-y-4">
+                      <div class="h-6 bg-gray-300 rounded w-1/4"></div>
+                      <div class="h-12 bg-gray-300 rounded w-3/4"></div>
+                      <div class="h-4 bg-gray-300 rounded w-full"></div>
+                      <div class="h-4 bg-gray-300 rounded w-5/6"></div>
+                      <div class="h-10 bg-gray-300 rounded w-1/3 mt-8"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Modal de Zoom de Imagen/Video -->
+  @if (showMediaZoom()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4 animate-fade-in"
+      (click)="closeMediaZoom()"
+    >
+      <div
+        class="relative max-w-full max-h-full w-full h-full flex items-center justify-center"
+      >
+        <!-- Botón de cerrar -->
+        <button
+          (click)="closeMediaZoom()"
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-cyan-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Cerrar"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <!-- Botón anterior (solo si hay múltiples archivos) -->
+        @if (hasMultipleMediaFiles()) {
+          <button
+            (click)="previousZoomedMedia(); $event.stopPropagation()"
+            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-cyan-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Anterior"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 left-arrow-bounce"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+        }
+
+        <!-- Botón siguiente (solo si hay múltiples archivos) -->
+        @if (hasMultipleMediaFiles()) {
+          <button
+            (click)="nextZoomedMedia(); $event.stopPropagation()"
+            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-cyan-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Siguiente"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 right-arrow-bounce"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        }
+
+        <!-- Media ampliado -->
+        <div
+          class="relative w-full h-full flex items-center justify-center"
+          (click)="$event.stopPropagation()"
+        >
+          @if (zoomedMediaType() === "video") {
+            <video
+              [src]="zoomedMediaUrl()"
+              [title]="zoomedMediaTitle()"
+              class="w-full h-full max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-zoom-in"
+              controls
+              autoplay
+              playsinline
+            >
+              Tu navegador no soporta la etiqueta de video.
+            </video>
+          } @else {
+            <img
+              [src]="zoomedMediaUrl()"
+              [alt]="zoomedMediaTitle()"
+              class="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl animate-zoom-in"
+            />
+          }
+        </div>
+
+        <!-- Indicador de posición (solo si hay múltiples archivos) -->
+        @if (hasMultipleMediaFiles()) {
+          <div
+            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-60 text-white px-4 py-2 rounded-full text-sm sm:text-base"
+          >
+            {{ zoomedMediaIndex() + 1 }} /
+            {{ zoomedMediaProduct()?.files?.length || 1 }}
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Sección Línea de Productos -->
+  <div
+    #productsSection
+    class="products-container pt-4 pb-10 bg-white relative overflow-hidden border-t-2 border-cyan-300 border-opacity-40"
+    [ngClass]="productsAnimationClass()"
+  >
+    <!-- Efecto de hojas flotantes suaves para la sección -->
+    <div class="wind-effect-wrapper-section">
+      <div class="leaf-soft-section leaf-soft-section-1">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-2">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-3">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-4">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-5">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-6">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-7">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-8">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-9">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-10">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-11">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-12">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-13">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-14">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-15">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-16">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-17">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-18">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-19">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-20">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-21">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-22">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-23">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-24">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-25">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-26">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-27">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-28">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-29">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-30">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-31">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-32">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-33">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-34">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-35">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-36">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-37">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-38">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-39">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-40">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-41">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-42">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-43">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-44">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-45">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-46">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-47">🍃</div>
+      <div class="leaf-soft-section leaf-soft-section-48">🍃</div>
+    </div>
+
+    <div class="w-full relative">
+      <div class="text-center mb-16">
+        <p
+          class="mt-6 text-4xl font-extrabold text-cyan-600 sm:text-5xl leading-tight drop-shadow-sm"
+          appScrollReveal
+          [revealAnimation]="'slide-up'"
+          [revealDelay]="0"
+        >
+          {{ "home.products.subtitle.first" | transloco }}
+          <span class="text-cyan-700">{{
+            "home.products.subtitle.second" | transloco
+          }}</span>
+        </p>
+        <p
+          class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed"
+          appScrollReveal
+          [revealAnimation]="'slide-up'"
+          [revealDelay]="100"
+        >
+          {{ "home.products.text" | transloco }}
+        </p>
+      </div>
+
+      <div
+        class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch px-4 sm:px-6 lg:px-8"
+      >
+        <div class="space-y-8 flex">
+          <div
+            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(6,182,212,0.15),_0_0_40px_rgba(6,182,212,0.1)] border border-cyan-100 flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] transition-all duration-300"
+            appScrollReveal
+            [revealAnimation]="'slide-left'"
+            [revealDelay]="0"
+            appBorderBeam
+            [beamColor]="'rgba(6, 182, 212, 0.5)'"
+            [beamWidth]="'1.5px'"
+            [beamDuration]="'6s'"
+            [beamDelay]="'0s'"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 rounded-xl flex items-center justify-center shadow-lg"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-cyan-600 ml-4">
+                {{ "home.products.square.left.title" | transloco }}
+              </h3>
+            </div>
+            <p class="text-slate-600 leading-relaxed flex-1 font-medium">
+              {{ "home.products.square.left.text" | transloco }}
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-8 flex">
+          <div
+            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(6,182,212,0.15),_0_0_40px_rgba(6,182,212,0.1)] border border-cyan-100 flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] transition-all duration-300"
+            appScrollReveal
+            [revealAnimation]="'slide-right'"
+            [revealDelay]="100"
+            appBorderBeam
+            [beamColor]="'rgba(6, 182, 212, 0.5)'"
+            [beamWidth]="'1.5px'"
+            [beamDuration]="'6s'"
+            [beamDelay]="'1.5s'"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 rounded-xl flex items-center justify-center shadow-lg"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-cyan-600 ml-4">
+                {{ "home.products.square.right.title" | transloco }}
+              </h3>
+            </div>
+            <p class="text-slate-600 leading-relaxed flex-1 font-medium">
+              {{ "home.products.square.right.text" | transloco }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Reseñas -->
+  @if (reviewsData().length > 0) {
+    <section
+      class="bg-white py-16 overflow-x-hidden border-t-2 border-cyan-300 border-opacity-40"
+    >
+      <div class="w-full px-4 sm:px-6 lg:px-8">
+        <!-- Header de Reseñas -->
+        <div class="text-center mb-12 relative">
+          <!-- Efecto de hojas flotantes suaves para el header -->
+          <div class="wind-effect-wrapper-reviews">
+            <div class="leaf-soft-reviews leaf-soft-reviews-1">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-2">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-3">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-4">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-5">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-6">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-7">🍃</div>
+            <div class="leaf-soft-reviews leaf-soft-reviews-8">🍃</div>
+          </div>
+
+          <h2
+            class="text-4xl font-extrabold text-cyan-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
+            appScrollReveal
+            [revealAnimation]="'slide-up'"
+            [revealDelay]="0"
+          >
+            {{ "home.reviews.title" | transloco }}
+          </h2>
+          <p
+            class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed relative z-10"
+            appScrollReveal
+            [revealAnimation]="'slide-up'"
+            [revealDelay]="100"
+          >
+            {{ "home.reviews.text" | transloco }}
+          </p>
+        </div>
+
+        @if (reviewsData().length > 0) {
+          <div class="text-center mb-8" appScrollReveal [revealAnimation]="'slide-up'" [revealDelay]="150">
+            <div class="inline-flex items-center gap-3 bg-white border border-cyan-100 rounded-full px-6 py-2.5 shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:border-cyan-200">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20">
+                  <defs>
+                    <linearGradient id="avg-star-gradient">
+                      <stop [attr.offset]="(averageRating() / 5 * 100) + '%'" stop-color="currentColor"/>
+                      <stop [attr.offset]="(averageRating() / 5 * 100) + '%'" stop-color="#D1D5DB"/>
+                    </linearGradient>
+                  </defs>
+                  <path fill="url(#avg-star-gradient)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+                <span class="text-xl font-bold text-cyan-600">{{ averageRating() }}</span>
+              </div>
+              <span class="text-cyan-200">|</span>
+              <span class="text-slate-600 font-medium">{{ reviewsCount() }} {{ 'home.reviews.count' | transloco }}</span>
+            </div>
+          </div>
+        }
+
+        <!-- Reseñas con estructura de columnas @defer -->
+        @defer (on viewport; when !isReviewsLoading()) {
+          @if (reviewsData().length > 0) {
+            <div class="py-2 bg-white overflow-hidden">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                  class="grid grid-cols-1 gap-8 lg:grid-cols-3 sm:grid-cols-2 items-stretch"
+                >
+                  @for (
+                    review of reviewsData();
+                    track trackByReview($index, review);
+                    let i = $index
+                  ) {
+                    <div
+                      class="group relative transform transition-all duration-300 hover:-translate-y-2 flex"
+                      appScrollReveal
+                      [revealAnimation]="'slide-up'"
+                      [revealDelay]="i * 100"
+                    >
+                      <div
+                        class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(6,182,212,0.15),_0_0_40px_rgba(6,182,212,0.1)] border border-cyan-100 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] hover:border-cyan-200 w-full flex flex-col min-h-[280px]"
+                        appBorderBeam
+                        [beamColor]="'rgba(6, 182, 212, 0.5)'"
+                        [beamWidth]="'1.5px'"
+                        [beamDuration]="'6s'"
+                        [beamDelay]="i * 1000 + 'ms'"
+                      >
+                        <div class="mb-3">
+                          <div class="flex items-center flex-shrink-0">
+                            <div class="flex-shrink-0">
+                              @if (review.imageUrl) {
+                                <img
+                                  [src]="getReviewImageUrl(review.imageUrl)"
+                                  class="h-12 w-12 rounded-full ring-2 ring-cyan-200 object-cover"
+                                  [alt]="review.title"
+                                  loading="lazy"
+                                  (error)="handleImageError($event)"
+                                />
+                              } @else {
+                                <div
+                                  class="h-12 w-12 rounded-full bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 flex items-center justify-center ring-2 ring-cyan-200"
+                                >
+                                  <svg
+                                    class="w-6 h-6 text-white"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                                    />
+                                  </svg>
+                                </div>
+                              }
+                            </div>
+                            <div class="ml-4">
+                              <div class="text-base font-semibold text-cyan-600">
+                                {{ review.title }}
+                              </div>
+                            </div>
+                          </div>
+                          @if (review.star_rating) {
+                            <div class="flex mt-0.5">
+                              <div class="flex items-center gap-0.5 ml-16">
+                                @for (star of [1, 2, 3, 4, 5]; track star) {
+                                  <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 20 20">
+                                    <defs>
+                                      <clipPath [id]="'clip-review-' + review.id + '-' + star">
+                                        <rect x="0" y="0" [attr.width]="getReviewStarWidth(star, review.star_rating)" height="20" />
+                                      </clipPath>
+                                    </defs>
+
+                                    <!-- Estrella de fondo (vacía / gris) -->
+                                    <path class="text-gray-300" fill="currentColor" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+
+                                    <!-- Estrella rellena (amarilla) encima con clipPath -->
+                                    <path fill="currentColor" [attr.clip-path]="'url(#clip-review-' + review.id + '-' + star + ')'" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                  </svg>
+                                }
+                                <span class="text-xs font-semibold ml-1.5 text-slate-500">
+                                  ({{ review.star_rating | number: '1.1-1' }})
+                                </span>
+                              </div>
+                            </div>
+                          }
+                        </div>
+                        <blockquote
+                          class="text-slate-600 text-base leading-relaxed mt-3 flex-grow whitespace-pre-line italic"
+                        >
+                          "{{ review.description }}"
+                        </blockquote>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          } @else if (!isReviewsLoading()) {
+            <!-- No hay reseñas -->
+            <div
+              class="text-center py-12"
+              appScrollReveal
+              [revealAnimation]="'slide-up'"
+              [revealDelay]="0"
+            >
+              <div class="text-6xl mb-4">💬</div>
+              <h3 class="text-xl font-semibold text-slate-600 mb-2">
+                {{ "home.reviews.nodata" | transloco }}
+              </h3>
+            </div>
+          }
+        } @placeholder (minimum 500ms) {
+          <!-- Skeleton de reseñas -->
+          <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div
+                class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3 sm:grid-cols-2 items-stretch"
+              >
+                @for (i of [1, 2, 3]; track i) {
+                  <div class="flex">
+                    <div
+                      class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(6,182,212,0.15),_0_0_40px_rgba(6,182,212,0.1)] border border-cyan-100 animate-pulse w-full flex flex-col min-h-[280px]"
+                    >
+                      <div class="flex items-center flex-shrink-0">
+                        <div
+                          class="h-12 w-12 rounded-full bg-gray-200 animate-pulse"
+                        ></div>
+                        <div class="ml-4">
+                          <div
+                            class="h-5 bg-gray-200 rounded w-32 mb-2 animate-pulse"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="mt-6 space-y-2 flex-grow">
+                        <div
+                          class="h-3 bg-gray-200 rounded w-full animate-pulse"
+                        ></div>
+                        <div
+                          class="h-3 bg-gray-200 rounded w-full animate-pulse"
+                        ></div>
+                        <div
+                          class="h-3 bg-gray-200 rounded w-5/6 animate-pulse"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- Sección para ir a contact o a about -->
+  <div class="bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400">
+    <div
+      class="w-full py-10 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
+      appScrollReveal
+      [revealAnimation]="'slide-up'"
+      [revealDelay]="200"
+    >
+      <h2
+        class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl px-4 sm:px-0 drop-shadow-lg"
+      >
+        <span class="block text-white p-2 sm:p-0">{{
+          "home.footer.text" | transloco
+        }}</span>
+      </h2>
+      <div
+        class="mt-8 flex lg:mt-0 lg:flex-shrink-0 justify-center lg:justify-end pr-4 sm:pr-0"
+      >
+        <div class="inline-flex rounded-lg shadow-xl group">
+          <div>
+            <a
+              [routerLink]="['/contact']"
+              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-l-lg text-white bg-cyan-500 hover:bg-white hover:text-cyan-600 transition-all duration-300 hover:shadow-lg"
+            >
+              {{ "home.footer.leftbutton" | transloco }}
+            </a>
+          </div>
+          <div class="inline-flex rounded-md shadow-xl">
+            <a
+              [routerLink]="['/about']"
+              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-r-lg text-white bg-cyan-500 hover:bg-white hover:text-cyan-600 transition-all duration-300 hover:shadow-lg"
+            >
+              {{ "home.footer.rightbutton" | transloco }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Zoom de Imagen/Video -->
+  @if (showMediaZoom()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4 animate-fade-in"
+      (click)="closeMediaZoom()"
+    >
+      <div
+        class="relative max-w-full max-h-full w-full h-full flex items-center justify-center"
+      >
+        <!-- Botón de cerrar -->
+        <button
+          (click)="closeMediaZoom()"
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-cyan-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Cerrar"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <!-- Botón anterior (solo si hay múltiples archivos) -->
+        @if (hasMultipleMediaFiles()) {
+          <button
+            (click)="previousZoomedMedia(); $event.stopPropagation()"
+            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-cyan-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Anterior"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 left-arrow-bounce"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+        }
+
+        <!-- Botón siguiente (solo si hay múltiples archivos) -->
+        @if (hasMultipleMediaFiles()) {
+          <button
+            (click)="nextZoomedMedia(); $event.stopPropagation()"
+            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-cyan-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Siguiente"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 right-arrow-bounce"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        }
+
+        <!-- Media ampliado -->
+        <div
+          class="relative w-full h-full flex items-center justify-center"
+          (click)="$event.stopPropagation()"
+        >
+          @if (zoomedMediaType() === "video") {
+            <video
+              [src]="getImageUrl(zoomedMediaUrl())"
+              (error)="handleVideoError($event)"
+              [title]="zoomedMediaTitle()"
+              class="w-full h-full max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-zoom-in"
+              controls
+              autoplay
+              playsinline
+            >
+              Tu navegador no soporta la etiqueta de video.
+            </video>
+          } @else {
+            <img
+              [src]="getImageUrl(zoomedMediaUrl())"
+              (error)="handleImageError($event)"
+              [alt]="zoomedMediaTitle()"
+              class="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl animate-zoom-in"
+            />
+          }
+        </div>
+
+        <!-- Indicador de posición (solo si hay múltiples archivos) -->
+        @if (hasMultipleMediaFiles()) {
+          <div
+            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-60 text-white px-4 py-2 rounded-full text-sm sm:text-base"
+          >
+            {{ zoomedMediaIndex() + 1 }} /
+            {{ zoomedMediaProduct()?.files?.length || 1 }}
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mejoras adicionales para el scroll suave */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Animación personalizada para los botones de navegación */
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .group:hover .animate-pulse-subtle {
+    animation: pulse-subtle 2s infinite;
+  }
+
+  @keyframes left-bounce {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-4px);
+    }
+  }
+
+  @keyframes right-bounce {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(4px);
+    }
+  }
+
+  .left-arrow-bounce {
+    animation: left-bounce 1.5s infinite ease-in-out;
+  }
+
+  .right-arrow-bounce {
+    animation: right-bounce 1.5s infinite ease-in-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .animate-zoom-in {
+    animation: zoom-in 0.4s ease-out;
+  }
+
+  /* Título expandible del modal de productos */
+  .modal-title {
+    line-height: 1.4;
+  }
+  .title-collapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+  }
+  .title-expanded {
+    display: block;
+    -webkit-box-orient: unset;
+    overflow: visible;
+  }
+
+  /* Animaciones del carrusel */
+  @keyframes slide-in-title {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-description {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-title {
+    animation: slide-in-title 1.5s ease-out forwards;
+  }
+
+  .slide-in-description {
+    animation: slide-in-description 1.5s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  /* Animaciones de categorías y productos */
+  @keyframes slide-in-from-right {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-from-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-from-right {
+    animation: slide-in-from-right 2s ease-out forwards;
+  }
+
+  .slide-in-from-left {
+    animation: slide-in-from-left 1.8s ease-out forwards;
+  }
+
+  /* Animación de caída desde arriba para el header */
+  @keyframes slide-down-on-load {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-down-on-load {
+    animation: slide-down-on-load 0.8s ease-out forwards;
+  }
+
+  /* Efecto de hojas flotantes suaves para productos */
+  .wind-effect-wrapper-products {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .leaf-soft-products {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+  }
+
+  /* Hojas suaves productos - lado izquierdo */
+  .leaf-soft-products-1 {
+    top: 5%;
+    left: -80px;
+    animation: leaf-float-soft-left 20s ease-in-out infinite;
+  }
+  .leaf-soft-products-2 {
+    top: 15%;
+    left: -90px;
+    animation: leaf-float-soft-left 22s ease-in-out infinite 2s;
+  }
+  .leaf-soft-products-3 {
+    top: 25%;
+    left: -85px;
+    animation: leaf-float-soft-left 21s ease-in-out infinite 4s;
+  }
+  .leaf-soft-products-4 {
+    top: 35%;
+    left: -95px;
+    animation: leaf-float-soft-left 23s ease-in-out infinite 6s;
+  }
+  .leaf-soft-products-5 {
+    top: 45%;
+    left: -88px;
+    animation: leaf-float-soft-left 19s ease-in-out infinite 1s;
+  }
+  .leaf-soft-products-6 {
+    top: 55%;
+    left: -92px;
+    animation: leaf-float-soft-left 24s ease-in-out infinite 3s;
+  }
+  .leaf-soft-products-7 {
+    top: 65%;
+    left: -87px;
+    animation: leaf-float-soft-left 20s ease-in-out infinite 5s;
+  }
+  .leaf-soft-products-8 {
+    top: 75%;
+    left: -93px;
+    animation: leaf-float-soft-left 22s ease-in-out infinite 7s;
+  }
+  .leaf-soft-products-9 {
+    top: 85%;
+    left: -89px;
+    animation: leaf-float-soft-left 21s ease-in-out infinite 8s;
+  }
+  .leaf-soft-products-10 {
+    top: 95%;
+    left: -91px;
+    animation: leaf-float-soft-left 23s ease-in-out infinite 9s;
+  }
+
+  /* Hojas suaves productos - lado derecho */
+  .leaf-soft-products-11 {
+    top: 8%;
+    right: -80px;
+    animation: leaf-float-soft-right 21s ease-in-out infinite 1.5s;
+  }
+  .leaf-soft-products-12 {
+    top: 18%;
+    right: -90px;
+    animation: leaf-float-soft-right 23s ease-in-out infinite 3.5s;
+  }
+  .leaf-soft-products-13 {
+    top: 28%;
+    right: -85px;
+    animation: leaf-float-soft-right 20s ease-in-out infinite 5.5s;
+  }
+  .leaf-soft-products-14 {
+    top: 38%;
+    right: -95px;
+    animation: leaf-float-soft-right 22s ease-in-out infinite 7.5s;
+  }
+  .leaf-soft-products-15 {
+    top: 48%;
+    right: -88px;
+    animation: leaf-float-soft-right 24s ease-in-out infinite 0.5s;
+  }
+  .leaf-soft-products-16 {
+    top: 58%;
+    right: -92px;
+    animation: leaf-float-soft-right 19s ease-in-out infinite 2.5s;
+  }
+  .leaf-soft-products-17 {
+    top: 68%;
+    right: -87px;
+    animation: leaf-float-soft-right 21s ease-in-out infinite 4.5s;
+  }
+  .leaf-soft-products-18 {
+    top: 78%;
+    right: -93px;
+    animation: leaf-float-soft-right 23s ease-in-out infinite 6.5s;
+  }
+  .leaf-soft-products-19 {
+    top: 88%;
+    right: -89px;
+    animation: leaf-float-soft-right 20s ease-in-out infinite 8.5s;
+  }
+  .leaf-soft-products-20 {
+    top: 98%;
+    right: -91px;
+    animation: leaf-float-soft-right 22s ease-in-out infinite 9.5s;
+  }
+
+  /* Hojas suaves productos - desde arriba */
+  .leaf-soft-products-21 {
+    top: -60px;
+    left: 10%;
+    animation: leaf-float-soft-down 24s ease-in-out infinite 1s;
+  }
+  .leaf-soft-products-22 {
+    top: -60px;
+    left: 25%;
+    animation: leaf-float-soft-down 22s ease-in-out infinite 3s;
+  }
+  .leaf-soft-products-23 {
+    top: -60px;
+    left: 40%;
+    animation: leaf-float-soft-down 23s ease-in-out infinite 5s;
+  }
+  .leaf-soft-products-24 {
+    top: -60px;
+    left: 55%;
+    animation: leaf-float-soft-down 21s ease-in-out infinite 7s;
+  }
+  .leaf-soft-products-25 {
+    top: -60px;
+    left: 70%;
+    animation: leaf-float-soft-down 25s ease-in-out infinite 9s;
+  }
+  .leaf-soft-products-26 {
+    top: -60px;
+    left: 85%;
+    animation: leaf-float-soft-down 20s ease-in-out infinite 11s;
+  }
+
+  /* Hojas suaves productos - desde abajo */
+  .leaf-soft-products-27 {
+    bottom: -60px;
+    left: 15%;
+    animation: leaf-float-soft-up 21s ease-in-out infinite 2s;
+  }
+  .leaf-soft-products-28 {
+    bottom: -60px;
+    left: 30%;
+    animation: leaf-float-soft-up 23s ease-in-out infinite 4s;
+  }
+  .leaf-soft-products-29 {
+    bottom: -60px;
+    left: 45%;
+    animation: leaf-float-soft-up 22s ease-in-out infinite 6s;
+  }
+  .leaf-soft-products-30 {
+    bottom: -60px;
+    left: 60%;
+    animation: leaf-float-soft-up 24s ease-in-out infinite 8s;
+  }
+  .leaf-soft-products-31 {
+    bottom: -60px;
+    left: 75%;
+    animation: leaf-float-soft-up 20s ease-in-out infinite 10s;
+  }
+  .leaf-soft-products-32 {
+    bottom: -60px;
+    left: 90%;
+    animation: leaf-float-soft-up 21s ease-in-out infinite 12s;
+  }
+
+  /* Hojas suaves productos - adicionales centro */
+  .leaf-soft-products-33 {
+    top: -60px;
+    left: 20%;
+    animation: leaf-float-soft-down 23s ease-in-out infinite 2.5s;
+  }
+  .leaf-soft-products-34 {
+    top: -60px;
+    left: 65%;
+    animation: leaf-float-soft-down 21s ease-in-out infinite 4.5s;
+  }
+  .leaf-soft-products-35 {
+    bottom: -60px;
+    left: 35%;
+    animation: leaf-float-soft-up 22s ease-in-out infinite 3.5s;
+  }
+  .leaf-soft-products-36 {
+    bottom: -60px;
+    left: 80%;
+    animation: leaf-float-soft-up 24s ease-in-out infinite 5.5s;
+  }
+
+  /* Efecto de hojas flotantes suaves para la sección de Bienestar */
+  .wind-effect-wrapper-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .leaf-soft-section {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+  }
+
+  /* Hojas suaves sección - lado izquierdo */
+  .leaf-soft-section-1 {
+    top: 10%;
+    left: -80px;
+    animation: leaf-float-soft-left 20s ease-in-out infinite;
+  }
+  .leaf-soft-section-2 {
+    top: 30%;
+    left: -90px;
+    animation: leaf-float-soft-left 22s ease-in-out infinite 3s;
+  }
+  .leaf-soft-section-3 {
+    top: 50%;
+    left: -85px;
+    animation: leaf-float-soft-left 21s ease-in-out infinite 6s;
+  }
+  .leaf-soft-section-4 {
+    top: 70%;
+    left: -95px;
+    animation: leaf-float-soft-left 23s ease-in-out infinite 9s;
+  }
+  .leaf-soft-section-5 {
+    top: 90%;
+    left: -88px;
+    animation: leaf-float-soft-left 19s ease-in-out infinite 12s;
+  }
+
+  /* Hojas suaves sección - lado derecho */
+  .leaf-soft-section-6 {
+    top: 15%;
+    right: -80px;
+    animation: leaf-float-soft-right 21s ease-in-out infinite 2s;
+  }
+  .leaf-soft-section-7 {
+    top: 35%;
+    right: -90px;
+    animation: leaf-float-soft-right 23s ease-in-out infinite 5s;
+  }
+  .leaf-soft-section-8 {
+    top: 55%;
+    right: -85px;
+    animation: leaf-float-soft-right 20s ease-in-out infinite 8s;
+  }
+  .leaf-soft-section-9 {
+    top: 75%;
+    right: -95px;
+    animation: leaf-float-soft-right 22s ease-in-out infinite 11s;
+  }
+  .leaf-soft-section-10 {
+    top: 95%;
+    right: -88px;
+    animation: leaf-float-soft-right 24s ease-in-out infinite 14s;
+  }
+
+  /* Hojas suaves sección - desde arriba */
+  .leaf-soft-section-11 {
+    top: -60px;
+    left: 15%;
+    animation: leaf-float-soft-down 24s ease-in-out infinite 1s;
+  }
+  .leaf-soft-section-12 {
+    top: -60px;
+    left: 35%;
+    animation: leaf-float-soft-down 22s ease-in-out infinite 4s;
+  }
+  .leaf-soft-section-13 {
+    top: -60px;
+    left: 55%;
+    animation: leaf-float-soft-down 23s ease-in-out infinite 7s;
+  }
+  .leaf-soft-section-14 {
+    top: -60px;
+    left: 75%;
+    animation: leaf-float-soft-down 21s ease-in-out infinite 10s;
+  }
+  .leaf-soft-section-15 {
+    top: -60px;
+    left: 90%;
+    animation: leaf-float-soft-down 25s ease-in-out infinite 13s;
+  }
+
+  /* Hojas suaves sección - desde abajo */
+  .leaf-soft-section-16 {
+    bottom: -60px;
+    left: 20%;
+    animation: leaf-float-soft-up 21s ease-in-out infinite 2.5s;
+  }
+  .leaf-soft-section-17 {
+    bottom: -60px;
+    left: 40%;
+    animation: leaf-float-soft-up 23s ease-in-out infinite 5.5s;
+  }
+  .leaf-soft-section-18 {
+    bottom: -60px;
+    left: 60%;
+    animation: leaf-float-soft-up 22s ease-in-out infinite 8.5s;
+  }
+  .leaf-soft-section-19 {
+    bottom: -60px;
+    left: 80%;
+    animation: leaf-float-soft-up 24s ease-in-out infinite 11.5s;
+  }
+  .leaf-soft-section-20 {
+    bottom: -60px;
+    left: 95%;
+    animation: leaf-float-soft-up 20s ease-in-out infinite 14.5s;
+  }
+
+  /* Hojas suaves sección - adicionales centro */
+  .leaf-soft-section-21 {
+    top: -60px;
+    left: 25%;
+    animation: leaf-float-soft-down 23s ease-in-out infinite 3.5s;
+  }
+  .leaf-soft-section-22 {
+    top: -60px;
+    left: 65%;
+    animation: leaf-float-soft-down 21s ease-in-out infinite 6.5s;
+  }
+  .leaf-soft-section-23 {
+    bottom: -60px;
+    left: 30%;
+    animation: leaf-float-soft-up 22s ease-in-out infinite 4.5s;
+  }
+  .leaf-soft-section-24 {
+    bottom: -60px;
+    left: 70%;
+    animation: leaf-float-soft-up 24s ease-in-out infinite 7.5s;
+  }
+
+  /* Efecto de hojas flotantes suaves para el header de servicios */
+  .wind-effect-wrapper-header {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .leaf-soft {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+  }
+
+  /* Hojas suaves - lado izquierdo */
+  .leaf-soft-1 {
+    top: 10%;
+    left: -80px;
+    animation: leaf-float-soft-left 18s ease-in-out infinite;
+  }
+  .leaf-soft-2 {
+    top: 40%;
+    left: -90px;
+    animation: leaf-float-soft-left 20s ease-in-out infinite 3s;
+  }
+  .leaf-soft-3 {
+    top: 70%;
+    left: -85px;
+    animation: leaf-float-soft-left 19s ease-in-out infinite 6s;
+  }
+
+  /* Hojas suaves - lado derecho */
+  .leaf-soft-4 {
+    top: 15%;
+    right: -80px;
+    animation: leaf-float-soft-right 21s ease-in-out infinite 2s;
+  }
+  .leaf-soft-5 {
+    top: 45%;
+    right: -90px;
+    animation: leaf-float-soft-right 19s ease-in-out infinite 5s;
+  }
+  .leaf-soft-6 {
+    top: 75%;
+    right: -85px;
+    animation: leaf-float-soft-right 20s ease-in-out infinite 8s;
+  }
+
+  /* Hojas suaves - desde arriba */
+  .leaf-soft-7 {
+    top: -60px;
+    left: 20%;
+    animation: leaf-float-soft-down 22s ease-in-out infinite 1s;
+  }
+  .leaf-soft-8 {
+    top: -60px;
+    left: 50%;
+    animation: leaf-float-soft-down 20s ease-in-out infinite 4s;
+  }
+  .leaf-soft-9 {
+    top: -60px;
+    left: 80%;
+    animation: leaf-float-soft-down 21s ease-in-out infinite 7s;
+  }
+
+  /* Hojas suaves - desde abajo */
+  .leaf-soft-10 {
+    bottom: -60px;
+    left: 30%;
+    animation: leaf-float-soft-up 19s ease-in-out infinite 2.5s;
+  }
+  .leaf-soft-11 {
+    bottom: -60px;
+    left: 60%;
+    animation: leaf-float-soft-up 21s ease-in-out infinite 5.5s;
+  }
+  .leaf-soft-12 {
+    bottom: -60px;
+    left: 90%;
+    animation: leaf-float-soft-up 20s ease-in-out infinite 8.5s;
+  }
+
+  .leaf {
+    position: absolute;
+    font-size: 36px;
+    opacity: 0;
+  }
+
+  /* Hojas lado izquierdo */
+  .leaf-1 {
+    top: 5%;
+    left: -120px;
+    animation: leaf-float-left 12s ease-in-out infinite;
+  }
+  .leaf-2 {
+    top: 20%;
+    left: -130px;
+    animation: leaf-float-left 14s ease-in-out infinite 2s;
+  }
+  .leaf-3 {
+    top: 35%;
+    left: -125px;
+    animation: leaf-float-left 13s ease-in-out infinite 4s;
+  }
+  .leaf-4 {
+    top: 50%;
+    left: -135px;
+    animation: leaf-float-left 15s ease-in-out infinite 6s;
+  }
+  .leaf-5 {
+    top: 65%;
+    left: -128px;
+    animation: leaf-float-left 11s ease-in-out infinite 1s;
+  }
+  .leaf-6 {
+    top: 80%;
+    left: -140px;
+    animation: leaf-float-left 13.5s ease-in-out infinite 3s;
+  }
+  .leaf-7 {
+    top: 95%;
+    left: -133px;
+    animation: leaf-float-left 12.5s ease-in-out infinite 5s;
+  }
+  .leaf-8 {
+    top: 12%;
+    left: -145px;
+    animation: leaf-float-left 14.5s ease-in-out infinite 7s;
+  }
+
+  /* Hojas lado derecho */
+  .leaf-9 {
+    top: 8%;
+    right: -120px;
+    animation: leaf-float-right 15.5s ease-in-out infinite 1.5s;
+  }
+  .leaf-10 {
+    top: 23%;
+    right: -130px;
+    animation: leaf-float-right 11.5s ease-in-out infinite 3.5s;
+  }
+  .leaf-11 {
+    top: 38%;
+    right: -125px;
+    animation: leaf-float-right 13.8s ease-in-out infinite 5.5s;
+  }
+  .leaf-12 {
+    top: 53%;
+    right: -135px;
+    animation: leaf-float-right 12.8s ease-in-out infinite 7.5s;
+  }
+  .leaf-13 {
+    top: 68%;
+    right: -128px;
+    animation: leaf-float-right 14s ease-in-out infinite 0.5s;
+  }
+  .leaf-14 {
+    top: 83%;
+    right: -140px;
+    animation: leaf-float-right 12.2s ease-in-out infinite 2.5s;
+  }
+  .leaf-15 {
+    top: 98%;
+    right: -133px;
+    animation: leaf-float-right 13.3s ease-in-out infinite 4.5s;
+  }
+  .leaf-16 {
+    top: 15%;
+    right: -145px;
+    animation: leaf-float-right 11.7s ease-in-out infinite 6.5s;
+  }
+
+  /* Hojas centro superior */
+  .leaf-17 {
+    top: -80px;
+    left: 20%;
+    animation: leaf-float-down 14.2s ease-in-out infinite 1s;
+  }
+  .leaf-18 {
+    top: -80px;
+    left: 40%;
+    animation: leaf-float-down 13.7s ease-in-out infinite 3s;
+  }
+  .leaf-19 {
+    top: -80px;
+    left: 60%;
+    animation: leaf-float-down 12.5s ease-in-out infinite 5s;
+  }
+  .leaf-20 {
+    top: -80px;
+    left: 80%;
+    animation: leaf-float-down 14.3s ease-in-out infinite 7s;
+  }
+
+  /* Hojas centro inferior */
+  .leaf-21 {
+    bottom: -80px;
+    left: 25%;
+    animation: leaf-float-up 11.9s ease-in-out infinite 2s;
+  }
+  .leaf-22 {
+    bottom: -80px;
+    left: 50%;
+    animation: leaf-float-up 13.6s ease-in-out infinite 4s;
+  }
+  .leaf-23 {
+    bottom: -80px;
+    left: 75%;
+    animation: leaf-float-up 12.4s ease-in-out infinite 6s;
+  }
+  .leaf-24 {
+    bottom: -80px;
+    left: 35%;
+    animation: leaf-float-up 14.8s ease-in-out infinite 8s;
+  }
+
+  /* Hojas adicionales lado izquierdo */
+  .leaf-25 {
+    top: 10%;
+    left: -150px;
+    animation: leaf-float-left 13.5s ease-in-out infinite 1.8s;
+  }
+  .leaf-26 {
+    top: 28%;
+    left: -155px;
+    animation: leaf-float-left 12.8s ease-in-out infinite 3.8s;
+  }
+  .leaf-27 {
+    top: 45%;
+    left: -148px;
+    animation: leaf-float-left 14.2s ease-in-out infinite 5.8s;
+  }
+  .leaf-28 {
+    top: 60%;
+    left: -142px;
+    animation: leaf-float-left 11.8s ease-in-out infinite 7.8s;
+  }
+
+  /* Hojas adicionales lado derecho */
+  .leaf-29 {
+    top: 18%;
+    right: -150px;
+    animation: leaf-float-right 13.2s ease-in-out infinite 2.8s;
+  }
+  .leaf-30 {
+    top: 33%;
+    right: -155px;
+    animation: leaf-float-right 12.5s ease-in-out infinite 4.8s;
+  }
+  .leaf-31 {
+    top: 48%;
+    right: -148px;
+    animation: leaf-float-right 14.5s ease-in-out infinite 6.8s;
+  }
+  .leaf-32 {
+    top: 63%;
+    right: -142px;
+    animation: leaf-float-right 11.3s ease-in-out infinite 8.8s;
+  }
+
+  /* Hojas adicionales centro superior */
+  .leaf-33 {
+    top: -80px;
+    left: 30%;
+    animation: leaf-float-down 13.8s ease-in-out infinite 2.5s;
+  }
+  .leaf-34 {
+    top: -80px;
+    left: 70%;
+    animation: leaf-float-down 12.3s ease-in-out infinite 4.5s;
+  }
+
+  /* Hojas adicionales centro inferior */
+  .leaf-35 {
+    bottom: -80px;
+    left: 15%;
+    animation: leaf-float-up 13.2s ease-in-out infinite 3.5s;
+  }
+  .leaf-36 {
+    bottom: -80px;
+    left: 65%;
+    animation: leaf-float-up 12.7s ease-in-out infinite 5.5s;
+  }
+
+  /* Animación desde la izquierda */
+  @keyframes leaf-float-left {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.7);
+    }
+    5% {
+      opacity: 0.8;
+    }
+    25% {
+      transform: translateX(150px) translateY(-30px) rotate(90deg) scale(1);
+    }
+    50% {
+      transform: translateX(300px) translateY(-50px) rotate(180deg) scale(1.15);
+    }
+    75% {
+      transform: translateX(450px) translateY(-30px) rotate(270deg) scale(1.05);
+    }
+    95% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(600px) translateY(0) rotate(360deg) scale(0.7);
+    }
+  }
+
+  /* Animación desde la derecha */
+  @keyframes leaf-float-right {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.7);
+    }
+    5% {
+      opacity: 0.8;
+    }
+    25% {
+      transform: translateX(-150px) translateY(-30px) rotate(-90deg) scale(1);
+    }
+    50% {
+      transform: translateX(-300px) translateY(-50px) rotate(-180deg)
+        scale(1.15);
+    }
+    75% {
+      transform: translateX(-450px) translateY(-30px) rotate(-270deg)
+        scale(1.05);
+    }
+    95% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-600px) translateY(0) rotate(-360deg) scale(0.7);
+    }
+  }
+
+  /* Animación desde arriba hacia abajo */
+  @keyframes leaf-float-down {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.7);
+    }
+    5% {
+      opacity: 0.8;
+    }
+    25% {
+      transform: translateX(-30px) translateY(150px) rotate(90deg) scale(1);
+    }
+    50% {
+      transform: translateX(30px) translateY(300px) rotate(180deg) scale(1.15);
+    }
+    75% {
+      transform: translateX(-20px) translateY(450px) rotate(270deg) scale(1.05);
+    }
+    95% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) translateY(600px) rotate(360deg) scale(0.7);
+    }
+  }
+
+  /* Animación desde abajo hacia arriba */
+  @keyframes leaf-float-up {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.7);
+    }
+    5% {
+      opacity: 0.8;
+    }
+    25% {
+      transform: translateX(30px) translateY(-150px) rotate(-90deg) scale(1);
+    }
+    50% {
+      transform: translateX(-30px) translateY(-300px) rotate(-180deg)
+        scale(1.15);
+    }
+    75% {
+      transform: translateX(20px) translateY(-450px) rotate(-270deg) scale(1.05);
+    }
+    95% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) translateY(-600px) rotate(-360deg) scale(0.7);
+    }
+  }
+
+  /* Animaciones suaves para el header de servicios */
+
+  /* Animación suave desde la izquierda */
+  @keyframes leaf-float-soft-left {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(100px) translateY(-15px) rotate(45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1);
+    }
+    70% {
+      transform: translateX(300px) translateY(-15px) rotate(135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde la derecha */
+  @keyframes leaf-float-soft-right {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(-100px) translateY(-15px) rotate(-45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(-200px) translateY(-25px) rotate(-90deg) scale(1);
+    }
+    70% {
+      transform: translateX(-300px) translateY(-15px) rotate(-135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde arriba hacia abajo */
+  @keyframes leaf-float-soft-down {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(-15px) translateY(80px) rotate(45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(15px) translateY(160px) rotate(90deg) scale(1);
+    }
+    70% {
+      transform: translateX(-10px) translateY(240px) rotate(135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) translateY(320px) rotate(180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde abajo hacia arriba */
+  @keyframes leaf-float-soft-up {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(15px) translateY(-80px) rotate(-45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(-15px) translateY(-160px) rotate(-90deg) scale(1);
+    }
+    70% {
+      transform: translateX(10px) translateY(-240px) rotate(-135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) translateY(-320px) rotate(-180deg) scale(0.8);
+    }
+  }
+
+  /* Efecto de hojas flotantes suaves para reseñas */
+  .wind-effect-wrapper-reviews {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .leaf-soft-reviews {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0;
+  }
+
+  /* Hojas suaves reseñas - lado izquierdo */
+  .leaf-soft-reviews-1 {
+    top: 20%;
+    left: -60px;
+    animation: leaf-float-soft-left 16s ease-in-out infinite;
+  }
+  .leaf-soft-reviews-2 {
+    top: 60%;
+    left: -70px;
+    animation: leaf-float-soft-left 18s ease-in-out infinite 4s;
+  }
+
+  /* Hojas suaves reseñas - lado derecho */
+  .leaf-soft-reviews-3 {
+    top: 30%;
+    right: -60px;
+    animation: leaf-float-soft-right 17s ease-in-out infinite 2s;
+  }
+  .leaf-soft-reviews-4 {
+    top: 70%;
+    right: -70px;
+    animation: leaf-float-soft-right 19s ease-in-out infinite 6s;
+  }
+
+  /* Hojas suaves reseñas - desde arriba */
+  .leaf-soft-reviews-5 {
+    top: -40px;
+    left: 25%;
+    animation: leaf-float-soft-down 20s ease-in-out infinite 1s;
+  }
+  .leaf-soft-reviews-6 {
+    top: -40px;
+    left: 75%;
+    animation: leaf-float-soft-down 18s ease-in-out infinite 5s;
+  }
+
+  /* Hojas suaves reseñas - desde abajo */
+  .leaf-soft-reviews-7 {
+    bottom: -40px;
+    left: 40%;
+    animation: leaf-float-soft-up 17s ease-in-out infinite 3s;
+  }
+  .leaf-soft-reviews-8 {
+    bottom: -40px;
+    left: 80%;
+    animation: leaf-float-soft-up 19s ease-in-out infinite 7s;
+  }
+</style>

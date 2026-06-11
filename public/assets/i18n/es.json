@@ -1,0 +1,289 @@
+{
+  "notifications": {
+    "success": {
+      "message_sent": "Mensaje enviado correctamente"
+    },
+    "error": {
+      "email_failed": "Error al enviar el correo."
+    }
+  },
+  "whatsapp": {
+    "greeting": "Hola, acabo de enviar una solicitud de servicio a domicilio. Aquí están los detalles:",
+    "subject_label": "Asunto",
+    "address_label": "Dirección",
+    "phone_label": "Teléfono",
+    "message_label": "Mensaje"
+  },
+  "calendar": {
+    "loading": "Cargando calendario...",
+    "retry": "Reintentar",
+    "directUrl": "Abrir en Cal.com"
+  },
+  "navbar": {
+    "about": "Quiénes Somos",
+    "contact": "Contactar",
+    "home": "Inicio",
+    "products": "Servicios"
+  },
+  "home": {
+    "products": {
+      "subtitle": {
+        "first": "Bienestar Hecho",
+        "second": "Fácil"
+      },
+      "text": "Descubre el equilibrio perfecto entre relajación y sanación con los mejores masajes terapéuticos a domicilio.",
+      "square": {
+        "left": {
+          "title": "Comprometidos con la excelencia",
+          "text": "Cada masaje se ofrece con los más altos estándares de atención, respaldados por años de formación y experiencia terapéutica. Garantizamos tratamientos seguros y efectivos, diseñados para apoyar la recuperación natural de su cuerpo."
+        },
+        "right": {
+          "title": "Curación innovadora",
+          "text": "Combinamos antiguas tradiciones de masaje y enfoques terapéuticos modernos, creando sesiones transformadoras que se adaptan a su estilo de vida y elevan su bienestar."
+        },
+        "bottom": {
+          "title": "¿Buscas el masaje perfecto?",
+          "text": "Explora nuestra carta de tratamientos terapéuticos y encuentra la sesión ideal para relajar tu cuerpo, calmar tu mente y recargar energías.",
+          "button": "Ver Catálogo Completo"
+        }
+      }
+    },
+    "reviews": {
+      "title": "Lo que Dicen Nuestros Clientes",
+      "subtitle": "Testimonios Reales",
+      "text": "La satisfacción de nuestros clientes es nuestro mayor logro y motivación.",
+      "nodata": "Aún no tenemos testimonios que mostrar.",
+      "count": "reseñas"
+    },
+    "footer": {
+      "text": "Comienza hoy mismo con nuestras soluciones.",
+      "leftbutton": "Contáctanos",
+      "rightbutton": "Saber más"
+    }
+  },
+  "about": {
+    "title": "Quiénes Somos",
+    "subtitle": "Descubre nuestra historia, valores y el equipo detrás de esta empresa.",
+    "nodata": "Aún no tenemos mucho que contar.",
+    "nodata.company": "Aún no tenemos información de la empresa que mostrar.",
+    "team": {
+      "title": "Nuestro Equipo",
+      "subtitle": "Las personas detrás del éxito",
+      "text": "Un grupo de profesionales apasionados por la tecnología y la innovación."
+    },
+    "reviews": {
+      "title": "Testimonios de Nuestros Clientes",
+      "subtitle": "Lo que dicen de nosotros",
+      "text": "La satisfacción de nuestros clientes es nuestro mayor logro y motivación."
+    }
+  },
+  "products": {
+    "title": {
+      "first": "Nuestros ",
+      "second": "Servicios"
+    },
+    "text": "Descubra terapias personalizadas diseñadas para rejuvenecer su cuerpo, calmar su mente y mejorar su bienestar.",
+    "button": "Todos",
+    "nodata": "No hay servicios disponibles en este momento.",
+    "nodata.category": "No hay servicios disponibles en esta categoría.",
+    "seedetails": "Ver Detalles",
+    "details": "Detalles",
+    "info": "Solicitar información",
+    "swipe": "← Desliza para ver más categorías →",
+    "scheduleAppointment": "Reserva ya"
+  },
+  "appointment": {
+    "cancel": "Cancelar",
+    "confirm": "Pagar para Reservar",
+    "back": "Atrás",
+    "availableTimes": "Horarios Disponibles",
+    "selectDate": "Selecciona una fecha para ver los horarios disponibles",
+    "summary": "Resumen de la Cita",
+    "product": "Servicio",
+    "dateTime": "Fecha y Hora",
+    "processing": "Procesando...",
+    "preparingForm": "Preparando tu formulario de cita",
+    "days": {
+      "sun": "Dom",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mié",
+      "thu": "Jue",
+      "fri": "Vie",
+      "sat": "Sáb"
+    },
+    "form": {
+      "title": "Tus Datos",
+      "name": "Tu Nombre",
+      "namePlaceholder": "Ingresa tu nombre completo",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "phone": "Nº de Teléfono",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "location": "En persona (dirección del asistente)",
+      "locationPlaceholder": "Ingresa la dirección completa",
+      "notes": "Notas Adicionales",
+      "notesPlaceholder": "Alguna solicitud especial o información adicional...",
+      "terms": "Al continuar, acepta nuestras condiciones de uso y nuestra política de privacidad."
+    }
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "text": "Estamos aquí para ayudarle con cualquier consulta. Póngase en contacto con nosotros y responderemos a la brevedad posible.",
+    "calling": "Llamando...",
+    "square": {
+      "left": {
+        "title": "Envíenos un correo",
+        "email": {
+          "title": "Correo electrónico",
+          "placeholder": "ejemplo@correo.com",
+          "error": "Ingrese un correo electrónico válido"
+        },
+        "subject": {
+          "title": "Asunto",
+          "placeholder": "Asunto de su mensaje",
+          "error": "El asunto es requerido"
+        },
+        "address": {
+          "title": "Dirección",
+          "placeholder": "Ingresa tu dirección completa",
+          "error": "La dirección es requerida"
+        },
+        "phone": {
+          "title": "Tu teléfono",
+          "placeholder": "Ingresa tu número de teléfono",
+          "error": "El teléfono es requerido"
+        },
+        "message": {
+          "title": "Mensaje",
+          "placeholder": "Escriba su mensaje aquí",
+          "required": "El mensaje es requerido",
+          "minlength": "El mensaje debe tener al menos 10 caracteres"
+        },
+        "button": "Enviar mensaje"
+      },
+      "right": {
+        "title": "Información de contacto",
+        "email": "Correo electrónico",
+        "phone": "Teléfono",
+        "address": "Dirección",
+        "button": "Haz clic para ver en Google Maps",
+        "phone.hint": "Haz clic para contactar por WhatsApp",
+        "email.hint": "Haz clic para enviar un correo electrónico",
+        "scheduleButton": "Agendar Cita"
+      }
+    },
+    "noContactInfo": "No hay información de contacto disponible"
+  },
+  "footer": {
+    "title": "Sitio desarrollado para",
+    "copyright": "Shirkasoft. Todos los derechos reservados.",
+    "whatsapp": "Contáctanos por WhatsApp",
+    "email": "Envíanos un correo",
+    "link": "Visita nuestra web",
+    "bookings": "Reservas",
+    "terms": "Términos y Condiciones",
+    "column": {
+      "left": {
+        "first": "En",
+        "second": "nos especializamos en masajes terapéuticos, relajantes y de bienestar, diseñados para aliviar el estrés, mejorar la circulación y recuperar tu equilibrio físico y mental.",
+        "third": "Agradecemos especialmente a",
+        "fourth": "por el desarrollo y diseño de nuestro sitio web, ¡su excelente trabajo nos conecta mejor contigo!"
+      },
+      "center": {
+        "title": "Enlaces Rápidos",
+        "first": "Inicio",
+        "second": "Sobre Nosotros",
+        "third": "Lo que ofrecemos",
+        "fourth": "Contactar"
+      },
+      "right": "Contáctenos",
+      "social": {
+        "title": "Nuestras Redes"
+      }
+    },
+    "noContactInfo": "No hay información de contactos disponible",
+    "noSocialNetworks": "No hay redes sociales disponibles"
+  },
+  "chat": {
+    "title": "Shirka",
+    "subtitle": "Asistente virtual",
+    "close": "Cerrar chat",
+    "open": "Abrir chat",
+    "welcome": {
+      "title": "¡Hola! Soy Shirka 🦾",
+      "subtitle": "¿En qué puedo ayudarte hoy?",
+      "button": "Iniciar conversación",
+      "message": "¡Hola! Soy Shirka, tu asistente virtual. Bienvenido a BnB, el mejor servicio a domicilio de masajes terapéuticos en Miami. ¿En qué puedo ayudarte hoy?"
+    },
+    "user": "Tú",
+    "botName": "Shirka",
+    "input": {
+      "placeholder": "Escribe tu mensaje..."
+    },
+    "clear": "Limpiar chat",
+    "bot": {
+      "response": "Gracias por tu mensaje: \"{{message}}\". Soy un asistente en desarrollo, pero estoy aquí para ayudarte."
+    }
+  },
+  "common": {
+    "contact": "Contactar",
+    "scrollTop": "Ir arriba",
+    "updateAvailable": "Nueva versión disponible - Actualizar",
+    "loading": "Cargando...",
+    "videoNotSupported": "Tu navegador no soporta la etiqueta de video.",
+    "fullscreen": "Ver en pantalla completa",
+    "download": "Descargar Archivo",
+    "zoomIn": "Ampliar",
+    "zoomMedia": "Ver en pantalla completa",
+    "previousImage": "Imagen anterior",
+    "nextImage": "Imagen siguiente",
+    "close": "Cerrar"
+  },
+  "bookings": {
+    "title": "Reserva tu Cita",
+    "subtitle": "Selecciona el servicio que deseas y agenda tu cita de manera fácil y rápida.",
+    "variants": "Opciones",
+    "bookNow": "Reservar Ahora",
+    "noServices": "No hay productos disponibles",
+    "noServicesText": "En este momento no tenemos productos disponibles para mostrar.",
+    "scheduling": "Programar Cita",
+    "goBack": "Volver"
+  },
+  "terms": {
+    "title": "Términos y Condiciones",
+    "lastUpdated": "Última actualización",
+    "footer": "Todos los derechos reservados",
+    "loading": "Traduciendo términos y condiciones..."
+  },
+  "socialNetworks": {
+    "whatsapp": {
+      "hint": "Haz clic para enviar un mensaje por WhatsApp"
+    },
+    "facebook": {
+      "hint": "Visítanos en Facebook"
+    },
+    "instagram": {
+      "hint": "Síguenos en Instagram"
+    },
+    "tiktok": {
+      "hint": "Visita nuestro TikTok"
+    },
+    "x": {
+      "hint": "Síguenos en X"
+    },
+    "telegram": {
+      "hint": "Únete a nuestro canal de Telegram"
+    },
+    "linkedin": {
+      "hint": "Conéctate con nosotros en LinkedIn"
+    },
+    "youtube": {
+      "hint": "Suscríbete a nuestro canal de YouTube"
+    },
+    "default": {
+      "label": "Red Social",
+      "hint": "Visita nuestro perfil"
+    }
+  }
+}

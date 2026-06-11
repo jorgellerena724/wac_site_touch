@@ -1,0 +1,289 @@
+{
+  "notifications": {
+    "success": {
+      "message_sent": "Message sent successfully"
+    },
+    "error": {
+      "email_failed": "Error sending email."
+    }
+  },
+  "whatsapp": {
+    "greeting": "Hello, I just sent a home service request. Here are the details:",
+    "subject_label": "Subject",
+    "address_label": "Address",
+    "phone_label": "Phone",
+    "message_label": "Message"
+  },
+  "calendar": {
+    "loading": "Loading calendar...",
+    "retry": "Retry",
+    "directUrl": "Open in Cal.com"
+  },
+  "navbar": {
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home",
+    "products": "Services"
+  },
+  "home": {
+    "products": {
+      "subtitle": {
+        "first": "Wellnes Made ",
+        "second": "Easy"
+      },
+      "text": "Discover the perfect balance of relaxation and healing with the best therapeutic massages delivered to your home.",
+      "square": {
+        "left": {
+          "title": "Comited to excellence",
+          "text": "Every massage is delivered with the highest standards of care, supported by years of training and therapeutic knowledge. We ensure safe, effective, and treatments designed to support your body’s natural recovery."
+        },
+        "right": {
+          "title": "Innovative Healing",
+          "text": "We bring together ancient massage traditions and modern therapeutic approaches, creating transformative sessions that adapt to your lifestyle and elevate your wellness."
+        },
+        "bottom": {
+          "title": "Looking up for the perfect massage?",
+          "text": "Explore our menu of therapeutic treatments and find the ideal session to relax your body, calm you mind, and recharge your energy.",
+          "button": "See Full Catalog"
+        }
+      }
+    },
+    "reviews": {
+      "title": "What Our Clients Say",
+      "subtitle": "Real Testimonials",
+      "text": "Our clients' satisfaction is our greatest achievement and motivation.",
+      "nodata": "We don't have testimonials to show yet.",
+      "count": "reviews"
+    },
+    "footer": {
+      "text": "Get started with our solutions today.",
+      "leftbutton": "Contact us",
+      "rightbutton": "Learn more"
+    }
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Discover our history, values, and the team behind this company.",
+    "nodata": "There is no information to show at the moment.",
+    "nodata.company": "We don't have company information to show yet.",
+    "team": {
+      "title": "Our Team",
+      "subtitle": "The people behind our success",
+      "text": "A group of professionals passionate about technology and innovation."
+    },
+    "reviews": {
+      "title": "Our Clients Testimonials",
+      "subtitle": "What they say about us",
+      "text": "Our clients satisfaction is our greatest achievement and motivation."
+    }
+  },
+  "products": {
+    "title": {
+      "first": "Our ",
+      "second": "Services"
+    },
+    "text": "Discover personalized therapies crafted to rejuvenate your body, calm your mind, and elevate your wellbeing.",
+    "button": "All",
+    "nodata": "There are no services available at this time.",
+    "nodata.category": "There are no services available in this category.",
+    "seedetails": "See Details",
+    "details": "Details",
+    "info": "Request information",
+    "swipe": "← Swipe to see more categories →",
+    "scheduleAppointment": "Book now"
+  },
+  "appointment": {
+    "cancel": "Cancel",
+    "confirm": "Pay to Reserve",
+    "back": "Back",
+    "availableTimes": "Available Times",
+    "selectDate": "Select a date to see available times",
+    "summary": "Appointment Summary",
+    "product": "Service",
+    "dateTime": "Date & Time",
+    "processing": "Processing...",
+    "preparingForm": "Preparing your appointment form",
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "form": {
+      "title": "Your Information",
+      "name": "Your Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "location": "In-person (attendee address)",
+      "locationPlaceholder": "Enter the full address",
+      "notes": "Additional Notes",
+      "notesPlaceholder": "Any special requests or additional information...",
+      "terms": "By continuing, you accept our terms of use and privacy policy."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "text": "We're here to help you with any questions. Contact us and we'll respond as soon as possible.",
+    "calling": "Calling...",
+    "square": {
+      "left": {
+        "title": "Send us an email",
+        "email": {
+          "title": "Email",
+          "placeholder": "example@email.com",
+          "error": "Please enter a valid email address"
+        },
+        "subject": {
+          "title": "Subject",
+          "placeholder": "Subject of your message",
+          "error": "The subject is required"
+        },
+        "phone": {
+          "title": "Your phone number",
+          "placeholder": "Enter your phone number",
+          "error": "Phone number is required"
+        },
+        "address": {
+          "title": "Address",
+          "placeholder": "Enter your full address",
+          "error": "The address is required"
+        },
+        "message": {
+          "title": "Message",
+          "placeholder": "Write your message here",
+          "required": "The message is required",
+          "minlength": "The message must be at least 10 characters"
+        },
+        "button": "Send message"
+      },
+      "right": {
+        "title": "Contact Info",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "button": "Click to view on Google Maps",
+        "email.hint": "Click to send an email",
+        "phone.hint": "Click to contact via WhatsApp",
+        "scheduleButton": "Schedule Appointment"
+      }
+    },
+    "noContactInfo": "No contact information available"
+  },
+  "footer": {
+    "title": "Site developed for",
+    "copyright": "Shirkasoft. All rights reserved.",
+    "whatsapp": "Contact us via WhatsApp",
+    "email": "Send us an email",
+    "link": "Visit our website",
+    "bookings": "Bookings",
+    "terms": "Terms & Conditions",
+    "column": {
+      "left": {
+        "first": "At",
+        "second": "we specialize in therapeutic, relaxing, and wellness massages, designed to relieve stress, improve circulation, and restore your physical and mental balance.",
+        "third": "We especially thank",
+        "fourth": "for the development and design of our website. Their excellent work connects us better with you!"
+      },
+      "center": {
+        "title": "Quick Links",
+        "first": "Home",
+        "second": "About Us",
+        "third": "What We Offer",
+        "fourth": "Contact"
+      },
+      "right": "Contact Us",
+      "social": {
+        "title": "Our Networks"
+      }
+    },
+    "noContactInfo": "No contact information available",
+    "noSocialNetworks": "No social networks available"
+  },
+  "chat": {
+    "title": "Shirka",
+    "subtitle": "Virtual assistant",
+    "close": "Close chat",
+    "open": "Open chat",
+    "welcome": {
+      "title": "Hello! I'm Shirka 🦾",
+      "subtitle": "How can I help you today?",
+      "button": "Start conversation",
+      "message": "Hello! I'm Shirka, your virtual assistant. Welcome to BnB, the best in-home therapeutic massage service in Miami. How can I help you today?"
+    },
+    "user": "You",
+    "botName": "Shirka",
+    "input": {
+      "placeholder": "Type your message..."
+    },
+    "clear": "Clear chat",
+    "bot": {
+      "response": "Thank you for your message: \"{{message}}\". I'm an assistant in development, but I'm here to help you."
+    }
+  },
+  "common": {
+    "contact": "Contact",
+    "scrollTop": "Go to top",
+    "updateAvailable": "New version available - Update",
+    "loading": "Loading...",
+    "videoNotSupported": "Your browser does not support the video tag.",
+    "fullscreen": "View fullscreen",
+    "download": "Download File",
+    "zoomIn": "Zoom in",
+    "zoomMedia": "View in fullscreen",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "close": "Close"
+  },
+  "bookings": {
+    "title": "Book Your Appointment",
+    "subtitle": "Select the service you want and schedule your appointment easily and quickly.",
+    "variants": "Options",
+    "bookNow": "Book Now",
+    "noServices": "No products available",
+    "noServicesText": "We currently have no products available to display.",
+    "scheduling": "Schedule Appointment",
+    "goBack": "Go Back"
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "lastUpdated": "Last updated",
+    "footer": "All rights reserved",
+    "loading": "Translating terms and conditions..."
+  },
+  "socialNetworks": {
+    "whatsapp": {
+      "hint": "Click to send a message via WhatsApp"
+    },
+    "facebook": {
+      "hint": "Visit us on Facebook"
+    },
+    "instagram": {
+      "hint": "Follow us on Instagram"
+    },
+    "tiktok": {
+      "hint": "Visit our TikTok"
+    },
+    "x": {
+      "hint": "Follow us on X"
+    },
+    "telegram": {
+      "hint": "Join our Telegram channel"
+    },
+    "linkedin": {
+      "hint": "Connect with us on LinkedIn"
+    },
+    "youtube": {
+      "hint": "Subscribe to our YouTube channel"
+    },
+    "default": {
+      "label": "Red Social",
+      "hint": "Visita nuestro perfil"
+    }
+  }
+}

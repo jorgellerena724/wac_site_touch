@@ -1,0 +1,813 @@
+<section class="bg-white py-10 overflow-x-hidden relative">
+  <!-- Efecto de viento suave para toda la sección -->
+  <div class="wind-effect-wrapper-full">
+    <!-- Hojas flotantes suaves -->
+    <div class="leaf-soft-contact leaf-soft-contact-1">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-2">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-3">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-4">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-5">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-6">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-7">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-8">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-9">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-10">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-11">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-12">🍃</div>
+    <!-- Hojas adicionales lado izquierdo -->
+    <div class="leaf-soft-contact leaf-soft-contact-13">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-14">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-15">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-16">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-17">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-18">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-19">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-20">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-21">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-22">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-23">🍃</div>
+    <div class="leaf-soft-contact leaf-soft-contact-24">🍃</div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div
+      class="text-center mb-16 mt-20"
+      [ngClass]="{
+        'slide-in-from-top': isHeaderLoaded(),
+        '-translate-y-12 opacity-0': !isHeaderLoaded(),
+      }"
+    >
+      <h1
+        class="text-4xl font-extrabold text-cyan-600 sm:text-5xl drop-shadow-sm mb-4"
+      >
+        {{ "contact.title" | transloco }}
+      </h1>
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        {{ "contact.text" | transloco }}
+      </p>
+    </div>
+
+    <!-- Layout con teléfono y tarjeta -->
+    <div class="flex justify-center items-center gap-8 lg:gap-12">
+      <!-- Contenedor de redes sociales -->
+      <div
+        class="w-full max-w-2xl relative"
+        [ngClass]="{
+          'slide-in-from-left': isContactInfoLoaded(),
+          '-translate-x-full opacity-0': !isContactInfoLoaded(),
+        }"
+      >
+        <div
+          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(6,182,212,0.15),_0_0_40px_rgba(6,182,212,0.1)] border border-cyan-100 flex flex-col h-full relative z-10 animate-container-breeze"
+        >
+          <h2 class="text-3xl font-bold text-cyan-600 mb-8">
+            {{ "contact.square.right.title" | transloco }}
+          </h2>
+          <div class="flex-grow space-y-6">
+            @if (hasAnyContactInfo()) {
+              <!-- Dirección - Prioridad 1 -->
+              @if (isAddressValid()) {
+                <div>
+                  <div
+                    class="flex items-start p-4 rounded-xl transition-all duration-300 hover:bg-cyan-50 group cursor-pointer"
+                    (click)="openGoogleMaps()"
+                  >
+                    <div class="flex-shrink-0 mt-1">
+                      <div
+                        class="w-10 h-10 bg-gradient-to-r from-cyan-100 to-cyan-50 rounded-lg flex items-center justify-center"
+                      >
+                        <svg
+                          class="h-6 w-6 text-cyan-600"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          title="Abrir en Google Maps"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="ml-4">
+                      <p class="text-lg font-semibold text-cyan-600">
+                        {{ "contact.square.right.address" | transloco }}
+                      </p>
+                      <p class="text-slate-600" style="white-space: pre-line">
+                        {{ contactData().address }}
+                      </p>
+                      <small
+                        class="text-sm text-cyan-600 mt-2 block font-semibold group-hover:text-cyan-500 transition-colors duration-300"
+                      >
+                        <em>{{ "contact.square.right.button" | transloco }}</em>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <!-- Email - Prioridad 2 -->
+              @if (isEmailValid()) {
+                @if (isAddressValid()) {
+                  <hr class="border-cyan-200 my-4" />
+                }
+                <div
+                  class="flex items-start p-4 rounded-xl transition-all duration-300 hover:bg-cyan-50 group cursor-pointer"
+                  (click)="openEmail()"
+                >
+                  <div class="flex-shrink-0 mt-1">
+                    <div
+                      class="w-10 h-10 bg-gradient-to-r from-cyan-100 to-cyan-50 rounded-lg flex items-center justify-center"
+                    >
+                      <svg
+                        class="h-6 w-6 text-cyan-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <p class="text-lg font-semibold text-cyan-600">
+                      {{ "contact.square.right.email" | transloco }}
+                    </p>
+                    <p
+                      class="text-slate-600 transition-colors duration-300 font-medium"
+                    >
+                      {{ contactData().email }}
+                    </p>
+                    <small
+                      class="text-sm text-cyan-600 mt-2 block font-semibold group-hover:text-cyan-500 transition-colors duration-300"
+                    >
+                      <em>{{
+                        "contact.square.right.email.hint" | transloco
+                      }}</em>
+                    </small>
+                  </div>
+                </div>
+              }
+
+              <!-- Redes Sociales - Después de dirección y email -->
+              @for (
+                network of activeSocialNetworks();
+                track network.network;
+                let i = $index
+              ) {
+                <div>
+                  @if (i === 0 && (isAddressValid() || isEmailValid())) {
+                    <hr class="border-cyan-200 my-4" />
+                  }
+                  @if (i > 0) {
+                    <hr class="border-cyan-200 my-4" />
+                  }
+                  <div
+                    class="flex items-start p-4 rounded-xl transition-all duration-300 hover:bg-cyan-50 group cursor-pointer"
+                    (click)="openSocialNetwork(network)"
+                  >
+                    <div class="flex-shrink-0 mt-1">
+                      <div
+                        class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300"
+                        [style.background-color]="
+                          getSocialNetworkBackgroundColor(network.network)
+                        "
+                        [style.color]="getSocialNetworkColor(network.network)"
+                      >
+                        <div
+                          [innerHTML]="getSocialNetworkIcon(network.network)"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="ml-4">
+                      <p class="text-lg font-semibold text-cyan-600">
+                        {{ getSocialNetworkLabel(network.network) }}
+                      </p>
+                      <p
+                        class="text-slate-600 transition-colors duration-300 font-medium"
+                      >
+                        {{ network.username }}
+                      </p>
+                      <small
+                        class="text-sm text-cyan-600 mt-2 block font-semibold group-hover:text-cyan-500 transition-colors duration-300"
+                      >
+                        <em>{{
+                          getSocialNetworkHint(network.network) | transloco
+                        }}</em>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              }
+            } @else {
+              <!-- Estado vacío - No hay información de contacto -->
+              <div
+                class="flex flex-col items-center justify-center text-center py-12"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="80"
+                  height="80"
+                  fill="currentColor"
+                  class="bi bi-emoji-tear text-cyan-300 mb-4 transform transition-all duration-700 ease-out"
+                  viewBox="0 0 16 16"
+                  [ngClass]="{
+                    'scale-100 rotate-0': isContactEmptyIconLoaded(),
+                    'scale-50 -rotate-12': !isContactEmptyIconLoaded(),
+                  }"
+                >
+                  <path
+                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                  />
+                  <path
+                    d="M6.831 11.43A3.1 3.1 0 0 1 8 11.196c.916 0 1.607.408 2.25.826.212.138.424-.069.282-.277-.564-.83-1.558-2.049-2.532-2.049-.53 0-1.066.361-1.536.824q.126.27.232.535q.069.174.135.373ZM6 11.333C6 12.253 5.328 13 4.5 13S3 12.254 3 11.333c0-.706.882-2.29 1.294-2.99a.238.238 0 0 1 .412 0c.412.7 1.294 2.284 1.294 2.99M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5m-1.5-3A.5.5 0 0 1 10 3c1.162 0 2.35.584 2.947 1.776a.5.5 0 1 1-.894.448C11.649 4.416 10.838 4 10 4a.5.5 0 0 1-.5-.5M7 3.5a.5.5 0 0 0-.5-.5c-1.162 0-2.35.584-2.947 1.776a.5.5 0 1 0 .894.448C4.851 4.416 5.662 4 6.5 4a.5.5 0 0 0 .5-.5"
+                  />
+                </svg>
+                <h3
+                  class="text-lg font-semibold text-slate-600 mb-2 transform transition-all duration-900 ease-out"
+                  [ngClass]="{
+                    'translate-x-0 opacity-100': isContactEmptyTextLoaded(),
+                    '-translate-x-8 opacity-0': !isContactEmptyTextLoaded(),
+                  }"
+                >
+                  {{ "contact.noContactInfo" | transloco }}
+                </h3>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Teléfono móvil - Solo visible en pantallas grandes -->
+      <div
+        class="hidden lg:block relative phone-container"
+        [ngClass]="{
+          'slide-in-from-right': isContactInfoLoaded(),
+          'translate-x-full opacity-0': !isContactInfoLoaded(),
+        }"
+      >
+        <div class="phone-mockup">
+          <div class="phone-inner">
+            <!-- Pantalla del teléfono con diseño de llamada -->
+            <div class="phone-screen">
+              <div class="call-screen">
+                <!-- Texto de llamada -->
+                <div class="call-text">{{ "contact.calling" | transloco }}</div>
+
+                <!-- Logo de la empresa -->
+                <div class="logo-container">
+                  @if (logoUrl() && !logoError()) {
+                    <img
+                      [src]="logoUrl()"
+                      [alt]="companyName()"
+                      class="company-logo"
+                      (error)="onLogoError()"
+                    />
+                  } @else {
+                    <div class="logo-fallback">
+                      <span>{{ companyName().charAt(0) }}</span>
+                    </div>
+                  }
+                  <!-- Anillo de pulso alrededor del logo -->
+                  <div class="pulse-ring"></div>
+                  <div class="pulse-ring pulse-ring-delay"></div>
+                </div>
+
+                <!-- Nombre de la empresa -->
+                <div class="company-name">{{ companyName() }}</div>
+
+                <!-- Botón de colgar -->
+                <div class="call-actions">
+                  <div class="action-button decline" (click)="openWhatsApp()">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      style="transform: rotate(135deg)"
+                    >
+                      <path
+                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes slide-in-from-top {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .slide-in-from-top {
+    animation: slide-in-from-top 1.8s ease-out forwards;
+  }
+
+  @keyframes slide-in-from-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .slide-in-from-left {
+    animation: slide-in-from-left 1.8s ease-out forwards;
+  }
+
+  @keyframes slide-in-from-right {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .slide-in-from-right {
+    animation: slide-in-from-right 1.8s ease-out forwards;
+  }
+
+  @keyframes container-breeze {
+    0%,
+    100% {
+      transform: translateX(0) translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateX(6px) translateY(-4px) rotate(0.6deg);
+    }
+    50% {
+      transform: translateX(-5px) translateY(4px) rotate(-0.6deg);
+    }
+    75% {
+      transform: translateX(4px) translateY(-3px) rotate(0.4deg);
+    }
+  }
+  .animate-container-breeze {
+    animation: container-breeze 12s ease-in-out infinite;
+  }
+
+  .wind-effect-wrapper-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .leaf-soft-contact {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+  }
+
+  /* Hojas suaves contacto - lado izquierdo */
+  .leaf-soft-contact-1 {
+    top: 2%;
+    left: -80px;
+    animation: leaf-float-soft-contact 20s ease-in-out infinite;
+  }
+  .leaf-soft-contact-2 {
+    top: 12%;
+    left: -90px;
+    animation: leaf-float-soft-contact 22s ease-in-out infinite 2s;
+  }
+  .leaf-soft-contact-3 {
+    top: 25%;
+    left: -85px;
+    animation: leaf-float-soft-contact 21s ease-in-out infinite 4s;
+  }
+  .leaf-soft-contact-4 {
+    top: 38%;
+    left: -95px;
+    animation: leaf-float-soft-contact 23s ease-in-out infinite 6s;
+  }
+  .leaf-soft-contact-5 {
+    top: 50%;
+    left: -88px;
+    animation: leaf-float-soft-contact 19s ease-in-out infinite 1s;
+  }
+  .leaf-soft-contact-6 {
+    top: 62%;
+    left: -92px;
+    animation: leaf-float-soft-contact 24s ease-in-out infinite 3s;
+  }
+  .leaf-soft-contact-7 {
+    top: 75%;
+    left: -87px;
+    animation: leaf-float-soft-contact 20s ease-in-out infinite 5s;
+  }
+  .leaf-soft-contact-8 {
+    top: 88%;
+    left: -93px;
+    animation: leaf-float-soft-contact 22s ease-in-out infinite 7s;
+  }
+  .leaf-soft-contact-9 {
+    top: 18%;
+    left: -89px;
+    animation: leaf-float-soft-contact 21s ease-in-out infinite 1.5s;
+  }
+  .leaf-soft-contact-10 {
+    top: 45%;
+    left: -91px;
+    animation: leaf-float-soft-contact 23s ease-in-out infinite 3.5s;
+  }
+  .leaf-soft-contact-11 {
+    top: 68%;
+    left: -86px;
+    animation: leaf-float-soft-contact 20s ease-in-out infinite 5.5s;
+  }
+  .leaf-soft-contact-12 {
+    top: 95%;
+    left: -94px;
+    animation: leaf-float-soft-contact 22s ease-in-out infinite 7.5s;
+  }
+
+  /* Hojas suaves contacto - lado derecho */
+  .leaf-soft-contact-13 {
+    top: 8%;
+    right: -80px;
+    animation: leaf-float-soft-contact-right 24s ease-in-out infinite 0.5s;
+  }
+  .leaf-soft-contact-14 {
+    top: 32%;
+    right: -90px;
+    animation: leaf-float-soft-contact-right 19s ease-in-out infinite 2.5s;
+  }
+  .leaf-soft-contact-15 {
+    top: 48%;
+    right: -85px;
+    animation: leaf-float-soft-contact-right 21s ease-in-out infinite 4.5s;
+  }
+  .leaf-soft-contact-16 {
+    top: 65%;
+    right: -95px;
+    animation: leaf-float-soft-contact-right 23s ease-in-out infinite 6.5s;
+  }
+  .leaf-soft-contact-17 {
+    top: 82%;
+    right: -88px;
+    animation: leaf-float-soft-contact-right 20s ease-in-out infinite 8.5s;
+  }
+  .leaf-soft-contact-18 {
+    top: 92%;
+    right: -92px;
+    animation: leaf-float-soft-contact-right 22s ease-in-out infinite 9.5s;
+  }
+
+  /* Hojas suaves contacto - adicionales izquierda */
+  .leaf-soft-contact-19 {
+    top: 15%;
+    left: -96px;
+    animation: leaf-float-soft-contact 20s ease-in-out infinite 1.2s;
+  }
+  .leaf-soft-contact-20 {
+    top: 28%;
+    left: -84px;
+    animation: leaf-float-soft-contact 22s ease-in-out infinite 3.2s;
+  }
+  .leaf-soft-contact-21 {
+    top: 42%;
+    left: -90px;
+    animation: leaf-float-soft-contact 21s ease-in-out infinite 5.2s;
+  }
+  .leaf-soft-contact-22 {
+    top: 58%;
+    left: -94px;
+    animation: leaf-float-soft-contact 23s ease-in-out infinite 7.2s;
+  }
+  .leaf-soft-contact-23 {
+    top: 72%;
+    left: -83px;
+    animation: leaf-float-soft-contact 19s ease-in-out infinite 9.2s;
+  }
+  .leaf-soft-contact-24 {
+    top: 85%;
+    left: -97px;
+    animation: leaf-float-soft-contact 24s ease-in-out infinite 10.5s;
+  }
+
+  /* Animación suave desde la izquierda */
+  @keyframes leaf-float-soft-contact {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(100px) translateY(-15px) rotate(45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1);
+    }
+    70% {
+      transform: translateX(300px) translateY(-15px) rotate(135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8);
+    }
+  }
+
+  /* Animación suave desde la derecha */
+  @keyframes leaf-float-soft-contact-right {
+    0% {
+      opacity: 0;
+      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateX(-100px) translateY(-15px) rotate(-45deg) scale(0.9);
+    }
+    50% {
+      transform: translateX(-200px) translateY(-25px) rotate(-90deg) scale(1);
+    }
+    70% {
+      transform: translateX(-300px) translateY(-15px) rotate(-135deg) scale(0.9);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8);
+    }
+  }
+
+  /* Estilos del teléfono móvil */
+  .phone-container {
+    width: 280px;
+    height: 560px;
+    position: relative;
+  }
+
+  .phone-mockup {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 40px;
+    padding: 0;
+    box-shadow:
+      0 0 20px rgba(6, 182, 212, 0.15),
+      0 0 40px rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+    position: relative;
+    transition: transform 0.3s ease;
+    transform: perspective(1000px) rotateY(0deg);
+  }
+
+  .phone-mockup:hover {
+    transform: perspective(1000px) rotateY(-8deg) translateY(-5px);
+  }
+
+  .phone-mockup::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 5px;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 3px;
+    z-index: 10;
+  }
+
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(
+        circle at 30% 30%,
+        rgba(6, 182, 212, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 70% 70%,
+        rgba(6, 182, 212, 0.08) 0%,
+        transparent 50%
+      );
+    animation: phone-glow 8s ease-in-out infinite;
+  }
+
+  /* Pantalla de llamada */
+  .call-screen {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 40px 20px;
+  }
+
+  .company-name {
+    color: #0e7490;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .logo-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
+  }
+
+  .company-logo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 5px 15px rgba(6, 182, 212, 0.2);
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 5px 15px rgba(6, 182, 212, 0.2);
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-fallback span {
+    color: white;
+    font-size: 42px;
+    font-weight: bold;
+  }
+
+  /* Anillos de pulso */
+  .pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(6, 182, 212, 0.4);
+    border-radius: 50%;
+    animation: pulse-animation 2s ease-out infinite;
+  }
+
+  .pulse-ring-delay {
+    animation-delay: 1s;
+  }
+
+  @keyframes pulse-animation {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  .call-text {
+    color: #0e7490;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 25px;
+  }
+
+  /* Botones de acción */
+  .call-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .action-button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(6, 182, 212, 0.2);
+  }
+
+  .action-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .action-button.decline {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+  }
+
+  .action-button.decline:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+  }
+
+  .action-button.accept {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+  }
+
+  .action-button.accept:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+  }
+
+  @keyframes phone-glow {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Responsive - ocultar teléfono en pantallas pequeñas */
+  @media (max-width: 1023px) {
+    .phone-container {
+      display: none;
+    }
+  }
+</style>
