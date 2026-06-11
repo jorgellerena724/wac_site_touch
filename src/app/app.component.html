@@ -14,7 +14,7 @@
     @if (showUpdateNotification()) {
       <button
         (click)="reloadApp()"
-        class="w-12 h-12 mb-2 bg-white text-cyan-600 border border-cyan-400 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
+        class="w-12 h-12 mb-2 bg-white text-primary border border-primary rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
         [title]="'common.updateAvailable' | transloco"
       >
         <svg
@@ -38,7 +38,7 @@
     <!-- 
     <button
       (click)="scrollToTop()"
-      class="w-full mb-2 bg-white text-cyan-600 border border-cyan-400 rounded-full p-3 shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
+      class="w-full mb-2 bg-white text-primary border border-primary rounded-full p-3 shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
       [title]="'common.scrollTop' | transloco"
     >
       <svg
@@ -60,7 +60,7 @@
     <!-- Botón de contacto -->
     <button
       (click)="navigateToContact()"
-      class="w-12 h-12 mb-2 bg-white text-cyan-400 border border-cyan-400 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
+      class="w-12 h-12 mb-2 bg-accent text-white border border-accent rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
       [title]="'common.contact' | transloco"
     >
       <svg
@@ -83,7 +83,7 @@
     <!-- Botón flotante de chat -->
     <button
       (click)="toggleChat()"
-      class="w-12 h-12 text-white bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 rounded-full shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center"
+      class="w-12 h-12 text-white bg-accent rounded-full shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center"
       [title]="
         isChatOpen ? ('chat.close' | transloco) : ('chat.open' | transloco)
       "
@@ -168,10 +168,10 @@
   @keyframes colorPulse {
     0%,
     100% {
-      color: #0891b2; /* cyan-600 */
+      color: #1C7790;
     }
     50% {
-      color: #22d3ee; /* cyan-400 */
+      color: #4DA5BE;
     }
   }
   .color-pulse {

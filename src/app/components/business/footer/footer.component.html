@@ -1,4 +1,4 @@
-<footer class="bg-white border-t-2 border-cyan-400 border-opacity-40">
+<footer class="bg-white border-t-2 border-primary border-opacity-40">
   <div class="w-full px-4 sm:px-6 lg:px-8">
     <!-- Contenedor principal del contenido del footer -->
     <div
@@ -6,10 +6,10 @@
     >
       <!-- Columna 1: Información de la Empresa -->
       <div class="space-y-4">
-        <h4 class="text-lg font-bold text-cyan-600 drop-shadow-sm">
+        <h4 class="text-lg font-bold text-primary drop-shadow-sm">
           <a
             [routerLink]="['/home']"
-            class="hover:text-cyan-700 transition-colors duration-300"
+            class="hover:text-primary-dark transition-colors duration-300"
             (click)="scrollToTop()"
           >
             {{ companyName }}
@@ -17,13 +17,13 @@
         </h4>
         <p class="text-sm text-slate-600">
           {{ "footer.column.left.first" | transloco }}
-          <a class="font-bold text-cyan-700">{{ companyName }}</a>
+          <a class="font-bold text-primary-dark">{{ companyName }}</a>
           {{ "footer.column.left.second" | transloco }}<br />
           {{ "footer.column.left.third" | transloco }}
           <a
             href="https://shirkasoft.com"
             target="_blank"
-            class="font-bold text-cyan-600 hover:text-cyan-700 transition-colors duration-300"
+            class="font-bold text-primary hover:text-primary-dark transition-colors duration-300"
           >
             Shirkasoft
           </a>
@@ -33,7 +33,7 @@
         <div class="space-y-2 pt-2">
           <a
             [routerLink]="['/terms']"
-            class="block text-sm text-slate-600 hover:text-cyan-600 transition-colors duration-300 font-medium"
+            class="block text-sm text-slate-600 hover:text-primary transition-colors duration-300 font-medium"
           >
             {{ "footer.terms" | transloco }}
           </a>
@@ -42,7 +42,7 @@
 
       <!-- Columna 2: Enlaces Rápidos -->
       <div class="space-y-3">
-        <h4 class="text-lg font-bold text-cyan-600">
+        <h4 class="text-lg font-bold text-primary">
           {{ "footer.column.center.title" | transloco }}
         </h4>
         <ul class="space-y-2 text-sm">
@@ -84,7 +84,7 @@
 
       <!-- Columna 3: Contáctenos -->
       <div class="space-y-3">
-        <h4 class="text-lg font-bold text-cyan-600">
+        <h4 class="text-lg font-bold text-primary">
           {{ "footer.column.right" | transloco }}
         </h4>
         @if (hasContactInfo()) {
@@ -152,7 +152,7 @@
 
       <!-- Columna 4: Redes Sociales -->
       <div class="space-y-3">
-        <h4 class="text-lg font-bold text-cyan-600">
+        <h4 class="text-lg font-bold text-primary">
           {{ "footer.column.social.title" | transloco }}
         </h4>
         @if (hasSocialNetworks()) {
@@ -185,7 +185,7 @@
 
     <!-- Barra inferior de Copyright y enlaces legales -->
     <div
-      class="border-t-2 border-cyan-300/40 py-6 flex flex-col sm:flex-row justify-between items-center text-sm text-slate-600"
+      class="border-t-2 border-surface/40 py-6 flex flex-col sm:flex-row justify-between items-center text-sm text-slate-600"
     >
       <!-- Copyright a la izquierda -->
       <p class="font-medium order-1 sm:order-1 mt-4 sm:mt-0 mb-5">
@@ -200,7 +200,7 @@
         <a
           [href]="'https://wa.me/5352751126'"
           target="_blank"
-          class="p-2 text-cyan-600 hover:text-green-500 transition-colors duration-300"
+          class="p-2 text-primary hover:text-green-500 transition-colors duration-300"
           title="{{ 'footer.whatsapp' | transloco }}"
         >
           <svg
@@ -220,7 +220,7 @@
         <!-- Icono de Email -->
         <a
           [href]="'mailto:jorgellerena724@gmail.com'"
-          class="p-2 text-cyan-600 hover:text-red-500 transition-colors duration-300"
+          class="p-2 text-primary hover:text-red-500 transition-colors duration-300"
           title="{{ 'footer.email' | transloco }}"
         >
           <svg
@@ -244,7 +244,7 @@
         <a
           href="https://shirkasoft.com"
           target="_blank"
-          class="p-2 text-cyan-600 hover:text-blue-950 transition-colors duration-300"
+          class="p-2 text-primary hover:text-blue-950 transition-colors duration-300"
           title="{{ 'footer.link' | transloco }}"
         >
           <svg

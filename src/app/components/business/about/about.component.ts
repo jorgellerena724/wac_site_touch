@@ -26,233 +26,10 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
   standalone: true,
   imports: [TranslocoModule, ScrollRevealDirective, BorderBeamDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      .wind-effect-wrapper-team {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-        overflow: visible;
-      }
-
-      .wind-effect-wrapper-team .leaf {
-        position: absolute;
-        font-size: 24px;
-        opacity: 0;
-      }
-
-      .wind-effect-wrapper-team .leaf-1 {
-        top: 5%;
-        left: -80px;
-        animation: leaf-float-left 20s ease-in-out infinite;
-      }
-      .wind-effect-wrapper-team .leaf-2 {
-        top: 25%;
-        left: -90px;
-        animation: leaf-float-left 22s ease-in-out infinite 2s;
-      }
-      .wind-effect-wrapper-team .leaf-3 {
-        top: 45%;
-        left: -85px;
-        animation: leaf-float-left 21s ease-in-out infinite 4s;
-      }
-      .wind-effect-wrapper-team .leaf-4 {
-        top: 65%;
-        left: -95px;
-        animation: leaf-float-left 23s ease-in-out infinite 6s;
-      }
-      .wind-effect-wrapper-team .leaf-5 {
-        top: 85%;
-        left: -88px;
-        animation: leaf-float-left 19s ease-in-out infinite 1s;
-      }
-      .wind-effect-wrapper-team .leaf-6 {
-        top: 10%;
-        right: -80px;
-        animation: leaf-float-right 21s ease-in-out infinite 1.5s;
-      }
-      .wind-effect-wrapper-team .leaf-7 {
-        top: 30%;
-        right: -90px;
-        animation: leaf-float-right 23s ease-in-out infinite 3.5s;
-      }
-      .wind-effect-wrapper-team .leaf-8 {
-        top: 50%;
-        right: -85px;
-        animation: leaf-float-right 20s ease-in-out infinite 5.5s;
-      }
-      .wind-effect-wrapper-team .leaf-9 {
-        top: 70%;
-        right: -95px;
-        animation: leaf-float-right 22s ease-in-out infinite 7.5s;
-      }
-      .wind-effect-wrapper-team .leaf-10 {
-        top: 90%;
-        right: -88px;
-        animation: leaf-float-right 24s ease-in-out infinite 0.5s;
-      }
-      .wind-effect-wrapper-team .leaf-11 {
-        top: -60px;
-        left: 20%;
-        animation: leaf-float-down 24s ease-in-out infinite 1s;
-      }
-      .wind-effect-wrapper-team .leaf-12 {
-        top: -60px;
-        left: 50%;
-        animation: leaf-float-down 22s ease-in-out infinite 3s;
-      }
-      .wind-effect-wrapper-team .leaf-13 {
-        top: -60px;
-        left: 80%;
-        animation: leaf-float-down 23s ease-in-out infinite 5s;
-      }
-      .wind-effect-wrapper-team .leaf-14 {
-        bottom: -60px;
-        left: 25%;
-        animation: leaf-float-up 21s ease-in-out infinite 2s;
-      }
-      .wind-effect-wrapper-team .leaf-15 {
-        bottom: -60px;
-        left: 55%;
-        animation: leaf-float-up 23s ease-in-out infinite 4s;
-      }
-      .wind-effect-wrapper-team .leaf-16 {
-        bottom: -60px;
-        left: 75%;
-        animation: leaf-float-up 22s ease-in-out infinite 6s;
-      }
-      .wind-effect-wrapper-team .leaf-17 {
-        top: 15%;
-        left: -92px;
-        animation: leaf-float-left 24s ease-in-out infinite 3.5s;
-      }
-      .wind-effect-wrapper-team .leaf-18 {
-        top: 55%;
-        right: -92px;
-        animation: leaf-float-right 21s ease-in-out infinite 4.5s;
-      }
-
-      @keyframes leaf-float-left {
-        0% {
-          opacity: 0;
-          transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-        }
-        10% {
-          opacity: 0.4;
-        }
-        30% {
-          transform: translateX(100px) translateY(-15px) rotate(45deg)
-            scale(0.9);
-        }
-        50% {
-          transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1);
-        }
-        70% {
-          transform: translateX(300px) translateY(-15px) rotate(135deg)
-            scale(0.9);
-        }
-        90% {
-          opacity: 0.4;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8);
-        }
-      }
-
-      @keyframes leaf-float-right {
-        0% {
-          opacity: 0;
-          transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-        }
-        10% {
-          opacity: 0.4;
-        }
-        30% {
-          transform: translateX(-100px) translateY(-15px) rotate(-45deg)
-            scale(0.9);
-        }
-        50% {
-          transform: translateX(-200px) translateY(-25px) rotate(-90deg)
-            scale(1);
-        }
-        70% {
-          transform: translateX(-300px) translateY(-15px) rotate(-135deg)
-            scale(0.9);
-        }
-        90% {
-          opacity: 0.4;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8);
-        }
-      }
-
-      @keyframes leaf-float-down {
-        0% {
-          opacity: 0;
-          transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-        }
-        10% {
-          opacity: 0.4;
-        }
-        30% {
-          transform: translateX(-15px) translateY(80px) rotate(45deg) scale(0.9);
-        }
-        50% {
-          transform: translateX(15px) translateY(160px) rotate(90deg) scale(1);
-        }
-        70% {
-          transform: translateX(-10px) translateY(240px) rotate(135deg)
-            scale(0.9);
-        }
-        90% {
-          opacity: 0.4;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(0) translateY(320px) rotate(180deg) scale(0.8);
-        }
-      }
-
-      @keyframes leaf-float-up {
-        0% {
-          opacity: 0;
-          transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-        }
-        10% {
-          opacity: 0.4;
-        }
-        30% {
-          transform: translateX(15px) translateY(-80px) rotate(-45deg)
-            scale(0.9);
-        }
-        50% {
-          transform: translateX(-15px) translateY(-160px) rotate(-90deg)
-            scale(1);
-        }
-        70% {
-          transform: translateX(10px) translateY(-240px) rotate(-135deg)
-            scale(0.9);
-        }
-        90% {
-          opacity: 0.4;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(0) translateY(-320px) rotate(-180deg) scale(0.8);
-        }
-      }
-    `,
-  ],
+  styles: [],
   template: `
     @if (isLoading()) {
-      <div class="py-16 bg-white/50 border-t border-cyan-200">
+      <div class="py-16 bg-white/50 border-t border-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center">
             <div
@@ -283,34 +60,12 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
       </div>
     } @else if (hasData()) {
       <div
-        class="py-16 bg-white/50 border-t border-cyan-200 overflow-hidden relative"
+        class="py-16 bg-white/50 border-t border-surface overflow-hidden relative"
       >
-        <!-- Efecto de hojas flotantes para la sección de equipo -->
-        <div class="wind-effect-wrapper-team">
-          <div class="leaf leaf-1">🍃</div>
-          <div class="leaf leaf-2">🍃</div>
-          <div class="leaf leaf-3">🍃</div>
-          <div class="leaf leaf-4">🍃</div>
-          <div class="leaf leaf-5">🍃</div>
-          <div class="leaf leaf-6">🍃</div>
-          <div class="leaf leaf-7">🍃</div>
-          <div class="leaf leaf-8">🍃</div>
-          <div class="leaf leaf-9">🍃</div>
-          <div class="leaf leaf-10">🍃</div>
-          <div class="leaf leaf-11">🍃</div>
-          <div class="leaf leaf-12">🍃</div>
-          <div class="leaf leaf-13">🍃</div>
-          <div class="leaf leaf-14">🍃</div>
-          <div class="leaf leaf-15">🍃</div>
-          <div class="leaf leaf-16">🍃</div>
-          <div class="leaf leaf-17">🍃</div>
-          <div class="leaf leaf-18">🍃</div>
-        </div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="text-center">
             <h2
-              class="inline-block text-sm font-bold text-cyan-700 tracking-wider uppercase bg-gradient-to-r from-cyan-100 to-cyan-50 px-4 py-2 rounded-full border border-cyan-200"
+              class="inline-block text-sm font-bold text-primary-dark tracking-wider uppercase bg-gradient-to-r from-primary-light to-accent-light px-4 py-2 rounded-full border border-surface"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="0"
@@ -318,7 +73,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
               {{ 'about.team.title' | transloco }}
             </h2>
             <p
-              class="mt-4 text-3xl font-extrabold text-cyan-600 sm:text-4xl drop-shadow-sm"
+              class="mt-4 text-3xl font-extrabold text-primary sm:text-4xl drop-shadow-sm"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="100"
@@ -348,9 +103,9 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                 [revealDelay]="i * 100"
               >
                 <div
-                  class="relative mx-auto h-56 w-56 rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.15)] ring-4 ring-cyan-100 group-hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] group-hover:ring-cyan-300 transition-all duration-300"
+                  class="relative mx-auto h-56 w-56 rounded-full overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.15)] ring-4 ring-surface group-hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] group-hover:ring-accent transition-all duration-300"
                   appBorderBeam
-                  [beamColor]="'rgba(6, 182, 212, 0.7)'"
+                  [beamColor]="'rgba(28, 119, 144, 0.7)'"
                   [beamWidth]="'3px'"
                   [beamDuration]="'5s'"
                   [beamDelay]="i * 0.6 + 's'"
@@ -364,14 +119,14 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                   />
 
                   <div
-                    class="absolute inset-0 bg-gradient-to-t from-cyan-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    class="absolute inset-0 bg-gradient-to-t from-primary-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   ></div>
                 </div>
 
                 <div class="mt-2">
                   <div class="flex items-center justify-center gap-2">
                     <h3
-                      class="text-xl font-semibold text-cyan-700 transition-colors duration-300 group-hover:text-cyan-800"
+                      class="text-xl font-semibold text-primary-dark transition-colors duration-300 group-hover:text-primary-dark"
                     >
                       {{ manager.title }}
                     </h3>
@@ -386,7 +141,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                             title: manager.title,
                           })
                         "
-                        class="flex items-center justify-center bg-cyan-500 text-white p-1.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                        class="flex items-center justify-center bg-accent text-white p-1.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -406,7 +161,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                     }
                   </div>
                   <div
-                    class="mt-1 inline-block px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-cyan-200"
+                    class="mt-1 inline-block px-3 py-1 bg-primary-light text-primary-dark rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-surface-light"
                   >
                     {{ manager.charge }}
                   </div>

@@ -1,37 +1,10 @@
 <div class="pt-20 bg-white min-h-screen relative">
-  <div class="wind-effect-wrapper-terms">
-    <div class="leaf-soft-terms leaf-soft-terms-1">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-2">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-3">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-4">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-5">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-6">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-7">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-8">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-9">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-10">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-11">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-12">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-13">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-14">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-15">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-16">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-17">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-18">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-19">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-20">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-21">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-22">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-23">🍃</div>
-    <div class="leaf-soft-terms leaf-soft-terms-24">🍃</div>
-  </div>
-
   <div class="w-full px-4 sm:px-6 lg:px-8 py-12 relative z-10">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-12">
         <div class="animate-slide-down-on-load">
           <h1
-            class="text-4xl font-extrabold text-cyan-600 sm:text-5xl leading-tight drop-shadow-sm"
+            class="text-4xl font-extrabold text-primary sm:text-5xl leading-tight drop-shadow-sm"
           >
             {{ "terms.title" | transloco }}
           </h1>
@@ -43,19 +16,19 @@
 
       @if (isTranslating()) {
         <div class="text-center py-12">
-          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600"></div>
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           <p class="mt-2 text-slate-500">{{ "terms.loading" | transloco }}</p>
         </div>
       }
 
       @if (!isTranslating()) {
         <div
-          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(6,182,212,0.15)] border border-cyan-100 animate-slide-in-from-right"
+          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(28, 119, 144,0.15)] border border-surface animate-slide-in-from-right"
         >
           <div class="prose prose-lg max-w-none">
             @for (item of termsData(); track item.title; let idx = $index) {
               <section class="mb-8">
-                <h2 class="text-2xl font-bold text-cyan-700 mb-4">
+                <h2 class="text-2xl font-bold text-primary-dark mb-4">
                   {{ idx + 1 }}. {{ item.title }}
                 </h2>
                 <p class="text-slate-700 leading-relaxed">
@@ -107,85 +80,4 @@
     opacity: 0;
   }
 
-  .wind-effect-wrapper-terms {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: visible;
-  }
-
-  .leaf-soft-terms {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0;
-  }
-
-  .leaf-soft-terms-1 { top: 5%; left: -80px; animation: leaf-float-soft-terms-left 20s ease-in-out infinite; }
-  .leaf-soft-terms-2 { top: 15%; left: -90px; animation: leaf-float-soft-terms-left 22s ease-in-out infinite 2s; }
-  .leaf-soft-terms-3 { top: 25%; left: -85px; animation: leaf-float-soft-terms-left 21s ease-in-out infinite 4s; }
-  .leaf-soft-terms-4 { top: 35%; left: -95px; animation: leaf-float-soft-terms-left 23s ease-in-out infinite 6s; }
-  .leaf-soft-terms-5 { top: 45%; left: -88px; animation: leaf-float-soft-terms-left 19s ease-in-out infinite 1s; }
-  .leaf-soft-terms-6 { top: 55%; left: -92px; animation: leaf-float-soft-terms-left 24s ease-in-out infinite 3s; }
-  .leaf-soft-terms-7 { top: 65%; left: -87px; animation: leaf-float-soft-terms-left 20s ease-in-out infinite 5s; }
-  .leaf-soft-terms-8 { top: 75%; left: -93px; animation: leaf-float-soft-terms-left 22s ease-in-out infinite 7s; }
-  .leaf-soft-terms-9 { top: 85%; left: -89px; animation: leaf-float-soft-terms-left 21s ease-in-out infinite 8s; }
-  .leaf-soft-terms-10 { top: 95%; left: -91px; animation: leaf-float-soft-terms-left 23s ease-in-out infinite 9s; }
-  .leaf-soft-terms-11 { top: 8%; right: -80px; animation: leaf-float-soft-terms-right 21s ease-in-out infinite 1.5s; }
-  .leaf-soft-terms-12 { top: 18%; right: -90px; animation: leaf-float-soft-terms-right 23s ease-in-out infinite 3.5s; }
-  .leaf-soft-terms-13 { top: 28%; right: -85px; animation: leaf-float-soft-terms-right 20s ease-in-out infinite 5.5s; }
-  .leaf-soft-terms-14 { top: 38%; right: -95px; animation: leaf-float-soft-terms-right 22s ease-in-out infinite 7.5s; }
-  .leaf-soft-terms-15 { top: 48%; right: -88px; animation: leaf-float-soft-terms-right 24s ease-in-out infinite 0.5s; }
-  .leaf-soft-terms-16 { top: 58%; right: -92px; animation: leaf-float-soft-terms-right 19s ease-in-out infinite 2.5s; }
-  .leaf-soft-terms-17 { top: 68%; right: -87px; animation: leaf-float-soft-terms-right 21s ease-in-out infinite 4.5s; }
-  .leaf-soft-terms-18 { top: 78%; right: -93px; animation: leaf-float-soft-terms-right 23s ease-in-out infinite 6.5s; }
-  .leaf-soft-terms-19 { top: 88%; right: -89px; animation: leaf-float-soft-terms-right 20s ease-in-out infinite 8.5s; }
-  .leaf-soft-terms-20 { top: 98%; right: -91px; animation: leaf-float-soft-terms-right 22s ease-in-out infinite 9.5s; }
-  .leaf-soft-terms-21 { top: -60px; left: 20%; animation: leaf-float-soft-terms-down 24s ease-in-out infinite 1s; }
-  .leaf-soft-terms-22 { top: -60px; left: 50%; animation: leaf-float-soft-terms-down 22s ease-in-out infinite 3s; }
-  .leaf-soft-terms-23 { top: -60px; left: 80%; animation: leaf-float-soft-terms-down 23s ease-in-out infinite 5s; }
-  .leaf-soft-terms-24 { bottom: -60px; left: 35%; animation: leaf-float-soft-terms-up 21s ease-in-out infinite 2s; }
-
-  @keyframes leaf-float-soft-terms-left {
-    0% { opacity: 0; transform: translateX(0) translateY(0) rotate(0deg) scale(0.8); }
-    10% { opacity: 0.4; }
-    30% { transform: translateX(100px) translateY(-15px) rotate(45deg) scale(0.9); }
-    50% { transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1); }
-    70% { transform: translateX(300px) translateY(-15px) rotate(135deg) scale(0.9); }
-    90% { opacity: 0.4; }
-    100% { opacity: 0; transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8); }
-  }
-
-  @keyframes leaf-float-soft-terms-right {
-    0% { opacity: 0; transform: translateX(0) translateY(0) rotate(0deg) scale(0.8); }
-    10% { opacity: 0.4; }
-    30% { transform: translateX(-100px) translateY(-15px) rotate(-45deg) scale(0.9); }
-    50% { transform: translateX(-200px) translateY(-25px) rotate(-90deg) scale(1); }
-    70% { transform: translateX(-300px) translateY(-15px) rotate(-135deg) scale(0.9); }
-    90% { opacity: 0.4; }
-    100% { opacity: 0; transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8); }
-  }
-
-  @keyframes leaf-float-soft-terms-down {
-    0% { opacity: 0; transform: translateX(0) translateY(0) rotate(0deg) scale(0.8); }
-    10% { opacity: 0.4; }
-    30% { transform: translateX(-15px) translateY(80px) rotate(45deg) scale(0.9); }
-    50% { transform: translateX(15px) translateY(160px) rotate(90deg) scale(1); }
-    70% { transform: translateX(-10px) translateY(240px) rotate(135deg) scale(0.9); }
-    90% { opacity: 0.4; }
-    100% { opacity: 0; transform: translateX(0) translateY(320px) rotate(180deg) scale(0.8); }
-  }
-
-  @keyframes leaf-float-soft-terms-up {
-    0% { opacity: 0; transform: translateX(0) translateY(0) rotate(0deg) scale(0.8); }
-    10% { opacity: 0.4; }
-    30% { transform: translateX(15px) translateY(-80px) rotate(-45deg) scale(0.9); }
-    50% { transform: translateX(-15px) translateY(-160px) rotate(-90deg) scale(1); }
-    70% { transform: translateX(10px) translateY(-240px) rotate(-135deg) scale(0.9); }
-    90% { opacity: 0.4; }
-    100% { opacity: 0; transform: translateX(0) translateY(-320px) rotate(-180deg) scale(0.8); }
-  }
 </style>

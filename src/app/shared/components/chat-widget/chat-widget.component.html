@@ -5,7 +5,7 @@
     <div #chatContainer class="chat-container visible">
       <!-- 1. HEADER DEL CHAT -->
       <div
-        class="chat-header bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 text-white p-4 rounded-t-lg shadow-[0_0_20px_rgba(6,182,212,0.2),_0_0_40px_rgba(6,182,212,0.15),_0_0_60px_rgba(6,182,212,0.1),_0_0_80px_rgba(6,182,212,0.05)]"
+        class="chat-header bg-gradient-to-r from-primary to-accent text-white p-4 rounded-t-lg shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
       >
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
@@ -36,7 +36,7 @@
           </div>
           <button
             (click)="toggleChat()"
-            class="chat-close-btn text-cyan-500"
+            class="chat-close-btn text-primary"
             [title]="'chat.close' | transloco"
           >
             <svg
@@ -84,7 +84,7 @@
               </p>
               <p class="text-sm">{{ "chat.welcome.subtitle" | transloco }}</p>
               <button
-                class="mt-4 bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 hover:from-cyan-600 hover:via-cyan-500 hover:to-teal-500 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                class="mt-4 bg-accent hover:bg-accent-dark text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
                 (click)="startChat()"
               >
                 {{ "chat.welcome.button" | transloco }}
@@ -111,7 +111,7 @@
                   @if (message.isUser) {
                     <div class="flex flex-col items-end">
                       <div
-                        class="max-w-xs px-3 py-2 rounded-lg bg-gradient-to-r bg-cyan-500 text-white rounded-br-none shadow-lg"
+                        class="max-w-xs px-3 py-2 rounded-lg bg-primary text-white rounded-br-none shadow-lg"
                       >
                         <p class="text-sm">{{ message.text }}</p>
                         <p class="text-xs opacity-70 mt-1">
@@ -123,7 +123,7 @@
                           "chat.user" | transloco
                         }}</span>
                         <div
-                          class="w-6 h-6 bg-cyan-600 rounded-full flex items-center justify-center"
+                          class="w-6 h-6 bg-primary-dark rounded-full flex items-center justify-center"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@
                   @if (!message.isUser) {
                     <div class="flex flex-col items-start">
                       <div
-                        class="max-w-xs px-3 py-2 rounded-lg bg-white text-slate-700 rounded-bl-none border border-cyan-200 shadow-sm"
+                        class="max-w-xs px-3 py-2 rounded-lg bg-white text-slate-700 rounded-bl-none border border-surface shadow-sm"
                       >
                         <div
                           class="text-sm"
@@ -155,11 +155,11 @@
                       </div>
                       <div class="flex items-center mt-2 -ml-4">
                         <div
-                          class="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center"
+                          class="w-6 h-6 bg-primary-light rounded-full flex items-center justify-center"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4 text-cyan-600"
+                            class="h-4 w-4 text-primary"
                             fill="currentColor"
                             viewBox="0 0 16 16"
                           >
@@ -171,7 +171,7 @@
                             />
                           </svg>
                         </div>
-                        <span class="text-xs text-cyan-500 font-medium ml-2">{{
+                        <span class="text-xs text-accent font-medium ml-2">{{
                           "chat.botName" | transloco
                         }}</span>
                       </div>
@@ -184,7 +184,7 @@
                 <div class="flex chat-message mb-3 justify-start">
                   <div class="flex flex-col items-start">
                     <div
-                      class="max-w-xs px-3 py-2 rounded-lg bg-white text-slate-700 rounded-bl-none border border-cyan-200 shadow-sm"
+                      class="max-w-xs px-3 py-2 rounded-lg bg-white text-slate-700 rounded-bl-none border border-surface shadow-sm"
                     >
                       <div class="thinking-dots">
                         <span class="dot"></span>
@@ -201,37 +201,37 @@
       </div>
       <!-- 3. CAMPO DE ENTRADA (PUNTO FIJO ABAJO) -->
       @if (chatStarted()) {
-        <div class="p-4 bg-cyan-50 border-t border-cyan-400 rounded-b-lg">
+        <div class="p-4 bg-primary-light border-t border-primary rounded-b-lg">
           <div class="flex space-x-2">
             <input
               type="text"
               [(ngModel)]="chatMessage"
               (keyup.enter)="sendMessage()"
               [placeholder]="'chat.input.placeholder' | transloco"
-              class="flex-1 px-3 py-2 border-2 text-slate-700 border-cyan-300 rounded-xl outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300"
+              class="flex-1 px-3 py-2 border-2 text-slate-700 border-surface rounded-xl outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all duration-300"
             />
             <button
               (click)="sendMessage()"
-              class="px-4 py-2 bg-gradient-to-r from-cyan-600 to-cyan-400 hover:from-cyan-500 hover:to-cyan-700 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+class="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                />
-              </svg>
-            </button>
-            <button
-              (click)="clearChat()"
-              class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+              </button>
+              <button
+                (click)="clearChat()"
+                class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
               [title]="'chat.clear' | transloco"
             >
               <svg
@@ -370,15 +370,15 @@
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgba(6, 182, 212, 0.08),
-      rgba(6, 182, 212, 0.03)
+      rgba(28, 119, 144, 0.08),
+      rgba(28, 119, 144, 0.03)
     );
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 16px auto;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(6, 182, 212, 0.1);
+    box-shadow: 0 4px 8px rgba(28, 119, 144, 0.1);
     position: relative;
     overflow: hidden;
     animation: robotGlow 4s ease-in-out infinite;
@@ -387,7 +387,7 @@
   .robot-svg {
     width: 48px;
     height: 48px;
-    color: #0891b2;
+    color: #1C7790;
     flex-shrink: 0;
     transition: all 0.3s ease;
   }
@@ -396,29 +396,29 @@
     transform: scale(1.05);
     background: radial-gradient(
       circle,
-      rgba(6, 182, 212, 0.12),
-      rgba(6, 182, 212, 0.06)
+      rgba(28, 119, 144, 0.12),
+      rgba(28, 119, 144, 0.06)
     );
-    box-shadow: 0 8px 16px rgba(6, 182, 212, 0.15);
+    box-shadow: 0 8px 16px rgba(28, 119, 144, 0.15);
   }
 
   .robot-icon-container:hover .robot-svg {
     transform: scale(1.1);
-    color: #0e7490;
+    color: #145A6E;
   }
 
   @keyframes robotGlow {
     0%,
     100% {
       box-shadow:
-        0 4px 8px rgba(6, 182, 212, 0.1),
-        0 0 8px rgba(6, 182, 212, 0.1);
+        0 4px 8px rgba(28, 119, 144, 0.1),
+        0 0 8px rgba(28, 119, 144, 0.1);
     }
     50% {
       box-shadow:
-        0 8px 16px rgba(6, 182, 212, 0.15),
-        0 0 16px rgba(6, 182, 212, 0.15),
-        0 0 24px rgba(6, 182, 212, 0.1);
+        0 8px 16px rgba(28, 119, 144, 0.15),
+        0 0 16px rgba(28, 119, 144, 0.15),
+        0 0 24px rgba(28, 119, 144, 0.1);
     }
   }
 
@@ -454,12 +454,12 @@
     border-radius: 4px;
   }
   .chat-messages-scroll-container::-webkit-scrollbar-thumb {
-    background: #0891b2;
+    background: #1C7790;
     border-radius: 4px;
     border: 2px solid #e0f2fe;
   }
   .chat-messages-scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #0e7490;
+    background: #145A6E;
   }
 
   .chat-message {
@@ -510,7 +510,7 @@
   .thinking-dots .dot {
     width: 4px;
     height: 4px;
-    background-color: #0891b2;
+    background-color: #1C7790;
     border-radius: 50%;
     animation: thinking 1.4s infinite ease-in-out;
   }
@@ -575,7 +575,7 @@
   }
 
   .chat-messages-wrapper a:hover {
-    color: #0891b2;
+    color: #1C7790;
     transform: translateY(-1px);
   }
 </style>

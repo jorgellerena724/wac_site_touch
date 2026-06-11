@@ -4,14 +4,14 @@
     <div class="relative h-96">
       <div class="absolute inset-0">
         <img
-          class="w-full h-full object-cover shadow-[0_0_20px_rgba(6,182,212,0.2),_0_0_40px_rgba(6,182,212,0.15),_0_0_60px_rgba(6,182,212,0.1),_0_0_80px_rgba(6,182,212,0.05)]"
+          class="w-full h-full object-cover shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
           [src]="path + 'about.jpg'"
           alt="Team working together"
           loading="eager"
           (error)="handleImageError($event)"
         />
         <div
-          class="absolute inset-0 bg-gradient-to-t from-cyan-900 via-cyan-800/70 to-transparent opacity-90"
+          class="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/70 to-transparent opacity-90"
         ></div>
       </div>
       <div class="relative py-20 px-4 sm:py-32 sm:px-6 lg:px-8">
@@ -22,7 +22,7 @@
           {{ "about.title" | transloco }}
         </h1>
         <p
-          class="mt-6 max-w-3xl text-xl text-cyan-100 leading-relaxed slide-in-right"
+          class="mt-6 max-w-3xl text-xl text-primary-light leading-relaxed slide-in-right"
           [class.loaded]="isHeaderLoaded()"
         >
           {{ "about.subtitle" | transloco }}
@@ -40,7 +40,7 @@
           <section
             class="bg-white"
             [ngClass]="{
-              'border-b border-cyan-100': i < companyData().length - 1,
+              'border-b border-surface': i < companyData().length - 1,
             }"
             appScrollReveal
             [revealAnimation]="i % 2 === 0 ? 'slide-right' : 'slide-left'"
@@ -65,22 +65,22 @@
                   />
                 } @else {
                   <div
-                    class="w-full h-[500px] lg:h-[600px] bg-gradient-to-r from-cyan-50 to-cyan-100 flex items-center justify-center"
+                    class="w-full h-[500px] lg:h-[600px] bg-gradient-to-r from-primary-light to-primary-light flex items-center justify-center"
                   >
-                    <span class="text-cyan-400">Sin imagen</span>
+                    <span class="text-primary">Sin imagen</span>
                   </div>
                 }
               </div>
 
               <!-- Contenido (30%) -->
               <div
-                class="w-full lg:w-[30%] flex items-center lg:h-[600px] border-l-2 lg:border-l-2 border-r-2 lg:border-r-0 border-cyan-500"
+                class="w-full lg:w-[30%] flex items-center lg:h-[600px] border-l-2 lg:border-l-2 border-r-2 lg:border-r-0 border-accent"
                 [ngClass]="{
                   'lg:border-l-2 lg:border-r-0': i % 2 === 0,
                   'lg:border-r-2 lg:border-l-0': i % 2 !== 0,
                 }"
                 appBorderBeam
-                [beamColor]="'rgba(6, 182, 212, 0.6)'"
+                [beamColor]="'rgba(28, 119, 144, 0.6)'"
                 [beamWidth]="'2px'"
                 [beamDuration]="'7s'"
                 [beamDelay]="i * 1 + 's'"
@@ -88,7 +88,7 @@
                 <div class="px-8 py-12 lg:px-14 lg:py-14 w-full">
                   <!-- Título -->
                   <h2
-                    class="text-3xl lg:text-4xl xl:text-5xl font-bold text-cyan-700 mb-6 tracking-tight"
+                    class="text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-dark mb-6 tracking-tight"
                   >
                     {{ item.title }}
                   </h2>
@@ -117,10 +117,10 @@
       </div>
     } @else {
       @if (!isCompanyLoading() && isCompanyDataLoaded()) {
-        <div class="py-16 text-center bg-white border-t border-cyan-100">
+        <div class="py-16 text-center bg-white border-t border-surface">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-24 w-24 text-cyan-300 mx-auto mb-4"
+            class="h-24 w-24 text-surface mx-auto mb-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -139,7 +139,7 @@
       }
     }
   } @placeholder (minimum 300ms) {
-    <div class="py-16 bg-white border-t border-cyan-100">
+    <div class="py-16 bg-white border-t border-surface">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         @for (i of [1, 2]; track i) {
           <div class="relative">
@@ -152,7 +152,7 @@
               class="relative lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:right-0 mt-6 lg:mt-0 lg:w-[35%]"
             >
               <div
-                class="bg-white rounded-2xl p-6 lg:p-8 border border-cyan-100 shadow-lg"
+                class="bg-white rounded-2xl p-6 lg:p-8 border border-surface shadow-lg"
               >
                 <div
                   class="h-8 bg-gray-200 rounded w-3/4 mb-4 animate-pulse"
@@ -175,7 +175,7 @@
   @defer (on viewport; prefetch on idle) {
     <app-about-team (onZoom)="handleZoomEvent($event)" />
   } @placeholder {
-    <div class="py-16 bg-white/50 border-t border-cyan-200">
+    <div class="py-16 bg-white/50 border-t border-surface">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <div
@@ -204,7 +204,7 @@
         <!-- Botón de cerrar -->
         <button
           (click)="closeMediaZoom()"
-          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-cyan-600 hover:bg-cyan-600 hover:text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-primary hover:bg-primary-dark hover:text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Cerrar"
         >
           <svg
@@ -343,229 +343,7 @@
     }
   }
 
-  /* Efecto de hojas flotantes suaves para equipo */
-  .wind-effect-wrapper-team {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: visible;
-  }
 
-  .leaf {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0;
-  }
 
-  /* Hojas suaves lado izquierdo */
-  .leaf-1 {
-    top: 5%;
-    left: -80px;
-    animation: leaf-float-soft-left 20s ease-in-out infinite;
-  }
-  .leaf-2 {
-    top: 25%;
-    left: -90px;
-    animation: leaf-float-soft-left 22s ease-in-out infinite 2s;
-  }
-  .leaf-3 {
-    top: 45%;
-    left: -85px;
-    animation: leaf-float-soft-left 21s ease-in-out infinite 4s;
-  }
-  .leaf-4 {
-    top: 65%;
-    left: -95px;
-    animation: leaf-float-soft-left 23s ease-in-out infinite 6s;
-  }
-  .leaf-5 {
-    top: 85%;
-    left: -88px;
-    animation: leaf-float-soft-left 19s ease-in-out infinite 1s;
-  }
 
-  /* Hojas suaves lado derecho */
-  .leaf-6 {
-    top: 10%;
-    right: -80px;
-    animation: leaf-float-soft-right 21s ease-in-out infinite 1.5s;
-  }
-  .leaf-7 {
-    top: 30%;
-    right: -90px;
-    animation: leaf-float-soft-right 23s ease-in-out infinite 3.5s;
-  }
-  .leaf-8 {
-    top: 50%;
-    right: -85px;
-    animation: leaf-float-soft-right 20s ease-in-out infinite 5.5s;
-  }
-  .leaf-9 {
-    top: 70%;
-    right: -95px;
-    animation: leaf-float-soft-right 22s ease-in-out infinite 7.5s;
-  }
-  .leaf-10 {
-    top: 90%;
-    right: -88px;
-    animation: leaf-float-soft-right 24s ease-in-out infinite 0.5s;
-  }
-
-  /* Hojas suaves centro superior */
-  .leaf-11 {
-    top: -60px;
-    left: 20%;
-    animation: leaf-float-soft-down 24s ease-in-out infinite 1s;
-  }
-  .leaf-12 {
-    top: -60px;
-    left: 50%;
-    animation: leaf-float-soft-down 22s ease-in-out infinite 3s;
-  }
-  .leaf-13 {
-    top: -60px;
-    left: 80%;
-    animation: leaf-float-soft-down 23s ease-in-out infinite 5s;
-  }
-
-  /* Hojas suaves centro inferior */
-  .leaf-14 {
-    bottom: -60px;
-    left: 25%;
-    animation: leaf-float-soft-up 21s ease-in-out infinite 2s;
-  }
-  .leaf-15 {
-    bottom: -60px;
-    left: 55%;
-    animation: leaf-float-soft-up 23s ease-in-out infinite 4s;
-  }
-  .leaf-16 {
-    bottom: -60px;
-    left: 75%;
-    animation: leaf-float-soft-up 22s ease-in-out infinite 6s;
-  }
-
-  /* Hojas suaves adicionales */
-  .leaf-17 {
-    top: 15%;
-    left: -92px;
-    animation: leaf-float-soft-left 24s ease-in-out infinite 3.5s;
-  }
-  .leaf-18 {
-    top: 55%;
-    right: -92px;
-    animation: leaf-float-soft-right 21s ease-in-out infinite 4.5s;
-  }
-
-  /* Animación suave desde la izquierda */
-  @keyframes leaf-float-soft-left {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.4;
-    }
-    30% {
-      transform: translateX(100px) translateY(-15px) rotate(45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1);
-    }
-    70% {
-      transform: translateX(300px) translateY(-15px) rotate(135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8);
-    }
-  }
-
-  /* Animación suave desde la derecha */
-  @keyframes leaf-float-soft-right {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.4;
-    }
-    30% {
-      transform: translateX(-100px) translateY(-15px) rotate(-45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(-200px) translateY(-25px) rotate(-90deg) scale(1);
-    }
-    70% {
-      transform: translateX(-300px) translateY(-15px) rotate(-135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8);
-    }
-  }
-
-  /* Animación suave desde arriba hacia abajo */
-  @keyframes leaf-float-soft-down {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.4;
-    }
-    30% {
-      transform: translateX(-15px) translateY(80px) rotate(45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(15px) translateY(160px) rotate(90deg) scale(1);
-    }
-    70% {
-      transform: translateX(-10px) translateY(240px) rotate(135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(0) translateY(320px) rotate(180deg) scale(0.8);
-    }
-  }
-
-  /* Animación suave desde abajo hacia arriba */
-  @keyframes leaf-float-soft-up {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.4;
-    }
-    30% {
-      transform: translateX(15px) translateY(-80px) rotate(-45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(-15px) translateY(-160px) rotate(-90deg) scale(1);
-    }
-    70% {
-      transform: translateX(10px) translateY(-240px) rotate(-135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(0) translateY(-320px) rotate(-180deg) scale(0.8);
-    }
-  }
 </style>

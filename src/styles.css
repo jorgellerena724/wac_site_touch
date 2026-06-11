@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #1C7790;
+  --color-primary-dark: #145A6E;
+  --color-primary-light: #E6F1F4;
+  --color-accent: #E58B6B;
+  --color-accent-dark: #C96A4A;
+  --color-accent-light: #FDF3EE;
+  --color-surface: #D4B895;
+  --color-surface-light: #EFE6D8;
+  --color-background: #F7F9F9;
+}
+
+body {
+  background-color: var(--color-background);
+}
+
 .custom-scrollbar {
     scrollbar-width: thin;
     -ms-overflow-style: none;

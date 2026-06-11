@@ -15,7 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
   standalone: true,
 })
 export class BorderBeamDirective implements OnInit, OnDestroy {
-  @Input() beamColor: string = 'rgba(255, 255, 255, 0.6)';
+  @Input() beamColor: string = 'rgba(28, 119, 144, 0.6)';
   @Input() beamWidth: string = '2px';
   @Input() beamDuration: string = '4s';
   @Input() beamDelay: string = '0s';

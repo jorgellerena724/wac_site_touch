@@ -1,6 +1,6 @@
 <nav
   id="navbar"
-  class="bg-gradient-to-r from-white to-slate-50 shadow-xl fixed w-full top-0 z-30 border-b-2 border-cyan-400 border-opacity-40 backdrop-blur-sm"
+  class="bg-gradient-to-r from-white to-slate-50 shadow-xl fixed w-full top-0 z-30 border-b-2 border-primary border-opacity-40 backdrop-blur-sm"
 >
   <div class="w-full px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-20 items-center">
@@ -13,27 +13,27 @@
         >
           @if (logoLoading()) {
             <!-- Skeleton loading -->
-            <div class="h-16 w-16 rounded-full bg-gray-200 animate-pulse"></div>
+            <div class="h-16 w-16 bg-gray-200 animate-pulse"></div>
           } @else if (logoUrl() && !logoError()) {
             <!-- Logo cargado -->
             <img
               [src]="logoUrl()"
               title="Logo"
               alt="Company Logo"
-              class="h-16 w-auto rounded-full transition-transform hover:scale-105"
+              class="h-16 w-16 transition-transform hover:scale-105 object-cover"
               loading="eager"
             />
           } @else {
             <!-- Fallback -->
             <div
-              class="h-16 w-16 rounded-full bg-cyan-100 flex items-center justify-center"
+              class="h-16 w-16 bg-primary-light flex items-center justify-center"
             >
-              <span class="text-cyan-600 font-bold text-lg">Logo</span>
+              <span class="text-primary font-bold text-lg">Logo</span>
             </div>
           }
         </div>
         <div
-          class="cursor-pointer text-cyan-500 hover:text-cyan-600 text-xl font-bold truncate max-w-[200px] md:max-w-full mr-8 ml-2 drop-shadow-sm"
+          class="cursor-pointer text-primary hover:text-primary text-xl font-bold truncate max-w-[200px] md:max-w-full mr-8 ml-2 drop-shadow-sm"
           (click)="scrollToTop()"
           [routerLink]="['/home']"
         >
@@ -59,9 +59,9 @@
             <a
               class="px-4 py-2 rounded-lg text-sm font-semibold border-b-2 transition-all duration-300 hover:shadow-md"
               [ngClass]="{
-                'text-white bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 border-cyan-500 shadow-lg':
+                'text-white bg-primary border-primary shadow-lg':
                   isActive(route.path),
-                'text-cyan-500 border-transparent hover:border-cyan-400 hover:text-cyan-600':
+                'text-primary border-transparent hover:border-primary hover:text-primary':
                   !isActive(route.path),
               }"
               [routerLink]="['/' + route.path]"
@@ -76,7 +76,7 @@
             <button
               type="button"
               (click)="toggleLanguageMenu()"
-              class="inline-flex items-center justify-center w-full rounded-xl border border-cyan-500 bg-white px-3 py-2 text-sm font-semibold text-cyan-500 transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-cyan-50 hover:via-cyan-25 hover:to-teal-25 hover:shadow-lg focus:outline-none"
+              class="inline-flex items-center justify-center w-full rounded-xl border border-primary bg-white px-3 py-2 text-sm font-semibold text-primary transition-all duration-300 ease-in-out hover:bg-primary-light hover:shadow-lg focus:outline-none"
               id="language-menu"
               [attr.aria-expanded]="languageMenuOpen()"
               aria-haspopup="true"
@@ -165,7 +165,7 @@
           </div>
           @if (languageMenuOpen()) {
             <div
-              class="origin-top-right absolute right-0 mt-2 w-48 rounded-xl shadow-2xl bg-white ring-1 ring-cyan-200 ring-opacity-80 focus:outline-none border border-cyan-300 z-50 animate-fade-in"
+              class="origin-top-right absolute right-0 mt-2 w-48 rounded-xl shadow-2xl bg-white ring-1 ring-surface ring-opacity-80 focus:outline-none border border-surface z-50 animate-fade-in"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="language-menu"
@@ -174,7 +174,7 @@
                 @for (lang of availableLanguages(); track lang.code) {
                   <button
                     (click)="selectLanguage(lang.code)"
-                    class="flex items-center w-full text-left px-4 py-3 text-sm font-medium text-cyan-500 hover:bg-gradient-to-r hover:from-cyan-100 hover:via-cyan-25 hover:to-teal-25 hover:text-cyan-600 transition-all duration-200 rounded-lg mx-2"
+                    class="flex items-center w-full text-left px-4 py-3 text-sm font-medium text-primary hover:bg-primary-light hover:text-primary-dark transition-all duration-200 rounded-lg mx-2"
                     role="menuitem"
                   >
                     <div class="mr-3 w-6 h-6">
@@ -265,7 +265,7 @@
           <button
             (click)="toggleMobileMenu()"
             type="button"
-            class="inline-flex items-center justify-center p-2 rounded-xl text-cyan-500 focus:outline-none transition-all duration-300 border border-cyan-500 bg-white hover:bg-gradient-to-r hover:from-cyan-50 hover:via-cyan-25 hover:to-teal-25 hover:shadow-lg"
+            class="inline-flex items-center justify-center p-2 rounded-xl text-primary focus:outline-none transition-all duration-300 border border-primary bg-white hover:bg-primary-light hover:shadow-lg"
             aria-controls="mobile-menu"
             [attr.aria-expanded]="mobileMenuOpen()"
           >
@@ -305,7 +305,7 @@
       class="md:hidden bg-gradient-to-b from-white to-slate-50 animate-slide-down"
       id="mobile-menu"
     >
-      <hr class="my-1 border-cyan-300 opacity-50" />
+      <hr class="my-1 border-surface opacity-50" />
       <div class="px-4 pt-2 pb-4 space-y-2 sm:px-6">
         @for (
           route of [
@@ -322,9 +322,9 @@
             [routerLink]="['/' + route.path]"
             class="block px-4 py-3 rounded-xl text-base font-semibold border-l-4 transition-all duration-300 hover:shadow-md"
             [ngClass]="{
-              'text-white bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 border-cyan-500 shadow-lg':
+              'text-white bg-primary border-primary shadow-lg':
                 isActive(route.path),
-              'text-cyan-500 border-transparent hover:border-cyan-400 hover:text-cyan-600':
+              'text-primary border-transparent hover:border-primary hover:text-primary':
                 !isActive(route.path),
             }"
             (click)="closeMenus()"

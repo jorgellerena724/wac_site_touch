@@ -4,25 +4,9 @@
     <div class="w-full px-4 sm:px-6 lg:px-8 py-12">
       <!-- Header -->
       <div class="text-center mb-12 relative">
-        <!-- Efecto de hojas flotantes suaves para el header -->
-        <div class="wind-effect-wrapper-header">
-          <div class="leaf-soft leaf-soft-1">🍃</div>
-          <div class="leaf-soft leaf-soft-2">🍃</div>
-          <div class="leaf-soft leaf-soft-3">🍃</div>
-          <div class="leaf-soft leaf-soft-4">🍃</div>
-          <div class="leaf-soft leaf-soft-5">🍃</div>
-          <div class="leaf-soft leaf-soft-6">🍃</div>
-          <div class="leaf-soft leaf-soft-7">🍃</div>
-          <div class="leaf-soft leaf-soft-8">🍃</div>
-          <div class="leaf-soft leaf-soft-9">🍃</div>
-          <div class="leaf-soft leaf-soft-10">🍃</div>
-          <div class="leaf-soft leaf-soft-11">🍃</div>
-          <div class="leaf-soft leaf-soft-12">🍃</div>
-        </div>
-
         <div class="animate-slide-down-on-load">
           <h1
-            class="text-4xl font-extrabold text-cyan-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
+            class="text-4xl font-extrabold text-primary sm:text-5xl leading-tight drop-shadow-sm relative z-10"
           >
             {{ "bookings.title" | transloco }}
           </h1>
@@ -39,13 +23,13 @@
         <div class="space-y-6 max-w-4xl mx-auto">
           @for (i of [1, 2, 3]; track i) {
             <div
-              class="bg-white rounded-2xl p-6 shadow-[0_0_20px_rgba(6,182,212,0.15)] border border-cyan-100 animate-pulse"
+              class="bg-white rounded-2xl p-6 shadow-[0_0_20px_rgba(28, 119, 144,0.15)] border border-surface animate-pulse"
             >
               <div class="flex flex-col gap-4">
                 <!-- Service title skeleton -->
                 <div class="w-full">
                   <div
-                    class="h-8 bg-gradient-to-r from-cyan-200 to-cyan-300 rounded-lg w-2/3 mb-4"
+                    class="h-8 bg-primary-light rounded-lg w-2/3 mb-4"
                   ></div>
 
                   <!-- Variants section skeleton -->
@@ -56,14 +40,14 @@
                     >
                       @for (j of [1, 2, 3]; track j) {
                         <div
-                          class="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-cyan-50 p-3 rounded-lg border border-cyan-200 w-full"
+                          class="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-primary-light p-3 rounded-lg border border-surface w-full"
                         >
                           <div class="flex-1 min-w-0 space-y-2">
-                            <div class="h-4 bg-cyan-200 rounded w-3/4"></div>
-                            <div class="h-4 bg-cyan-300 rounded w-1/2"></div>
+                            <div class="h-4 bg-surface-light rounded w-3/4"></div>
+                            <div class="h-4 bg-surface rounded w-1/2"></div>
                           </div>
                           <div
-                            class="h-8 bg-gradient-to-r from-cyan-300 to-teal-300 rounded-lg w-full sm:w-20"
+                            class="h-8 bg-primary-light rounded-lg w-full sm:w-20"
                           ></div>
                         </div>
                       }
@@ -77,32 +61,9 @@
       } @else if (products$().length > 0) {
         <!-- Lista de servicios -->
         <div class="space-y-6 max-w-4xl mx-auto relative">
-          <!-- Efecto de hojas flotantes suaves para los servicios -->
-          <div class="wind-effect-wrapper-services">
-            <div class="leaf-soft-services leaf-soft-services-1">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-2">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-3">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-4">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-5">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-6">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-7">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-8">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-9">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-10">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-11">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-12">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-13">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-14">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-15">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-16">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-17">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-18">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-19">🍃</div>
-            <div class="leaf-soft-services leaf-soft-services-20">🍃</div>
-          </div>
           @for (product of products$(); track trackByProduct($index, product)) {
             <div
-              class="bg-white rounded-2xl p-6 shadow-[0_0_20px_rgba(6,182,212,0.15)] border border-cyan-100 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] transition-all duration-300 relative z-10"
+              class="bg-white rounded-2xl p-6 shadow-[0_0_20px_rgba(28, 119, 144,0.15)] border border-surface hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] transition-all duration-300 relative z-10"
               appScrollReveal
               [revealAnimation]="
                 $index % 2 === 0 ? 'slide-left' : 'slide-right'
@@ -112,7 +73,7 @@
               <div class="flex flex-col gap-4">
                 <!-- Información del servicio -->
                 <div class="w-full">
-                  <h3 class="text-2xl font-bold text-cyan-700 mb-4">
+                  <h3 class="text-2xl font-bold text-primary-dark mb-4">
                     {{ product.title }}
                   </h3>
 
@@ -131,16 +92,16 @@
                           track trackByVariant($index, variant)
                         ) {
                           <div
-                            class="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-cyan-50 p-3 rounded-lg border border-cyan-200 w-full"
+                            class="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-primary-light p-3 rounded-lg border border-surface w-full"
                           >
                             <div class="flex-1 min-w-0">
                               <span
-                                class="text-sm font-medium text-cyan-700 block truncate"
+                                class="text-sm font-medium text-primary-dark block truncate"
                               >
                                 {{ variant.description }}
                               </span>
                               <span
-                                class="text-sm font-bold text-cyan-600 block"
+                                class="text-sm font-bold text-primary block"
                               >
                                 {{
                                   variant.price
@@ -150,7 +111,7 @@
                             </div>
                             <button
                               (click)="bookNow(product, variant)"
-                              class="bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 text-white text-xs font-bold py-2 px-3 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto whitespace-nowrap"
+                              class="bg-accent text-white text-xs font-bold py-2 px-3 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto whitespace-nowrap"
                             >
                               {{ "bookings.bookNow" | transloco }}
                             </button>
@@ -163,7 +124,7 @@
                     <div class="mt-4">
                       <button
                         (click)="bookNow(product)"
-                        class="bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 text-white text-sm font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                        class="bg-accent text-white text-sm font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                       >
                         {{ "bookings.bookNow" | transloco }}
                       </button>
@@ -182,24 +143,13 @@
           [revealAnimation]="'slide-up'"
           [revealDelay]="0"
         >
-          <!-- Efecto de hojas flotantes suaves para el estado vacío -->
-          <div class="wind-effect-wrapper-empty">
-            <div class="leaf-soft-empty leaf-soft-empty-1">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-2">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-3">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-4">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-5">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-6">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-7">🍃</div>
-            <div class="leaf-soft-empty leaf-soft-empty-8">🍃</div>
-          </div>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="100"
             height="100"
             fill="currentColor"
-            class="bi bi-emoji-tear text-cyan-300 mb-4 sm:mb-6 sm:w-32 sm:h-32 md:w-36 md:h-36 transform transition-all duration-700 ease-out relative z-10"
+            class="bi bi-emoji-tear text-surface mb-4 sm:mb-6 sm:w-32 sm:h-32 md:w-36 md:h-36 transform transition-all duration-700 ease-out relative z-10"
             viewBox="0 0 16 16"
             [ngClass]="{
               'scale-100 rotate-0': isNoDataIconLoaded(),
@@ -236,7 +186,7 @@
         [revealDelay]="0"
       >
         <div>
-          <h1 class="text-3xl font-bold text-cyan-600">
+          <h1 class="text-3xl font-bold text-primary">
             {{ "bookings.scheduling" | transloco }}
           </h1>
           @if (selectedService()) {
@@ -253,11 +203,11 @@
         </div>
         <button
           (click)="goBack()"
-          class="bg-white text-cyan-600 border border-cyan-400 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none hover:shadow-xl hover:scale-105"
+          class="bg-white text-primary border border-primary rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none hover:shadow-xl hover:scale-105"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 left-arrow-bounce text-cyan-600"
+            class="h-6 w-6 left-arrow-bounce text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -274,7 +224,7 @@
 
       <!-- Cal.com Component -->
       <div
-        class="bg-white rounded-2xl shadow-[0_0_20px_rgba(6,182,212,0.15)] border border-cyan-100 overflow-hidden"
+        class="bg-white rounded-2xl shadow-[0_0_20px_rgba(28, 119, 144,0.15)] border border-surface overflow-hidden"
         appScrollReveal
         [revealAnimation]="'slide-up'"
         [revealDelay]="200"
@@ -316,391 +266,4 @@
     animation: slide-down-on-load 0.8s ease-out forwards;
   }
 
-  /* Efecto de hojas flotantes suaves para el header */
-  .wind-effect-wrapper-header {
-    position: absolute;
-    top: -50px;
-    left: 0;
-    width: 100%;
-    height: 300px;
-    pointer-events: none;
-    z-index: 0;
-    overflow: visible;
-  }
-
-  .leaf-soft {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0;
-  }
-
-  /* Hojas suaves - lado izquierdo */
-  .leaf-soft-1 {
-    top: 10%;
-    left: -80px;
-    animation: leaf-float-soft-left 18s ease-in-out infinite;
-  }
-  .leaf-soft-2 {
-    top: 40%;
-    left: -90px;
-    animation: leaf-float-soft-left 20s ease-in-out infinite 3s;
-  }
-  .leaf-soft-3 {
-    top: 70%;
-    left: -85px;
-    animation: leaf-float-soft-left 19s ease-in-out infinite 6s;
-  }
-
-  /* Hojas suaves - lado derecho */
-  .leaf-soft-4 {
-    top: 15%;
-    right: -80px;
-    animation: leaf-float-soft-right 21s ease-in-out infinite 2s;
-  }
-  .leaf-soft-5 {
-    top: 45%;
-    right: -90px;
-    animation: leaf-float-soft-right 19s ease-in-out infinite 5s;
-  }
-  .leaf-soft-6 {
-    top: 75%;
-    right: -85px;
-    animation: leaf-float-soft-right 20s ease-in-out infinite 8s;
-  }
-
-  /* Hojas suaves - desde arriba */
-  .leaf-soft-7 {
-    top: -60px;
-    left: 20%;
-    animation: leaf-float-soft-down 22s ease-in-out infinite 1s;
-  }
-  .leaf-soft-8 {
-    top: -60px;
-    left: 50%;
-    animation: leaf-float-soft-down 20s ease-in-out infinite 4s;
-  }
-  .leaf-soft-9 {
-    top: -60px;
-    left: 80%;
-    animation: leaf-float-soft-down 21s ease-in-out infinite 7s;
-  }
-
-  /* Hojas suaves - desde abajo */
-  .leaf-soft-10 {
-    bottom: -60px;
-    left: 30%;
-    animation: leaf-float-soft-up 19s ease-in-out infinite 2.5s;
-  }
-  .leaf-soft-11 {
-    bottom: -60px;
-    left: 60%;
-    animation: leaf-float-soft-up 21s ease-in-out infinite 5.5s;
-  }
-  .leaf-soft-12 {
-    bottom: -60px;
-    left: 90%;
-    animation: leaf-float-soft-up 20s ease-in-out infinite 8.5s;
-  }
-
-  /* Efecto de hojas flotantes suaves para los servicios */
-  .wind-effect-wrapper-services {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: visible;
-  }
-
-  .leaf-soft-services {
-    position: absolute;
-    font-size: 28px;
-    opacity: 0;
-  }
-
-  /* Hojas suaves servicios - lado izquierdo */
-  .leaf-soft-services-1 {
-    top: 5%;
-    left: -70px;
-    animation: leaf-float-soft-left 18s ease-in-out infinite;
-  }
-  .leaf-soft-services-2 {
-    top: 25%;
-    left: -80px;
-    animation: leaf-float-soft-left 20s ease-in-out infinite 3s;
-  }
-  .leaf-soft-services-3 {
-    top: 45%;
-    left: -75px;
-    animation: leaf-float-soft-left 19s ease-in-out infinite 6s;
-  }
-  .leaf-soft-services-4 {
-    top: 65%;
-    left: -85px;
-    animation: leaf-float-soft-left 21s ease-in-out infinite 9s;
-  }
-  .leaf-soft-services-5 {
-    top: 85%;
-    left: -78px;
-    animation: leaf-float-soft-left 17s ease-in-out infinite 12s;
-  }
-
-  /* Hojas suaves servicios - lado derecho */
-  .leaf-soft-services-6 {
-    top: 10%;
-    right: -70px;
-    animation: leaf-float-soft-right 19s ease-in-out infinite 2s;
-  }
-  .leaf-soft-services-7 {
-    top: 30%;
-    right: -80px;
-    animation: leaf-float-soft-right 21s ease-in-out infinite 5s;
-  }
-  .leaf-soft-services-8 {
-    top: 50%;
-    right: -75px;
-    animation: leaf-float-soft-right 18s ease-in-out infinite 8s;
-  }
-  .leaf-soft-services-9 {
-    top: 70%;
-    right: -85px;
-    animation: leaf-float-soft-right 20s ease-in-out infinite 11s;
-  }
-  .leaf-soft-services-10 {
-    top: 90%;
-    right: -78px;
-    animation: leaf-float-soft-right 22s ease-in-out infinite 14s;
-  }
-
-  /* Hojas suaves servicios - desde arriba */
-  .leaf-soft-services-11 {
-    top: -50px;
-    left: 15%;
-    animation: leaf-float-soft-down 20s ease-in-out infinite 1s;
-  }
-  .leaf-soft-services-12 {
-    top: -50px;
-    left: 35%;
-    animation: leaf-float-soft-down 18s ease-in-out infinite 4s;
-  }
-  .leaf-soft-services-13 {
-    top: -50px;
-    left: 55%;
-    animation: leaf-float-soft-down 19s ease-in-out infinite 7s;
-  }
-  .leaf-soft-services-14 {
-    top: -50px;
-    left: 75%;
-    animation: leaf-float-soft-down 17s ease-in-out infinite 10s;
-  }
-  .leaf-soft-services-15 {
-    top: -50px;
-    left: 85%;
-    animation: leaf-float-soft-down 21s ease-in-out infinite 13s;
-  }
-
-  /* Hojas suaves servicios - desde abajo */
-  .leaf-soft-services-16 {
-    bottom: -50px;
-    left: 20%;
-    animation: leaf-float-soft-up 19s ease-in-out infinite 2.5s;
-  }
-  .leaf-soft-services-17 {
-    bottom: -50px;
-    left: 40%;
-    animation: leaf-float-soft-up 21s ease-in-out infinite 5.5s;
-  }
-  .leaf-soft-services-18 {
-    bottom: -50px;
-    left: 60%;
-    animation: leaf-float-soft-up 18s ease-in-out infinite 8.5s;
-  }
-  .leaf-soft-services-19 {
-    bottom: -50px;
-    left: 80%;
-    animation: leaf-float-soft-up 20s ease-in-out infinite 11.5s;
-  }
-  .leaf-soft-services-20 {
-    bottom: -50px;
-    left: 90%;
-    animation: leaf-float-soft-up 17s ease-in-out infinite 14.5s;
-  }
-
-  /* Animaciones suaves */
-
-  /* Animación suave desde la izquierda */
-  @keyframes leaf-float-soft-left {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.6;
-    }
-    30% {
-      transform: translateX(100px) translateY(-15px) rotate(45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(200px) translateY(-25px) rotate(90deg) scale(1);
-    }
-    70% {
-      transform: translateX(300px) translateY(-15px) rotate(135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(400px) translateY(0) rotate(180deg) scale(0.8);
-    }
-  }
-
-  /* Animación suave desde la derecha */
-  @keyframes leaf-float-soft-right {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.6;
-    }
-    30% {
-      transform: translateX(-100px) translateY(-15px) rotate(-45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(-200px) translateY(-25px) rotate(-90deg) scale(1);
-    }
-    70% {
-      transform: translateX(-300px) translateY(-15px) rotate(-135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-400px) translateY(0) rotate(-180deg) scale(0.8);
-    }
-  }
-
-  /* Animación suave desde arriba hacia abajo */
-  @keyframes leaf-float-soft-down {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.6;
-    }
-    30% {
-      transform: translateX(-15px) translateY(80px) rotate(45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(15px) translateY(160px) rotate(90deg) scale(1);
-    }
-    70% {
-      transform: translateX(-10px) translateY(240px) rotate(135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(0) translateY(320px) rotate(180deg) scale(0.8);
-    }
-  }
-
-  /* Animación suave desde abajo hacia arriba */
-  @keyframes leaf-float-soft-up {
-    0% {
-      opacity: 0;
-      transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
-    }
-    10% {
-      opacity: 0.6;
-    }
-    30% {
-      transform: translateX(15px) translateY(-80px) rotate(-45deg) scale(0.9);
-    }
-    50% {
-      transform: translateX(-15px) translateY(-160px) rotate(-90deg) scale(1);
-    }
-    70% {
-      transform: translateX(10px) translateY(-240px) rotate(-135deg) scale(0.9);
-    }
-    90% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(0) translateY(-320px) rotate(-180deg) scale(0.8);
-    }
-  }
-
-  /* Efecto de hojas flotantes suaves para el estado vacío */
-  .wind-effect-wrapper-empty {
-    position: absolute;
-    top: -50px;
-    left: 0;
-    width: 100%;
-    height: 400px;
-    pointer-events: none;
-    z-index: 0;
-    overflow: visible;
-  }
-
-  .leaf-soft-empty {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0;
-  }
-
-  /* Hojas suaves estado vacío - lado izquierdo */
-  .leaf-soft-empty-1 {
-    top: 20%;
-    left: -70px;
-    animation: leaf-float-soft-left 16s ease-in-out infinite;
-  }
-  .leaf-soft-empty-2 {
-    top: 60%;
-    left: -80px;
-    animation: leaf-float-soft-left 18s ease-in-out infinite 4s;
-  }
-
-  /* Hojas suaves estado vacío - lado derecho */
-  .leaf-soft-empty-3 {
-    top: 30%;
-    right: -70px;
-    animation: leaf-float-soft-right 17s ease-in-out infinite 2s;
-  }
-  .leaf-soft-empty-4 {
-    top: 70%;
-    right: -80px;
-    animation: leaf-float-soft-right 19s ease-in-out infinite 6s;
-  }
-
-  /* Hojas suaves estado vacío - desde arriba */
-  .leaf-soft-empty-5 {
-    top: -40px;
-    left: 25%;
-    animation: leaf-float-soft-down 20s ease-in-out infinite 1s;
-  }
-  .leaf-soft-empty-6 {
-    top: -40px;
-    left: 75%;
-    animation: leaf-float-soft-down 18s ease-in-out infinite 5s;
-  }
-
-  /* Hojas suaves estado vacío - desde abajo */
-  .leaf-soft-empty-7 {
-    bottom: -40px;
-    left: 40%;
-    animation: leaf-float-soft-up 17s ease-in-out infinite 3s;
-  }
-  .leaf-soft-empty-8 {
-    bottom: -40px;
-    left: 80%;
-    animation: leaf-float-soft-up 19s ease-in-out infinite 7s;
-  }
 </style>
