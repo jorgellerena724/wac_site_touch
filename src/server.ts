@@ -42,20 +42,6 @@ app.use(
 );
 
 /**
- * Guard para rutas de /assets
- * Si la petición es a /assets pero Express.static no la sirvió,
- * responder 404 en lugar de pasar al SSR de Angular.
- */
-app.use((req, res, next) => {
-  if (req.path.startsWith('/assets/')) {
-    // No pasar al SSR, responder 404 directamente
-    res.status(404).type('text/plain').send('Asset not found');
-  } else {
-    next();
-  }
-});
-
-/**
  * Handle all other requests by rendering the Angular application.
  */
 app.use('/**', (req, res, next) => {
