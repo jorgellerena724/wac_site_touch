@@ -8,7 +8,7 @@
     }
   },
   "whatsapp": {
-    "greeting": "Hello, I just sent a home service request. Here are the details:",
+    "greeting": "Hello, I just sent a travel request. Here are the details:",
     "subject_label": "Subject",
     "address_label": "Address",
     "phone_label": "Phone",
@@ -18,69 +18,69 @@
     "about": "About",
     "contact": "Contact",
     "home": "Home",
-    "products": "Services"
+    "products": "Destinations"
   },
   "home": {
     "products": {
       "subtitle": {
-        "first": "Wellnes Made ",
+        "first": "Travel Made ",
         "second": "Easy"
       },
-      "text": "Discover the perfect balance of relaxation and healing with the best therapeutic massages delivered to your home.",
+      "text": "Discover the perfect escape with the best travel experiences curated just for you. From exotic beaches to vibrant cities, we make every journey unforgettable.",
       "square": {
         "left": {
-          "title": "Comited to excellence",
-          "text": "Every massage is delivered with the highest standards of care, supported by years of training and therapeutic knowledge. We ensure safe, effective, and treatments designed to support your body’s natural recovery."
+          "title": "Committed to excellence",
+          "text": "Every trip is planned with the highest standards of quality and care, backed by years of experience and deep destination knowledge. We ensure safe, seamless, and memorable travel experiences designed around you."
         },
         "right": {
-          "title": "Innovative Healing",
-          "text": "We bring together ancient massage traditions and modern therapeutic approaches, creating transformative sessions that adapt to your lifestyle and elevate your wellness."
+          "title": "Explore Beyond",
+          "text": "We bring together the world's most stunning destinations and modern travel trends, creating transformative journeys that adapt to your style and elevate your wanderlust."
         },
         "bottom": {
-          "title": "Looking up for the perfect massage?",
-          "text": "Explore our menu of therapeutic treatments and find the ideal session to relax your body, calm you mind, and recharge your energy.",
-          "button": "See Full Catalog"
+          "title": "Ready for your next adventure?",
+          "text": "Browse our curated travel packages and find the perfect getaway to relax your mind, explore new cultures, and recharge your spirit.",
+          "button": "View Full Catalog"
         }
       }
     },
     "reviews": {
-      "title": "What Our Clients Say",
+      "title": "What Our Travelers Say",
       "subtitle": "Real Testimonials",
-      "text": "Our clients' satisfaction is our greatest achievement and motivation.",
+      "text": "Our travelers' satisfaction is our greatest achievement and motivation.",
       "nodata": "We don't have testimonials to show yet.",
       "count": "reviews"
     },
     "footer": {
-      "text": "Get started with our solutions today.",
+      "text": "Start planning your dream trip today.",
       "leftbutton": "Contact us",
       "rightbutton": "Learn more"
     }
   },
   "about": {
     "title": "About",
-    "subtitle": "Discover our history, values, and the team behind this company.",
+    "subtitle": "Discover our story, values, and the team behind this travel agency.",
     "nodata": "There is no information to show at the moment.",
     "nodata.company": "We don't have company information to show yet.",
     "team": {
       "title": "Our Team",
-      "subtitle": "The people behind our success",
-      "text": "A group of professionals passionate about technology and innovation."
+      "subtitle": "The people behind your adventures",
+      "text": "A group of travel enthusiasts passionate about creating unforgettable experiences."
     },
     "reviews": {
-      "title": "Our Clients Testimonials",
+      "title": "Our Travelers Testimonials",
       "subtitle": "What they say about us",
-      "text": "Our clients satisfaction is our greatest achievement and motivation."
+      "text": "Our travelers satisfaction is our greatest achievement and motivation."
     }
   },
   "products": {
     "title": {
       "first": "Our ",
-      "second": "Services"
+      "second": "Destinations"
     },
-    "text": "Discover personalized therapies crafted to rejuvenate your body, calm your mind, and elevate your wellbeing.",
+    "text": "Discover curated travel packages designed to inspire your soul, broaden your horizons, and elevate your journey.",
     "button": "All",
-    "nodata": "There are no services available at this time.",
-    "nodata.category": "There are no services available in this category.",
+    "nodata": "There are no destinations available at this time.",
+    "nodata.category": "There are no destinations available in this category.",
     "seedetails": "See Details",
     "details": "Details",
     "info": "Request information",
@@ -92,11 +92,11 @@
     "back": "Back",
     "availableTimes": "Available Times",
     "selectDate": "Select a date to see available times",
-    "summary": "Appointment Summary",
-    "product": "Service",
+    "summary": "Booking Summary",
+    "product": "Package",
     "dateTime": "Date & Time",
     "processing": "Processing...",
-    "preparingForm": "Preparing your appointment form",
+    "preparingForm": "Preparing your booking form",
     "days": {
       "sun": "Sun",
       "mon": "Mon",
@@ -114,8 +114,8 @@
       "emailPlaceholder": "your@email.com",
       "phone": "Phone Number",
       "phonePlaceholder": "+1 (555) 123-4567",
-      "location": "In-person (attendee address)",
-      "locationPlaceholder": "Enter the full address",
+      "location": "Pickup location",
+      "locationPlaceholder": "Enter your pickup address or meeting point",
       "notes": "Additional Notes",
       "notesPlaceholder": "Any special requests or additional information...",
       "terms": "By continuing, you accept our terms of use and privacy policy."
@@ -123,7 +123,7 @@
   },
   "contact": {
     "title": "Contact Us",
-    "text": "We're here to help you with any questions. Contact us and we'll respond as soon as possible.",
+    "text": "We're here to help you plan your next trip. Contact us and we'll respond as soon as possible.",
     "calling": "Calling...",
     "square": {
       "left": {
@@ -164,6 +164,10 @@
         "button": "Click to view on Google Maps",
         "email.hint": "Click to send an email",
         "phone.hint": "Click to contact via WhatsApp",
+<<<<<<< HEAD
+=======
+        "scheduleButton": "Book a Trip"
+>>>>>>> 7aed881 (cambios de textos)
       }
     },
     "noContactInfo": "No contact information available"
@@ -178,7 +182,7 @@
     "column": {
       "left": {
         "first": "At",
-        "second": "we specialize in therapeutic, relaxing, and wellness massages, designed to relieve stress, improve circulation, and restore your physical and mental balance.",
+        "second": "we specialize in creating unforgettable travel experiences — from relaxing beach getaways to thrilling cultural adventures, designed to inspire and rejuvenate you.",
         "third": "We especially thank",
         "fourth": "for the development and design of our website. Their excellent work connects us better with you!"
       },
@@ -206,7 +210,7 @@
       "title": "Hello! I'm Shirka 🦾",
       "subtitle": "How can I help you today?",
       "button": "Start conversation",
-      "message": "Hello! I'm Shirka, your virtual assistant. Welcome to BnB, the best in-home therapeutic massage service in Miami. How can I help you today?"
+      "message": "Hello! I'm Shirka, your virtual assistant. Welcome to Touch Coral, your trusted travel agency. How can I help you plan your next adventure today?"
     },
     "user": "You",
     "botName": "Shirka",
@@ -232,6 +236,19 @@
     "nextImage": "Next image",
     "close": "Close"
   },
+<<<<<<< HEAD
+=======
+  "bookings": {
+    "title": "Book Your Trip",
+    "subtitle": "Select the destination you want and book your trip easily and quickly.",
+    "variants": "Options",
+    "bookNow": "Book Now",
+    "noServices": "No packages available",
+    "noServicesText": "We currently have no travel packages available to display.",
+    "scheduling": "Book Trip",
+    "goBack": "Go Back"
+  },
+>>>>>>> 7aed881 (cambios de textos)
   "terms": {
     "title": "Terms and Conditions",
     "lastUpdated": "Last updated",

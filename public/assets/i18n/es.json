@@ -8,103 +8,109 @@
     }
   },
   "whatsapp": {
-    "greeting": "Hola, acabo de enviar una solicitud de servicio a domicilio. Aquí están los detalles:",
+    "greeting": "Hola, acabo de enviar una solicitud de viaje. Aqu\u00ed est\u00e1n los detalles:",
     "subject_label": "Asunto",
-    "address_label": "Dirección",
-    "phone_label": "Teléfono",
+    "address_label": "Direcci\u00f3n",
+    "phone_label": "Tel\u00e9fono",
     "message_label": "Mensaje"
   },
   "navbar": {
-    "about": "Quiénes Somos",
+    "about": "Qui\u00e9nes Somos",
     "contact": "Contactar",
     "home": "Inicio",
-    "products": "Servicios"
+    "products": "Destinos"
   },
   "home": {
     "products": {
       "subtitle": {
-        "first": "Bienestar Hecho",
-        "second": "Fácil"
+        "first": "Viajar Hecho",
+        "second": "F\u00e1cil"
       },
-      "text": "Descubre el equilibrio perfecto entre relajación y sanación con los mejores masajes terapéuticos a domicilio.",
+      "text": "Descubre el escape perfecto con las mejores experiencias de viaje seleccionadas para ti. Desde playas ex\u00f3ticas hasta ciudades vibrantes, hacemos que cada viaje sea inolvidable.",
       "square": {
         "left": {
           "title": "Comprometidos con la excelencia",
-          "text": "Cada masaje se ofrece con los más altos estándares de atención, respaldados por años de formación y experiencia terapéutica. Garantizamos tratamientos seguros y efectivos, diseñados para apoyar la recuperación natural de su cuerpo."
+          "text": "Cada viaje se planifica con los m\u00e1s altos est\u00e1ndares de calidad y atenci\u00f3n, respaldados por a\u00f1os de experiencia y conocimiento profundo de los destinos. Garantizamos experiencias de viaje seguras, fluidas y memorables, dise\u00f1adas a tu medida."
         },
         "right": {
-          "title": "Curación innovadora",
-          "text": "Combinamos antiguas tradiciones de masaje y enfoques terapéuticos modernos, creando sesiones transformadoras que se adaptan a su estilo de vida y elevan su bienestar."
+          "title": "Explora m\u00e1s all\u00e1",
+          "text": "Combinamos los destinos m\u00e1s impresionantes del mundo con las tendencias de viaje modernas, creando experiencias transformadoras que se adaptan a tu estilo y despiertan tu pasi\u00f3n por viajar."
         },
         "bottom": {
-          "title": "¿Buscas el masaje perfecto?",
-          "text": "Explora nuestra carta de tratamientos terapéuticos y encuentra la sesión ideal para relajar tu cuerpo, calmar tu mente y recargar energías.",
-          "button": "Ver Catálogo Completo"
+          "title": "\u00bfListo para tu pr\u00f3xima aventura?",
+          "text": "Explora nuestros paquetes de viaje seleccionados y encuentra la escapada ideal para relajar tu mente, descubrir nuevas culturas y recargar energ\u00edas.",
+          "button": "Ver Cat\u00e1logo Completo"
         }
       }
     },
     "reviews": {
-      "title": "Lo que Dicen Nuestros Clientes",
+      "title": "Lo que Dicen Nuestros Viajeros",
       "subtitle": "Testimonios Reales",
-      "text": "La satisfacción de nuestros clientes es nuestro mayor logro y motivación.",
-      "nodata": "Aún no tenemos testimonios que mostrar.",
-      "count": "reseñas"
+      "text": "La satisfacci\u00f3n de nuestros viajeros es nuestro mayor logro y motivaci\u00f3n.",
+      "nodata": "A\u00fan no tenemos testimonios que mostrar.",
+      "count": "rese\u00f1as"
     },
     "footer": {
-      "text": "Comienza hoy mismo con nuestras soluciones.",
-      "leftbutton": "Contáctanos",
-      "rightbutton": "Saber más"
+      "text": "Comienza hoy a planificar tu viaje so\u00f1ado.",
+      "leftbutton": "Cont\u00e1ctanos",
+      "rightbutton": "Saber m\u00e1s"
     }
   },
   "about": {
-    "title": "Quiénes Somos",
-    "subtitle": "Descubre nuestra historia, valores y el equipo detrás de esta empresa.",
-    "nodata": "Aún no tenemos mucho que contar.",
-    "nodata.company": "Aún no tenemos información de la empresa que mostrar.",
+    "title": "Qui\u00e9nes Somos",
+    "subtitle": "Descubre nuestra historia, valores y el equipo detr\u00e1s de esta agencia de viajes.",
+    "nodata": "A\u00fan no tenemos mucho que contar.",
+    "nodata.company": "A\u00fan no tenemos informaci\u00f3n de la empresa que mostrar.",
     "team": {
       "title": "Nuestro Equipo",
-      "subtitle": "Las personas detrás del éxito",
-      "text": "Un grupo de profesionales apasionados por la tecnología y la innovación."
+      "subtitle": "Las personas detr\u00e1s de tus aventuras",
+      "text": "Un grupo de apasionados por los viajes dedicados a crear experiencias inolvidables."
     },
     "reviews": {
-      "title": "Testimonios de Nuestros Clientes",
+      "title": "Testimonios de Nuestros Viajeros",
       "subtitle": "Lo que dicen de nosotros",
-      "text": "La satisfacción de nuestros clientes es nuestro mayor logro y motivación."
+      "text": "La satisfacci\u00f3n de nuestros viajeros es nuestro mayor logro y motivaci\u00f3n."
     }
   },
   "products": {
     "title": {
       "first": "Nuestros ",
-      "second": "Servicios"
+      "second": "Destinos"
     },
-    "text": "Descubra terapias personalizadas diseñadas para rejuvenecer su cuerpo, calmar su mente y mejorar su bienestar.",
+    "text": "Descubre paquetes de viaje seleccionados para inspirar tu alma, ampliar tus horizontes y elevar tu experiencia.",
     "button": "Todos",
-    "nodata": "No hay servicios disponibles en este momento.",
-    "nodata.category": "No hay servicios disponibles en esta categoría.",
+    "nodata": "No hay destinos disponibles en este momento.",
+    "nodata.category": "No hay destinos disponibles en esta categor\u00eda.",
     "seedetails": "Ver Detalles",
     "details": "Detalles",
+<<<<<<< HEAD
     "info": "Solicitar información",
     "swipe": "← Desliza para ver más categorías →"
+=======
+    "info": "Solicitar informaci\u00f3n",
+    "swipe": "\u2190 Desliza para ver m\u00e1s categor\u00edas \u2192",
+    "scheduleAppointment": "Reserva ya"
+>>>>>>> 7aed881 (cambios de textos)
   },
   "appointment": {
     "cancel": "Cancelar",
     "confirm": "Pagar para Reservar",
-    "back": "Atrás",
+    "back": "Atr\u00e1s",
     "availableTimes": "Horarios Disponibles",
     "selectDate": "Selecciona una fecha para ver los horarios disponibles",
-    "summary": "Resumen de la Cita",
-    "product": "Servicio",
+    "summary": "Resumen de la Reserva",
+    "product": "Paquete",
     "dateTime": "Fecha y Hora",
     "processing": "Procesando...",
-    "preparingForm": "Preparando tu formulario de cita",
+    "preparingForm": "Preparando tu formulario de reserva",
     "days": {
       "sun": "Dom",
       "mon": "Lun",
       "tue": "Mar",
-      "wed": "Mié",
+      "wed": "Mi\u00e9",
       "thu": "Jue",
       "fri": "Vie",
-      "sat": "Sáb"
+      "sat": "S\u00e1b"
     },
     "form": {
       "title": "Tus Datos",
@@ -112,26 +118,26 @@
       "namePlaceholder": "Ingresa tu nombre completo",
       "email": "Email",
       "emailPlaceholder": "tu@email.com",
-      "phone": "Nº de Teléfono",
+      "phone": "N\u00ba de Tel\u00e9fono",
       "phonePlaceholder": "+1 (555) 123-4567",
-      "location": "En persona (dirección del asistente)",
-      "locationPlaceholder": "Ingresa la dirección completa",
+      "location": "Lugar de recogida",
+      "locationPlaceholder": "Ingresa tu direcci\u00f3n de recogida o punto de encuentro",
       "notes": "Notas Adicionales",
-      "notesPlaceholder": "Alguna solicitud especial o información adicional...",
-      "terms": "Al continuar, acepta nuestras condiciones de uso y nuestra política de privacidad."
+      "notesPlaceholder": "Alguna solicitud especial o informaci\u00f3n adicional...",
+      "terms": "Al continuar, acepta nuestras condiciones de uso y nuestra pol\u00edtica de privacidad."
     }
   },
   "contact": {
-    "title": "Contáctenos",
-    "text": "Estamos aquí para ayudarle con cualquier consulta. Póngase en contacto con nosotros y responderemos a la brevedad posible.",
+    "title": "Cont\u00e1ctenos",
+    "text": "Estamos aqu\u00ed para ayudarte a planificar tu pr\u00f3ximo viaje. Ponte en contacto con nosotros y te responderemos a la brevedad posible.",
     "calling": "Llamando...",
     "square": {
       "left": {
-        "title": "Envíenos un correo",
+        "title": "Env\u00edenos un correo",
         "email": {
-          "title": "Correo electrónico",
+          "title": "Correo electr\u00f3nico",
           "placeholder": "ejemplo@correo.com",
-          "error": "Ingrese un correo electrónico válido"
+          "error": "Ingrese un correo electr\u00f3nico v\u00e1lido"
         },
         "subject": {
           "title": "Asunto",
@@ -139,62 +145,72 @@
           "error": "El asunto es requerido"
         },
         "address": {
-          "title": "Dirección",
-          "placeholder": "Ingresa tu dirección completa",
-          "error": "La dirección es requerida"
+          "title": "Direcci\u00f3n",
+          "placeholder": "Ingresa tu direcci\u00f3n completa",
+          "error": "La direcci\u00f3n es requerida"
         },
         "phone": {
-          "title": "Tu teléfono",
-          "placeholder": "Ingresa tu número de teléfono",
-          "error": "El teléfono es requerido"
+          "title": "Tu tel\u00e9fono",
+          "placeholder": "Ingresa tu n\u00famero de tel\u00e9fono",
+          "error": "El tel\u00e9fono es requerido"
         },
         "message": {
           "title": "Mensaje",
-          "placeholder": "Escriba su mensaje aquí",
+          "placeholder": "Escriba su mensaje aqu\u00ed",
           "required": "El mensaje es requerido",
           "minlength": "El mensaje debe tener al menos 10 caracteres"
         },
         "button": "Enviar mensaje"
       },
       "right": {
-        "title": "Información de contacto",
-        "email": "Correo electrónico",
-        "phone": "Teléfono",
-        "address": "Dirección",
+        "title": "Informaci\u00f3n de contacto",
+        "email": "Correo electr\u00f3nico",
+        "phone": "Tel\u00e9fono",
+        "address": "Direcci\u00f3n",
         "button": "Haz clic para ver en Google Maps",
         "phone.hint": "Haz clic para contactar por WhatsApp",
+<<<<<<< HEAD
         "email.hint": "Haz clic para enviar un correo electrónico",
+=======
+        "email.hint": "Haz clic para enviar un correo electr\u00f3nico",
+        "scheduleButton": "Reservar Viaje"
+>>>>>>> 7aed881 (cambios de textos)
       }
     },
-    "noContactInfo": "No hay información de contacto disponible"
+    "noContactInfo": "No hay informaci\u00f3n de contacto disponible"
   },
   "footer": {
     "title": "Sitio desarrollado para",
     "copyright": "Shirkasoft. Todos los derechos reservados.",
-    "whatsapp": "Contáctanos por WhatsApp",
-    "email": "Envíanos un correo",
+    "whatsapp": "Cont\u00e1ctanos por WhatsApp",
+    "email": "Env\u00edanos un correo",
     "link": "Visita nuestra web",
+<<<<<<< HEAD
     "terms": "Términos y Condiciones",
+=======
+    "bookings": "Reservas",
+    "terms": "T\u00e9rminos y Condiciones",
+>>>>>>> 7aed881 (cambios de textos)
     "column": {
       "left": {
         "first": "En",
-        "second": "nos especializamos en masajes terapéuticos, relajantes y de bienestar, diseñados para aliviar el estrés, mejorar la circulación y recuperar tu equilibrio físico y mental.",
+        "second": "nos especializamos en crear experiencias de viaje inolvidables \u2014 desde escapadas relajantes en la playa hasta emocionantes aventuras culturales, dise\u00f1adas para inspirarte y renovarte.",
         "third": "Agradecemos especialmente a",
-        "fourth": "por el desarrollo y diseño de nuestro sitio web, ¡su excelente trabajo nos conecta mejor contigo!"
+        "fourth": "por el desarrollo y dise\u00f1o de nuestro sitio web, \u00a1su excelente trabajo nos conecta mejor contigo!"
       },
       "center": {
-        "title": "Enlaces Rápidos",
+        "title": "Enlaces R\u00e1pidos",
         "first": "Inicio",
         "second": "Sobre Nosotros",
         "third": "Lo que ofrecemos",
         "fourth": "Contactar"
       },
-      "right": "Contáctenos",
+      "right": "Cont\u00e1ctenos",
       "social": {
         "title": "Nuestras Redes"
       }
     },
-    "noContactInfo": "No hay información de contactos disponible",
+    "noContactInfo": "No hay informaci\u00f3n de contactos disponible",
     "noSocialNetworks": "No hay redes sociales disponibles"
   },
   "chat": {
@@ -203,25 +219,25 @@
     "close": "Cerrar chat",
     "open": "Abrir chat",
     "welcome": {
-      "title": "¡Hola! Soy Shirka 🦾",
-      "subtitle": "¿En qué puedo ayudarte hoy?",
-      "button": "Iniciar conversación",
-      "message": "¡Hola! Soy Shirka, tu asistente virtual. Bienvenido a BnB, el mejor servicio a domicilio de masajes terapéuticos en Miami. ¿En qué puedo ayudarte hoy?"
+      "title": "\u00a1Hola! Soy Shirka \ud83e\uddbe",
+      "subtitle": "\u00bfEn qu\u00e9 puedo ayudarte hoy?",
+      "button": "Iniciar conversaci\u00f3n",
+      "message": "\u00a1Hola! Soy Shirka, tu asistente virtual. Bienvenido a Touch Coral, tu agencia de viajes de confianza. \u00bfEn qu\u00e9 puedo ayudarte a planificar tu pr\u00f3xima aventura hoy?"
     },
-    "user": "Tú",
+    "user": "T\u00fa",
     "botName": "Shirka",
     "input": {
       "placeholder": "Escribe tu mensaje..."
     },
     "clear": "Limpiar chat",
     "bot": {
-      "response": "Gracias por tu mensaje: \"{{message}}\". Soy un asistente en desarrollo, pero estoy aquí para ayudarte."
+      "response": "Gracias por tu mensaje: \"{{message}}\". Soy un asistente en desarrollo, pero estoy aqu\u00ed para ayudarte."
     }
   },
   "common": {
     "contact": "Contactar",
     "scrollTop": "Ir arriba",
-    "updateAvailable": "Nueva versión disponible - Actualizar",
+    "updateAvailable": "Nueva versi\u00f3n disponible - Actualizar",
     "loading": "Cargando...",
     "videoNotSupported": "Tu navegador no soporta la etiqueta de video.",
     "fullscreen": "Ver en pantalla completa",
@@ -232,37 +248,50 @@
     "nextImage": "Imagen siguiente",
     "close": "Cerrar"
   },
+<<<<<<< HEAD
 
+=======
+  "bookings": {
+    "title": "Reserva tu Viaje",
+    "subtitle": "Selecciona el destino que deseas y reserva tu viaje de manera f\u00e1cil y r\u00e1pida.",
+    "variants": "Opciones",
+    "bookNow": "Reservar Ahora",
+    "noServices": "No hay paquetes disponibles",
+    "noServicesText": "En este momento no tenemos paquetes de viaje disponibles para mostrar.",
+    "scheduling": "Reservar Viaje",
+    "goBack": "Volver"
+  },
+>>>>>>> 7aed881 (cambios de textos)
   "terms": {
-    "title": "Términos y Condiciones",
-    "lastUpdated": "Última actualización",
+    "title": "T\u00e9rminos y Condiciones",
+    "lastUpdated": "\u00daltima actualizaci\u00f3n",
     "footer": "Todos los derechos reservados",
-    "loading": "Traduciendo términos y condiciones..."
+    "loading": "Traduciendo t\u00e9rminos y condiciones..."
   },
   "socialNetworks": {
     "whatsapp": {
       "hint": "Haz clic para enviar un mensaje por WhatsApp"
     },
     "facebook": {
-      "hint": "Visítanos en Facebook"
+      "hint": "Vis\u00edtanos en Facebook"
     },
     "instagram": {
-      "hint": "Síguenos en Instagram"
+      "hint": "S\u00edguenos en Instagram"
     },
     "tiktok": {
       "hint": "Visita nuestro TikTok"
     },
     "x": {
-      "hint": "Síguenos en X"
+      "hint": "S\u00edguenos en X"
     },
     "telegram": {
-      "hint": "Únete a nuestro canal de Telegram"
+      "hint": "\u00danete a nuestro canal de Telegram"
     },
     "linkedin": {
-      "hint": "Conéctate con nosotros en LinkedIn"
+      "hint": "Con\u00e9ctate con nosotros en LinkedIn"
     },
     "youtube": {
-      "hint": "Suscríbete a nuestro canal de YouTube"
+      "hint": "Suscr\u00edbete a nuestro canal de YouTube"
     },
     "default": {
       "label": "Red Social",

@@ -7,7 +7,7 @@ export const TERMS_DATA: TermsItem[] = [
   {
     title: 'Scope of Services',
     content:
-      'Our in-home massage services are professional therapeutic interventions and do not substitute medical advice or care.',
+      'Our travel agency services include trip planning, booking, and travel consultancy. We do not act as a carrier and are not liable for services provided by third-party providers such as airlines, hotels, or tour operators.',
   },
   {
     title: 'Client Confidentiality',
@@ -17,27 +17,27 @@ export const TERMS_DATA: TermsItem[] = [
   {
     title: 'Liability Limitation',
     content:
-      'Breeze & Balance Therapies is not liable for any injury or condition arising from incorrect use of the service or failure to disclose health concerns by the client.',
+      'Touch Coral Travels is not liable for any loss, injury, or damages arising from events beyond our control, including but not limited to natural disasters, flight cancellations, or personal health issues during travel.',
   },
   {
     title: 'Deposit Requirement',
     content:
-      'A deposit is required at the time of booking to secure your appointment.',
+      'A deposit is required at the time of booking to secure your reservation.',
   },
   {
     title: 'Cancellation Policy',
     content:
-      'Cancellations must be made at least 2 hours prior to the appointment to avoid any charges. Late cancellations will result in a full charge of the service.',
+      'Cancellations must be made at least 48 hours prior to departure to avoid any charges. Late cancellations will result in a full charge of the package price.',
   },
   {
-    title: 'Consent Form',
+    title: 'Travel Documents',
     content:
-      'All clients must sign a consent form prior to the session, acknowledging the nature of the service, health responsibilities, and booking terms.',
+      'All clients are responsible for ensuring they have valid passports, visas, and any other required travel documents before departure.',
   },
   {
-    title: 'Service Area Disclosure',
+    title: 'Service Area',
     content:
-      'We provide in-home services in Miami-Dade County and Broward County, with additional fees for distance in Broward.',
+      'We offer travel packages worldwide, with departures available from Miami-Dade County and Broward County.',
   },
   {
     title: 'Data Protection',
