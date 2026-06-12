@@ -164,10 +164,7 @@
         "button": "Click to view on Google Maps",
         "email.hint": "Click to send an email",
         "phone.hint": "Click to contact via WhatsApp",
-<<<<<<< HEAD
-=======
         "scheduleButton": "Book a Trip"
->>>>>>> 7aed881 (cambios de textos)
       }
     },
     "noContactInfo": "No contact information available"
@@ -236,8 +233,6 @@
     "nextImage": "Next image",
     "close": "Close"
   },
-<<<<<<< HEAD
-=======
   "bookings": {
     "title": "Book Your Trip",
     "subtitle": "Select the destination you want and book your trip easily and quickly.",
@@ -248,7 +243,6 @@
     "scheduling": "Book Trip",
     "goBack": "Go Back"
   },
->>>>>>> 7aed881 (cambios de textos)
   "terms": {
     "title": "Terms and Conditions",
     "lastUpdated": "Last updated",

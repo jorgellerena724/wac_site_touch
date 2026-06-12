@@ -83,14 +83,9 @@
     "nodata.category": "No hay destinos disponibles en esta categor\u00eda.",
     "seedetails": "Ver Detalles",
     "details": "Detalles",
-<<<<<<< HEAD
-    "info": "Solicitar información",
-    "swipe": "← Desliza para ver más categorías →"
-=======
     "info": "Solicitar informaci\u00f3n",
     "swipe": "\u2190 Desliza para ver m\u00e1s categor\u00edas \u2192",
     "scheduleAppointment": "Reserva ya"
->>>>>>> 7aed881 (cambios de textos)
   },
   "appointment": {
     "cancel": "Cancelar",
@@ -169,12 +164,8 @@
         "address": "Direcci\u00f3n",
         "button": "Haz clic para ver en Google Maps",
         "phone.hint": "Haz clic para contactar por WhatsApp",
-<<<<<<< HEAD
-        "email.hint": "Haz clic para enviar un correo electrónico",
-=======
         "email.hint": "Haz clic para enviar un correo electr\u00f3nico",
         "scheduleButton": "Reservar Viaje"
->>>>>>> 7aed881 (cambios de textos)
       }
     },
     "noContactInfo": "No hay informaci\u00f3n de contacto disponible"
@@ -185,12 +176,8 @@
     "whatsapp": "Cont\u00e1ctanos por WhatsApp",
     "email": "Env\u00edanos un correo",
     "link": "Visita nuestra web",
-<<<<<<< HEAD
-    "terms": "Términos y Condiciones",
-=======
     "bookings": "Reservas",
     "terms": "T\u00e9rminos y Condiciones",
->>>>>>> 7aed881 (cambios de textos)
     "column": {
       "left": {
         "first": "En",
@@ -248,9 +235,6 @@
     "nextImage": "Imagen siguiente",
     "close": "Cerrar"
   },
-<<<<<<< HEAD
-
-=======
   "bookings": {
     "title": "Reserva tu Viaje",
     "subtitle": "Selecciona el destino que deseas y reserva tu viaje de manera f\u00e1cil y r\u00e1pida.",
@@ -261,7 +245,6 @@
     "scheduling": "Reservar Viaje",
     "goBack": "Volver"
   },
->>>>>>> 7aed881 (cambios de textos)
   "terms": {
     "title": "T\u00e9rminos y Condiciones",
     "lastUpdated": "\u00daltima actualizaci\u00f3n",
