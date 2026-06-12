@@ -572,7 +572,7 @@ export class HomeStateService implements OnDestroy {
   // MÉTODO PARA OBTENER IMAGEN POR DEFECTO
   getDefaultImageUrl(): string {
     const timestamp = Date.now();
-    return `${environment.imgPath}img_default.webp?no-cache=${timestamp}`;
+    return `${environment.imgPath}img_default.jpg?no-cache=${timestamp}`;
   }
 
   private buildImageUrl(photoName: string): string {
@@ -620,7 +620,7 @@ export class HomeStateService implements OnDestroy {
     if (!url || url.trim() === '') {
       return true;
     }
-    return url.includes('img_default.webp');
+    return url.includes('img_default.jpg');
   }
 
   // Helper para obtener extensión de archivo

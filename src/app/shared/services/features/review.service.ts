@@ -26,7 +26,7 @@ export class ReviewService {
   }
 
   getImageUrl(name: string): string {
-    if (!name) return `${this.localImgPath}img_default.webp`;
+    if (!name) return `${this.localImgPath}img_default.jpg`;
 
     return `${this.localImgPath}${name}`;
   }

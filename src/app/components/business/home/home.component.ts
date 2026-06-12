@@ -58,7 +58,7 @@ export class HomeComponent {
 
   // ===== CONSTANTES =====
   private readonly SCROLL_AMOUNT = 300;
-  private readonly DEFAULT_IMAGE = `${environment.imgPath}img_default.webp`;
+  private readonly DEFAULT_IMAGE = `${environment.imgPath}img_default.jpg`;
 
   // ===== SIGNALS DEL CARRUSEL (HOME) =====
   readonly carouselData = this.homeState.carouselWithImages$;

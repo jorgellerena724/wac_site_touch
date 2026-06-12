@@ -69,7 +69,7 @@ export class HeaderService {
   // Obtener URL de imagen
   getImageUrl(name: string | null | undefined): string {
     if (!name || name.trim() === '') {
-      return `${this.localImgPath}img_default.webp`;
+      return `${this.localImgPath}img_default.jpg`;
     }
     return `${this.localImgPath}${name}`;
   }
