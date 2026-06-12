@@ -1,4 +1,4 @@
-const apiUrl = 'https://api.shirkasoft.net/api/';
+const apiUrl = 'https://wacsiteapi.shirkasoft.net/api/';
 const imgPath = `/assets/img/`;
 
 export const environment = {
