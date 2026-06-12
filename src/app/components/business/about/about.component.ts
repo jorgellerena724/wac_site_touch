@@ -274,7 +274,7 @@ export class AboutComponent {
   readonly zoomedMediaTitle = signal<string>('');
 
   // Constantes
-  protected readonly DEFAULT_IMAGE = `${environment.imgPath}img_default.jpg`;
+  protected readonly DEFAULT_IMAGE = `${environment.imgPath}img_default.webp`;
   protected readonly path = environment.imgPath;
 
   constructor() {

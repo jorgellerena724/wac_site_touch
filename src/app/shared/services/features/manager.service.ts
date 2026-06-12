@@ -35,13 +35,13 @@ export class ManagerService {
   }
 
   getDefaultImageUrl(): string {
-    return `${this.localImgPath}users_default.jpg`;
+    return `${this.localImgPath}users_default.webp`;
   }
 
   isDefaultImage(url: string | null | undefined): boolean {
     if (!url || url.trim() === '') {
       return true;
     }
-    return url.includes('users_default.jpg');
+    return url.includes('users_default.webp');
   }
 }
