@@ -14,11 +14,6 @@
     "phone_label": "Phone",
     "message_label": "Message"
   },
-  "calendar": {
-    "loading": "Loading calendar...",
-    "retry": "Retry",
-    "directUrl": "Open in Cal.com"
-  },
   "navbar": {
     "about": "About",
     "contact": "Contact",
@@ -89,8 +84,7 @@
     "seedetails": "See Details",
     "details": "Details",
     "info": "Request information",
-    "swipe": "← Swipe to see more categories →",
-    "scheduleAppointment": "Book now"
+    "swipe": "← Swipe to see more categories →"
   },
   "appointment": {
     "cancel": "Cancel",
@@ -170,7 +164,6 @@
         "button": "Click to view on Google Maps",
         "email.hint": "Click to send an email",
         "phone.hint": "Click to contact via WhatsApp",
-        "scheduleButton": "Schedule Appointment"
       }
     },
     "noContactInfo": "No contact information available"
@@ -181,7 +174,6 @@
     "whatsapp": "Contact us via WhatsApp",
     "email": "Send us an email",
     "link": "Visit our website",
-    "bookings": "Bookings",
     "terms": "Terms & Conditions",
     "column": {
       "left": {
@@ -239,16 +231,6 @@
     "previousImage": "Previous image",
     "nextImage": "Next image",
     "close": "Close"
-  },
-  "bookings": {
-    "title": "Book Your Appointment",
-    "subtitle": "Select the service you want and schedule your appointment easily and quickly.",
-    "variants": "Options",
-    "bookNow": "Book Now",
-    "noServices": "No products available",
-    "noServicesText": "We currently have no products available to display.",
-    "scheduling": "Schedule Appointment",
-    "goBack": "Go Back"
   },
   "terms": {
     "title": "Terms and Conditions",

@@ -12,15 +12,10 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 import { environment } from '../environments/environment';
-import { CalcomService } from './shared/services/system/calcom.service';
 import { MetricsService } from './shared/services/system/metrics.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAppInitializer(() => {
-      const calcomService = inject(CalcomService);
-      return calcomService.loadScript().catch(() => {});
-    }),
     provideAppInitializer(() => {
       const metricsSrv = inject(MetricsService);
       if (metricsSrv.hasTrackedVisit()) return;

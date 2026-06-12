@@ -14,11 +14,6 @@
     "phone_label": "Teléfono",
     "message_label": "Mensaje"
   },
-  "calendar": {
-    "loading": "Cargando calendario...",
-    "retry": "Reintentar",
-    "directUrl": "Abrir en Cal.com"
-  },
   "navbar": {
     "about": "Quiénes Somos",
     "contact": "Contactar",
@@ -89,8 +84,7 @@
     "seedetails": "Ver Detalles",
     "details": "Detalles",
     "info": "Solicitar información",
-    "swipe": "← Desliza para ver más categorías →",
-    "scheduleAppointment": "Reserva ya"
+    "swipe": "← Desliza para ver más categorías →"
   },
   "appointment": {
     "cancel": "Cancelar",
@@ -170,7 +164,6 @@
         "button": "Haz clic para ver en Google Maps",
         "phone.hint": "Haz clic para contactar por WhatsApp",
         "email.hint": "Haz clic para enviar un correo electrónico",
-        "scheduleButton": "Agendar Cita"
       }
     },
     "noContactInfo": "No hay información de contacto disponible"
@@ -181,7 +174,6 @@
     "whatsapp": "Contáctanos por WhatsApp",
     "email": "Envíanos un correo",
     "link": "Visita nuestra web",
-    "bookings": "Reservas",
     "terms": "Términos y Condiciones",
     "column": {
       "left": {
@@ -240,16 +232,7 @@
     "nextImage": "Imagen siguiente",
     "close": "Cerrar"
   },
-  "bookings": {
-    "title": "Reserva tu Cita",
-    "subtitle": "Selecciona el servicio que deseas y agenda tu cita de manera fácil y rápida.",
-    "variants": "Opciones",
-    "bookNow": "Reservar Ahora",
-    "noServices": "No hay productos disponibles",
-    "noServicesText": "En este momento no tenemos productos disponibles para mostrar.",
-    "scheduling": "Programar Cita",
-    "goBack": "Volver"
-  },
+
   "terms": {
     "title": "Términos y Condiciones",
     "lastUpdated": "Última actualización",

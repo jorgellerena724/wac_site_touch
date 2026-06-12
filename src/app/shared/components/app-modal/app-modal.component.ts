@@ -14,7 +14,6 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ModalService, ModalConfig } from '../../services/system/modal.service';
 import { NotificationService } from '../../services/system/notification.service';
 import { DynamicComponent } from '../../interfaces/dynamic.interface';
-import { CalcomComponent } from '../app-calcom/app-calcom.component';
 
 @Component({
   selector: 'app-modal',
@@ -97,10 +96,6 @@ export class ModalComponent {
       // Manejar eventos del componente dinámico
       this.setupDynamicComponentEvents();
 
-      // Fix específico para Calcom: forzar detección de cambios inicial
-      if (this.componentRef.instance instanceof CalcomComponent) {
-        this.componentRef.changeDetectorRef.detectChanges();
-      }
     } catch (error) {
       this.closeModal();
     }
@@ -181,26 +176,14 @@ export class ModalComponent {
 
   // Helpers de Estilo (Actualizados para Signals)
   getModalSizeClass(): string {
-    const component = this.currentConfig()?.component;
-    if (component === CalcomComponent) {
-      return 'w-full max-w-lg sm:max-w-4xl lg:max-w-7xl xl:max-w-[95vw]';
-    }
     return 'w-full max-w-lg sm:max-w-4xl';
   }
 
   getModalHeightClass(): string {
-    const component = this.currentConfig()?.component;
-    if (component === CalcomComponent) {
-      return 'max-h-[98vh]';
-    }
     return 'max-h-[95vh] sm:max-h-[90vh]';
   }
 
   getContentMaxHeight(): string {
-    const component = this.currentConfig()?.component;
-    if (component === CalcomComponent) {
-      return 'calc(98vh - 120px)';
-    }
     return 'max-h-[70vh]'; // Ajustado para mejor UX general
   }
 

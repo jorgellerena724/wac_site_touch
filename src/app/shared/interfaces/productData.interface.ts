@@ -13,7 +13,6 @@ export interface ProductData {
   mediaType?: 'image' | 'video';
   files?: ProductImage[];
   variants: ProductVariant[];
-  cal_url?: string;
   imageLoaded: boolean;
 }
 

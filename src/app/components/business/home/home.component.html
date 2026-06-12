@@ -539,36 +539,6 @@
 
                           <!-- Botones de acción siempre en la parte inferior -->
                           <div class="flex flex-wrap gap-4 flex-shrink-0">
-                            @if (
-                              product.cal_url && product.cal_url.trim() !== ""
-                            ) {
-                              <button
-                                (click)="
-                                  showProductDetails(product);
-                                  openBookingModal(
-                                    getCardSelectedVariant(product)
-                                  )
-                                "
-                                class="inline-flex items-center gap-2 bg-accent text-white text-sm font-bold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none group"
-                              >
-                                {{ "products.scheduleAppointment" | transloco }}
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  class="h-5 w-5 group-hover:scale-110 transition-transform duration-300"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  stroke-width="2"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  />
-                                </svg>
-                              </button>
-                            }
-
                             @if (hasImageToShow(product)) {
                               <button
                                 (click)="

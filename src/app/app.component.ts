@@ -21,7 +21,6 @@ import { NotificationComponent } from './shared/components/app-notification/app-
 import { TranslocoModule } from '@jsverse/transloco';
 import { ChatWidgetComponent } from './shared/components/chat-widget/chat-widget.component';
 import { ModalComponent } from './shared/components/app-modal/app-modal.component';
-import { CalcomService } from './shared/services/system/calcom.service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -43,7 +42,6 @@ export class AppComponent {
   // Inyección moderna sin @Inject
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly calcomService = inject(CalcomService);
   private readonly injector = inject(Injector);
 
   // ViewChild moderna con signal
@@ -66,17 +64,9 @@ export class AppComponent {
   });
 
   constructor() {
-    // Precargar Cal.com script en el inicio de la app
     if (this.isBrowser) {
       afterNextRender(
         () => {
-          // Precargar después de 2 segundos para no afectar el inicio
-          setTimeout(() => {
-            this.calcomService.loadScript().catch(() => {
-              // Silenciar errores de precarga
-            });
-          }, 2000);
-
           // Verificar actualizaciones al cargar la app
           this.checkForUpdates();
 

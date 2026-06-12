@@ -25,9 +25,7 @@ import { HomeStateService } from '../../../shared/services/features/home-state.s
 import { ReviewService } from '../../../shared/services/features/review.service';
 import {
   ModalService,
-  ModalConfig,
 } from '../../../shared/services/system/modal.service';
-import { CalcomComponent } from '../../../shared/components/app-calcom/app-calcom.component';
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
 import { BorderBeamDirective } from '../../../shared/directives/border-beam.directive';
@@ -922,37 +920,6 @@ export class HomeComponent {
     this.isProductTitleExpanded.update((expanded) => !expanded);
   }
 
-  // ===== BOOKING =====
-  openBookingModal(cardVariant?: ProductVariant | null): void {
-    const product = this.selectedProduct();
-    const variant = cardVariant ?? this.selectedVariant();
-
-    if (!product || !variant) return;
-
-    const baseCalUrl = product.cal_url;
-    const dynamicCalUrl = this.getCalUrlForVariant(
-      baseCalUrl ?? '',
-      variant.description,
-    );
-
-    const scheduleText = this.translocoService.translate(
-      'products.scheduleAppointment',
-    );
-
-    const modalConfig: ModalConfig = {
-      title: `${scheduleText} - ${product.title}`,
-      component: CalcomComponent,
-      data: {
-        calUrl: dynamicCalUrl,
-        initialVariant: variant,
-        initialVariantIndex: this.selectedVariantIndex(),
-      },
-      showButtons: false,
-    };
-
-    this.modalService.open(modalConfig);
-  }
-
   // ===== SETUP PARA ESCAPE =====
   private setupModalEscapeEffect(): void {
     effect(() => {
@@ -1185,20 +1152,6 @@ export class HomeComponent {
     return (
       this.cardVariantScrollStates().get(productId)?.canScrollRight ?? true
     );
-  }
-
-  private toCalSlug(description: string): string {
-    return description
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, '-') // espacios → guiones
-      .replace(/[^a-z0-9-]/g, ''); // quitar caracteres especiales
-  }
-
-  getCalUrlForVariant(calUrl: string, variantDescription: string): string {
-    if (!calUrl || !variantDescription) return calUrl;
-    const slug = this.toCalSlug(variantDescription);
-    return `${calUrl}-${slug}`;
   }
 
   // ===== MÉTODOS DE RESEÑAS =====
