@@ -248,7 +248,6 @@ export class AboutTeamComponent {
     CommonModule,
     AboutTeamComponent,
     ScrollRevealDirective,
-    BorderBeamDirective,
   ],
   templateUrl: './about.component.html',
 })

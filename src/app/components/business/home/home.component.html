@@ -3,7 +3,7 @@
   @if (showCarouselSkeleton()) {
     <!-- Skeleton del Carrusel -->
     <div
-      class="relative w-full h-[350px] sm:h-[500px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15)]"
+      class="relative w-full h-[450px] sm:h-[550px] lg:h-[650px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15)]"
     >
       <div
         class="w-full h-full bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 skeleton-shimmer"
@@ -69,7 +69,7 @@
     <!-- Carrusel Real -->
     @if (carouselData().length > 0) {
       <div
-        class="relative w-full h-[350px] sm:h-[500px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
+        class="relative w-full h-[450px] sm:h-[550px] lg:h-[650px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
       >
         <div class="w-full h-full">
           <div class="carrousel-container relative h-full" #carouselSection>
@@ -113,7 +113,7 @@
                         />
                       }
                       <div
-                        class="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/70 to-transparent opacity-90"
+                        class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"
                       ></div>
                     </div>
                     <div
@@ -289,7 +289,7 @@
                         #productVideo
                         [src]="getCardImageUrl(product)"
                         [title]="product.title"
-                        class="w-full h-full object-cover brightness-90 rounded-2xl"
+                        class="w-full h-full object-cover rounded-2xl"
                         (error)="handleVideoError($event)"
                         (loadedmetadata)="forceVideoMute($event)"
                         muted
@@ -304,23 +304,21 @@
                         [src]="getCardImageUrl(product)"
                         [alt]="product.title"
                         loading="lazy"
-                        class="w-full h-full object-cover brightness-90 transition-transform duration-700 hover:scale-105 rounded-2xl"
+                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105 rounded-2xl"
                         (error)="onImageError($event)"
                       />
                     }
                   }
                 </div>
 
-                <!-- Overlay con gradiente según posición -->
+                <!-- Overlay sutil solo en el lado del contenido -->
                 @if (i % 2 === 0) {
-                  <!-- Imagen izquierda, contenido derecha - gradiente de izq a der -->
                   <div
-                    class="absolute inset-0 bg-gradient-to-r from-white/70 to-white/95 pointer-events-none"
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/40 pointer-events-none"
                   ></div>
                 } @else {
-                  <!-- Imagen derecha, contenido izquierda - gradiente de der a izq -->
                   <div
-                    class="absolute inset-0 bg-gradient-to-l from-white/70 to-white/95 pointer-events-none"
+                    class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/40 pointer-events-none"
                   ></div>
                 }
 
