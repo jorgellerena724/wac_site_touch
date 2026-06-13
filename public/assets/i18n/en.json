@@ -1,10 +1,15 @@
 {
   "notifications": {
     "success": {
-      "message_sent": "Message sent successfully"
+      "message_sent": "Message sent successfully",
+      "testimonial_sent": "Thank you for your testimonial!"
     },
     "error": {
-      "email_failed": "Error sending email."
+      "email_failed": "Error sending email.",
+      "name_required": "Please enter your name",
+      "message_required": "Please write your testimonial",
+      "rating_required": "Please select a rating",
+      "testimonial_failed": "There was an error sending your testimonial. Please try again."
     }
   },
   "whatsapp": {

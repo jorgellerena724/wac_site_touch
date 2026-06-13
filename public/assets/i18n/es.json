@@ -1,10 +1,15 @@
 {
   "notifications": {
     "success": {
-      "message_sent": "Mensaje enviado correctamente"
+      "message_sent": "Mensaje enviado correctamente",
+      "testimonial_sent": "¡Gracias por tu testimonio!"
     },
     "error": {
-      "email_failed": "Error al enviar el correo."
+      "email_failed": "Error al enviar el correo.",
+      "name_required": "Por favor ingresa tu nombre",
+      "message_required": "Por favor escribe tu testimonio",
+      "rating_required": "Por favor selecciona una calificación",
+      "testimonial_failed": "Hubo un error al enviar tu testimonio. Intenta de nuevo."
     }
   },
   "whatsapp": {
