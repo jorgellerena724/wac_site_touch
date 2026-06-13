@@ -134,7 +134,7 @@
                         </div>
                         <div class="description-container mt-2 sm:mt-4">
                           <p
-                            class="font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-primary-light leading-relaxed sm:leading-relaxed lg:leading-loose h-16 sm:h-32 lg:h-40 overflow-y-auto pr-2 custom-scrollbar drop-shadow-lg whitespace-pre-line slide-in-description"
+                            class="font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-teal-50 leading-relaxed sm:leading-relaxed lg:leading-loose h-16 sm:h-32 lg:h-40 overflow-y-auto pr-2 custom-scrollbar drop-shadow-lg whitespace-pre-line slide-in-description"
                             [class.opacity-100]="currentSlide() === i"
                             [class.opacity-0]="currentSlide() !== i"
                           >
@@ -149,12 +149,12 @@
               </div>
             }
             <button
-              class="prev absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white text-primary border border-primary rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
+              class="prev absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
               (click)="prevSlide()"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 left-arrow-bounce text-primary"
+                class="h-6 w-6 left-arrow-bounce text-teal-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -168,12 +168,12 @@
               </svg>
             </button>
             <button
-              class="next absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white text-primary border border-primary rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
+              class="next absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
               (click)="nextSlide()"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 right-arrow-bounce text-primary"
+                class="h-6 w-6 right-arrow-bounce text-teal-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -198,7 +198,7 @@
                   class="w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 hover:scale-125"
                   [ngClass]="{
                     'bg-white shadow-lg': currentSlide() === i,
-                    'bg-surface-light bg-opacity-60 hover:bg-opacity-80':
+                    'bg-amber-50 bg-opacity-60 hover:bg-opacity-80':
                       currentSlide() !== i,
                   }"
                   (click)="goToSlide(i)"
@@ -216,13 +216,11 @@
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <!-- Header (carga inmediata ya que es crítico) -->
       <div class="text-center mb-4 animate-slide-down-on-load relative">
-
-
         <h1
-          class="text-4xl font-extrabold text-primary sm:text-5xl leading-tight drop-shadow-sm relative z-10"
+          class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
         >
           {{ "products.title.first" | transloco }}
-          <span class="text-primary-dark">{{
+          <span class="text-teal-800">{{
             "products.title.second" | transloco
           }}</span>
         </h1>
@@ -236,7 +234,7 @@
           <div class="mt-6 flex justify-center relative z-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-primary/75 animate-bounce cursor-pointer hover:text-primary transition-colors duration-300"
+              class="h-8 w-8 text-teal-600/75 animate-bounce cursor-pointer hover:text-teal-600 transition-colors duration-300"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -258,7 +256,6 @@
         @if (filteredProducts().length > 0) {
           <!-- Contenedor de productos con efecto de hojas suaves -->
           <div class="relative">
-
             <!-- Secciones Spotlight de Productos -->
             @for (
               product of filteredProducts();
@@ -268,14 +265,14 @@
               <!-- Borde divisorio entre productos (excepto antes del primero) -->
               @if (i > 0) {
                 <div
-                  class="border-t-2 border-surface border-opacity-40 mb-8"
+                  class="border-t-2 border-amber-300 border-opacity-40 mb-8"
                 ></div>
               }
 
               <!-- Sección Spotlight - Alterna entre right (imagen izq) y left (imagen der) -->
               <section
                 [id]="'product-' + i"
-                class="relative min-h-[600px] flex items-center overflow-hidden bg-white mb-8 rounded-2xl shadow-[0_0_20px_rgba(28, 119, 144,0.15),_0_0_40px_rgba(28, 119, 144,0.1)] border border-surface"
+                class="relative min-h-[600px] flex items-center overflow-hidden bg-white mb-8 rounded-2xl shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300"
                 appScrollReveal
                 [revealAnimation]="i % 2 === 0 ? 'slide-right' : 'slide-left'"
                 [revealDelay]="0"
@@ -355,7 +352,7 @@
                               <!-- Badge de categoría -->
                               <div class="mb-6">
                                 <span
-                                  class="inline-block text-primary text-lg lg:text-xl font-bold uppercase tracking-wider"
+                                  class="inline-block text-teal-600 text-lg lg:text-xl font-bold uppercase tracking-wider"
                                 >
                                   {{ getCategoryTitle(product.category) }}
                                 </span>
@@ -363,7 +360,7 @@
 
                               <!-- Título -->
                               <h2
-                                class="text-3xl lg:text-4xl xl:text-5xl font-light text-primary-dark leading-tight"
+                                class="text-3xl lg:text-4xl xl:text-5xl font-light text-teal-800 leading-tight"
                               >
                                 {{ product.title }}
                               </h2>
@@ -397,12 +394,12 @@
                                     [class.cursor-not-allowed]="
                                       !canScrollCardVariantsLeft(product.id)
                                     "
-                                    class="flex-shrink-0 bg-white text-primary border border-primary rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
+                                    class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
                                     aria-label="Scroll variants left"
                                   >
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
-                                      class="h-4 w-4 left-arrow-bounce text-primary"
+                                      class="h-4 w-4 left-arrow-bounce text-teal-600"
                                       fill="none"
                                       viewBox="0 0 24 24"
                                       stroke="currentColor"
@@ -443,16 +440,16 @@
                                           selectCardVariant(product, vi, $event)
                                         "
                                         [ngClass]="{
-                                          'bg-accent text-white shadow-md border-accent transform scale-105':
+                                          'bg-orange-400 text-white shadow-md border-orange-400 transform scale-105':
                                             getCardSelectedVariantIndex(
                                               product.id
                                             ) === vi,
-                                          'bg-white text-primary-dark hover:bg-primary-light border border-surface hover:border-surface':
+                                          'bg-white text-teal-800 hover:bg-teal-50 border border-amber-300 hover:border-amber-300':
                                             getCardSelectedVariantIndex(
                                               product.id
                                             ) !== vi,
                                         }"
-                                        class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 min-w-fit"
+                                        class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-opacity-50 min-w-fit"
                                       >
                                         {{ variant.description }}
                                       </button>
@@ -477,12 +474,12 @@
                                     [class.cursor-not-allowed]="
                                       !canScrollCardVariantsRight(product.id)
                                     "
-                                    class="flex-shrink-0 bg-white text-primary border border-primary rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
+                                    class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
                                     aria-label="Scroll variants right"
                                   >
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
-                                      class="h-4 w-4 right-arrow-bounce text-primary"
+                                      class="h-4 w-4 right-arrow-bounce text-teal-600"
                                       fill="none"
                                       viewBox="0 0 24 24"
                                       stroke="currentColor"
@@ -508,7 +505,7 @@
                                   }"
                                 >
                                   <p
-                                    class="text-2xl lg:text-3xl font-extrabold text-accent"
+                                    class="text-2xl lg:text-3xl font-extrabold text-orange-400"
                                   >
                                     {{
                                       getCardSelectedVariant(product)?.price ||
@@ -547,7 +544,7 @@
                                     product
                                   )
                                 "
-                                class="flex items-center justify-center bg-primary/10 backdrop-blur-sm border border-primary/20 hover:bg-primary/20 rounded-xl w-12 h-12 transition-all duration-300 outline-none"
+                                class="flex items-center justify-center bg-teal-600/10 backdrop-blur-sm border border-teal-600/20 hover:bg-teal-600/20 rounded-xl w-12 h-12 transition-all duration-300 outline-none"
                                 [title]="'common.zoomMedia' | transloco"
                                 [attr.aria-label]="
                                   'common.zoomMedia' | transloco
@@ -555,7 +552,7 @@
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
-                                  class="h-5 w-5 text-primary"
+                                  class="h-5 w-5 text-teal-600"
                                   fill="none"
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
@@ -587,7 +584,7 @@
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-8 w-8 text-primary/75 animate-bounce cursor-pointer hover:text-primary transition-colors duration-300"
+                      class="h-8 w-8 text-teal-600/75 animate-bounce cursor-pointer hover:text-teal-600 transition-colors duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -617,7 +614,7 @@
               width="100"
               height="100"
               fill="currentColor"
-              class="bi bi-emoji-tear text-surface mb-4 sm:mb-6 sm:w-32 sm:h-32 md:w-36 md:h-36 transform transition-all duration-700 ease-out"
+              class="bi bi-emoji-tear text-amber-300 mb-4 sm:mb-6 sm:w-32 sm:h-32 md:w-36 md:h-36 transform transition-all duration-700 ease-out"
               viewBox="0 0 16 16"
               [ngClass]="{
                 'scale-100 rotate-0': isNoDataIconLoaded(),
@@ -651,7 +648,7 @@
         <div class="bg-white py-16">
           @for (i of [1, 2, 3]; track i) {
             <section
-              class="relative min-h-[600px] flex items-center border-b border-surface animate-pulse mb-8"
+              class="relative min-h-[600px] flex items-center border-b border-amber-300 animate-pulse mb-8"
             >
               <div class="absolute inset-0 bg-gray-200"></div>
               <div class="relative z-10 w-full">
@@ -687,7 +684,7 @@
         <!-- Botón de cerrar -->
         <button
           (click)="closeMediaZoom()"
-          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-primary rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Cerrar"
         >
           <svg
@@ -710,7 +707,7 @@
         @if (hasMultipleMediaFiles()) {
           <button
             (click)="previousZoomedMedia(); $event.stopPropagation()"
-            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-primary rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Anterior"
           >
             <svg
@@ -734,7 +731,7 @@
         @if (hasMultipleMediaFiles()) {
           <button
             (click)="nextZoomedMedia(); $event.stopPropagation()"
-            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-primary rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Siguiente"
           >
             <svg
@@ -795,20 +792,19 @@
   <!-- Sección Línea de Productos -->
   <div
     #productsSection
-    class="products-container pt-4 pb-10 bg-white relative overflow-hidden border-t-2 border-surface border-opacity-40"
+    class="products-container pt-4 pb-10 bg-white relative overflow-hidden border-t-2 border-amber-300 border-opacity-40"
     [ngClass]="productsAnimationClass()"
   >
-
     <div class="w-full relative">
       <div class="text-center mb-16">
         <p
-          class="mt-6 text-4xl font-extrabold text-primary sm:text-5xl leading-tight drop-shadow-sm"
+          class="mt-6 text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm"
           appScrollReveal
           [revealAnimation]="'slide-up'"
           [revealDelay]="0"
         >
           {{ "home.products.subtitle.first" | transloco }}
-          <span class="text-primary-dark">{{
+          <span class="text-teal-800">{{
             "home.products.subtitle.second" | transloco
           }}</span>
         </p>
@@ -827,19 +823,19 @@
       >
         <div class="space-y-8 flex">
           <div
-            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(28, 119, 144,0.15),_0_0_40px_rgba(28, 119, 144,0.1)] border border-surface flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] transition-all duration-300"
+            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(13, 148, 136,0.25)] transition-all duration-300"
             appScrollReveal
             [revealAnimation]="'slide-left'"
             [revealDelay]="0"
             appBorderBeam
-            [beamColor]="'rgba(28, 119, 144, 0.5)'"
+            [beamColor]="'rgba(13, 148, 136, 0.5)'"
             [beamWidth]="'1.5px'"
             [beamDuration]="'6s'"
             [beamDelay]="'0s'"
           >
             <div class="flex items-center mb-6">
               <div
-                class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg"
+                class="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center shadow-lg"
               >
                 <svg
                   class="w-6 h-6 text-white"
@@ -855,7 +851,7 @@
                   ></path>
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-primary ml-4">
+              <h3 class="text-2xl font-bold text-teal-600 ml-4">
                 {{ "home.products.square.left.title" | transloco }}
               </h3>
             </div>
@@ -867,19 +863,19 @@
 
         <div class="space-y-8 flex">
           <div
-            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(28, 119, 144,0.15),_0_0_40px_rgba(28, 119, 144,0.1)] border border-surface flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] transition-all duration-300"
+            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(13, 148, 136,0.25)] transition-all duration-300"
             appScrollReveal
             [revealAnimation]="'slide-right'"
             [revealDelay]="100"
             appBorderBeam
-            [beamColor]="'rgba(28, 119, 144, 0.5)'"
+            [beamColor]="'rgba(13, 148, 136, 0.5)'"
             [beamWidth]="'1.5px'"
             [beamDuration]="'6s'"
             [beamDelay]="'1.5s'"
           >
             <div class="flex items-center mb-6">
               <div
-                class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center shadow-lg"
+                class="w-12 h-12 bg-orange-400 rounded-xl flex items-center justify-center shadow-lg"
               >
                 <svg
                   class="w-6 h-6 text-white"
@@ -895,7 +891,7 @@
                   ></path>
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-accent-dark ml-4">
+              <h3 class="text-2xl font-bold text-orange-500 ml-4">
                 {{ "home.products.square.right.title" | transloco }}
               </h3>
             </div>
@@ -911,14 +907,13 @@
   <!-- Sección de Reseñas -->
   @if (reviewsData().length > 0) {
     <section
-      class="bg-white py-16 overflow-x-hidden border-t-2 border-surface border-opacity-40"
+      class="bg-white py-16 overflow-x-hidden border-t-2 border-amber-300 border-opacity-40"
     >
       <div class="w-full px-4 sm:px-6 lg:px-8">
         <!-- Header de Reseñas -->
         <div class="text-center mb-12 relative">
-
           <h2
-            class="text-4xl font-extrabold text-primary sm:text-5xl leading-tight drop-shadow-sm relative z-10"
+            class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
             appScrollReveal
             [revealAnimation]="'slide-up'"
             [revealDelay]="0"
@@ -936,22 +931,43 @@
         </div>
 
         @if (reviewsData().length > 0) {
-          <div class="text-center mb-8" appScrollReveal [revealAnimation]="'slide-up'" [revealDelay]="150">
-            <div class="inline-flex items-center gap-3 bg-white border border-surface rounded-full px-6 py-2.5 shadow-[0_0_15px_rgba(28, 119, 144,0.1)] transition-all hover:shadow-[0_0_20px_rgba(28, 119, 144,0.15)] hover:border-surface">
+          <div
+            class="text-center mb-8"
+            appScrollReveal
+            [revealAnimation]="'slide-up'"
+            [revealDelay]="150"
+          >
+            <div
+              class="inline-flex items-center gap-3 bg-white border border-amber-300 rounded-full px-6 py-2.5 shadow-[0_0_15px_rgba(13, 148, 136,0.1)] transition-all hover:shadow-[0_0_20px_rgba(13, 148, 136,0.15)] hover:border-amber-300"
+            >
               <div class="flex items-center gap-1.5">
                 <svg class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20">
                   <defs>
                     <linearGradient id="avg-star-gradient">
-                      <stop [attr.offset]="(averageRating() / 5 * 100) + '%'" stop-color="currentColor"/>
-                      <stop [attr.offset]="(averageRating() / 5 * 100) + '%'" stop-color="#D1D5DB"/>
+                      <stop
+                        [attr.offset]="(averageRating() / 5) * 100 + '%'"
+                        stop-color="currentColor"
+                      />
+                      <stop
+                        [attr.offset]="(averageRating() / 5) * 100 + '%'"
+                        stop-color="#D1D5DB"
+                      />
                     </linearGradient>
                   </defs>
-                  <path fill="url(#avg-star-gradient)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  <path
+                    fill="url(#avg-star-gradient)"
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
                 </svg>
-                <span class="text-xl font-bold text-primary">{{ averageRating() }}</span>
+                <span class="text-xl font-bold text-teal-600">{{
+                  averageRating()
+                }}</span>
               </div>
-              <span class="text-surface">|</span>
-              <span class="text-slate-600 font-medium">{{ reviewsCount() }} {{ 'home.reviews.count' | transloco }}</span>
+              <span class="text-amber-300">|</span>
+              <span class="text-slate-600 font-medium"
+                >{{ reviewsCount() }}
+                {{ "home.reviews.count" | transloco }}</span
+              >
             </div>
           </div>
         }
@@ -976,9 +992,9 @@
                       [revealDelay]="i * 100"
                     >
                       <div
-                        class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(28, 119, 144,0.15),_0_0_40px_rgba(28, 119, 144,0.1)] border border-surface transition-all duration-300 hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] hover:border-surface w-full flex flex-col min-h-[280px]"
+                        class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 transition-all duration-300 hover:shadow-[0_0_30px_rgba(13, 148, 136,0.25)] hover:border-amber-300 w-full flex flex-col min-h-[280px]"
                         appBorderBeam
-                        [beamColor]="'rgba(28, 119, 144, 0.5)'"
+                        [beamColor]="'rgba(13, 148, 136, 0.5)'"
                         [beamWidth]="'1.5px'"
                         [beamDuration]="'6s'"
                         [beamDelay]="i * 1000 + 'ms'"
@@ -989,14 +1005,14 @@
                               @if (review.imageUrl) {
                                 <img
                                   [src]="getReviewImageUrl(review.imageUrl)"
-                                  class="h-12 w-12 rounded-full ring-2 ring-surface object-cover"
+                                  class="h-12 w-12 rounded-full ring-2 ring-amber-300 object-cover"
                                   [alt]="review.title"
                                   loading="lazy"
                                   (error)="handleImageError($event)"
                                 />
                               } @else {
                                 <div
-                                  class="h-12 w-12 rounded-full bg-primary flex items-center justify-center ring-2 ring-surface"
+                                  class="h-12 w-12 rounded-full bg-teal-600 flex items-center justify-center ring-2 ring-amber-300"
                                 >
                                   <svg
                                     class="w-6 h-6 text-white"
@@ -1011,7 +1027,9 @@
                               }
                             </div>
                             <div class="ml-4">
-                              <div class="text-base font-semibold text-primary">
+                              <div
+                                class="text-base font-semibold text-teal-600"
+                              >
                                 {{ review.title }}
                               </div>
                             </div>
@@ -1020,22 +1038,58 @@
                             <div class="flex mt-0.5">
                               <div class="flex items-center gap-0.5 ml-16">
                                 @for (star of [1, 2, 3, 4, 5]; track star) {
-                                  <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 20 20">
+                                  <svg
+                                    class="w-5 h-5 text-yellow-400"
+                                    viewBox="0 0 20 20"
+                                  >
                                     <defs>
-                                      <clipPath [id]="'clip-review-' + review.id + '-' + star">
-                                        <rect x="0" y="0" [attr.width]="getReviewStarWidth(star, review.star_rating)" height="20" />
+                                      <clipPath
+                                        [id]="
+                                          'clip-review-' +
+                                          review.id +
+                                          '-' +
+                                          star
+                                        "
+                                      >
+                                        <rect
+                                          x="0"
+                                          y="0"
+                                          [attr.width]="
+                                            getReviewStarWidth(
+                                              star,
+                                              review.star_rating
+                                            )
+                                          "
+                                          height="20"
+                                        />
                                       </clipPath>
                                     </defs>
 
                                     <!-- Estrella de fondo (vacía / gris) -->
-                                    <path class="text-gray-300" fill="currentColor" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    <path
+                                      class="text-gray-300"
+                                      fill="currentColor"
+                                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
 
                                     <!-- Estrella rellena (amarilla) encima con clipPath -->
-                                    <path fill="currentColor" [attr.clip-path]="'url(#clip-review-' + review.id + '-' + star + ')'" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    <path
+                                      fill="currentColor"
+                                      [attr.clip-path]="
+                                        'url(#clip-review-' +
+                                        review.id +
+                                        '-' +
+                                        star +
+                                        ')'
+                                      "
+                                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
                                   </svg>
                                 }
-                                <span class="text-xs font-semibold ml-1.5 text-slate-500">
-                                  ({{ review.star_rating | number: '1.1-1' }})
+                                <span
+                                  class="text-xs font-semibold ml-1.5 text-slate-500"
+                                >
+                                  ({{ review.star_rating | number: "1.1-1" }})
                                 </span>
                               </div>
                             </div>
@@ -1076,7 +1130,7 @@
                 @for (i of [1, 2, 3]; track i) {
                   <div class="flex">
                     <div
-                      class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(28, 119, 144,0.15),_0_0_40px_rgba(28, 119, 144,0.1)] border border-surface animate-pulse w-full flex flex-col min-h-[280px]"
+                      class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 animate-pulse w-full flex flex-col min-h-[280px]"
                     >
                       <div class="flex items-center flex-shrink-0">
                         <div
@@ -1111,7 +1165,7 @@
   }
 
   <!-- Sección para ir a contact o a about -->
-  <div class="bg-accent">
+  <div class="bg-orange-400">
     <div
       class="w-full py-10 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
       appScrollReveal
@@ -1132,7 +1186,7 @@
           <div>
             <a
               [routerLink]="['/contact']"
-              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-l-lg text-white bg-accent hover:bg-white hover:text-accent transition-all duration-300 hover:shadow-lg"
+              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-l-lg text-white bg-orange-400 hover:bg-white hover:text-orange-400 transition-all duration-300 hover:shadow-lg"
             >
               {{ "home.footer.leftbutton" | transloco }}
             </a>
@@ -1140,7 +1194,7 @@
           <div class="inline-flex rounded-md shadow-xl">
             <a
               [routerLink]="['/about']"
-              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-r-lg text-white bg-accent hover:bg-white hover:text-accent transition-all duration-300 hover:shadow-lg"
+              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-r-lg text-white bg-orange-400 hover:bg-white hover:text-orange-400 transition-all duration-300 hover:shadow-lg"
             >
               {{ "home.footer.rightbutton" | transloco }}
             </a>
@@ -1162,7 +1216,7 @@
         <!-- Botón de cerrar -->
         <button
           (click)="closeMediaZoom()"
-          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-primary rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Cerrar"
         >
           <svg
@@ -1185,7 +1239,7 @@
         @if (hasMultipleMediaFiles()) {
           <button
             (click)="previousZoomedMedia(); $event.stopPropagation()"
-            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-primary rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Anterior"
           >
             <svg
@@ -1209,7 +1263,7 @@
         @if (hasMultipleMediaFiles()) {
           <button
             (click)="nextZoomedMedia(); $event.stopPropagation()"
-            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-primary rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
+            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Siguiente"
           >
             <svg

@@ -4,7 +4,7 @@
       <div class="text-center mb-12">
         <div class="animate-slide-down-on-load">
           <h1
-            class="text-4xl font-extrabold text-primary sm:text-5xl leading-tight drop-shadow-sm"
+            class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm"
           >
             {{ "terms.title" | transloco }}
           </h1>
@@ -16,19 +16,21 @@
 
       @if (isTranslating()) {
         <div class="text-center py-12">
-          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div
+            class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"
+          ></div>
           <p class="mt-2 text-slate-500">{{ "terms.loading" | transloco }}</p>
         </div>
       }
 
       @if (!isTranslating()) {
         <div
-          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(28, 119, 144,0.15)] border border-surface animate-slide-in-from-right"
+          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15)] border border-amber-300 animate-slide-in-from-right"
         >
           <div class="prose prose-lg max-w-none">
             @for (item of termsData(); track item.title; let idx = $index) {
               <section class="mb-8">
-                <h2 class="text-2xl font-bold text-primary-dark mb-4">
+                <h2 class="text-2xl font-bold text-teal-800 mb-4">
                   {{ idx + 1 }}. {{ item.title }}
                 </h2>
                 <p class="text-slate-700 leading-relaxed">
@@ -79,5 +81,4 @@
     animation-delay: 0.3s;
     opacity: 0;
   }
-
 </style>
