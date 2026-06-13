@@ -65,32 +65,25 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="text-center">
             <h2
-              class="inline-block text-sm font-bold text-primary-dark tracking-wider uppercase bg-gradient-to-r from-primary-light to-accent-light px-4 py-2 rounded-full border border-surface"
+              class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="0"
             >
               {{ 'about.team.title' | transloco }}
+              <span class="text-teal-800">{{ 'about.team.subtitle' | transloco }}</span>
             </h2>
             <p
-              class="mt-4 text-3xl font-extrabold text-primary sm:text-4xl drop-shadow-sm"
+              class="mt-6 max-w-2xl text-xl text-slate-600 mx-auto leading-relaxed"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="100"
-            >
-              {{ 'about.team.subtitle' | transloco }}
-            </p>
-            <p
-              class="mt-4 max-w-2xl text-xl text-slate-600 mx-auto leading-relaxed"
-              appScrollReveal
-              [revealAnimation]="'slide-up'"
-              [revealDelay]="200"
             >
               {{ 'about.team.text' | transloco }}
             </p>
           </div>
 
-          <div class="mt-20 team-grid-container">
+          <div class="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             @for (
               manager of managerData();
               track trackByFn($index, manager);
@@ -126,7 +119,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                 <div class="mt-2">
                   <div class="flex items-center justify-center gap-2">
                     <h3
-                      class="text-xl font-semibold text-primary-dark transition-colors duration-300 group-hover:text-primary-dark"
+                      class="text-xl font-semibold text-teal-600 transition-colors duration-300 group-hover:text-teal-800"
                     >
                       {{ manager.title }}
                     </h3>
@@ -161,7 +154,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                     }
                   </div>
                   <div
-                    class="mt-1 inline-block px-3 py-1 bg-primary-light text-primary-dark rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-surface-light"
+                    class="mt-1 inline-block px-3 py-1 bg-amber-100 text-teal-600 rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-amber-200"
                   >
                     {{ manager.charge }}
                   </div>
