@@ -104,7 +104,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                   [beamDelay]="i * 0.6 + 's'"
                 >
                   <img
-                    [src]="getImageUrl(manager.imageUrl)"
+                    [src]="manager.imageUrl"
                     (error)="handleImageError($event)"
                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                     [alt]="manager.title"
