@@ -33,13 +33,10 @@
   <!-- Sección Datos de la Empresa -->
   @defer (on viewport) {
     @if (companyData().length > 0) {
-      <div #companySection>
+      <div #companySection class="py-12 sm:py-16 bg-slate-50/30 space-y-12 lg:space-y-16">
         @for (item of companyData(); track trackByFn(i, item); let i = $index) {
           <section
-            class="bg-white"
-            [ngClass]="{
-              'border-b-2 border-amber-300': i < companyData().length - 1,
-            }"
+            class="bg-white mx-4 sm:mx-6 lg:mx-auto max-w-7xl rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-amber-200 overflow-hidden"
             appScrollReveal
             [revealAnimation]="i % 2 === 0 ? 'slide-right' : 'slide-left'"
             [revealDelay]="0"
