@@ -49,18 +49,18 @@
               }"
             >
               <!-- Imagen (70%) -->
-              <div class="w-full lg:w-[70%]">
+              <div class="w-full lg:w-[70%] bg-slate-50 flex items-center justify-center">
                 @if (item.imageUrl) {
                   <img
                     [src]="item.imageUrl"
                     [alt]="item.title"
                     loading="lazy"
-                    class="w-full h-[500px] lg:h-[600px] object-cover"
+                    class="w-full h-[300px] sm:h-[450px] lg:h-[600px] object-contain"
                     (error)="handleImageError($event)"
                   />
                 } @else {
                   <div
-                    class="w-full h-[500px] lg:h-[600px] bg-gray-200 flex items-center justify-center"
+                    class="w-full h-[300px] sm:h-[450px] lg:h-[600px] bg-gray-200 flex items-center justify-center"
                   >
                     <span class="text-gray-400">Sin imagen</span>
                   </div>

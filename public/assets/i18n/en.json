@@ -2,14 +2,14 @@
   "notifications": {
     "success": {
       "message_sent": "Message sent successfully",
-      "testimonial_sent": "Thank you for your testimonial!"
+      "testimonial_sent": "Thank you for your review!"
     },
     "error": {
       "email_failed": "Error sending email.",
       "name_required": "Please enter your name",
-      "message_required": "Please write your testimonial",
+      "message_required": "Please write your review",
       "rating_required": "Please select a rating",
-      "testimonial_failed": "There was an error sending your testimonial. Please try again."
+      "testimonial_failed": "There was an error sending your review. Please try again."
     }
   },
   "whatsapp": {
@@ -50,15 +50,15 @@
     },
     "reviews": {
       "title": "What Our Travelers Say",
-      "subtitle": "Real Testimonials",
+      "subtitle": "Real Reviews",
       "text": "Our travelers' satisfaction is our greatest achievement and motivation.",
-      "nodata": "We don't have testimonials to show yet.",
+      "nodata": "We don't have reviews to show yet.",
       "count": "reviews"
     },
     "testimonial": {
       "form": {
         "title": "Share Your Experience",
-        "subtitle": "Your testimonial helps other travelers learn about the quality of our services",
+        "subtitle": "Your review helps other travelers learn about the quality of our services",
         "name": "Name",
         "name.placeholder": "Enter your full name",
         "rating": "Rating",
@@ -89,7 +89,7 @@
     },
     "nodata.team": "No team information available.",
     "reviews": {
-      "title": "Our Travelers Testimonials",
+      "title": "Our Travelers Reviews",
       "subtitle": "What they say about us",
       "text": "Our travelers satisfaction is our greatest achievement and motivation."
     }

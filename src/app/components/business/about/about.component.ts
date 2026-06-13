@@ -169,14 +169,6 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
           </div>
         </div>
       </div>
-    } @else {
-      <div class="py-16 bg-white/50 border-t border-surface">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p class="text-slate-500 text-lg">
-            {{ 'about.nodata.team' | transloco }}
-          </p>
-        </div>
-      </div>
     }
   `,
 })
