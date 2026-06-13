@@ -1352,22 +1352,26 @@ export class HomeComponent {
   submitTestimonial(name: string, message: string): void {
     // Validar campos
     if (!name || !name.trim()) {
-      this.notificationService.addNotification('Por favor ingresa tu nombre', 'error');
+      this.notificationService.addNotification(
+        this.translocoService.translate('notifications.error.name_required'),
+        'error'
+      );
       return;
     }
 
     if (!message || !message.trim()) {
-      this.notificationService.addNotification('Por favor escribe tu testimonio', 'error');
+      this.notificationService.addNotification(
+        this.translocoService.translate('notifications.error.message_required'),
+        'error'
+      );
       return;
     }
 
     if (this.testimonialRating() === 0) {
-      this.notificationService.addNotification('Por favor selecciona una calificación', 'error');
-      return;
-    }
-
-    if (!this.testimonialImageFile()) {
-      this.notificationService.addNotification('Por favor carga una foto', 'error');
+      this.notificationService.addNotification(
+        this.translocoService.translate('notifications.error.rating_required'),
+        'error'
+      );
       return;
     }
 
@@ -1379,7 +1383,11 @@ export class HomeComponent {
     formData.append('description', message.trim());
     formData.append('star_rating', this.testimonialRating().toString());
     formData.append('active', 'false');
-    formData.append('photo', this.testimonialImageFile()!);
+    
+    const image = this.testimonialImageFile();
+    if (image) {
+      formData.append('photo', image);
+    }
 
     this.reviewService.post(formData).subscribe({
       next: () => this.handleTestimonialSuccess(),
@@ -1388,7 +1396,10 @@ export class HomeComponent {
   }
 
   private handleTestimonialSuccess(): void {
-    this.notificationService.addNotification('¡Gracias por tu testimonio! Será revisado antes de publicarse.', 'success');
+    this.notificationService.addNotification(
+      this.translocoService.translate('notifications.success.testimonial_sent'),
+      'success'
+    );
 
     // Limpiar formulario
     this.testimonialRating.set(0);
@@ -1404,13 +1415,18 @@ export class HomeComponent {
       input.value = '';
     }
 
+    this.isTestimonialSubmitting.set(false);
+
     // Recargar reseñas
     this.loadReviews();
   }
 
   private handleTestimonialError(error: any): void {
     console.error('[HomeComponent] Error enviando testimonio:', error);
-    this.notificationService.addNotification('Hubo un error al enviar tu testimonio. Intenta de nuevo.', 'error');
+    this.notificationService.addNotification(
+      this.translocoService.translate('notifications.error.testimonial_failed'),
+      'error'
+    );
     this.isTestimonialSubmitting.set(false);
   }
 }

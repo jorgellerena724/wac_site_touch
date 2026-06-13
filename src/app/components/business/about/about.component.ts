@@ -98,7 +98,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                 <div
                   class="relative mx-auto h-56 w-56 rounded-full overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.15)] ring-4 ring-surface group-hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] group-hover:ring-accent transition-all duration-300"
                   appBorderBeam
-                  [beamColor]="'rgba(28, 119, 144, 0.7)'"
+                  [beamColor]="'rgba(249, 115, 22, 0.85)'"
                   [beamWidth]="'3px'"
                   [beamDuration]="'5s'"
                   [beamDelay]="i * 0.6 + 's'"
