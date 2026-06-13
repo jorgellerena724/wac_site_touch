@@ -141,11 +141,11 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                             title: manager.title,
                           })
                         "
-                        class="flex items-center justify-center bg-accent text-white p-1.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent"
+                        class="flex items-center justify-center bg-orange-400 text-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-orange-400"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="h-4 w-4"
+                          class="h-5 w-5"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
