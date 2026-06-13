@@ -30,4 +30,18 @@ export class ReviewService {
 
     return `${this.localImgPath}${name}`;
   }
+
+  create(testimonial: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.FRONT_TOKEN}`,
+    });
+    return this.http.post<any>(`${this.apiUrl}reviews/`, testimonial, { headers });
+  }
+
+  post(formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.FRONT_TOKEN}`,
+    });
+    return this.http.post<any>(`${this.apiUrl}reviews/`, formData, { headers });
+  }
 }

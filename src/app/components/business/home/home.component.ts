@@ -26,6 +26,9 @@ import { ReviewService } from '../../../shared/services/features/review.service'
 import {
   ModalService,
 } from '../../../shared/services/system/modal.service';
+import {
+  NotificationService,
+} from '../../../shared/services/system/notification.service';
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
 import { BorderBeamDirective } from '../../../shared/directives/border-beam.directive';
@@ -50,6 +53,7 @@ export class HomeComponent {
   private readonly homeState = inject(HomeStateService);
   private readonly reviewService = inject(ReviewService);
   private readonly modalService = inject(ModalService);
+  private readonly notificationService = inject(NotificationService);
   private readonly translocoService = inject(TranslocoService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
@@ -162,6 +166,13 @@ export class HomeComponent {
       (product) => this.getCategoryTitle(product.category) === category,
     );
   });
+
+  // ===== SEÑALES DE TESTIMONIOS =====
+  readonly testimonialRating = signal<number>(0);
+  readonly hoverTestimonialRating = signal<number | null>(null);
+  readonly isTestimonialSubmitting = signal(false);
+  readonly testimonialImageFile = signal<File | null>(null);
+  readonly testimonialImagePreview = signal<string | null>(null);
 
   // ===== TIMERS =====
   private noDataTimeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -1254,5 +1265,152 @@ export class HomeComponent {
     }
     const fraction = rating - (starIndex - 1);
     return fraction * 20;
+  }
+
+  // ===== MÉTODOS DE TESTIMONIOS =====
+  onStarMouseMove(event: MouseEvent, starIndex: number): void {
+    const value = this.calculateTestimonialRatingFromEvent(event, starIndex);
+    this.hoverTestimonialRating.set(value);
+  }
+
+  onStarMouseLeave(): void {
+    this.hoverTestimonialRating.set(null);
+  }
+
+  onStarClick(event: MouseEvent, starIndex: number): void {
+    const value = this.calculateTestimonialRatingFromEvent(event, starIndex);
+    this.setTestimonialRating(value);
+  }
+
+  private calculateTestimonialRatingFromEvent(event: MouseEvent, starIndex: number): number {
+    const target = event.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, x / rect.width));
+    const rawVal = starIndex - 1 + ratio;
+    return Math.max(0.1, Math.min(5.0, Math.round(rawVal * 10) / 10));
+  }
+
+  getTestimonialStarWidth(starIndex: number): number {
+    const rating = this.hoverTestimonialRating() ?? this.testimonialRating() ?? 0;
+    if (rating >= starIndex) {
+      return 20;
+    }
+    if (rating <= starIndex - 1) {
+      return 0;
+    }
+    const fraction = rating - (starIndex - 1);
+    return fraction * 20;
+  }
+
+  setTestimonialRating(rating: number): void {
+    if (this.testimonialRating() === rating) {
+      this.testimonialRating.set(0);
+    } else {
+      this.testimonialRating.set(rating);
+    }
+  }
+
+  onTestimonialImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) return;
+
+    // Validar que sea una imagen
+    if (!file.type.startsWith('image/')) {
+      this.notificationService.addNotification('Por favor selecciona un archivo de imagen válido', 'error');
+      return;
+    }
+
+    // Validar tamaño (máximo 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      this.notificationService.addNotification('La imagen debe ser menor a 5MB', 'error');
+      return;
+    }
+
+    this.testimonialImageFile.set(file);
+
+    // Crear preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.testimonialImagePreview.set(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  removeTestimonialImage(): void {
+    this.testimonialImageFile.set(null);
+    this.testimonialImagePreview.set(null);
+    const input = document.getElementById('testimonialImageInput') as HTMLInputElement;
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  submitTestimonial(name: string, message: string): void {
+    // Validar campos
+    if (!name || !name.trim()) {
+      this.notificationService.addNotification('Por favor ingresa tu nombre', 'error');
+      return;
+    }
+
+    if (!message || !message.trim()) {
+      this.notificationService.addNotification('Por favor escribe tu testimonio', 'error');
+      return;
+    }
+
+    if (this.testimonialRating() === 0) {
+      this.notificationService.addNotification('Por favor selecciona una calificación', 'error');
+      return;
+    }
+
+    if (!this.testimonialImageFile()) {
+      this.notificationService.addNotification('Por favor carga una foto', 'error');
+      return;
+    }
+
+    this.isTestimonialSubmitting.set(true);
+
+    // Siempre enviar como FormData (como en el dashboard)
+    const formData = new FormData();
+    formData.append('title', name.trim());
+    formData.append('description', message.trim());
+    formData.append('star_rating', this.testimonialRating().toString());
+    formData.append('active', 'false');
+    formData.append('photo', this.testimonialImageFile()!);
+
+    this.reviewService.post(formData).subscribe({
+      next: () => this.handleTestimonialSuccess(),
+      error: (error) => this.handleTestimonialError(error),
+    });
+  }
+
+  private handleTestimonialSuccess(): void {
+    this.notificationService.addNotification('¡Gracias por tu testimonio! Será revisado antes de publicarse.', 'success');
+
+    // Limpiar formulario
+    this.testimonialRating.set(0);
+    this.testimonialImageFile.set(null);
+    this.testimonialImagePreview.set(null);
+
+    const form = document.querySelector('#testimonialForm') as HTMLFormElement;
+    if (form) {
+      form.reset();
+    }
+    const input = document.getElementById('testimonialImageInput') as HTMLInputElement;
+    if (input) {
+      input.value = '';
+    }
+
+    // Recargar reseñas
+    this.loadReviews();
+  }
+
+  private handleTestimonialError(error: any): void {
+    console.error('[HomeComponent] Error enviando testimonio:', error);
+    this.notificationService.addNotification('Hubo un error al enviar tu testimonio. Intenta de nuevo.', 'error');
+    this.isTestimonialSubmitting.set(false);
   }
 }

@@ -50,6 +50,22 @@
       "nodata": "A\u00fan no tenemos testimonios que mostrar.",
       "count": "rese\u00f1as"
     },
+    "testimonial": {
+      "form": {
+        "title": "Comparte tu Experiencia",
+        "subtitle": "Tu testimonio ayuda a otros viajeros a conocer la calidad de nuestros servicios",
+        "name": "Nombre",
+        "name.placeholder": "Ingresa tu nombre completo",
+        "rating": "Calificaci\u00f3n",
+        "rating.none": "Sin calificaci\u00f3n",
+        "message": "Tu Comentario",
+        "message.placeholder": "Comparte tu experiencia de viaje con nosotros...",
+        "image": "Foto",
+        "image.upload": "Haz clic para subir una foto o arrastra una aqu\u00ed",
+        "image.format": "PNG, JPG, GIF hasta 5MB",
+        "submit": "Enviar"
+      }
+    },
     "footer": {
       "text": "Comienza hoy a planificar tu viaje so\u00f1ado.",
       "leftbutton": "Cont\u00e1ctanos",
@@ -227,6 +243,7 @@
     "scrollTop": "Ir arriba",
     "updateAvailable": "Nueva versi\u00f3n disponible - Actualizar",
     "loading": "Cargando...",
+    "sending": "Enviando...",
     "videoNotSupported": "Tu navegador no soporta la etiqueta de video.",
     "fullscreen": "Ver en pantalla completa",
     "download": "Descargar Archivo",
