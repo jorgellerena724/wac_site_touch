@@ -176,7 +176,6 @@
     "whatsapp": "Contact us via WhatsApp",
     "email": "Send us an email",
     "link": "Visit our website",
-    "terms": "Terms & Conditions",
     "column": {
       "left": {
         "first": "At",
@@ -243,12 +242,6 @@
     "noServicesText": "We currently have no travel packages available to display.",
     "scheduling": "Book Trip",
     "goBack": "Go Back"
-  },
-  "terms": {
-    "title": "Terms and Conditions",
-    "lastUpdated": "Last updated",
-    "footer": "All rights reserved",
-    "loading": "Translating terms and conditions..."
   },
   "socialNetworks": {
     "whatsapp": {

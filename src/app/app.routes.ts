@@ -38,18 +38,6 @@ export const routes: Routes = [
       priority: 'low',
     },
   },
-  {
-    path: 'terms',
-    loadComponent: () =>
-      import('../app/components/business/terms/terms.component').then(
-        (m) => m.TermsComponent,
-      ),
-    data: {
-      renderMode: RenderMode.Server,
-      preload: false,
-      priority: 'low',
-    },
-  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

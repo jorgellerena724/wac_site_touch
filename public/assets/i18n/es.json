@@ -178,7 +178,6 @@
     "email": "Env\u00edanos un correo",
     "link": "Visita nuestra web",
     "bookings": "Reservas",
-    "terms": "T\u00e9rminos y Condiciones",
     "column": {
       "left": {
         "first": "En",
@@ -245,12 +244,6 @@
     "noServicesText": "En este momento no tenemos paquetes de viaje disponibles para mostrar.",
     "scheduling": "Reservar Viaje",
     "goBack": "Volver"
-  },
-  "terms": {
-    "title": "T\u00e9rminos y Condiciones",
-    "lastUpdated": "\u00daltima actualizaci\u00f3n",
-    "footer": "Todos los derechos reservados",
-    "loading": "Traduciendo t\u00e9rminos y condiciones..."
   },
   "socialNetworks": {
     "whatsapp": {
