@@ -55,7 +55,7 @@
                     [src]="item.imageUrl"
                     [alt]="item.title"
                     loading="lazy"
-                    class="w-full h-[300px] sm:h-[450px] lg:h-[600px] object-contain"
+                    class="w-full h-[300px] sm:h-[450px] lg:h-[600px] object-cover"
                     (error)="handleImageError($event)"
                   />
                 } @else {

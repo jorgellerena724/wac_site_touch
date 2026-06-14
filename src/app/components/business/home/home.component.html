@@ -279,7 +279,9 @@
                 appParallax
                 [parallaxSpeed]="0.3"
               >
-                <div class="absolute inset-0 w-full h-full">
+                <div
+                  class="absolute inset-0 w-full h-full bg-orange-200 overflow-hidden"
+                >
                   @if (hasImageToShow(product)) {
                     @if (getCardMediaType(product) === "video") {
                       <video
@@ -301,7 +303,7 @@
                         [src]="getCardImageUrl(product)"
                         [alt]="product.title"
                         loading="lazy"
-                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105 rounded-2xl"
+                        class="w-full h-full object-contain transition-transform duration-700 hover:scale-105 rounded-2xl"
                         (error)="onImageError($event)"
                       />
                     }
@@ -576,8 +578,6 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- Flecha hacia el siguiente producto -->
                 @if (i < filteredProducts().length - 1) {
                   <div
                     class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20"
@@ -1202,14 +1202,14 @@
             <!-- Nombre/Título -->
             <div>
               <label class="block text-sm font-semibold text-teal-600 mb-2">
-                {{ "home.testimonial.form.name" | transloco }}
+                {{ "home.testimonial.form.nameLabel" | transloco }}
               </label>
               <input
                 type="text"
                 placeholder="{{
-                  'home.testimonial.form.name.placeholder' | transloco
+                  'home.testimonial.form.namePlaceholder' | transloco
                 }}"
-                class="w-full px-4 py-3 border border-amber-300 rounded-lg  focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all duration-300"
+                class="w-full px-4 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all duration-300"
                 #nameInput
               />
             </div>
@@ -1217,7 +1217,7 @@
             <!-- Calificación en Estrellas -->
             <div>
               <label class="block text-sm font-semibold text-teal-600 mb-3">
-                {{ "home.testimonial.form.rating" | transloco }}
+                {{ "home.testimonial.form.ratingLabel" | transloco }}
               </label>
               <div
                 class="flex items-center gap-2"
@@ -1232,7 +1232,7 @@
                     [title]="
                       (hoverTestimonialRating() ?? testimonialRating()) +
                       ' ' +
-                      ('home.testimonial.form.rating' | transloco)
+                      ('home.testimonial.form.ratingLabel' | transloco)
                     "
                   >
                     <svg
@@ -1271,13 +1271,11 @@
                   @if (testimonialRating() > 0) {
                     {{ testimonialRating() }} / 5
                   } @else {
-                    {{ "home.testimonial.form.rating.none" | transloco }}
+                    {{ "home.testimonial.form.ratingNone" | transloco }}
                   }
                 </span>
               </div>
             </div>
-
-
           </div>
 
           <!-- Columna Derecha -->
@@ -1285,13 +1283,13 @@
             <!-- Comentario -->
             <div class="flex-1 flex flex-col">
               <label class="block text-sm font-semibold text-teal-600 mb-2">
-                {{ "home.testimonial.form.message" | transloco }}
+                {{ "home.testimonial.form.messageLabel" | transloco }}
               </label>
               <textarea
                 placeholder="{{
-                  'home.testimonial.form.message.placeholder' | transloco
+                  'home.testimonial.form.messagePlaceholder' | transloco
                 }}"
-                class="w-full px-4 py-3 border border-amber-300 rounded-lg  focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all duration-300 resize-none flex-1"
+                class="w-full px-4 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all duration-300 resize-none flex-1"
                 #messageInput
               ></textarea>
             </div>

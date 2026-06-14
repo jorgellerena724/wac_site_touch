@@ -71,7 +71,9 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
               [revealDelay]="0"
             >
               {{ 'about.team.title' | transloco }}
-              <span class="text-teal-800">{{ 'about.team.subtitle' | transloco }}</span>
+              <span class="text-teal-800">{{
+                'about.team.subtitle' | transloco
+              }}</span>
             </h2>
             <p
               class="mt-6 max-w-2xl text-xl text-slate-600 mx-auto leading-relaxed"
@@ -83,7 +85,9 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
             </p>
           </div>
 
-          <div class="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div
+            class="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          >
             @for (
               manager of managerData();
               track trackByFn($index, manager);
@@ -108,7 +112,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                     (error)="handleImageError($event)"
                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                     [alt]="manager.title"
-                    loading="lazy"
+                    loading="eager"
                   />
 
                   <div
