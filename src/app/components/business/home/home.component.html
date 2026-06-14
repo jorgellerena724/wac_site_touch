@@ -303,7 +303,7 @@
                         [src]="getCardImageUrl(product)"
                         [alt]="product.title"
                         loading="lazy"
-                        class="w-full h-full object-contain transition-transform duration-700 hover:scale-105 rounded-2xl"
+                        class="w-full h-full object-fill transition-transform duration-700 hover:scale-105 rounded-2xl"
                         (error)="onImageError($event)"
                       />
                     }
