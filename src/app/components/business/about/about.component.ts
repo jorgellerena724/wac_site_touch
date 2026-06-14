@@ -42,7 +42,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
               class="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse"
             ></div>
           </div>
-          <div class="mt-20 team-grid-container">
+          <div class="mt-20 flex flex-wrap justify-center gap-8">
             @for (i of [1, 2, 3]; track i) {
               <div class="text-center">
                 <div
@@ -90,25 +90,32 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
             </p>
           </div>
 
-          <div class="mt-20 team-grid-container">
+          <div class="mt-20 flex flex-wrap justify-center gap-8">
             @for (
               manager of managerData();
               track trackByFn($index, manager);
               let i = $index
             ) {
               <div
-                class="group relative text-center transform transition-all duration-300 hover:-translate-y-2 mt-4 cursor-pointer"
+                class="group relative text-center max-w-[320px] transform transition-all duration-300 hover:-translate-y-2 mt-4 cursor-pointer"
                 appScrollReveal
                 [revealAnimation]="'slide-up'"
                 [revealDelay]="i * 100"
               >
                 <div
-                  class="relative mx-auto h-56 w-56 rounded-full overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.15)] ring-4 ring-surface group-hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] group-hover:ring-accent transition-all duration-300"
+                  class="relative mx-auto h-56 w-56 rounded-full overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.15)] ring-4 ring-surface group-hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] group-hover:ring-accent transition-all duration-300 cursor-pointer"
                   appBorderBeam
                   [beamColor]="'rgba(28, 119, 144, 0.7)'"
                   [beamWidth]="'3px'"
                   [beamDuration]="'5s'"
                   [beamDelay]="i * 0.6 + 's'"
+                  (click)="
+                    manager.imageUrl && !isUsingDefault(manager.imageUrl) &&
+                    onZoom.emit({
+                      url: manager.imageUrl,
+                      title: manager.title,
+                    })
+                  "
                 >
                   <img
                     [src]="manager.imageUrl"
@@ -119,45 +126,16 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                   />
                 </div>
 
-                  <div class="mt-2">
+                  <div class="mt-2 text-center">
                   <div class="flex items-center justify-center gap-2">
                     <h3
-                      class="text-xl font-semibold text-primary-dark transition-colors duration-300 group-hover:text-primary-dark"
+                      class="text-xl font-semibold text-center text-primary-dark transition-colors duration-300 group-hover:text-primary-dark"
                     >
                       {{ manager.title }}
                     </h3>
-
-                    @if (
-                      manager.imageUrl && !isUsingDefault(manager.imageUrl)
-                    ) {
-                      <button
-                        (click)="
-                          onZoom.emit({
-                            url: manager.imageUrl,
-                            title: manager.title,
-                          })
-                        "
-                        class="flex items-center justify-center bg-accent text-white p-1.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-4 w-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                          />
-                        </svg>
-                      </button>
-                    }
                   </div>
                   <div
-                    class="mt-1 inline-block px-3 py-1 bg-primary-light text-primary-dark rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-surface-light"
+                    class="mx-auto w-fit mt-1 px-3 py-1 bg-primary-light text-primary-dark rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-surface-light"
                   >
                     {{ manager.charge }}
                   </div>
