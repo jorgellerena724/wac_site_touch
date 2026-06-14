@@ -23,12 +23,8 @@ import {
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { HomeStateService } from '../../../shared/services/features/home-state.service';
 import { ReviewService } from '../../../shared/services/features/review.service';
-import {
-  ModalService,
-} from '../../../shared/services/system/modal.service';
-import {
-  NotificationService,
-} from '../../../shared/services/system/notification.service';
+import { ModalService } from '../../../shared/services/system/modal.service';
+import { NotificationService } from '../../../shared/services/system/notification.service';
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
 import { BorderBeamDirective } from '../../../shared/directives/border-beam.directive';
@@ -78,9 +74,14 @@ export class HomeComponent {
   readonly averageRating = computed(() => {
     const reviews = this.reviewsData();
     if (reviews.length === 0) return 0;
-    const ratings = reviews.filter(r => r.star_rating).map(r => r.star_rating!);
+    const ratings = reviews
+      .filter((r) => r.star_rating)
+      .map((r) => r.star_rating!);
     if (ratings.length === 0) return 0;
-    return Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) / 10;
+    return (
+      Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) /
+      10
+    );
   });
   readonly reviewsCount = computed(() => this.reviewsData().length);
 
@@ -772,12 +773,18 @@ export class HomeComponent {
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = this.DEFAULT_IMAGE;
+    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
+    if (!img.src.includes('img_default.webp')) {
+      img.src = this.DEFAULT_IMAGE;
+    }
   }
 
   onModalImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = this.DEFAULT_IMAGE;
+    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
+    if (!img.src.includes('img_default.webp')) {
+      img.src = this.DEFAULT_IMAGE;
+    }
   }
 
   isUsingDefault(url: string | null | undefined): boolean {
@@ -965,7 +972,10 @@ export class HomeComponent {
 
   handleImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = this.homeState.getDefaultImageUrl();
+    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
+    if (!img.src.includes('img_default.webp')) {
+      img.src = this.homeState.getDefaultImageUrl();
+    }
   }
 
   handleVideoError(event: Event): void {
@@ -1282,7 +1292,10 @@ export class HomeComponent {
     this.setTestimonialRating(value);
   }
 
-  private calculateTestimonialRatingFromEvent(event: MouseEvent, starIndex: number): number {
+  private calculateTestimonialRatingFromEvent(
+    event: MouseEvent,
+    starIndex: number,
+  ): number {
     const target = event.currentTarget as HTMLElement;
     const rect = target.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -1292,7 +1305,8 @@ export class HomeComponent {
   }
 
   getTestimonialStarWidth(starIndex: number): number {
-    const rating = this.hoverTestimonialRating() ?? this.testimonialRating() ?? 0;
+    const rating =
+      this.hoverTestimonialRating() ?? this.testimonialRating() ?? 0;
     if (rating >= starIndex) {
       return 20;
     }
@@ -1319,14 +1333,20 @@ export class HomeComponent {
 
     // Validar que sea una imagen
     if (!file.type.startsWith('image/')) {
-      this.notificationService.addNotification('Por favor selecciona un archivo de imagen válido', 'error');
+      this.notificationService.addNotification(
+        'Por favor selecciona un archivo de imagen válido',
+        'error',
+      );
       return;
     }
 
     // Validar tamaño (máximo 5MB)
     const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
-      this.notificationService.addNotification('La imagen debe ser menor a 5MB', 'error');
+      this.notificationService.addNotification(
+        'La imagen debe ser menor a 5MB',
+        'error',
+      );
       return;
     }
 
@@ -1343,7 +1363,9 @@ export class HomeComponent {
   removeTestimonialImage(): void {
     this.testimonialImageFile.set(null);
     this.testimonialImagePreview.set(null);
-    const input = document.getElementById('testimonialImageInput') as HTMLInputElement;
+    const input = document.getElementById(
+      'testimonialImageInput',
+    ) as HTMLInputElement;
     if (input) {
       input.value = '';
     }
@@ -1354,7 +1376,7 @@ export class HomeComponent {
     if (!name || !name.trim()) {
       this.notificationService.addNotification(
         this.translocoService.translate('notifications.error.name_required'),
-        'error'
+        'error',
       );
       return;
     }
@@ -1362,7 +1384,7 @@ export class HomeComponent {
     if (!message || !message.trim()) {
       this.notificationService.addNotification(
         this.translocoService.translate('notifications.error.message_required'),
-        'error'
+        'error',
       );
       return;
     }
@@ -1370,7 +1392,7 @@ export class HomeComponent {
     if (this.testimonialRating() === 0) {
       this.notificationService.addNotification(
         this.translocoService.translate('notifications.error.rating_required'),
-        'error'
+        'error',
       );
       return;
     }
@@ -1383,7 +1405,7 @@ export class HomeComponent {
     formData.append('description', message.trim());
     formData.append('star_rating', this.testimonialRating().toString());
     formData.append('active', 'false');
-    
+
     const image = this.testimonialImageFile();
     if (image) {
       formData.append('photo', image);
@@ -1398,7 +1420,7 @@ export class HomeComponent {
   private handleTestimonialSuccess(): void {
     this.notificationService.addNotification(
       this.translocoService.translate('notifications.success.testimonial_sent'),
-      'success'
+      'success',
     );
 
     // Limpiar formulario
@@ -1410,7 +1432,9 @@ export class HomeComponent {
     if (form) {
       form.reset();
     }
-    const input = document.getElementById('testimonialImageInput') as HTMLInputElement;
+    const input = document.getElementById(
+      'testimonialImageInput',
+    ) as HTMLInputElement;
     if (input) {
       input.value = '';
     }
@@ -1425,7 +1449,7 @@ export class HomeComponent {
     console.error('[HomeComponent] Error enviando testimonio:', error);
     this.notificationService.addNotification(
       this.translocoService.translate('notifications.error.testimonial_failed'),
-      'error'
+      'error',
     );
     this.isTestimonialSubmitting.set(false);
   }
