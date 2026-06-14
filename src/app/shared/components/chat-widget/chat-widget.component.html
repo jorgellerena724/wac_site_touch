@@ -202,22 +202,22 @@
       </div>
       <!-- 3. CAMPO DE ENTRADA (PUNTO FIJO ABAJO) -->
       @if (chatStarted()) {
-        <div class="p-4 bg-teal-50 border-t border-teal-600 rounded-b-lg">
-          <div class="flex space-x-2">
+        <div class="p-3 sm:p-4 bg-teal-50 border-t border-teal-600 rounded-b-lg">
+          <div class="flex items-center space-x-1.5 sm:space-x-2">
             <input
               type="text"
               [(ngModel)]="chatMessage"
               (keyup.enter)="sendMessage()"
               [placeholder]="'chat.input.placeholder' | transloco"
-              class="flex-1 px-3 py-2 border-2 text-slate-700 border-amber-300 rounded-xl outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300"
+              class="flex-1 min-w-0 px-3 py-2 text-sm sm:text-base border-2 text-slate-700 border-amber-300 rounded-xl outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300"
             />
             <button
               (click)="sendMessage()"
-              class="px-4 py-2 bg-orange-400 hover:bg-orange-500 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-orange-400 hover:bg-orange-500 text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
+                class="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -232,12 +232,12 @@
             </button>
             <button
               (click)="clearChat()"
-              class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center"
               [title]="'chat.clear' | transloco"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
+                class="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

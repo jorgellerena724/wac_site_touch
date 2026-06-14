@@ -1002,9 +1002,9 @@
                         <div class="mb-3">
                           <div class="flex items-center flex-shrink-0">
                             <div class="flex-shrink-0">
-                              @if (review.imageUrl) {
+                              @if (review.photo) {
                                 <img
-                                  [src]="getReviewImageUrl(review.imageUrl)"
+                                  [src]="getReviewImageUrl(review.photo)"
                                   class="h-12 w-12 rounded-full ring-2 ring-amber-300 object-cover"
                                   [alt]="review.title"
                                   loading="lazy"

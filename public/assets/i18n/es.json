@@ -2,14 +2,14 @@
   "notifications": {
     "success": {
       "message_sent": "Mensaje enviado correctamente",
-      "testimonial_sent": "¡Gracias por tu testimonio!"
+      "testimonial_sent": "¡Gracias por su reseña!"
     },
     "error": {
       "email_failed": "Error al enviar el correo.",
-      "name_required": "Por favor ingresa tu nombre",
-      "message_required": "Por favor escribe tu testimonio",
+      "name_required": "Por favor ingresa su nombre",
+      "message_required": "Por favor escribe su reseña",
       "rating_required": "Por favor selecciona una calificación",
-      "testimonial_failed": "Hubo un error al enviar tu testimonio. Intenta de nuevo."
+      "testimonial_failed": "Hubo un error al enviar su reseña. Intenta de nuevo."
     }
   },
   "whatsapp": {
@@ -50,15 +50,15 @@
     },
     "reviews": {
       "title": "Lo que Dicen Nuestros Viajeros",
-      "subtitle": "Testimonios Reales",
+      "subtitle": "Reseñas Reales",
       "text": "La satisfacci\u00f3n de nuestros viajeros es nuestro mayor logro y motivaci\u00f3n.",
-      "nodata": "A\u00fan no tenemos testimonios que mostrar.",
+      "nodata": "A\u00fan no tenemos reseñas que mostrar.",
       "count": "rese\u00f1as"
     },
     "testimonial": {
       "form": {
         "title": "Comparte tu Experiencia",
-        "subtitle": "Tu testimonio ayuda a otros viajeros a conocer la calidad de nuestros servicios",
+        "subtitle": "Su reseña ayuda a otros viajeros a conocer la calidad de nuestros servicios",
         "name": "Nombre",
         "name.placeholder": "Ingresa tu nombre completo",
         "rating": "Calificaci\u00f3n",
@@ -89,7 +89,7 @@
     },
     "nodata.team": "No hay informaci\u00f3n del equipo disponible.",
     "reviews": {
-      "title": "Testimonios de Nuestros Viajeros",
+      "title": "Reseñas de Nuestros Viajeros",
       "subtitle": "Lo que dicen de nosotros",
       "text": "La satisfacci\u00f3n de nuestros viajeros es nuestro mayor logro y motivaci\u00f3n."
     }
