@@ -212,7 +212,10 @@ export class AboutTeamComponent {
   // Maneja el error cuando la imagen SÍ existe en BD pero NO físicamente (404)
   handleImageError(event: Event): void {
     const imgElement = event.target as HTMLImageElement;
-    imgElement.src = this.aboutState.getDefaultImageUrl();
+    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
+    if (!imgElement.src.includes('users_default.webp')) {
+      imgElement.src = this.aboutState.getDefaultImageUrl();
+    }
   }
 
   // Helper para ocultar el botón de zoom si es la imagen por defecto
@@ -311,7 +314,10 @@ export class AboutComponent {
 
   handleImageError(event: Event): void {
     const imgElement = event.target as HTMLImageElement;
-    imgElement.src = this.DEFAULT_IMAGE;
+    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
+    if (!imgElement.src.includes('img_default.webp')) {
+      imgElement.src = this.DEFAULT_IMAGE;
+    }
   }
 
   // Lógica del Modal (Zoom)

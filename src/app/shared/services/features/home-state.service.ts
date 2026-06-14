@@ -571,48 +571,40 @@ export class HomeStateService implements OnDestroy {
 
   // MÉTODO PARA OBTENER IMAGEN POR DEFECTO
   getDefaultImageUrl(): string {
-    const timestamp = Date.now();
-    return `${environment.imgPath}img_default.webp?no-cache=${timestamp}`;
+    // Sin timestamp para permitir cacheo del navegador
+    return `${environment.imgPath}img_default.webp`;
   }
 
   private buildImageUrl(photoName: string): string {
-    const timestamp = Date.now();
+    // Sin timestamp para permitir cacheo del navegador
 
-    // Si es una URL completa, agregar timestamp
+    // Si es una URL completa, retornarla directamente
     if (photoName.startsWith('http://') || photoName.startsWith('https://')) {
-      return photoName.includes('?')
-        ? `${photoName}&no-cache=${timestamp}`
-        : `${photoName}?no-cache=${timestamp}`;
+      return photoName;
     }
 
     // Si empieza con /, es ruta absoluta
     if (photoName.startsWith('/')) {
-      return photoName.includes('?')
-        ? `${photoName}&no-cache=${timestamp}`
-        : `${photoName}?no-cache=${timestamp}`;
+      return photoName;
     }
 
     // Ruta relativa - usar localImgPath
-    return `${this.localImgPath}${photoName}?no-cache=${timestamp}`;
+    return `${this.localImgPath}${photoName}`;
   }
 
   private buildFileUrl(fileName: string): string {
-    const timestamp = Date.now();
+    // Sin timestamp para permitir cacheo del navegador
 
-    // Para archivos, usar la misma lógica pero asegurarse de que sea descargable
+    // Para archivos, usar la misma lógica
     if (fileName.startsWith('http://') || fileName.startsWith('https://')) {
-      return fileName.includes('?')
-        ? `${fileName}&no-cache=${timestamp}`
-        : `${fileName}?no-cache=${timestamp}`;
+      return fileName;
     }
 
     if (fileName.startsWith('/')) {
-      return fileName.includes('?')
-        ? `${fileName}&no-cache=${timestamp}`
-        : `${fileName}?no-cache=${timestamp}`;
+      return fileName;
     }
 
-    return `${this.localImgPath}${fileName}?no-cache=${timestamp}`;
+    return `${this.localImgPath}${fileName}`;
   }
 
   // Helper para detectar si es imagen por defecto
