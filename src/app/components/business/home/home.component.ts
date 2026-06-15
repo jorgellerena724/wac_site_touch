@@ -28,7 +28,7 @@ import { NotificationService } from '../../../shared/services/system/notificatio
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
 import { BorderBeamDirective } from '../../../shared/directives/border-beam.directive';
-import { ParallaxDirective } from '../../../shared/directives/parallax.directive';
+import EmblaCarousel from 'embla-carousel';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +39,6 @@ import { ParallaxDirective } from '../../../shared/directives/parallax.directive
     TranslocoModule,
     ScrollRevealDirective,
     BorderBeamDirective,
-    ParallaxDirective,
   ],
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -131,6 +130,8 @@ export class HomeComponent {
     viewChild<ElementRef<HTMLDivElement>>('variantScroller');
   readonly carouselSection = viewChild<ElementRef>('carouselSection');
   readonly productsSection = viewChild<ElementRef>('productsSection');
+  readonly emblaViewport =
+    viewChild<ElementRef<HTMLDivElement>>('emblaViewport');
 
   // ===== SEÃñALES DE VARIANTES =====
   readonly selectedVariant = signal<ProductVariant | null>(null);
@@ -140,6 +141,13 @@ export class HomeComponent {
   readonly cardSelectedVariants = signal<Map<string | number, number>>(
     new Map(),
   );
+
+  // ===== SEÑALES DE EMBLA (CARRUSEL DE PRODUCTOS) =====
+  readonly emblaSelectedSnap = signal(0);
+  readonly emblaSnapCount = signal(0);
+  readonly emblaCanScrollPrev = signal(false);
+  readonly emblaCanScrollNext = signal(false);
+  private emblaApi: ReturnType<typeof EmblaCarousel> | null = null;
 
   // ===== SEÃñALES DE IMÃGENES =====
   readonly currentImageIndex = signal(0);
@@ -200,6 +208,26 @@ export class HomeComponent {
               this.scheduleAnimation(500, () => {
                 this.checkScrollability();
               });
+            }
+          },
+          { injector: this.injector },
+        );
+      });
+    }
+
+    // Inicializar Embla para carrusel de productos en cards
+    if (this.isBrowser) {
+      afterNextRender(() => {
+        effect(
+          () => {
+            const viewport = this.emblaViewport();
+            const products = this.filteredProducts();
+
+            if (viewport) {
+              this.destroyEmbla();
+              if (products.length > 0) {
+                setTimeout(() => this.initEmblaCarousel(), 0);
+              }
             }
           },
           { injector: this.injector },
@@ -315,6 +343,7 @@ export class HomeComponent {
       this.cancelNoDataTimeout();
       this.stopCarouselAutoplay();
       this.stopReviewsAutoplay();
+      this.destroyEmbla();
       // Limpiar todos los timeouts de scroll
       this.scrollTimeouts.forEach((timeout) => clearTimeout(timeout));
       this.scrollTimeouts.clear();
@@ -1452,5 +1481,66 @@ export class HomeComponent {
       'error',
     );
     this.isTestimonialSubmitting.set(false);
+  }
+
+  // ===== EMBLA CARRUSEL (PRODUCTOS EN CARDS) =====
+  private destroyEmbla(): void {
+    if (this.emblaApi) {
+      this.emblaApi.destroy();
+      this.emblaApi = null;
+    }
+  }
+
+  private initEmblaCarousel(): void {
+    const viewportEl = this.emblaViewport()?.nativeElement;
+    if (!viewportEl || this.emblaApi) return;
+
+    this.emblaApi = EmblaCarousel(viewportEl, {
+      align: 'start',
+      slidesToScroll: 3,
+      containScroll: 'trimSnaps',
+      breakpoints: {
+        '(max-width: 767px)': {
+          slidesToScroll: 1,
+        },
+      },
+    });
+
+    const onSelect = () => {
+      if (!this.emblaApi) return;
+      this.emblaSelectedSnap.set(this.emblaApi.selectedScrollSnap());
+      this.emblaSnapCount.set(this.emblaApi.scrollSnapList().length);
+      this.emblaCanScrollPrev.set(this.emblaApi.canScrollPrev());
+      this.emblaCanScrollNext.set(this.emblaApi.canScrollNext());
+    };
+
+    this.emblaApi.on('init', onSelect);
+    this.emblaApi.on('select', onSelect);
+    this.emblaApi.on('reInit', onSelect);
+    onSelect();
+  }
+
+  onEmblaPrevClick(): void {
+    this.emblaApi?.scrollPrev();
+  }
+
+  onEmblaNextClick(): void {
+    this.emblaApi?.scrollNext();
+  }
+
+  onEmblaDotClick(index: number): void {
+    this.emblaApi?.scrollTo(index);
+  }
+
+  scrollToServices(): void {
+    if (!this.isBrowser) return;
+    const el = document.getElementById('services');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  range(count: number): number[] {
+    return Array.from({ length: count }, (_, i) => i);
   }
 }

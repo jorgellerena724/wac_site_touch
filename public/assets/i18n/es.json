@@ -23,7 +23,7 @@
     "about": "Qui\u00e9nes Somos",
     "contact": "Contactar",
     "home": "Inicio",
-    "products": "Destinos"
+    "products": "Servicios"
   },
   "home": {
     "products": {
@@ -97,17 +97,18 @@
   "products": {
     "title": {
       "first": "Nuestros ",
-      "second": "Destinos"
+      "second": "Servicios"
     },
     "text": "Descubre paquetes de viaje seleccionados para inspirar tu alma, ampliar tus horizontes y elevar tu experiencia.",
     "button": "Todos",
-    "nodata": "No hay destinos disponibles en este momento.",
-    "nodata.category": "No hay destinos disponibles en esta categor\u00eda.",
+    "nodata": "No hay servicios disponibles en este momento.",
+    "nodata.category": "No hay servicios disponibles en esta categor\u00eda.",
     "seedetails": "Ver Detalles",
     "details": "Detalles",
     "info": "Solicitar informaci\u00f3n",
     "swipe": "\u2190 Desliza para ver m\u00e1s categor\u00edas \u2192",
-    "scheduleAppointment": "Reserva ya"
+    "scheduleAppointment": "Reserva ya",
+    "cta": "Ver Servicios"
   },
   "appointment": {
     "cancel": "Cancelar",
