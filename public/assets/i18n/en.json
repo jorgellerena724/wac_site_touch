@@ -23,7 +23,7 @@
     "about": "About",
     "contact": "Contact",
     "home": "Home",
-    "products": "Destinations"
+    "products": "Services"
   },
   "home": {
     "products": {
@@ -97,16 +97,17 @@
   "products": {
     "title": {
       "first": "Our ",
-      "second": "Destinations"
+      "second": "Services"
     },
     "text": "Discover curated travel packages designed to inspire your soul, broaden your horizons, and elevate your journey.",
     "button": "All",
-    "nodata": "There are no destinations available at this time.",
-    "nodata.category": "There are no destinations available in this category.",
+    "nodata": "There are no services available at this time.",
+    "nodata.category": "There are no services available in this category.",
     "seedetails": "See Details",
     "details": "Details",
     "info": "Request information",
-    "swipe": "← Swipe to see more categories →"
+    "swipe": "← Swipe to see more categories →",
+    "cta": "View Services"
   },
   "appointment": {
     "cancel": "Cancel",

@@ -70,7 +70,7 @@
     <!-- Carrusel Real -->
     @if (carouselData().length > 0) {
       <div
-        class="relative w-full h-[450px] sm:h-[550px] lg:h-[650px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
+        class="relative w-full h-[500px] sm:h-[650px] lg:h-[800px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
       >
         <div class="w-full h-full">
           <div class="carrousel-container relative h-full" #carouselSection>
@@ -122,11 +122,11 @@
                     >
                       <div class="flex-1"></div>
                       <div
-                        class="content-container mx-2 sm:mx-8 lg:mx-12 flex flex-col"
+                        class="content-container mx-2 sm:mx-8 lg:mx-12 flex flex-col max-w-4xl"
                       >
                         <div class="title-container flex-shrink-0 mb-2 sm:mb-4">
                           <h2
-                            class="text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-white drop-shadow-xl overflow-visible leading-tight slide-in-title"
+                            class="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white drop-shadow-xl overflow-visible leading-tight slide-in-title"
                             [class.opacity-100]="currentSlide() === i"
                             [class.opacity-0]="currentSlide() !== i"
                           >
@@ -135,12 +135,34 @@
                         </div>
                         <div class="description-container mt-2 sm:mt-4">
                           <p
-                            class="font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-teal-50 leading-relaxed sm:leading-relaxed lg:leading-loose h-16 sm:h-32 lg:h-40 overflow-y-auto pr-2 custom-scrollbar drop-shadow-lg whitespace-pre-line slide-in-description"
+                            class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-teal-50 leading-relaxed sm:leading-relaxed lg:leading-loose h-20 sm:h-40 lg:h-48 overflow-y-auto pr-2 custom-scrollbar drop-shadow-lg whitespace-pre-line slide-in-description"
                             [class.opacity-100]="currentSlide() === i"
                             [class.opacity-0]="currentSlide() !== i"
                           >
                             {{ item.description }}
                           </p>
+                        </div>
+                        <div class="mt-4 sm:mt-6">
+                          <button
+                            (click)="scrollToServices()"
+                            class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-full text-base sm:text-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95"
+                          >
+                            {{ "products.cta" | transloco }}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </button>
                         </div>
                       </div>
                       <div class="flex-shrink-0 h-16 sm:h-12 lg:h-16"></div>
@@ -212,8 +234,11 @@
     }
   }
 
-  <!-- Sección Productos -->
-  <section class="bg-white py-10 overflow-x-hidden">
+  <!-- Espaciador para que la sección de servicios quede debajo del pliegue -->
+  <div class="h-24 sm:h-32 lg:h-48"></div>
+
+  <!-- Sección Productos con Carrusel de Cards -->
+  <section id="services" class="bg-white py-10 overflow-x-hidden">
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <!-- Header (carga inmediata ya que es crítico) -->
       <div class="text-center mb-4 animate-slide-down-on-load relative">
@@ -226,381 +251,336 @@
           }}</span>
         </h2>
         <p
-          class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed relative z-10"
+          class="mt-8 max-w-4xl text-2xl text-slate-600 mx-auto leading-relaxed relative z-10"
         >
           {{ "products.text" | transloco }}
         </p>
-        <!-- Flecha hacia abajo para ir al primer producto -->
-        @if (filteredProducts().length > 0) {
-          <div class="mt-6 flex justify-center relative z-10">
+      </div>
+
+      <!-- Filtro de categorías (fuera del defer para carga inmediata) -->
+      @if (hasCategories()) {
+        <div class="flex items-center justify-center gap-3 mb-8">
+          <!-- Botón scroll izquierda -->
+          <button
+            (click)="scrollCategoriesLeft()"
+            [disabled]="!canScrollLeft()"
+            [class.opacity-30]="!canScrollLeft()"
+            [class.cursor-not-allowed]="!canScrollLeft()"
+            class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg"
+            aria-label="Scroll categories left"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-teal-600/75 animate-bounce cursor-pointer hover:text-teal-600 transition-colors duration-300"
+              class="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              stroke-width="2"
-              (click)="scrollToFirstProduct()"
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                d="M19 13l-7 7-7-7"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
               />
             </svg>
+          </button>
+
+          <!-- Contenedor de categorías scrolleable -->
+          <div
+            #categoryScroller
+            class="flex gap-2 overflow-x-auto scrollbar-hide py-2 max-w-[80vw]"
+            (scroll)="onScroll($event)"
+          >
+            <button
+              (click)="filterByCategory('Todos')"
+              [ngClass]="{
+                'bg-teal-600 text-white shadow-md':
+                  selectedCategory() === 'Todos',
+                'bg-white text-teal-800 border border-amber-300 hover:bg-teal-50':
+                  selectedCategory() !== 'Todos',
+              }"
+              class="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md"
+            >
+              {{ "products.button" | transloco }}
+            </button>
+            @for (cat of categoriesData(); track cat.id; let ci = $index) {
+              <button
+                (click)="filterByCategory(getCategoryTitle(cat))"
+                [ngClass]="{
+                  'bg-teal-600 text-white shadow-md':
+                    selectedCategory() === getCategoryTitle(cat),
+                  'bg-white text-teal-800 border border-amber-300 hover:bg-teal-50':
+                    selectedCategory() !== getCategoryTitle(cat),
+                }"
+                class="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md"
+              >
+                {{ getCategoryTitle(cat) }}
+              </button>
+            }
           </div>
-        }
-      </div>
+
+          <!-- Botón scroll derecha -->
+          <button
+            (click)="scrollCategoriesRight()"
+            [disabled]="!canScrollRight()"
+            [class.opacity-30]="!canScrollRight()"
+            [class.cursor-not-allowed]="!canScrollRight()"
+            class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg"
+            aria-label="Scroll categories right"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+      }
 
       <!-- Productos con @defer (carga diferida) -->
       @defer (on viewport; when !isProductsLoading()) {
         @if (filteredProducts().length > 0) {
-          <!-- Contenedor de productos con efecto de hojas suaves -->
-          <div class="relative">
-            <!-- Secciones Spotlight de Productos -->
-            @for (
-              product of filteredProducts();
-              track trackByProduct($index, product);
-              let i = $index
-            ) {
-              <!-- Borde divisorio entre productos (excepto antes del primero) -->
-              @if (i > 0) {
-                <div
-                  class="border-t-2 border-amber-300 border-opacity-40 mb-8"
-                ></div>
-              }
-
-              <!-- Sección Spotlight - Alterna entre right (imagen izq) y left (imagen der) -->
-              <section
-                [id]="'product-' + i"
-                class="relative min-h-[600px] flex items-center overflow-hidden bg-white mb-8 rounded-2xl shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300"
-                appScrollReveal
-                [revealAnimation]="i % 2 === 0 ? 'slide-right' : 'slide-left'"
-                [revealDelay]="0"
-                appParallax
-                [parallaxSpeed]="0.3"
-              >
-                <div
-                  class="absolute inset-0 w-full h-full bg-orange-200 overflow-hidden"
-                >
-                  @if (hasImageToShow(product)) {
-                    @if (getCardMediaType(product) === "video") {
-                      <video
-                        #productVideo
-                        [src]="getCardImageUrl(product)"
-                        [title]="product.title"
-                        class="w-full h-full object-cover rounded-2xl"
-                        (error)="handleVideoError($event)"
-                        (loadedmetadata)="forceVideoMute($event)"
-                        muted
-                        loop
-                        autoplay
-                        playsinline
-                      >
-                        Tu navegador no soporta la etiqueta de video.
-                      </video>
-                    } @else {
-                      <img
-                        [src]="getCardImageUrl(product)"
-                        [alt]="product.title"
-                        loading="lazy"
-                        class="w-full h-full object-fill transition-transform duration-700 hover:scale-105 rounded-2xl"
-                        (error)="onImageError($event)"
-                      />
-                    }
-                  }
-                </div>
-
-                <!-- Overlay sutil solo en el lado del contenido -->
-                @if (i % 2 === 0) {
+          <!-- Embla Carrusel de Cards -->
+          <div class="embla">
+            <div class="embla__viewport overflow-hidden" #emblaViewport>
+              <div class="embla__container flex">
+                @for (
+                  product of filteredProducts();
+                  track product.id;
+                  let pi = $index
+                ) {
                   <div
-                    class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/40 pointer-events-none"
-                  ></div>
-                } @else {
-                  <div
-                    class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/40 pointer-events-none"
-                  ></div>
-                }
-
-                <!-- Contenedor del contenido -->
-                <div class="relative z-10 w-full">
-                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    class="embla__slide flex-shrink-0 pl-4 md:basis-1/3 basis-full"
+                  >
+                    <!-- Card -->
                     <div
-                      class="flex flex-col lg:flex-row items-center"
-                      [ngClass]="{
-                        'lg:flex-row': i % 2 === 0,
-                        'lg:flex-row-reverse': i % 2 !== 0,
-                      }"
+                      class="bg-white rounded-2xl border border-amber-300 overflow-hidden h-full flex flex-col"
                     >
-                      <!-- Espaciador para la imagen (invisible en móvil) -->
-                      <div class="hidden lg:block lg:w-1/2"></div>
-
-                      <!-- Contenido del producto -->
+                      <!-- Imagen -->
                       <div
-                        class="w-full lg:w-1/2 py-16 lg:py-24 flex items-center"
+                        class="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-teal-50 to-amber-50"
                       >
-                        <div
-                          class="max-w-xl flex flex-col justify-between min-h-[400px] w-full"
-                          [ngClass]="{
-                            'lg:ml-auto lg:pr-8': i % 2 === 0,
-                            'lg:mr-auto lg:pl-8': i % 2 !== 0,
-                          }"
-                        >
-                          <!-- Fila superior: Badge/Título y Variantes/Precio -->
+                        @if (hasImageToShow(product)) {
+                          @if (getCardMediaType(product) === "video") {
+                            <video
+                              [src]="getCardImageUrl(product)"
+                              [title]="product.title"
+                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                              (error)="handleVideoError($event)"
+                              (loadedmetadata)="forceVideoMute($event)"
+                              muted
+                              loop
+                              autoplay
+                              playsinline
+                            >
+                              {{ "common.videoNotSupported" | transloco }}
+                            </video>
+                          } @else {
+                            <img
+                              [src]="getCardImageUrl(product)"
+                              [alt]="product.title"
+                              loading="lazy"
+                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                              (error)="onImageError($event)"
+                            />
+                          }
+                        } @else {
                           <div
-                            class="flex flex-col lg:flex-row justify-between gap-6 mb-6"
+                            class="w-full h-full flex items-center justify-center"
                           >
-                            <!-- Columna izquierda: Badge y Título -->
-                            <div class="flex-1 flex-shrink-0">
-                              <!-- Badge de categoría -->
-                              <div class="mb-6">
-                                <span
-                                  class="inline-block text-teal-600 text-lg lg:text-xl font-bold uppercase tracking-wider"
-                                >
-                                  {{ getCategoryTitle(product.category) }}
-                                </span>
-                              </div>
-
-                              <!-- Título -->
-                              <h2
-                                class="text-3xl lg:text-4xl xl:text-5xl font-light text-teal-800 leading-tight"
-                              >
-                                {{ product.title }}
-                              </h2>
-                            </div>
-
-                            <!-- Columna derecha: Variantes y Precio -->
-                            @if (
-                              product.variants && product.variants.length > 0
-                            ) {
-                              <div
-                                class="flex-shrink-0 lg:w-64 flex flex-col justify-start"
-                              >
-                                <!-- Selector de variantes -->
-                                <div class="flex items-center gap-2 mb-4">
-                                  <!-- Botón Izquierda -->
-                                  <button
-                                    #cardVariantScrollerLeft
-                                    (click)="
-                                      scrollCardVariantsLeft(
-                                        product.id,
-                                        cardVariantScroller,
-                                        $event
-                                      )
-                                    "
-                                    [disabled]="
-                                      !canScrollCardVariantsLeft(product.id)
-                                    "
-                                    [class.opacity-50]="
-                                      !canScrollCardVariantsLeft(product.id)
-                                    "
-                                    [class.cursor-not-allowed]="
-                                      !canScrollCardVariantsLeft(product.id)
-                                    "
-                                    class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
-                                    aria-label="Scroll variants left"
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      class="h-4 w-4 left-arrow-bounce text-teal-600"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M15 19l-7-7 7-7"
-                                      />
-                                    </svg>
-                                  </button>
-
-                                  <!-- Contenedor de variantes -->
-                                  <div
-                                    #cardVariantScroller
-                                    (scroll)="
-                                      onCardVariantScroll($event, product.id)
-                                    "
-                                    class="flex items-center overflow-x-auto scrollbar-hide space-x-2 px-1 py-2 scroll-smooth"
-                                    [ngClass]="{
-                                      'flex-1': product.variants.length > 1,
-                                      'justify-center':
-                                        product.variants.length === 1,
-                                    }"
-                                    style="
-                                      scroll-behavior: smooth;
-                                      overflow-y: hidden;
-                                    "
-                                  >
-                                    @for (
-                                      variant of product.variants;
-                                      track trackByVariant($index, variant);
-                                      let vi = $index
-                                    ) {
-                                      <button
-                                        (click)="
-                                          selectCardVariant(product, vi, $event)
-                                        "
-                                        [ngClass]="{
-                                          'bg-orange-400 text-white shadow-md border-orange-400 transform scale-105':
-                                            getCardSelectedVariantIndex(
-                                              product.id
-                                            ) === vi,
-                                          'bg-white text-teal-800 hover:bg-teal-50 border border-amber-300 hover:border-amber-300':
-                                            getCardSelectedVariantIndex(
-                                              product.id
-                                            ) !== vi,
-                                        }"
-                                        class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-opacity-50 min-w-fit"
-                                      >
-                                        {{ variant.description }}
-                                      </button>
-                                    }
-                                  </div>
-
-                                  <!-- Botón Derecha -->
-                                  <button
-                                    (click)="
-                                      scrollCardVariantsRight(
-                                        product.id,
-                                        cardVariantScroller,
-                                        $event
-                                      )
-                                    "
-                                    [disabled]="
-                                      !canScrollCardVariantsRight(product.id)
-                                    "
-                                    [class.opacity-50]="
-                                      !canScrollCardVariantsRight(product.id)
-                                    "
-                                    [class.cursor-not-allowed]="
-                                      !canScrollCardVariantsRight(product.id)
-                                    "
-                                    class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-1.5 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:hover:shadow-md"
-                                    aria-label="Scroll variants right"
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      class="h-4 w-4 right-arrow-bounce text-teal-600"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 5l7 7-7 7"
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-
-                                <!-- Precio de la variante seleccionada -->
-                                <div
-                                  class="flex justify-start"
-                                  [ngClass]="{
-                                    'lg:justify-end':
-                                      product.variants.length > 1,
-                                    'lg:justify-center':
-                                      product.variants.length === 1,
-                                  }"
-                                >
-                                  <p
-                                    class="text-2xl lg:text-3xl font-extrabold text-orange-400"
-                                  >
-                                    {{
-                                      getCardSelectedVariant(product)?.price ||
-                                        product.variants[0].price
-                                        | currency: "USD" : "symbol" : "1.2-2"
-                                    }}
-                                  </p>
-                                </div>
-                              </div>
-                            }
+                            <svg
+                              class="w-16 h-16 text-amber-300"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                              />
+                            </svg>
                           </div>
+                        }
+                      </div>
 
-                          <!-- Descripción - Ancho completo debajo de ambas columnas -->
-                          <div class="flex-grow mb-8">
+                      <!-- Contenido de la card -->
+                      <div class="p-5 flex flex-col flex-1 min-w-0">
+                        <!-- Categoría -->
+                        <span
+                          class="inline-block text-teal-600 text-sm font-bold uppercase tracking-wider mb-2"
+                        >
+                          {{ getCategoryTitle(product.category) }}
+                        </span>
+
+                        <!-- Nombre -->
+                        <h3
+                          class="text-xl font-bold text-teal-800 leading-tight mb-3 line-clamp-2"
+                        >
+                          {{ product.title }}
+                        </h3>
+
+                        <!-- Variantes y Precio -->
+                        @if (product.variants && product.variants.length > 0) {
+                          <div class="mb-3">
+                            <div class="flex gap-1.5 flex-wrap">
+                              @for (
+                                variant of product.variants;
+                                track trackByVariant($index, variant);
+                                let vi = $index
+                              ) {
+                                <button
+                                  (click)="
+                                    selectCardVariant(product, vi, $event)
+                                  "
+                                  [ngClass]="{
+                                    'bg-teal-600 text-white shadow-sm':
+                                      getCardSelectedVariantIndex(
+                                        product.id
+                                      ) === vi,
+                                    'bg-gray-50 text-teal-800 border border-amber-300 hover:bg-teal-50':
+                                      getCardSelectedVariantIndex(
+                                        product.id
+                                      ) !== vi,
+                                  }"
+                                  class="px-2.5 py-1 rounded-full text-xs font-semibold transition-all duration-200 max-w-full break-words"
+                                >
+                                  {{ variant.description }}
+                                </button>
+                              }
+                            </div>
                             <p
-                              class="text-base lg:text-lg font-light text-slate-600 leading-relaxed"
+                              class="text-xl font-extrabold text-orange-400 mt-2"
                             >
                               {{
-                                product.description.length > 400
-                                  ? (product.description | slice: 0 : 400) +
-                                    "..."
-                                  : product.description
+                                getCardSelectedVariant(product)?.price ||
+                                  product.variants[0].price
+                                  | currency: "USD" : "symbol" : "1.2-2"
                               }}
                             </p>
                           </div>
+                        }
 
-                          <!-- Botones de acción siempre en la parte inferior -->
-                          <div class="flex flex-wrap gap-4 flex-shrink-0">
-                            @if (hasImageToShow(product)) {
-                              <button
-                                (click)="
-                                  openMediaZoom(
-                                    getCardImageUrl(product),
-                                    getFirstImageTitle(product),
-                                    getCardMediaType(product),
-                                    product
-                                  )
-                                "
-                                class="flex items-center justify-center bg-teal-600/10 backdrop-blur-sm border border-teal-600/20 hover:bg-teal-600/20 rounded-xl w-12 h-12 transition-all duration-300 outline-none"
-                                [title]="'common.zoomMedia' | transloco"
-                                [attr.aria-label]="
-                                  'common.zoomMedia' | transloco
-                                "
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  class="h-5 w-5 text-teal-600"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  stroke-width="2"
-                                  role="img"
-                                  [attr.aria-label]="
-                                    'common.zoomMedia' | transloco
-                                  "
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                                  />
-                                </svg>
-                              </button>
-                            }
-                          </div>
+                        <!-- Descripción -->
+                        <p
+                          class="text-sm text-slate-600 leading-relaxed line-clamp-3 flex-1"
+                        >
+                          {{ product.description }}
+                        </p>
+
+                        <!-- Zoom -->
+                        <div class="mt-4 pt-3 border-t border-amber-200">
+                          <button
+                            (click)="
+                              openMediaZoom(
+                                getCardImageUrl(product),
+                                getFirstImageTitle(product),
+                                getCardMediaType(product),
+                                product
+                              )
+                            "
+                            class="flex items-center gap-2 text-teal-600 hover:text-teal-800 text-sm font-semibold transition-colors"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                              />
+                            </svg>
+                            {{ "common.zoomMedia" | transloco }}
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                @if (i < filteredProducts().length - 1) {
-                  <div
-                    class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-8 w-8 text-teal-600/75 animate-bounce cursor-pointer hover:text-teal-600 transition-colors duration-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      (click)="scrollToProduct(i + 1)"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19 13l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
                 }
-              </section>
+              </div>
+            </div>
+
+            <!-- Navegación del carrusel -->
+            @if (emblaSnapCount() > 1) {
+              <div class="flex items-center justify-center gap-4 mt-8">
+                <!-- Prev -->
+                <button
+                  (click)="onEmblaPrevClick()"
+                  [disabled]="!emblaCanScrollPrev()"
+                  [class.opacity-30]="!emblaCanScrollPrev()"
+                  [class.cursor-not-allowed]="!emblaCanScrollPrev()"
+                  class="bg-white text-teal-600 border border-teal-600 rounded-full p-2.5 shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 focus:outline-none disabled:hover:scale-100 disabled:hover:shadow-md"
+                  aria-label="Previous products"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Dots de paginación -->
+                <div class="flex items-center gap-2">
+                  @for (dotId of range(emblaSnapCount()); track dotId) {
+                    <button
+                      (click)="onEmblaDotClick($index)"
+                      [ngClass]="{
+                        'bg-teal-600 scale-110 w-3 h-3':
+                          emblaSelectedSnap() === $index,
+                        'bg-amber-300 hover:bg-amber-400 w-2.5 h-2.5':
+                          emblaSelectedSnap() !== $index,
+                      }"
+                      class="rounded-full transition-all duration-300 focus:outline-none"
+                      [attr.aria-label]="'Go to page ' + ($index + 1)"
+                    ></button>
+                  }
+                </div>
+
+                <!-- Next -->
+                <button
+                  (click)="onEmblaNextClick()"
+                  [disabled]="!emblaCanScrollNext()"
+                  [class.opacity-30]="!emblaCanScrollNext()"
+                  [class.cursor-not-allowed]="!emblaCanScrollNext()"
+                  class="bg-white text-teal-600 border border-teal-600 rounded-full p-2.5 shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 focus:outline-none disabled:hover:scale-100 disabled:hover:shadow-md"
+                  aria-label="Next products"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
             }
           </div>
         } @else if (productsData().length === 0 && !isProductsLoading()) {
@@ -645,28 +625,21 @@
           </div>
         }
       } @placeholder (minimum 500ms) {
-        <!-- Placeholder para productos spotlight -->
-        <div class="bg-white py-16">
+        <!-- Placeholder skeleton cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           @for (i of [1, 2, 3]; track i) {
-            <section
-              class="relative min-h-[600px] flex items-center border-b border-amber-300 animate-pulse mb-8"
+            <div
+              class="bg-white rounded-2xl border border-amber-300 overflow-hidden animate-pulse"
             >
-              <div class="absolute inset-0 bg-gray-200"></div>
-              <div class="relative z-10 w-full">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div class="flex items-center">
-                    <div class="w-1/2"></div>
-                    <div class="w-1/2 py-24 space-y-4">
-                      <div class="h-6 bg-gray-300 rounded w-1/4"></div>
-                      <div class="h-12 bg-gray-300 rounded w-3/4"></div>
-                      <div class="h-4 bg-gray-300 rounded w-full"></div>
-                      <div class="h-4 bg-gray-300 rounded w-5/6"></div>
-                      <div class="h-10 bg-gray-300 rounded w-1/3 mt-8"></div>
-                    </div>
-                  </div>
-                </div>
+              <div class="aspect-[4/3] bg-gray-200"></div>
+              <div class="p-5 space-y-3">
+                <div class="h-3 bg-gray-200 rounded w-1/4"></div>
+                <div class="h-5 bg-gray-200 rounded w-3/4"></div>
+                <div class="h-3 bg-gray-200 rounded w-1/3"></div>
+                <div class="h-3 bg-gray-200 rounded w-full"></div>
+                <div class="h-3 bg-gray-200 rounded w-5/6"></div>
               </div>
-            </section>
+            </div>
           }
         </div>
       }
@@ -1355,123 +1328,6 @@
   </div>
 
   <!-- Modal de Zoom de Imagen/Video -->
-  @if (showMediaZoom()) {
-    <div
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4 animate-fade-in"
-      (click)="closeMediaZoom()"
-    >
-      <div
-        class="relative max-w-full max-h-full w-full h-full flex items-center justify-center"
-      >
-        <!-- Botón de cerrar -->
-        <button
-          (click)="closeMediaZoom()"
-          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
-          aria-label="Cerrar"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-
-        <!-- Botón anterior (solo si hay múltiples archivos) -->
-        @if (hasMultipleMediaFiles()) {
-          <button
-            (click)="previousZoomedMedia(); $event.stopPropagation()"
-            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
-            aria-label="Anterior"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 left-arrow-bounce"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-        }
-
-        <!-- Botón siguiente (solo si hay múltiples archivos) -->
-        @if (hasMultipleMediaFiles()) {
-          <button
-            (click)="nextZoomedMedia(); $event.stopPropagation()"
-            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
-            aria-label="Siguiente"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 right-arrow-bounce"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        }
-
-        <!-- Media ampliado -->
-        <div
-          class="relative w-full h-full flex items-center justify-center"
-          (click)="$event.stopPropagation()"
-        >
-          @if (zoomedMediaType() === "video") {
-            <video
-              [src]="getImageUrl(zoomedMediaUrl())"
-              (error)="handleVideoError($event)"
-              [title]="zoomedMediaTitle()"
-              class="w-full h-full max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-zoom-in"
-              controls
-              autoplay
-              playsinline
-            >
-              Tu navegador no soporta la etiqueta de video.
-            </video>
-          } @else {
-            <img
-              [src]="getImageUrl(zoomedMediaUrl())"
-              (error)="handleImageError($event)"
-              [alt]="zoomedMediaTitle()"
-              class="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl animate-zoom-in"
-            />
-          }
-        </div>
-
-        <!-- Indicador de posición (solo si hay múltiples archivos) -->
-        @if (hasMultipleMediaFiles()) {
-          <div
-            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-60 text-white px-4 py-2 rounded-full text-sm sm:text-base"
-          >
-            {{ zoomedMediaIndex() + 1 }} /
-            {{ zoomedMediaProduct()?.files?.length || 1 }}
-          </div>
-        }
-      </div>
-    </div>
-  }
 </div>
 
 <style>
@@ -1481,6 +1337,42 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Embla Carousel */
+  .embla__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .embla__container {
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  @media (min-width: 768px) {
+    .embla__slide {
+      flex: 0 0 33.3333%;
+    }
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* Mejoras adicionales para el scroll suave */
