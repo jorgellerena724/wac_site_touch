@@ -6,4 +6,5 @@ export const environment = {
   api: `${apiUrl}`,
   api_security: `${apiUrl}auth/`,
   imgPath: imgPath,
+  BUILD_TS: 0,
 };

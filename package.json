@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "node dist/web-empresarial-frontend/server/server.mjs",
     "build": "sed -i \"s/BUILD_TS: [0-9]\\+/BUILD_TS: $(date +%s)/\" src/environments/environment.prod.ts && ng build --configuration production --optimization=true --source-map=false --output-hashing=all --aot",
-    "build:deploy": "ng build --configuration deploy --optimization=true --source-map=false  --output-hashing=all --aot",
+    "build:deploy": "sed -i \"s/BUILD_TS: [0-9]\\+/BUILD_TS: $(date +%s)/\" src/environments/environment.deploy.ts && ng build --configuration deploy --optimization=true --source-map=false --output-hashing=all --aot",
     "build:staging": "ng build --configuration staging --optimization=true --source-map=false  --output-hashing=all --aot",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

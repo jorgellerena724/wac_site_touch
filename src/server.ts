@@ -12,25 +12,30 @@ const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
+
+app.disable('x-powered-by');
+
+app.use((_req, res, next) => {
+  res.setHeader(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains; preload',
+  );
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+const KNOWN_ROUTES = new Set([
+  '/',
+  '/home',
+  '/about',
+  '/contact',
+]);
 
-/**
- * Serve static files from /browser
- * Importante: `redirect: false` previene redirecciones internas;
- * `index: false` evita que directorios sin index.html busquen en rutas de la app.
- */
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -41,11 +46,6 @@ app.use(
   })
 );
 
-/**
- * Guard para rutas de /assets
- * Si express.static no sirvió el asset, responde 404 rápido
- * en vez de pasar al SSR de Angular (evita timeouts en prerender).
- */
 app.use((req, res, next) => {
   if (req.path.startsWith('/assets/') && !req.path.endsWith('.html')) {
     res.status(404).type('text/plain').send('Asset not found');
@@ -54,10 +54,17 @@ app.use((req, res, next) => {
   }
 });
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
 app.use('/**', (req, res, next) => {
+  const urlPath = new URL(req.url, `http://${req.headers.host}`).pathname;
+  const isKnownRoute =
+    KNOWN_ROUTES.has(urlPath) ||
+    urlPath.startsWith('/assets/') ||
+    urlPath.startsWith('/health');
+
+  if (!isKnownRoute) {
+    res.status(404);
+  }
+
   angularApp
     .handle(req)
     .then((response) =>

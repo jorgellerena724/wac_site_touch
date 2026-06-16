@@ -1,4 +1,5 @@
 <div class="pt-20 bg-white">
+  <h1 class="sr-only">Travel Agency | Your next adventure awaits.</h1>
   <!-- Carrusel con Skeleton -->
   @if (showCarouselSkeleton()) {
     <!-- Skeleton del Carrusel -->
@@ -216,14 +217,14 @@
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <!-- Header (carga inmediata ya que es crítico) -->
       <div class="text-center mb-4 animate-slide-down-on-load relative">
-        <h1
+        <h2
           class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
         >
           {{ "products.title.first" | transloco }}
           <span class="text-teal-800">{{
             "products.title.second" | transloco
           }}</span>
-        </h1>
+        </h2>
         <p
           class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed relative z-10"
         >

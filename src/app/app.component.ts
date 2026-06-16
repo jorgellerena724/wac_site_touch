@@ -22,6 +22,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { ChatWidgetComponent } from './shared/components/chat-widget/chat-widget.component';
 import { ModalComponent } from './shared/components/app-modal/app-modal.component';
 import { environment } from '../environments/environment';
+import { SeoService } from './shared/services/system/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,7 @@ export class AppComponent {
   // Inyección moderna sin @Inject
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly seoService = inject(SeoService);
   private readonly injector = inject(Injector);
 
   // ViewChild moderna con signal
@@ -94,6 +96,15 @@ export class AppComponent {
         if (this.isBrowser) {
           this.checkForUpdates();
         }
+      }
+    });
+
+    effect(() => {
+      const url = this.currentUrl();
+      if (url) {
+        const segments = url.split('/');
+        const route = segments[1] || 'home';
+        this.seoService.updateForRoute(route);
       }
     });
   }
