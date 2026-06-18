@@ -3,7 +3,7 @@ const imgPath = `/assets/img/`;
 
 export const environment = {
   production: true,
-  defaultLanguage: 'en',
+  defaultLanguage: 'es',
   api: `${apiUrl}`,
   api_security: `${apiUrl}auth/`,
   imgPath: imgPath,
