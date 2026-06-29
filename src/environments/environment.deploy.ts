@@ -1,10 +1,16 @@
-const apiUrl = 'http://172.16.1.233:3002/';
+const apiUrl = 'http://localhost:3002/api/';
 const imgPath = `/assets/img/`;
 
 export const environment = {
   production: true,
+  defaultLanguage: 'es',
   api: `${apiUrl}`,
   api_security: `${apiUrl}auth/`,
   imgPath: imgPath,
-  BUILD_TS: 0,
+  BUILD_TS: 1782771543,
+  /*FRONT_TOKEN:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYW5hLmxvcmVuem9AdG91Y2hhbmRib29rLmNvbSIsImZ1bGxfbmFtZSI6IlRvdWNoIFJlZWYiLCJjbGllbnQiOiJ0b3VjaF9yZWVmIn0.t9Nz0jcETCBE8ZMWESdoYFDwRPMaI_zUiuui4DeE2Hg',
+*/
+  FRONT_TOKEN:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvdWNocmVlZkBzaGlya2Fzb2Z0LmNvbSIsImZ1bGxfbmFtZSI6IlRvdWNoIFJlZWYiLCJjbGllbnQiOiJ0b3VjaF9yZWVmIiwic291cmNlIjoid2Vic2l0ZSJ9.2GqJN05BcZMHlExZ27xVg7inlZCDILLXCModoCVH0uM',
 };
