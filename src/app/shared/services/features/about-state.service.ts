@@ -8,6 +8,7 @@ import { HomeData } from '../../interfaces/homeData.interface';
 import { LibreTranslateService } from '../system/libre-translate.service';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subject } from 'rxjs';
+import { ImageUrlService } from '../system/image-url.service';
 
 @Injectable({ providedIn: 'root' })
 export class AboutStateService implements OnDestroy {
@@ -48,6 +49,7 @@ export class AboutStateService implements OnDestroy {
     private companySrv: CompanyService,
     private managerSrv: ManagerService,
     private reviewSrv: ReviewService,
+    private imageUrls: ImageUrlService,
     private translateService: LibreTranslateService,
     private translocoService: TranslocoService,
   ) {
@@ -228,7 +230,7 @@ export class AboutStateService implements OnDestroy {
     try {
       const processedData = data.map((item) => {
         // Usar CompanyService para obtener la URL local
-        const imageUrl = this.companySrv.getImageUrl(item.photo);
+        const imageUrl = this.imageUrls.image(item.photo,'content');
 
         return {
           ...item,
@@ -258,7 +260,7 @@ export class AboutStateService implements OnDestroy {
       // CAMBIO CLAVE: Asignar URLs locales directamente (sin HTTP requests)
       const processedData = data.map((item) => {
         // Usar ManagerService para obtener la URL local
-        const imageUrl = this.managerSrv.getImageUrl(item.photo);
+        const imageUrl = this.imageUrls.image(item.photo,'user');
 
         return {
           ...item,
@@ -288,7 +290,7 @@ export class AboutStateService implements OnDestroy {
       // CAMBIO CLAVE: Asignar URLs locales directamente (sin HTTP requests)
       const processedData = data.map((item) => {
         // Usar ReviewService para obtener la URL local
-        const imageUrl = this.reviewSrv.getImageUrl(item.photo);
+        const imageUrl = this.imageUrls.image(item.photo,'user');
 
         return {
           ...item,
@@ -320,15 +322,4 @@ export class AboutStateService implements OnDestroy {
   }
 
   // ===== MÉTODOS DE UTILIDAD PARA IMÁGENES =====
-  getImageUrl(name: string | null | undefined): string {
-    return this.managerSrv.getImageUrl(name);
-  }
-
-  getDefaultImageUrl(): string {
-    return this.managerSrv.getDefaultImageUrl();
-  }
-
-  isDefaultImage(url: string | null | undefined): boolean {
-    return this.managerSrv.isDefaultImage(url);
-  }
 }

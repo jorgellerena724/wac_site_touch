@@ -12,6 +12,7 @@ import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { HeaderService } from '../../../shared/services/features/header.service';
+import { ImageUrlService } from '../../../shared/services/system/image-url.service';
 import { TranslocoService, TranslocoModule } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { environment } from '../../../../environments/environment';
@@ -33,6 +34,7 @@ export class NavbarComponent {
   // Servicios
   private readonly router = inject(Router);
   private readonly headerService = inject(HeaderService);
+  private readonly imageUrls = inject(ImageUrlService);
   private readonly transloco = inject(TranslocoService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
@@ -145,7 +147,7 @@ export class NavbarComponent {
       this.logoError.set(false);
 
       try {
-        const imageUrl = this.headerService.getImageUrl(logoName);
+        const imageUrl = this.imageUrls.image(logoName, 'content');
 
         // Crear una imagen en memoria para precargar y verificar
         const img = new Image();
@@ -168,26 +170,12 @@ export class NavbarComponent {
     }
   }
 
-  // Helper para obtener rutas de imágenes consistentes
-  getImagePath(filename: string): string {
-    if (!filename) return '';
-
-    // Asegurar que siempre tengamos la ruta correcta
-    const basePath = environment.imgPath || 'assets/img/';
-    const cleanPath = basePath.endsWith('/') ? basePath : `${basePath}/`;
-    const cleanFilename = filename.startsWith('/')
-      ? filename.slice(1)
-      : filename;
-
-    return `${cleanPath}${cleanFilename}`;
-  }
-
   // Computed para la URL del logo
   readonly logoUrl = computed(() => {
     const data = this.headerData();
     if (!data?.logo) return '';
 
-    return this.headerService.getImageUrl(data.logo);
+    return this.imageUrls.image(data.logo, 'content');
   });
 
   // Computed para determinar si mostrar el logo
@@ -266,7 +254,7 @@ export class NavbarComponent {
 
     try {
       if (logoName?.trim()) {
-        const faviconUrl = this.headerService.getImageUrl(logoName);
+        const faviconUrl = this.imageUrls.image(logoName, 'content');
         this.setFavicon(faviconUrl);
       } else {
         this.setDefaultFavicon();

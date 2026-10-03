@@ -22,7 +22,6 @@ export class HeaderService {
   readonly error = computed(() => this._error());
 
   private readonly apiUrl = environment.api;
-  private readonly localImgPath = environment.imgPath;
 
   constructor(private http: HttpClient) {}
 
@@ -64,14 +63,6 @@ export class HeaderService {
         })
       )
       .subscribe();
-  }
-
-  // Obtener URL de imagen
-  getImageUrl(name: string | null | undefined): string {
-    if (!name || name.trim() === '') {
-      return `${this.localImgPath}img_default.webp`;
-    }
-    return `${this.localImgPath}${name}`;
   }
 
   // Setear datos manualmente (útil para testing o inicialización)

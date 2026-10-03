@@ -9,7 +9,6 @@ import { HomeData } from '../../interfaces/homeData.interface';
 })
 export class ManagerService {
   private apiUrl = environment.api;
-  private localImgPath = environment.imgPath;
 
   constructor(private http: HttpClient) {}
 
@@ -26,22 +25,5 @@ export class ManagerService {
     );
   }
 
-  getImageUrl(name: string | null | undefined): string {
-    if (!name || name.trim() === '') {
-      return this.getDefaultImageUrl();
-    }
 
-    return `${this.localImgPath}${name}`;
-  }
-
-  getDefaultImageUrl(): string {
-    return `${this.localImgPath}users_default.webp`;
-  }
-
-  isDefaultImage(url: string | null | undefined): boolean {
-    if (!url || url.trim() === '') {
-      return true;
-    }
-    return url.includes('users_default.webp');
-  }
 }

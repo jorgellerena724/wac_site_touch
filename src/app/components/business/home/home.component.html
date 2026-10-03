@@ -92,7 +92,7 @@
                       @if (getCarouselMediaType(item) === "video") {
                         <video
                           #carouselVideo
-                          [src]="getImageUrl(item.imageUrl)"
+                          [src]="item.imageUrl"
                           (error)="handleVideoError($event)"
                           (loadedmetadata)="forceVideoMute($event)"
                           [title]="item.title"
@@ -106,7 +106,7 @@
                         </video>
                       } @else {
                         <img
-                          [src]="getImageUrl(item.imageUrl)"
+                          [src]="item.imageUrl"
                           (error)="handleImageError($event)"
                           [alt]="item.title"
                           [loading]="i === 0 ? 'eager' : 'lazy'"

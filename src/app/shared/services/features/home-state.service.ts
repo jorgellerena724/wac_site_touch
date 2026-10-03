@@ -19,6 +19,7 @@ import { of, Subject, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LibreTranslateService } from '../system/libre-translate.service';
 import { TranslocoService } from '@jsverse/transloco';
+import { ImageUrlService } from '../system/image-url.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +27,6 @@ export class HomeStateService implements OnDestroy {
   private readonly defaultLanguage = environment.defaultLanguage;
   private isBrowser: boolean = false;
   private apiUrl = environment.api;
-  private localImgPath = environment.imgPath;
 
   // ===== CAROUSEL & NEWS =====
   isCarouselLoaded = signal(false);
@@ -101,6 +101,7 @@ export class HomeStateService implements OnDestroy {
     private carrouselSrv: CarrouselService,
     private categorySrv: CategoryService,
     private translateService: LibreTranslateService,
+    private imageUrls: ImageUrlService,
     private translocoService: TranslocoService,
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -271,7 +272,7 @@ export class HomeStateService implements OnDestroy {
           : 'image';
 
         // Usar CarrouselService para obtener la URL local
-        const imageUrl = this.carrouselSrv.getImageUrl(item.photo);
+        const imageUrl = this.imageUrls.image(item.photo, 'content');
 
         return {
           ...item,
@@ -307,7 +308,7 @@ export class HomeStateService implements OnDestroy {
           : 'image';
 
         // Usar CarrouselService para obtener la URL local
-        const imageUrl = this.carrouselSrv.getImageUrl(item.photo);
+        const imageUrl = this.imageUrls.image(item.photo, 'content');
 
         return {
           ...item,
@@ -466,7 +467,7 @@ export class HomeStateService implements OnDestroy {
           mediaType = this.isVideoFile(photoName) ? 'video' : 'image';
         }
 
-        const imageUrl = this.getImageUrl(photoName);
+        const imageUrl = this.imageUrls.image(photoName, 'content');
 
         return {
           ...item,
@@ -553,72 +554,4 @@ export class HomeStateService implements OnDestroy {
     );
   }
 
-  // MÉTODO PARA OBTENER URL DE IMAGEN CON FALLBACK
-  getImageUrl(name: string | null | undefined): string {
-    if (!name || name.trim() === '') {
-      return this.getDefaultImageUrl();
-    }
-    return this.buildImageUrl(name);
-  }
-
-  // MÉTODO PARA OBTENER URL DE ARCHIVO
-  getFileUrl(name: string | null | undefined): string {
-    if (!name || name.trim() === '') {
-      return '';
-    }
-    return this.buildFileUrl(name);
-  }
-
-  // MÉTODO PARA OBTENER IMAGEN POR DEFECTO
-  getDefaultImageUrl(): string {
-    // Sin timestamp para permitir cacheo del navegador
-    return `${environment.imgPath}img_default.webp`;
-  }
-
-  private buildImageUrl(photoName: string): string {
-    // Sin timestamp para permitir cacheo del navegador
-
-    // Si es una URL completa, retornarla directamente
-    if (photoName.startsWith('http://') || photoName.startsWith('https://')) {
-      return photoName;
-    }
-
-    // Si empieza con /, es ruta absoluta
-    if (photoName.startsWith('/')) {
-      return photoName;
-    }
-
-    // Ruta relativa - usar localImgPath
-    return `${this.localImgPath}${photoName}`;
-  }
-
-  private buildFileUrl(fileName: string): string {
-    // Sin timestamp para permitir cacheo del navegador
-
-    // Para archivos, usar la misma lógica
-    if (fileName.startsWith('http://') || fileName.startsWith('https://')) {
-      return fileName;
-    }
-
-    if (fileName.startsWith('/')) {
-      return fileName;
-    }
-
-    return `${this.localImgPath}${fileName}`;
-  }
-
-  // Helper para detectar si es imagen por defecto
-  isDefaultImage(url: string | null | undefined): boolean {
-    if (!url || url.trim() === '') {
-      return true;
-    }
-    return url.includes('img_default.webp');
-  }
-
-  // Helper para obtener extensión de archivo
-  getFileExtension(fileName: string): string {
-    if (!fileName) return '';
-    const parts = fileName.split('.');
-    return parts.length > 1 ? parts.pop()!.toUpperCase() : '';
-  }
 }

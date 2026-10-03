@@ -23,6 +23,7 @@ import {
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { HomeStateService } from '../../../shared/services/features/home-state.service';
 import { ReviewService } from '../../../shared/services/features/review.service';
+import { ImageUrlService } from '../../../shared/services/system/image-url.service';
 import { ModalService } from '../../../shared/services/system/modal.service';
 import { NotificationService } from '../../../shared/services/system/notification.service';
 import { environment } from '../../../../environments/environment';
@@ -47,6 +48,7 @@ export class HomeComponent {
   // ===== INYECCIONES =====
   private readonly homeState = inject(HomeStateService);
   private readonly reviewService = inject(ReviewService);
+  private readonly imageUrls = inject(ImageUrlService);
   private readonly modalService = inject(ModalService);
   private readonly notificationService = inject(NotificationService);
   private readonly translocoService = inject(TranslocoService);
@@ -57,7 +59,7 @@ export class HomeComponent {
 
   // ===== CONSTANTES =====
   private readonly SCROLL_AMOUNT = 300;
-  private readonly DEFAULT_IMAGE = `${environment.imgPath}img_default.webp`;
+  private readonly DEFAULT_IMAGE = this.imageUrls.defaultImage('content');
 
   // ===== SIGNALS DEL CARRUSEL (HOME) =====
   readonly carouselData = this.homeState.carouselWithImages$;
@@ -763,7 +765,7 @@ export class HomeComponent {
 
     if (images.length > 0 && currentIndex < images.length) {
       const currentImage = images[currentIndex];
-      const imageUrl = this.homeState.getImageUrl(currentImage.media);
+      const imageUrl = this.imageUrls.image(currentImage.media);
       this.currentImageUrl.set(imageUrl);
     }
   }
@@ -802,28 +804,26 @@ export class HomeComponent {
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
-    if (!img.src.includes('img_default.webp')) {
-      img.src = this.DEFAULT_IMAGE;
+    if (!this.imageUrls.isDefaultImage(img.src)) {
+      img.src = this.imageUrls.defaultImage('content');
     }
   }
 
   onModalImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
-    if (!img.src.includes('img_default.webp')) {
-      img.src = this.DEFAULT_IMAGE;
+    if (!this.imageUrls.isDefaultImage(img.src)) {
+      img.src = this.imageUrls.defaultImage('content');
     }
   }
 
   isUsingDefault(url: string | null | undefined): boolean {
-    return this.homeState.isDefaultImage(url);
+    return this.imageUrls.isDefaultImage(url);
   }
 
   // ===== MÃ‰TODOS DE ARCHIVOS =====
   downloadFile(fileUrl: string, title: string): void {
     if (this.isBrowser && fileUrl && fileUrl.trim() !== '') {
-      const fileFullUrl = this.homeState.getFileUrl(fileUrl);
+      const fileFullUrl = this.imageUrls.file(fileUrl);
 
       if (!fileFullUrl) {
         console.error('No se pudo obtener la URL del archivo');
@@ -915,7 +915,7 @@ export class HomeComponent {
     this.zoomedMediaIndex.set(nextIndex);
 
     const nextFile = product.files[nextIndex];
-    const mediaUrl = this.homeState.getImageUrl(nextFile.media);
+    const mediaUrl = this.imageUrls.image(nextFile.media);
     const mediaType = this.isVideoFile(nextFile.media) ? 'video' : 'image';
 
     this.zoomedMediaUrl.set(mediaUrl);
@@ -933,7 +933,7 @@ export class HomeComponent {
     this.zoomedMediaIndex.set(prevIndex);
 
     const prevFile = product.files[prevIndex];
-    const mediaUrl = this.homeState.getImageUrl(prevFile.media);
+    const mediaUrl = this.imageUrls.image(prevFile.media);
     const mediaType = this.isVideoFile(prevFile.media) ? 'video' : 'image';
 
     this.zoomedMediaUrl.set(mediaUrl);
@@ -996,14 +996,14 @@ export class HomeComponent {
   // ===== MÉTODOS PÚBLICOS DEL HOME =====
 
   getImageUrl(path: string | null | undefined): string {
-    return this.homeState.getImageUrl(path);
+    return this.imageUrls.image(path, 'content');
   }
 
   handleImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
-    if (!img.src.includes('img_default.webp')) {
-      img.src = this.homeState.getDefaultImageUrl();
+    if (!this.imageUrls.isDefaultImage(img.src)) {
+      img.src = this.imageUrls.defaultImage('content');
     }
   }
 
@@ -1287,7 +1287,7 @@ export class HomeComponent {
   }
 
   getReviewImageUrl(path: string | null | undefined): string {
-    return this.reviewService.getImageUrl(path || '');
+    return this.imageUrls.image(path || '', 'user');
   }
 
   trackByReview(index: number, review: HomeData): number {

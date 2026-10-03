@@ -13,6 +13,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { AboutStateService } from '../../../shared/services/features/about-state.service';
+import { ImageUrlService } from '../../../shared/services/system/image-url.service';
 import { HomeData } from '../../../shared/interfaces/homeData.interface';
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
@@ -163,6 +164,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
 })
 export class AboutTeamComponent {
   private readonly aboutState = inject(AboutStateService);
+  private readonly imageUrls = inject(ImageUrlService);
 
   // Output como signal
   readonly onZoom = output<{ url: string; title: string }>();
@@ -189,23 +191,18 @@ export class AboutTeamComponent {
     });
   }
 
-  // Método para obtener la URL correcta de la imagen
-  getImageUrl(imageUrl: string | null | undefined): string {
-    return this.aboutState.getImageUrl(imageUrl);
-  }
-
   // Maneja el error cuando la imagen SÍ existe en BD pero NO físicamente (404)
   handleImageError(event: Event): void {
     const imgElement = event.target as HTMLImageElement;
     // Prevenir loop infinito: solo intentar cargar la imagen por defecto una vez
     if (!imgElement.src.includes('users_default.webp')) {
-      imgElement.src = this.aboutState.getDefaultImageUrl();
+      imgElement.src = this.imageUrls.defaultImage('user');
     }
   }
 
   // Helper para ocultar el botón de zoom si es la imagen por defecto
   isUsingDefault(url: string | null | undefined): boolean {
-    return this.aboutState.isDefaultImage(url);
+    return this.imageUrls.isDefaultImage(url);
   }
 
   trackByFn(index: number, item: HomeData): string | number {
@@ -230,6 +227,7 @@ export class AboutTeamComponent {
 })
 export class AboutComponent {
   private readonly aboutState = inject(AboutStateService);
+  private readonly imageUrls = inject(ImageUrlService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
 
@@ -250,8 +248,8 @@ export class AboutComponent {
   readonly zoomedMediaTitle = signal<string>('');
 
   // Constantes
-  protected readonly DEFAULT_IMAGE = `${environment.imgPath}img_default.webp`;
-  protected readonly path = environment.imgPath;
+  protected readonly DEFAULT_IMAGE = this.imageUrls.defaultImage('content');
+  protected readonly path = environment.staticImgPath;
 
   constructor() {
     // Cargar datos iniciales

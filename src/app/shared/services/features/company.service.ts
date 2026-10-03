@@ -9,7 +9,6 @@ import { HomeData } from '../../interfaces/homeData.interface';
 })
 export class CompanyService {
   private apiUrl = environment.api;
-  private localImgPath = environment.imgPath;
 
   constructor(private http: HttpClient) {}
 
@@ -26,9 +25,4 @@ export class CompanyService {
     );
   }
 
-  getImageUrl(name: string): string {
-    if (!name) return `${this.localImgPath}img_default.webp`;
-
-    return `${this.localImgPath}${name}`;
-  }
 }

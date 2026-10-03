@@ -18,6 +18,7 @@ import {
 import { TranslocoModule } from '@jsverse/transloco';
 import { ContactStateService } from '../../../shared/services/features/contact-state.service';
 import { HeaderService } from '../../../shared/services/features/header.service';
+import { ImageUrlService } from '../../../shared/services/system/image-url.service';
 import { getSocialNetworkConfig } from '../../../shared/constants/social-networks';
 
 @Component({
@@ -38,6 +39,7 @@ export class ContactComponent {
   // Servicios
   private readonly contactState = inject(ContactStateService);
   private readonly headerService = inject(HeaderService);
+  private readonly imageUrls = inject(ImageUrlService);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly injector = inject(Injector);
   private readonly platformId = inject(PLATFORM_ID);
@@ -56,7 +58,7 @@ export class ContactComponent {
   readonly logoUrl = computed(() => {
     const header = this.headerData();
     if (!header?.logo) return '';
-    return this.headerService.getImageUrl(header.logo);
+    return this.imageUrls.image(header.logo, 'content');
   });
 
   readonly companyName = computed(() => {
