@@ -41,18 +41,6 @@ app.use(
   }),
 );
 
-/**
- * Guard para rutas de /assets
- * Si express.static no sirvió el asset, responde 404 rápido
- * en vez de pasar al SSR de Angular (evita timeouts en prerender).
- */
-app.use((req, res, next) => {
-  if (req.path.startsWith('/assets/') && !req.path.endsWith('.html')) {
-    res.status(404).type('text/plain').send('Asset not found');
-  } else {
-    next();
-  }
-});
 
 /**
  * Handle all other requests by rendering the Angular application.

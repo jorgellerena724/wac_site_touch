@@ -1,5 +1,5 @@
 const apiUrl = 'http://localhost:3002/api/';
-const imgPath = `/assets/img/`;
+const imgPath = `/assets/img/uploads/`;
 const staticImgPath = `/assets/img/`;
 
 export const environment = {
