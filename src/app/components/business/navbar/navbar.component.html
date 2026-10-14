@@ -13,14 +13,16 @@
         >
           @if (logoLoading()) {
             <!-- Skeleton loading -->
-            <div class="h-16 w-16 bg-gray-200 animate-pulse"></div>
+            <div
+              class="h-12 md:h-16 w-36 md:w-44 bg-gray-200 animate-pulse rounded"
+            ></div>
           } @else if (logoUrl() && !logoError()) {
             <!-- Logo cargado -->
             <img
               [src]="logoUrl()"
               title="Logo"
               alt="Company Logo"
-              class="h-16 w-16 transition-transform hover:scale-105 object-cover"
+              class="h-12 md:h-16 w-auto max-w-[200px] md:max-w-[260px] object-contain transition-transform hover:scale-105"
               loading="eager"
             />
           } @else {
@@ -31,11 +33,15 @@
           }
         </div>
         <div
-          class="cursor-pointer text-teal-600 hover:text-teal-600 text-xl font-bold truncate max-w-[200px] md:max-w-full mr-8 ml-2 drop-shadow-sm"
+          class="cursor-pointer text-teal-600 text-xl font-bold truncate max-w-[200px] md:max-w-full mr-8 ml-2 drop-shadow-sm"
           (click)="scrollToTop()"
           [routerLink]="['/home']"
         >
-          {{ headerData()?.name || "Empresa" }}
+          @if (headerData()?.name; as name) {
+            {{ name }}
+          } @else if (isLoading()) {
+            <div class="h-5 w-32 bg-gray-200 animate-pulse rounded"></div>
+          }
         </div>
       </div>
 
