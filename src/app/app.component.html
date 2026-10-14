@@ -4,7 +4,10 @@
   <app-navbar id="navbar"></app-navbar>
   <main class="flex-1 bg-white">
     <router-outlet></router-outlet>
-    <app-chat-widget #chatWidgetComp></app-chat-widget>
+    <!-- El chat se carga en un chunk aparte: se precarga en idle y se monta al primer click -->
+    @defer (when chatRequested(); prefetch on idle) {
+      <app-chat-widget #chatWidgetComp></app-chat-widget>
+    }
   </main>
   <app-footer></app-footer>
   <!-- Botón flotante para ir al navbar -->

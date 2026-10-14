@@ -11,7 +11,6 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import {
   ChatbotService,
@@ -28,7 +27,7 @@ interface ChatMessage {
 @Component({
   selector: 'app-chat-widget',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslocoModule],
+  imports: [CommonModule, TranslocoModule],
   templateUrl: './chat-widget.component.html',
 })
 export class ChatWidgetComponent implements AfterViewChecked {

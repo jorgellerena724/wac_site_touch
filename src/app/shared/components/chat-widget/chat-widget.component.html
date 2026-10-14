@@ -206,7 +206,8 @@
           <div class="flex items-center space-x-1.5 sm:space-x-2">
             <input
               type="text"
-              [(ngModel)]="chatMessage"
+              [value]="chatMessage()"
+              (input)="chatMessage.set($any($event.target).value)"
               (keyup.enter)="sendMessage()"
               [placeholder]="'chat.input.placeholder' | transloco"
               class="flex-1 min-w-0 px-4 py-2.5 text-sm sm:text-base border text-ink bg-white border-slate-300 rounded-[3px] outline-none focus:ring-1 focus:ring-brand-600 focus:border-brand-600 transition-all duration-300"

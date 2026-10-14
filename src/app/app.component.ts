@@ -47,8 +47,10 @@ export class AppComponent {
   private readonly injector = inject(Injector);
 
   // ViewChild moderna con signal
-  readonly chatWidget =
-    viewChild.required<ChatWidgetComponent>('chatWidgetComp');
+  // Opcional: el widget vive dentro de un @defer y no existe hasta el primer click
+  readonly chatWidget = viewChild<ChatWidgetComponent>('chatWidgetComp');
+  readonly chatRequested = signal(false);
+  private pendingChatToggle = false;
 
   // Signals para el estado
   readonly isBrowser = isPlatformBrowser(this.platformId);
@@ -82,6 +84,15 @@ export class AppComponent {
         { injector: this.injector },
       );
     }
+
+    // Abrir el chat en cuanto el bloque @defer termine de montar el widget
+    effect(() => {
+      const widget = this.chatWidget();
+      if (widget && this.pendingChatToggle) {
+        this.pendingChatToggle = false;
+        widget.toggleChat();
+      }
+    });
 
     // Effect para manejar cambios de ruta
     effect(() => {
@@ -140,7 +151,13 @@ export class AppComponent {
 
   // Método para toggle del chat (opcional, para usar en el template)
   toggleChat(): void {
-    this.chatWidget().toggleChat();
+    const widget = this.chatWidget();
+    if (widget) {
+      widget.toggleChat();
+      return;
+    }
+    this.pendingChatToggle = true;
+    this.chatRequested.set(true);
   }
 
   // Computed signal para el estado del chat
