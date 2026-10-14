@@ -1,586 +1,297 @@
-<section class="bg-white py-10 overflow-x-hidden relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="overflow-x-hidden bg-white">
+  <!-- =====================================================
+       ENCABEZADO
+       ===================================================== -->
+  <section class="relative isolate overflow-hidden bg-ink pb-36 pt-32 sm:pb-40 sm:pt-36 lg:pb-44 lg:pt-44">
     <div
-      class="text-center mb-16 mt-20"
+      class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50rem_26rem_at_85%_10%,rgba(27,1,188,0.7),transparent_60%),radial-gradient(36rem_20rem_at_5%_100%,rgba(250,161,128,0.18),transparent_60%)]"
+    ></div>
+    <div
+      class="container-x"
       [ngClass]="{
         'slide-in-from-top': isHeaderLoaded(),
-        '-translate-y-12 opacity-0': !isHeaderLoaded(),
+        'opacity-0': !isHeaderLoaded(),
       }"
     >
-      <h1
-        class="text-4xl font-extrabold text-teal-600 sm:text-5xl drop-shadow-sm mb-4"
-      >
+      <span class="eyebrow-light">{{ "ui.eyebrow.contact" | transloco }}</span>
+      <h1 class="heading-xl mt-6 max-w-4xl text-white">
         {{ "contact.title" | transloco }}
       </h1>
-      <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
         {{ "contact.text" | transloco }}
       </p>
     </div>
+  </section>
 
-    <!-- Layout con teléfono y tarjeta -->
-    <div class="flex justify-center items-center gap-8 lg:gap-12">
-      <!-- Contenedor de redes sociales -->
+  <!-- =====================================================
+       CONTENIDO
+       ===================================================== -->
+  <section class="container-x relative z-10 -mt-24 pb-20 sm:-mt-28 sm:pb-28">
+    <div class="grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:gap-8">
+      <!-- Canales de contacto -->
       <div
-        class="w-full max-w-2xl relative"
+        class="bg-white p-6 shadow-[0_30px_70px_-25px_rgba(26,20,70,0.4)] ring-1 ring-slate-200 sm:p-10"
         [ngClass]="{
           'slide-in-from-left': isContactInfoLoaded(),
-          '-translate-x-full opacity-0': !isContactInfoLoaded(),
+          'opacity-0': !isContactInfoLoaded(),
+        }"
+      >
+        <h2 class="heading-md">
+          {{ "contact.square.right.title" | transloco }}
+        </h2>
+
+        @if (hasAnyContactInfo()) {
+          <div class="mt-8 divide-y divide-slate-200 border-y border-slate-200">
+            <!-- Dirección -->
+            @if (isAddressValid()) {
+              <button
+                type="button"
+                class="group flex w-full items-center gap-5 py-5 text-left"
+                (click)="openGoogleMaps()"
+              >
+                <span
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[3px] bg-brand-50 text-brand-600 transition-colors duration-200 group-hover:bg-brand-600 group-hover:text-white"
+                >
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="field-label !mb-1">
+                    {{ "contact.square.right.address" | transloco }}
+                  </span>
+                  <span class="block whitespace-pre-line text-[15px] font-semibold text-ink">
+                    {{ contactData().address }}
+                  </span>
+                  <span class="mt-1 block text-xs text-slate-500">
+                    {{ "contact.square.right.button" | transloco }}
+                  </span>
+                </span>
+                <svg class="h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            }
+
+            <!-- Email -->
+            @if (isEmailValid()) {
+              <button
+                type="button"
+                class="group flex w-full items-center gap-5 py-5 text-left"
+                (click)="openEmail()"
+              >
+                <span
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[3px] bg-coral-50 text-coral-600 transition-colors duration-200 group-hover:bg-coral-400 group-hover:text-ink"
+                >
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="field-label !mb-1">
+                    {{ "contact.square.right.email" | transloco }}
+                  </span>
+                  <span class="block break-all text-[15px] font-semibold text-ink">
+                    {{ contactData().email }}
+                  </span>
+                  <span class="mt-1 block text-xs text-slate-500">
+                    {{ "contact.square.right.email.hint" | transloco }}
+                  </span>
+                </span>
+                <svg class="h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            }
+
+            <!-- Redes sociales -->
+            @for (network of activeSocialNetworks(); track network.network) {
+              <button
+                type="button"
+                class="group flex w-full items-center gap-5 py-5 text-left"
+                (click)="openSocialNetwork(network)"
+              >
+                <span
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[3px]"
+                  [style.background-color]="getSocialNetworkBackgroundColor(network.network)"
+                  [style.color]="getSocialNetworkColor(network.network)"
+                >
+                  <span class="block h-6 w-6" [innerHTML]="getSocialNetworkIcon(network.network)"></span>
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="field-label !mb-1">
+                    {{ getSocialNetworkLabel(network.network) }}
+                  </span>
+                  <span class="block break-all text-[15px] font-semibold text-ink">
+                    {{ network.username }}
+                  </span>
+                  <span class="mt-1 block text-xs text-slate-500">
+                    {{ getSocialNetworkHint(network.network) | transloco }}
+                  </span>
+                </span>
+                <svg class="h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            }
+          </div>
+        } @else {
+          <div
+            class="mt-8 flex flex-col items-center justify-center rounded-md border border-dashed border-slate-300 px-6 py-14 text-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.4"
+              class="mb-4 h-12 w-12 text-slate-300 transition-all duration-700 ease-out"
+              [ngClass]="{
+                'scale-100 opacity-100': isContactEmptyIconLoaded(),
+                'scale-75 opacity-0': !isContactEmptyIconLoaded(),
+              }"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <h3
+              class="text-base font-semibold text-slate-500 transition-all duration-700 ease-out"
+              [ngClass]="{
+                'translate-y-0 opacity-100': isContactEmptyTextLoaded(),
+                'translate-y-2 opacity-0': !isContactEmptyTextLoaded(),
+              }"
+            >
+              {{ "contact.noContactInfo" | transloco }}
+            </h3>
+          </div>
+        }
+      </div>
+
+      <!-- Panel WhatsApp -->
+      <div
+        class="relative isolate flex flex-col overflow-hidden bg-brand-600 p-8 text-white sm:p-10"
+        [ngClass]="{
+          'slide-in-from-right': isContactInfoLoaded(),
+          'opacity-0': !isContactInfoLoaded(),
         }"
       >
         <div
-          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 flex flex-col h-full relative z-10 animate-container-breeze"
-        >
-          <h2 class="text-3xl font-bold text-orange-500 mb-8">
-            {{ "contact.square.right.title" | transloco }}
-          </h2>
-          <div class="flex-grow space-y-6">
-            @if (hasAnyContactInfo()) {
-              <!-- Dirección - Prioridad 1 -->
-              @if (isAddressValid()) {
-                <div>
-                  <div
-                    class="flex items-start p-4 rounded-xl transition-all duration-300 hover:bg-teal-50 group cursor-pointer"
-                    (click)="openGoogleMaps()"
-                  >
-                    <div class="flex-shrink-0 mt-1">
-                      <div
-                        class="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center"
-                      >
-                        <svg
-                          class="h-6 w-6 text-teal-600"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          title="Abrir en Google Maps"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="ml-4">
-                      <p class="text-lg font-semibold text-teal-600">
-                        {{ "contact.square.right.address" | transloco }}
-                      </p>
-                      <p class="text-slate-600" style="white-space: pre-line">
-                        {{ contactData().address }}
-                      </p>
-                      <small
-                        class="text-sm text-orange-400 mt-2 block font-semibold group-hover:text-orange-500 transition-colors duration-300"
-                      >
-                        <em>{{ "contact.square.right.button" | transloco }}</em>
-                      </small>
-                    </div>
-                  </div>
-                </div>
-              }
+          class="pointer-events-none absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full border-[40px] border-white/[0.06]"
+        ></div>
+        <div
+          class="pointer-events-none absolute -bottom-32 -left-16 -z-10 h-80 w-80 rounded-full border-[48px] border-white/[0.05]"
+        ></div>
 
-              <!-- Email - Prioridad 2 -->
-              @if (isEmailValid()) {
-                @if (isAddressValid()) {
-                  <hr class="border-amber-300 my-4" />
-                }
-                <div
-                  class="flex items-start p-4 rounded-xl transition-all duration-300 hover:bg-teal-50 group cursor-pointer"
-                  (click)="openEmail()"
-                >
-                  <div class="flex-shrink-0 mt-1">
-                    <div
-                      class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center"
-                    >
-                      <svg
-                        class="h-6 w-6 text-orange-500"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="ml-4">
-                    <p class="text-lg font-semibold text-orange-500">
-                      {{ "contact.square.right.email" | transloco }}
-                    </p>
-                    <p
-                      class="text-slate-600 transition-colors duration-300 font-medium"
-                    >
-                      {{ contactData().email }}
-                    </p>
-                    <small
-                      class="text-sm text-orange-400 mt-2 block font-semibold group-hover:text-orange-500 transition-colors duration-300"
-                    >
-                      <em>{{
-                        "contact.square.right.email.hint" | transloco
-                      }}</em>
-                    </small>
-                  </div>
-                </div>
-              }
-
-              <!-- Redes Sociales - Después de dirección y email -->
-              @for (
-                network of activeSocialNetworks();
-                track network.network;
-                let i = $index
-              ) {
-                <div>
-                  @if (i === 0 && (isAddressValid() || isEmailValid())) {
-                    <hr class="border-amber-300 my-4" />
-                  }
-                  @if (i > 0) {
-                    <hr class="border-amber-300 my-4" />
-                  }
-                  <div
-                    class="flex items-start p-4 rounded-xl transition-all duration-300 hover:bg-teal-50 group cursor-pointer"
-                    (click)="openSocialNetwork(network)"
-                  >
-                    <div class="flex-shrink-0 mt-1">
-                      <div
-                        class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300"
-                        [style.background-color]="
-                          getSocialNetworkBackgroundColor(network.network)
-                        "
-                        [style.color]="getSocialNetworkColor(network.network)"
-                      >
-                        <div
-                          [innerHTML]="getSocialNetworkIcon(network.network)"
-                        ></div>
-                      </div>
-                    </div>
-                    <div class="ml-4">
-                      <p class="text-lg font-semibold text-teal-600">
-                        {{ getSocialNetworkLabel(network.network) }}
-                      </p>
-                      <p
-                        class="text-slate-600 transition-colors duration-300 font-medium"
-                      >
-                        {{ network.username }}
-                      </p>
-                      <small
-                        class="text-sm text-orange-400 mt-2 block font-semibold group-hover:text-orange-500 transition-colors duration-300"
-                      >
-                        <em>{{
-                          getSocialNetworkHint(network.network) | transloco
-                        }}</em>
-                      </small>
-                    </div>
-                  </div>
-                </div>
-              }
+        <div class="flex items-center gap-4">
+          <div class="relative h-16 w-16 flex-shrink-0">
+            @if (logoUrl() && !logoError()) {
+              <div class="flex h-full w-full items-center justify-center rounded-full bg-white p-2.5">
+                <img
+                  [src]="logoUrl()"
+                  [alt]="companyName()"
+                  class="h-full w-full object-contain"
+                  (error)="onLogoError()"
+                />
+              </div>
             } @else {
-              <!-- Estado vacío - No hay información de contacto -->
-              <div
-                class="flex flex-col items-center justify-center text-center py-12"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="80"
-                  height="80"
-                  fill="currentColor"
-                  class="bi bi-emoji-tear text-amber-300 mb-4 transform transition-all duration-700 ease-out"
-                  viewBox="0 0 16 16"
-                  [ngClass]="{
-                    'scale-100 rotate-0': isContactEmptyIconLoaded(),
-                    'scale-50 -rotate-12': !isContactEmptyIconLoaded(),
-                  }"
-                >
-                  <path
-                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-                  />
-                  <path
-                    d="M6.831 11.43A3.1 3.1 0 0 1 8 11.196c.916 0 1.607.408 2.25.826.212.138.424-.069.282-.277-.564-.83-1.558-2.049-2.532-2.049-.53 0-1.066.361-1.536.824q.126.27.232.535q.069.174.135.373ZM6 11.333C6 12.253 5.328 13 4.5 13S3 12.254 3 11.333c0-.706.882-2.29 1.294-2.99a.238.238 0 0 1 .412 0c.412.7 1.294 2.284 1.294 2.99M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5m-1.5-3A.5.5 0 0 1 10 3c1.162 0 2.35.584 2.947 1.776a.5.5 0 1 1-.894.448C11.649 4.416 10.838 4 10 4a.5.5 0 0 1-.5-.5M7 3.5a.5.5 0 0 0-.5-.5c-1.162 0-2.35.584-2.947 1.776a.5.5 0 1 0 .894.448C4.851 4.416 5.662 4 6.5 4a.5.5 0 0 0 .5-.5"
-                  />
-                </svg>
-                <h3
-                  class="text-lg font-semibold text-slate-600 mb-2 transform transition-all duration-900 ease-out"
-                  [ngClass]="{
-                    'translate-x-0 opacity-100': isContactEmptyTextLoaded(),
-                    '-translate-x-8 opacity-0': !isContactEmptyTextLoaded(),
-                  }"
-                >
-                  {{ "contact.noContactInfo" | transloco }}
-                </h3>
+              <div class="flex h-full w-full items-center justify-center rounded-full bg-white text-2xl font-extrabold text-brand-600">
+                {{ companyName().charAt(0) }}
               </div>
             }
+            <span class="pulse-ring"></span>
+            <span class="pulse-ring pulse-ring-delay"></span>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
+              {{ "contact.calling" | transloco }}
+            </p>
+            <p class="truncate text-lg font-bold tracking-tight">{{ companyName() }}</p>
           </div>
         </div>
-      </div>
 
-      <!-- Teléfono móvil - Solo visible en pantallas grandes -->
-      <div
-        class="hidden lg:block relative phone-container"
-        [ngClass]="{
-          'slide-in-from-right': isContactInfoLoaded(),
-          'translate-x-full opacity-0': !isContactInfoLoaded(),
-        }"
-      >
-        <div class="phone-mockup">
-          <div class="phone-inner">
-            <!-- Pantalla del teléfono con diseño de llamada -->
-            <div class="phone-screen">
-              <div class="call-screen">
-                <!-- Texto de llamada -->
-                <div class="call-text">{{ "contact.calling" | transloco }}</div>
+        <h2 class="mt-10 text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl">
+          {{ "ui.whatsapp" | transloco }}
+        </h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-white/75">
+          {{ "ui.whatsappText" | transloco }}
+        </p>
 
-                <!-- Logo de la empresa -->
-                <div class="logo-container">
-                  @if (logoUrl() && !logoError()) {
-                    <img
-                      [src]="logoUrl()"
-                      [alt]="companyName()"
-                      class="company-logo"
-                      (error)="onLogoError()"
-                    />
-                  } @else {
-                    <div class="logo-fallback">
-                      <span>{{ companyName().charAt(0) }}</span>
-                    </div>
-                  }
-                  <!-- Anillo de pulso alrededor del logo -->
-                  <div class="pulse-ring"></div>
-                  <div class="pulse-ring pulse-ring-delay"></div>
-                </div>
-
-                <!-- Nombre de la empresa -->
-                <div class="company-name">{{ companyName() }}</div>
-
-                <!-- Botón de colgar -->
-                <div class="call-actions">
-                  <div class="action-button decline" (click)="openWhatsApp()">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      style="transform: rotate(135deg)"
-                    >
-                      <path
-                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="mt-auto pt-10">
+          <button type="button" (click)="openWhatsApp()" class="btn w-full bg-[#25D366] text-ink hover:bg-white">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+            </svg>
+            WhatsApp
+          </button>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <style>
   @keyframes slide-in-from-top {
-    0% {
+    from {
       opacity: 0;
-      transform: translateY(-50px);
+      transform: translateY(-20px);
     }
-    100% {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
   .slide-in-from-top {
-    animation: slide-in-from-top 1.8s ease-out forwards;
+    animation: slide-in-from-top 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   @keyframes slide-in-from-left {
-    0% {
+    from {
       opacity: 0;
-      transform: translateX(-100px);
+      transform: translateY(24px);
     }
-    100% {
+    to {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
   .slide-in-from-left {
-    animation: slide-in-from-left 1.8s ease-out forwards;
+    animation: slide-in-from-left 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   @keyframes slide-in-from-right {
-    0% {
+    from {
       opacity: 0;
-      transform: translateX(100px);
+      transform: translateY(24px);
     }
-    100% {
+    to {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
   .slide-in-from-right {
-    animation: slide-in-from-right 1.8s ease-out forwards;
+    animation: slide-in-from-right 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
   }
 
-  @keyframes container-breeze {
-    0%,
-    100% {
-      transform: translateX(0) translateY(0) rotate(0deg);
-    }
-    25% {
-      transform: translateX(6px) translateY(-4px) rotate(0.6deg);
-    }
-    50% {
-      transform: translateX(-5px) translateY(4px) rotate(-0.6deg);
-    }
-    75% {
-      transform: translateX(4px) translateY(-3px) rotate(0.4deg);
-    }
-  }
-  .animate-container-breeze {
-    animation: container-breeze 12s ease-in-out infinite;
-  }
-
-  /* Estilos del teléfono móvil */
-  .phone-container {
-    width: 280px;
-    height: 560px;
-    position: relative;
-  }
-
-  .phone-mockup {
-    width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 40px;
-    padding: 0;
-    box-shadow:
-      0 0 20px rgba(13, 148, 136, 0.15),
-      0 0 40px rgba(13, 148, 136, 0.1);
-    border: 1px solid rgba(13, 148, 136, 0.1);
-    position: relative;
-    transition: transform 0.3s ease;
-    transform: perspective(1000px) rotateY(0deg);
-  }
-
-  .phone-mockup:hover {
-    transform: perspective(1000px) rotateY(-8deg) translateY(-5px);
-  }
-
-  .phone-mockup::before {
-    content: "";
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 5px;
-    background: rgba(13, 148, 136, 0.2);
-    border-radius: 3px;
-    z-index: 10;
-  }
-
-  .phone-inner {
-    width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 40px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .phone-screen {
-    width: 100%;
-    height: 100%;
-    background: white;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .phone-screen::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(
-        circle at 30% 30%,
-        rgba(13, 148, 136, 0.1) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 70% 70%,
-        rgba(13, 148, 136, 0.08) 0%,
-        transparent 50%
-      );
-    animation: phone-glow 8s ease-in-out infinite;
-  }
-
-  /* Pantalla de llamada */
-  .call-screen {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 40px 20px;
-  }
-
-  .company-name {
-    color: #145a6e;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-
-  .logo-container {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin-bottom: 30px;
-  }
-
-  .company-logo {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(13, 148, 136, 0.3);
-    box-shadow: 0 5px 15px rgba(13, 148, 136, 0.2);
-    position: relative;
-    z-index: 2;
-  }
-
-  .logo-fallback {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0d9488 0%, #0d9488 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid rgba(13, 148, 136, 0.3);
-    box-shadow: 0 5px 15px rgba(13, 148, 136, 0.2);
-    position: relative;
-    z-index: 2;
-  }
-
-  .logo-fallback span {
-    color: white;
-    font-size: 42px;
-    font-weight: bold;
-  }
-
-  /* Anillos de pulso */
+  /* Anillos de pulso alrededor del logo */
   .pulse-ring {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
-    border: 2px solid rgba(13, 148, 136, 0.4);
+    inset: 0;
+    border: 2px solid rgba(255, 255, 255, 0.45);
     border-radius: 50%;
-    animation: pulse-animation 2s ease-out infinite;
+    animation: pulse-animation 2.4s ease-out infinite;
+    pointer-events: none;
   }
-
   .pulse-ring-delay {
-    animation-delay: 1s;
+    animation-delay: 1.2s;
   }
-
   @keyframes pulse-animation {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
+    from {
+      transform: scale(1);
       opacity: 1;
     }
-    100% {
-      transform: translate(-50%, -50%) scale(1.4);
+    to {
+      transform: scale(1.5);
       opacity: 0;
-    }
-  }
-
-  .call-text {
-    color: #145a6e;
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 25px;
-  }
-
-  /* Botones de acción */
-  .call-actions {
-    display: flex;
-    justify-content: center;
-  }
-
-  .action-button {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(13, 148, 136, 0.2);
-  }
-
-  .action-button svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .action-button.decline {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    color: white;
-  }
-
-  .action-button.decline:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
-  }
-
-  .action-button.accept {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-  }
-
-  .action-button.accept:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
-  }
-
-  @keyframes phone-glow {
-    0%,
-    100% {
-      opacity: 0.3;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.6;
-      transform: scale(1.05);
-    }
-  }
-
-  /* Responsive - ocultar teléfono en pantallas pequeñas */
-  @media (max-width: 1023px) {
-    .phone-container {
-      display: none;
     }
   }
 </style>

@@ -1,216 +1,141 @@
-<div class="pt-20 bg-white">
+<div class="bg-white">
   <h1 class="sr-only">Travel Agency | Your next adventure awaits.</h1>
-  <!-- Carrusel con Skeleton -->
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
   @if (showCarouselSkeleton()) {
-    <!-- Skeleton del Carrusel -->
     <div
-      class="relative w-full h-[450px] sm:h-[550px] lg:h-[650px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15)]"
+      class="relative h-[680px] w-full overflow-hidden bg-ink sm:h-[760px] lg:h-screen lg:min-h-[700px] lg:max-h-[900px]"
     >
       <div
-        class="w-full h-full bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 skeleton-shimmer"
+        class="absolute inset-0 animate-pulse bg-gradient-to-b from-brand-900 via-ink to-ink"
+      ></div>
+      <div
+        class="relative flex h-full flex-col items-center justify-center gap-5 px-6 pb-16 pt-16 text-center lg:pt-[72px]"
       >
-        <div class="relative h-full flex flex-col justify-end p-6 sm:p-12">
-          <!-- Skeleton del gradiente de fondo -->
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-gray-300 via-gray-200/70 to-transparent opacity-90"
-          ></div>
-
-          <!-- Skeleton del contenido -->
-          <div class="relative z-10 space-y-4 sm:space-y-6">
-            <!-- Skeleton del título -->
-            <div class="space-y-2 sm:space-y-3">
-              <div
-                class="h-6 sm:h-8 lg:h-10 xl:h-12 bg-gray-300 rounded-lg w-3/4 animate-pulse"
-              ></div>
-              <div
-                class="h-6 sm:h-8 lg:h-10 xl:h-12 bg-gray-300 rounded-lg w-1/2 animate-pulse delay-75"
-              ></div>
-            </div>
-
-            <!-- Skeleton de la descripción -->
-            <div class="space-y-2 pt-2 sm:pt-4">
-              <div
-                class="h-3 sm:h-4 lg:h-5 xl:h-6 bg-gray-200 rounded w-full animate-pulse delay-150"
-              ></div>
-              <div
-                class="h-3 sm:h-4 lg:h-5 xl:h-6 bg-gray-200 rounded w-5/6 animate-pulse delay-200"
-              ></div>
-              <div
-                class="h-3 sm:h-4 lg:h-5 xl:h-6 bg-gray-200 rounded w-4/6 animate-pulse delay-300"
-              ></div>
-              <div
-                class="hidden sm:block h-3 sm:h-4 lg:h-5 bg-gray-200 rounded w-3/4 animate-pulse delay-[400ms]"
-              ></div>
-            </div>
-          </div>
-
-          <!-- Skeleton de los botones de navegación -->
-          <div
-            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 rounded-full animate-pulse shadow-lg"
-          ></div>
-          <div
-            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 rounded-full animate-pulse shadow-lg"
-          ></div>
-
-          <!-- Skeleton de los indicadores -->
-          <div
-            class="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center space-x-2 sm:space-x-3"
-          >
-            @for (i of [1, 2, 3]; track i) {
-              <div
-                class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full bg-gray-300 animate-pulse"
-                [style.animation-delay]="i * 100 + 'ms'"
-              ></div>
-            }
-          </div>
-        </div>
+        <div class="h-3 w-40 animate-pulse rounded-sm bg-white/15"></div>
+        <div class="h-10 w-full max-w-3xl animate-pulse rounded-sm bg-white/15 sm:h-14"></div>
+        <div class="h-10 w-2/3 max-w-2xl animate-pulse rounded-sm bg-white/15 sm:h-14"></div>
+        <div class="mt-4 h-4 w-full max-w-xl animate-pulse rounded-sm bg-white/10"></div>
+        <div class="h-12 w-44 animate-pulse rounded-sm bg-white/15"></div>
       </div>
     </div>
   } @else {
-    <!-- Carrusel Real -->
     @if (carouselData().length > 0) {
-      <div
-        class="relative w-full h-[500px] sm:h-[650px] lg:h-[800px] overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.2),_0_0_40px_rgba(28, 119, 144,0.15),_0_0_60px_rgba(28, 119, 144,0.1),_0_0_80px_rgba(28, 119, 144,0.05)]"
+      <section
+        class="relative h-[680px] w-full overflow-hidden bg-ink sm:h-[760px] lg:h-screen lg:min-h-[700px] lg:max-h-[900px]"
       >
-        <div class="w-full h-full">
-          <div class="carrousel-container relative h-full" #carouselSection>
-            @if (carouselData().length) {
-              <div
-                #carrouselSlides
-                class="carrousel-slides flex transition-transform duration-500 ease-in-out h-full"
-                [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'"
-              >
-                @for (
-                  item of carouselData();
-                  track trackByFn(i, item);
-                  let i = $index
-                ) {
-                  <div
-                    class="carrousel-slide w-full flex-shrink-0 relative group h-full"
-                  >
-                    <div class="absolute inset-0 h-full">
-                      @if (getCarouselMediaType(item) === "video") {
-                        <video
-                          #carouselVideo
-                          [src]="item.imageUrl"
-                          (error)="handleVideoError($event)"
-                          (loadedmetadata)="forceVideoMute($event)"
-                          [title]="item.title"
-                          class="w-full h-full object-cover"
-                          muted
-                          loop
-                          autoplay
-                          playsinline
-                        >
-                          {{ "common.videoNotSupported" | transloco }}
-                        </video>
-                      } @else {
-                        <img
-                          [src]="item.imageUrl"
-                          (error)="handleImageError($event)"
-                          [alt]="item.title"
-                          [loading]="i === 0 ? 'eager' : 'lazy'"
-                          class="w-full h-full object-cover"
-                        />
-                      }
-                      <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"
-                      ></div>
-                    </div>
-                    <div
-                      class="relative px-12 py-6 sm:px-6 sm:py-8 lg:py-12 lg:px-8 flex flex-col h-full transition-shadow duration-300 shadow-lg group-hover:shadow-2xl"
+        <div class="carrousel-container relative h-full" #carouselSection>
+          <div
+            #carrouselSlides
+            class="carrousel-slides flex h-full transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+            [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'"
+          >
+            @for (
+              item of carouselData();
+              track trackByFn(i, item);
+              let i = $index
+            ) {
+              <div class="carrousel-slide relative h-full w-full flex-shrink-0">
+                <!-- Media -->
+                <div class="absolute inset-0 overflow-hidden">
+                  @if (getCarouselMediaType(item) === "video") {
+                    <video
+                      #carouselVideo
+                      [src]="item.imageUrl"
+                      (error)="handleVideoError($event)"
+                      (loadedmetadata)="forceVideoMute($event)"
+                      [title]="item.title"
+                      class="h-full w-full object-cover"
+                      muted
+                      loop
+                      autoplay
+                      playsinline
                     >
-                      <div class="flex-1"></div>
-                      <div
-                        class="content-container mx-2 sm:mx-8 lg:mx-12 flex flex-col max-w-4xl"
+                      {{ "common.videoNotSupported" | transloco }}
+                    </video>
+                  } @else {
+                    <img
+                      [src]="item.imageUrl"
+                      (error)="handleImageError($event)"
+                      [alt]="item.title"
+                      [loading]="i === 0 ? 'eager' : 'lazy'"
+                      class="h-full w-full object-cover"
+                      [class.animate-kenburns]="currentSlide() === i"
+                    />
+                  }
+                  <div class="absolute inset-0 bg-ink/35"></div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-b from-ink/60 via-transparent to-ink/80"
+                  ></div>
+                </div>
+
+                <!-- Contenido -->
+                <div
+                  class="relative flex h-full flex-col items-center justify-center px-6 pb-20 pt-16 text-center sm:pb-24 lg:pt-[72px]"
+                >
+                  @if (currentSlide() === i) {
+                    <div class="flex max-w-5xl flex-col items-center">
+                      <span
+                        class="eyebrow-light animate-rise"
+                        style="animation-delay: 0.1s"
                       >
-                        <div class="title-container flex-shrink-0 mb-2 sm:mb-4">
-                          <h2
-                            class="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white drop-shadow-xl overflow-visible leading-tight slide-in-title"
-                            [class.opacity-100]="currentSlide() === i"
-                            [class.opacity-0]="currentSlide() !== i"
-                          >
-                            {{ item.title }}
-                          </h2>
-                        </div>
-                        <div class="description-container mt-2 sm:mt-4">
-                          <p
-                            class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-teal-50 leading-relaxed sm:leading-relaxed lg:leading-loose h-20 sm:h-40 lg:h-48 overflow-y-auto pr-2 custom-scrollbar drop-shadow-lg whitespace-pre-line slide-in-description"
-                            [class.opacity-100]="currentSlide() === i"
-                            [class.opacity-0]="currentSlide() !== i"
-                          >
-                            {{ item.description }}
-                          </p>
-                        </div>
-                        <div class="mt-4 sm:mt-6">
-                          <button
-                            (click)="scrollToServices()"
-                            class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-full text-base sm:text-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95"
-                          >
-                            {{ "products.cta" | transloco }}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-5 w-5"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              stroke-width="2"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M19 9l-7 7-7-7"
-                              />
-                            </svg>
-                          </button>
-                        </div>
+                        {{ "ui.eyebrow.services" | transloco }}
+                      </span>
+                      <h2
+                        class="heading-xl mt-6 text-white animate-rise"
+                        style="animation-delay: 0.2s"
+                      >
+                        {{ item.title }}
+                      </h2>
+                      <p
+                        class="custom-scrollbar custom-scrollbar-light mt-6 max-h-28 max-w-2xl overflow-y-auto whitespace-pre-line text-base leading-relaxed text-white/85 animate-rise sm:text-lg lg:max-h-32"
+                        style="animation-delay: 0.35s"
+                      >
+                        {{ item.description }}
+                      </p>
+                      <div
+                        class="mt-9 flex flex-wrap items-center justify-center gap-3 animate-rise"
+                        style="animation-delay: 0.5s"
+                      >
+                        <button (click)="scrollToServices()" class="btn-accent">
+                          {{ "products.cta" | transloco }}
+                        </button>
+                        <a [routerLink]="['/contact']" class="btn-outline-light">
+                          {{ "home.footer.leftbutton" | transloco }}
+                        </a>
                       </div>
-                      <div class="flex-shrink-0 h-16 sm:h-12 lg:h-16"></div>
                     </div>
-                  </div>
-                }
+                  }
+                </div>
               </div>
             }
+          </div>
+
+          @if (carouselData().length > 1) {
             <button
-              class="prev absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
+              class="prev icon-sq-light absolute left-6 top-1/2 hidden -translate-y-1/2 lg:inline-flex"
               (click)="prevSlide()"
+              aria-label="Previous slide"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 left-arrow-bounce text-teal-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             <button
-              class="next absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 focus:outline-none"
+              class="next icon-sq-light absolute right-6 top-1/2 hidden -translate-y-1/2 lg:inline-flex"
               (click)="nextSlide()"
+              aria-label="Next slide"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 right-arrow-bounce text-teal-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </button>
+
+            <!-- Indicadores -->
             <div
-              class="carrousel-indicators absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center space-x-3"
+              class="carrousel-indicators absolute inset-x-0 bottom-20 flex items-center justify-center gap-3 sm:bottom-24"
             >
               @for (
                 item of carouselData();
@@ -218,1062 +143,720 @@
                 let i = $index
               ) {
                 <button
-                  class="w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 hover:scale-125"
-                  [ngClass]="{
-                    'bg-white shadow-lg': currentSlide() === i,
-                    'bg-amber-50 bg-opacity-60 hover:bg-opacity-80':
-                      currentSlide() !== i,
-                  }"
+                  class="group flex items-center py-2"
                   (click)="goToSlide(i)"
-                ></button>
+                  [attr.aria-label]="'Slide ' + (i + 1)"
+                >
+                  <span
+                    class="block h-[3px] transition-all duration-500"
+                    [ngClass]="{
+                      'w-12 bg-white': currentSlide() === i,
+                      'w-6 bg-white/40 group-hover:bg-white/70':
+                        currentSlide() !== i,
+                    }"
+                  ></span>
+                </button>
               }
             </div>
-          </div>
+          }
         </div>
-      </div>
+      </section>
     }
   }
 
-  <!-- Espaciador para que la sección de servicios quede debajo del pliegue -->
-  <div class="h-24 sm:h-32 lg:h-48"></div>
+  <!-- =====================================================
+       BUSCADOR (superpuesto al hero)
+       ===================================================== -->
+  @if (hasCategories()) {
+    <div
+      class="container-x relative z-10"
+      [ngClass]="{
+        '-mt-12 sm:-mt-14': carouselData().length > 0 || showCarouselSkeleton(),
+        'pt-10': !(carouselData().length > 0 || showCarouselSkeleton()),
+      }"
+    >
+      <div
+        class="grid gap-5 rounded-md bg-white p-5 shadow-[0_30px_70px_-25px_rgba(26,20,70,0.45)] ring-1 ring-slate-200 sm:p-6 md:grid-cols-[1fr_1.4fr_auto] md:items-end md:gap-6 lg:p-7"
+      >
+        <div class="md:pb-1">
+          <span class="eyebrow">{{ "ui.explore" | transloco }}</span>
+          <p class="mt-2 text-xl font-bold tracking-tight text-ink lg:text-2xl">
+            {{ "ui.search.title" | transloco }}
+          </p>
+        </div>
+        <div>
+          <label class="field-label" for="search-category">
+            {{ "ui.search.category" | transloco }}
+          </label>
+          <div class="relative">
+            <select
+              id="search-category"
+              #searchCategory
+              class="field cursor-pointer appearance-none pr-10 font-semibold"
+            >
+              <option value="Todos" [selected]="selectedCategory() === 'Todos'">
+                {{ "products.button" | transloco }}
+              </option>
+              @for (cat of categoriesData(); track cat.id) {
+                <option
+                  [value]="getCategoryTitle(cat)"
+                  [selected]="selectedCategory() === getCategoryTitle(cat)"
+                >
+                  {{ getCategoryTitle(cat) }}
+                </option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn-primary w-full md:w-auto md:min-w-[180px]"
+          (click)="filterByCategory(searchCategory.value); scrollToServices()"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+          </svg>
+          {{ "ui.search.button" | transloco }}
+        </button>
+      </div>
+    </div>
+  }
 
-  <!-- Sección Productos con Carrusel de Cards -->
-  <section id="services" class="bg-white py-10 overflow-x-hidden">
-    <div class="w-full px-4 sm:px-6 lg:px-8">
-      <!-- Header (carga inmediata ya que es crítico) -->
-      <div class="text-center mb-4 animate-slide-down-on-load relative">
-        <h2
-          class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
-        >
-          {{ "products.title.first" | transloco }}
-          <span class="text-teal-800">{{
-            "products.title.second" | transloco
-          }}</span>
-        </h2>
-        <p
-          class="mt-8 max-w-4xl text-2xl text-slate-600 mx-auto leading-relaxed relative z-10"
-        >
-          {{ "products.text" | transloco }}
-        </p>
+  <!-- =====================================================
+       SERVICIOS / PRODUCTOS
+       ===================================================== -->
+  <section id="services" class="section scroll-mt-nav overflow-x-hidden bg-white">
+    <div class="container-x">
+      <!-- Encabezado -->
+      <div
+        class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between animate-slide-down-on-load"
+      >
+        <div class="max-w-2xl">
+          <span class="eyebrow">{{ "ui.eyebrow.services" | transloco }}</span>
+          <h2 class="heading-lg mt-4">
+            {{ "products.title.first" | transloco
+            }}{{ "products.title.second" | transloco }}
+          </h2>
+          <p class="lead mt-4">{{ "products.text" | transloco }}</p>
+        </div>
+        @if (emblaSnapCount() > 1) {
+          <div class="hidden items-center gap-2 lg:flex">
+            <button
+              (click)="onEmblaPrevClick()"
+              [disabled]="!emblaCanScrollPrev()"
+              class="icon-sq"
+              aria-label="Previous products"
+            >
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              (click)="onEmblaNextClick()"
+              [disabled]="!emblaCanScrollNext()"
+              class="icon-sq"
+              aria-label="Next products"
+            >
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        }
       </div>
 
-      <!-- Filtro de categorías (fuera del defer para carga inmediata) -->
+      <!-- Pestañas de categorías -->
       @if (hasCategories()) {
-        <div class="flex items-center justify-center gap-3 mb-8">
-          <!-- Botón scroll izquierda -->
+        <div class="mt-10 flex items-center gap-3 border-b border-slate-200">
           <button
             (click)="scrollCategoriesLeft()"
             [disabled]="!canScrollLeft()"
-            [class.opacity-30]="!canScrollLeft()"
-            [class.cursor-not-allowed]="!canScrollLeft()"
-            class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg"
+            [class.invisible]="!canScrollLeft()"
+            class="mb-3 flex-shrink-0 text-slate-500 hover:text-ink"
             aria-label="Scroll categories left"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-
-          <!-- Contenedor de categorías scrolleable -->
           <div
             #categoryScroller
-            class="flex gap-2 overflow-x-auto scrollbar-hide py-2 max-w-[80vw]"
+            class="scrollbar-hide -mb-px flex flex-1 gap-8 overflow-x-auto"
             (scroll)="onScroll($event)"
           >
             <button
               (click)="filterByCategory('Todos')"
-              [ngClass]="{
-                'bg-teal-600 text-white shadow-md':
-                  selectedCategory() === 'Todos',
-                'bg-white text-teal-800 border border-amber-300 hover:bg-teal-50':
-                  selectedCategory() !== 'Todos',
-              }"
-              class="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md"
+              class="tab flex-shrink-0"
+              [class.tab-active]="selectedCategory() === 'Todos'"
             >
               {{ "products.button" | transloco }}
             </button>
-            @for (cat of categoriesData(); track cat.id; let ci = $index) {
+            @for (cat of categoriesData(); track cat.id) {
               <button
                 (click)="filterByCategory(getCategoryTitle(cat))"
-                [ngClass]="{
-                  'bg-teal-600 text-white shadow-md':
-                    selectedCategory() === getCategoryTitle(cat),
-                  'bg-white text-teal-800 border border-amber-300 hover:bg-teal-50':
-                    selectedCategory() !== getCategoryTitle(cat),
-                }"
-                class="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 hover:shadow-md"
+                class="tab flex-shrink-0"
+                [class.tab-active]="selectedCategory() === getCategoryTitle(cat)"
               >
                 {{ getCategoryTitle(cat) }}
               </button>
             }
           </div>
-
-          <!-- Botón scroll derecha -->
           <button
             (click)="scrollCategoriesRight()"
             [disabled]="!canScrollRight()"
-            [class.opacity-30]="!canScrollRight()"
-            [class.cursor-not-allowed]="!canScrollRight()"
-            class="flex-shrink-0 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-md transition-all duration-300 focus:outline-none hover:shadow-lg"
+            [class.invisible]="!canScrollRight()"
+            class="mb-3 flex-shrink-0 text-slate-500 hover:text-ink"
             aria-label="Scroll categories right"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
       }
 
-      <!-- Productos con @defer (carga diferida) -->
-      @defer (on viewport; when !isProductsLoading()) {
-        @if (filteredProducts().length > 0) {
-          <!-- Embla Carrusel de Cards -->
-          <div class="embla">
-            <div class="embla__viewport overflow-hidden" #emblaViewport>
-              <div class="embla__container flex">
-                @for (
-                  product of filteredProducts();
-                  track product.id;
-                  let pi = $index
-                ) {
-                  <div
-                    class="embla__slide flex-shrink-0 pl-4 md:basis-1/3 basis-full"
-                  >
-                    <!-- Card -->
-                    <div
-                      class="bg-white rounded-2xl border border-amber-300 overflow-hidden h-full flex flex-col"
-                    >
-                      <!-- Imagen -->
-                      <div
-                        class="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-teal-50 to-amber-50"
+      <!-- Productos -->
+      <div class="mt-10">
+        @defer (on viewport; when !isProductsLoading()) {
+          @if (filteredProducts().length > 0) {
+            <div class="embla">
+              <div class="embla__viewport overflow-hidden" #emblaViewport>
+                <div class="embla__container -ml-6 flex">
+                  @for (
+                    product of filteredProducts();
+                    track product.id;
+                    let pi = $index
+                  ) {
+                    <div class="embla__slide flex-shrink-0 pl-6">
+                      <article
+                        class="group/card flex h-full flex-col overflow-hidden rounded-md border border-slate-200 bg-white transition-shadow duration-300 hover:shadow-[0_24px_50px_-24px_rgba(26,20,70,0.45)]"
                       >
-                        @if (hasImageToShow(product)) {
-                          @if (getCardMediaType(product) === "video") {
-                            <video
-                              [src]="getCardImageUrl(product)"
-                              [title]="product.title"
-                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                              (error)="handleVideoError($event)"
-                              (loadedmetadata)="forceVideoMute($event)"
-                              muted
-                              loop
-                              autoplay
-                              playsinline
-                            >
-                              {{ "common.videoNotSupported" | transloco }}
-                            </video>
+                        <!-- Imagen -->
+                        <a
+                          [routerLink]="['/product', product.id]"
+                          class="relative block aspect-[16/11] overflow-hidden bg-slate-100"
+                        >
+                          @if (hasImageToShow(product)) {
+                            @if (getCardMediaType(product) === "video") {
+                              <video
+                                [src]="getCardImageUrl(product)"
+                                [title]="product.title"
+                                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                                (error)="handleVideoError($event)"
+                                (loadedmetadata)="forceVideoMute($event)"
+                                muted
+                                loop
+                                autoplay
+                                playsinline
+                              >
+                                {{ "common.videoNotSupported" | transloco }}
+                              </video>
+                            } @else {
+                              <img
+                                [src]="getCardImageUrl(product)"
+                                [alt]="product.title"
+                                loading="lazy"
+                                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                                (error)="onImageError($event)"
+                              />
+                            }
                           } @else {
-                            <img
-                              [src]="getCardImageUrl(product)"
-                              [alt]="product.title"
-                              loading="lazy"
-                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                              (error)="onImageError($event)"
-                            />
-                          }
-                        } @else {
-                          <div
-                            class="w-full h-full flex items-center justify-center"
-                          >
-                            <svg
-                              class="w-16 h-16 text-amber-300"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
-                              />
-                            </svg>
-                          </div>
-                        }
-                      </div>
-
-                      <!-- Contenido de la card -->
-                      <div class="p-5 flex flex-col flex-1 min-w-0">
-                        <!-- Categoría -->
-                        <span
-                          class="inline-block text-teal-600 text-sm font-bold uppercase tracking-wider mb-2"
-                        >
-                          {{ getCategoryTitle(product.category) }}
-                        </span>
-
-                        <!-- Nombre -->
-                        <h3
-                          class="text-xl font-bold text-teal-800 leading-tight mb-3 line-clamp-2"
-                        >
-                          {{ product.title }}
-                        </h3>
-
-                        <!-- Variantes y Precio -->
-                        @if (product.variants && product.variants.length > 0) {
-                          <div class="mb-3">
-                            <div class="flex gap-1.5 flex-wrap">
-                              @for (
-                                variant of product.variants;
-                                track trackByVariant($index, variant);
-                                let vi = $index
-                              ) {
-                                <button
-                                  (click)="
-                                    selectCardVariant(product, vi, $event)
-                                  "
-                                  [ngClass]="{
-                                    'bg-teal-600 text-white shadow-sm':
-                                      getCardSelectedVariantIndex(
-                                        product.id
-                                      ) === vi,
-                                    'bg-gray-50 text-teal-800 border border-amber-300 hover:bg-teal-50':
-                                      getCardSelectedVariantIndex(
-                                        product.id
-                                      ) !== vi,
-                                  }"
-                                  class="px-2.5 py-1 rounded-full text-xs font-semibold transition-all duration-200 max-w-full break-words"
-                                >
-                                  {{ variant.description }}
-                                </button>
-                              }
+                            <div class="flex h-full w-full items-center justify-center">
+                              <svg class="h-12 w-12 text-slate-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                              </svg>
                             </div>
-                            <p
-                              class="text-xl font-extrabold text-orange-400 mt-2"
-                            >
-                              {{
-                                getCardSelectedVariant(product)?.price ||
-                                  product.variants[0].price
-                                  | currency: "USD" : "symbol" : "1.2-2"
-                              }}
-                            </p>
-                          </div>
-                        }
+                          }
+                          <div
+                            class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/70 to-transparent"
+                          ></div>
 
-                        <!-- Descripción -->
-                        <p
-                          class="text-sm text-slate-600 leading-relaxed line-clamp-3 flex-1"
-                        >
-                          {{ product.description }}
-                        </p>
+                          <!-- Precio -->
+                          @if (product.variants && product.variants.length > 0) {
+                            <span class="absolute left-0 top-5 bg-brand-600 px-4 py-2.5 text-white">
+                              <span class="block text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">
+                                {{ "ui.from" | transloco }}
+                              </span>
+                              <span class="block text-2xl font-extrabold leading-none tabular-nums">
+                                {{ getCardMinPrice(product) | currency: "USD" : "symbol" : "1.0-0" }}
+                              </span>
+                            </span>
+                          }
 
-                        <!-- Zoom -->
-                        <div class="mt-4 pt-3 border-t border-amber-200">
-                          <button
-                            (click)="
-                              openMediaZoom(
-                                getCardImageUrl(product),
-                                getFirstImageTitle(product),
-                                getCardMediaType(product),
-                                product
-                              )
-                            "
-                            class="flex items-center gap-2 text-teal-600 hover:text-teal-800 text-sm font-semibold transition-colors"
+                          <!-- Categoría -->
+                          <span
+                            class="absolute bottom-4 left-5 text-[11px] font-bold uppercase tracking-[0.18em] text-white"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-4 w-4"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              stroke-width="2"
+                            {{ getCategoryTitle(product.category) }}
+                          </span>
+                        </a>
+
+                        <!-- Contenido -->
+                        <div class="flex flex-1 flex-col p-6">
+                          <h3 class="line-clamp-2 text-xl font-bold leading-snug tracking-tight text-ink">
+                            <a
+                              [routerLink]="['/product', product.id]"
+                              class="transition-colors hover:text-brand-600"
                             >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                              />
+                              {{ product.title }}
+                            </a>
+                          </h3>
+                          <p class="mt-2 line-clamp-2 whitespace-pre-line text-sm leading-relaxed text-slate-500">
+                            {{ product.description }}
+                          </p>
+
+                          <div
+                            class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-200 pt-4 text-xs font-semibold text-slate-500"
+                          >
+                            @if (product.variants && product.variants.length > 0) {
+                              <span class="inline-flex items-center gap-1.5">
+                                <svg class="h-4 w-4 text-coral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+                                </svg>
+                                @if (product.variants.length === 1) {
+                                  <span class="line-clamp-1">{{ product.variants[0].description }}</span>
+                                } @else {
+                                  {{ product.variants.length }} {{ "ui.detail.optionsCount" | transloco }}
+                                }
+                              </span>
+                            }
+                            @if (product.files && product.files.length > 1) {
+                              <span class="inline-flex items-center gap-1.5">
+                                <svg class="h-4 w-4 text-coral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                {{ product.files.length }} {{ "ui.detail.photos" | transloco }}
+                              </span>
+                            }
+                          </div>
+
+                          <div class="mt-auto pt-6">
+                          <a
+                            [routerLink]="['/product', product.id]"
+                            class="btn-outline w-full"
+                          >
+                            {{ "products.seedetails" | transloco }}
+                            <svg class="h-4 w-4 transition-transform group-hover/card:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                            {{ "common.zoomMedia" | transloco }}
-                          </button>
+                          </a>
+                          </div>
                         </div>
-                      </div>
+                      </article>
                     </div>
-                  </div>
-                }
-              </div>
-            </div>
-
-            <!-- Navegación del carrusel -->
-            @if (emblaSnapCount() > 1) {
-              <div class="flex items-center justify-center gap-4 mt-8">
-                <!-- Prev -->
-                <button
-                  (click)="onEmblaPrevClick()"
-                  [disabled]="!emblaCanScrollPrev()"
-                  [class.opacity-30]="!emblaCanScrollPrev()"
-                  [class.cursor-not-allowed]="!emblaCanScrollPrev()"
-                  class="bg-white text-teal-600 border border-teal-600 rounded-full p-2.5 shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 focus:outline-none disabled:hover:scale-100 disabled:hover:shadow-md"
-                  aria-label="Previous products"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-
-                <!-- Dots de paginación -->
-                <div class="flex items-center gap-2">
-                  @for (dotId of range(emblaSnapCount()); track dotId) {
-                    <button
-                      (click)="onEmblaDotClick($index)"
-                      [ngClass]="{
-                        'bg-teal-600 scale-110 w-3 h-3':
-                          emblaSelectedSnap() === $index,
-                        'bg-amber-300 hover:bg-amber-400 w-2.5 h-2.5':
-                          emblaSelectedSnap() !== $index,
-                      }"
-                      class="rounded-full transition-all duration-300 focus:outline-none"
-                      [attr.aria-label]="'Go to page ' + ($index + 1)"
-                    ></button>
                   }
                 </div>
+              </div>
 
-                <!-- Next -->
-                <button
-                  (click)="onEmblaNextClick()"
-                  [disabled]="!emblaCanScrollNext()"
-                  [class.opacity-30]="!emblaCanScrollNext()"
-                  [class.cursor-not-allowed]="!emblaCanScrollNext()"
-                  class="bg-white text-teal-600 border border-teal-600 rounded-full p-2.5 shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 focus:outline-none disabled:hover:scale-100 disabled:hover:shadow-md"
-                  aria-label="Next products"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-            }
-          </div>
-        } @else if (productsData().length === 0 && !isProductsLoading()) {
-          <div
-            class="flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16"
-            appScrollReveal
-            [revealAnimation]="'slide-up'"
-            [revealDelay]="0"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              height="100"
-              fill="currentColor"
-              class="bi bi-emoji-tear text-amber-300 mb-4 sm:mb-6 sm:w-32 sm:h-32 md:w-36 md:h-36 transform transition-all duration-700 ease-out"
-              viewBox="0 0 16 16"
-              [ngClass]="{
-                'scale-100 rotate-0': isNoDataIconLoaded(),
-                'scale-50 -rotate-12': !isNoDataIconLoaded(),
-              }"
-            >
-              <path
-                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-              />
-              <path
-                d="M6.831 11.43A3.1 3.1 0 0 1 8 11.196c.916 0 1.607.408 2.25.826.212.138.424-.069.282-.277-.564-.83-1.558-2.049-2.532-2.049-.53 0-1.066.361-1.536.824q.126.27.232.535q.069.174.135.373ZM6 11.333C6 12.253 5.328 13 4.5 13S3 12.254 3 11.333c0-.706.882-2.29 1.294-2.99a.238.238 0 0 1 .412 0c.412.7 1.294 2.284 1.294 2.99M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5m-1.5-3A.5.5 0 0 1 10 3c1.162 0 2.35.584 2.947 1.776a.5.5 0 1 1-.894.448C11.649 4.416 10.838 4 10 4a.5.5 0 0 1-.5-.5M7 3.5a.5.5 0 0 0-.5-.5c-1.162 0-2.35.584-2.947 1.776a.5.5 0 1 0 .894.448C4.851 4.416 5.662 4 6.5 4a.5.5 0 0 0 .5-.5"
-              />
-            </svg>
-            <p
-              class="text-slate-500 text-base sm:text-lg max-w-md transform transition-all duration-900 ease-out"
-              [ngClass]="{
-                'translate-x-0 opacity-100': isNoDataTextLoaded(),
-                '-translate-x-8 opacity-0': !isNoDataTextLoaded(),
-              }"
-            >
-              {{
-                selectedCategory() === "Todos"
-                  ? ("products.nodata" | transloco)
-                  : ("products.nodata.category" | transloco)
-              }}
-            </p>
-          </div>
-        }
-      } @placeholder (minimum 500ms) {
-        <!-- Placeholder skeleton cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          @for (i of [1, 2, 3]; track i) {
+              <!-- Progreso + navegación -->
+              @if (emblaSnapCount() > 1) {
+                <div class="mt-10 flex items-center justify-between gap-6">
+                  <div class="flex flex-1 items-center gap-1.5">
+                    @for (dotId of range(emblaSnapCount()); track dotId) {
+                      <button
+                        (click)="onEmblaDotClick($index)"
+                        class="h-[3px] max-w-[64px] flex-1 transition-colors duration-300 focus:outline-none"
+                        [ngClass]="{
+                          'bg-ink': emblaSelectedSnap() === $index,
+                          'bg-slate-200 hover:bg-slate-300':
+                            emblaSelectedSnap() !== $index,
+                        }"
+                        [attr.aria-label]="'Go to page ' + ($index + 1)"
+                      ></button>
+                    }
+                  </div>
+                  <div class="flex items-center gap-2 lg:hidden">
+                    <button
+                      (click)="onEmblaPrevClick()"
+                      [disabled]="!emblaCanScrollPrev()"
+                      class="icon-sq"
+                      aria-label="Previous products"
+                    >
+                      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      (click)="onEmblaNextClick()"
+                      [disabled]="!emblaCanScrollNext()"
+                      class="icon-sq"
+                      aria-label="Next products"
+                    >
+                      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+          } @else if (productsData().length === 0 && !isProductsLoading()) {
             <div
-              class="bg-white rounded-2xl border border-amber-300 overflow-hidden animate-pulse"
+              class="flex flex-col items-center justify-center rounded-md border border-dashed border-slate-300 px-6 py-16 text-center"
             >
-              <div class="aspect-[4/3] bg-gray-200"></div>
-              <div class="p-5 space-y-3">
-                <div class="h-3 bg-gray-200 rounded w-1/4"></div>
-                <div class="h-5 bg-gray-200 rounded w-3/4"></div>
-                <div class="h-3 bg-gray-200 rounded w-1/3"></div>
-                <div class="h-3 bg-gray-200 rounded w-full"></div>
-                <div class="h-3 bg-gray-200 rounded w-5/6"></div>
-              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.4"
+                class="mb-4 h-12 w-12 text-slate-300 transition-all duration-700 ease-out"
+                [ngClass]="{
+                  'scale-100 opacity-100': isNoDataIconLoaded(),
+                  'scale-75 opacity-0': !isNoDataIconLoaded(),
+                }"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p
+                class="max-w-md text-base text-slate-500 transition-all duration-700 ease-out"
+                [ngClass]="{
+                  'translate-y-0 opacity-100': isNoDataTextLoaded(),
+                  'translate-y-2 opacity-0': !isNoDataTextLoaded(),
+                }"
+              >
+                {{
+                  selectedCategory() === "Todos"
+                    ? ("products.nodata" | transloco)
+                    : ("products.nodata.category" | transloco)
+                }}
+              </p>
             </div>
           }
-        </div>
-      }
-    </div>
-  </section>
-
-  <!-- Modal de Zoom de Imagen/Video -->
-  @if (showMediaZoom()) {
-    <div
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4 animate-fade-in"
-      (click)="closeMediaZoom()"
-    >
-      <div
-        class="relative max-w-full max-h-full w-full h-full flex items-center justify-center"
-      >
-        <!-- Botón de cerrar -->
-        <button
-          (click)="closeMediaZoom()"
-          class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white text-teal-600 border border-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
-          aria-label="Cerrar"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-
-        <!-- Botón anterior (solo si hay múltiples archivos) -->
-        @if (hasMultipleMediaFiles()) {
-          <button
-            (click)="previousZoomedMedia(); $event.stopPropagation()"
-            class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
-            aria-label="Anterior"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 left-arrow-bounce"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-        }
-
-        <!-- Botón siguiente (solo si hay múltiples archivos) -->
-        @if (hasMultipleMediaFiles()) {
-          <button
-            (click)="nextZoomedMedia(); $event.stopPropagation()"
-            class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white text-teal-600 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
-            aria-label="Siguiente"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 right-arrow-bounce"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        }
-
-        <!-- Media ampliado -->
-        <div
-          class="relative w-full h-full flex items-center justify-center"
-          (click)="$event.stopPropagation()"
-        >
-          @if (zoomedMediaType() === "video") {
-            <video
-              [src]="zoomedMediaUrl()"
-              [title]="zoomedMediaTitle()"
-              class="w-full h-full max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-zoom-in"
-              controls
-              autoplay
-              playsinline
-            >
-              Tu navegador no soporta la etiqueta de video.
-            </video>
-          } @else {
-            <img
-              [src]="zoomedMediaUrl()"
-              [alt]="zoomedMediaTitle()"
-              class="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl animate-zoom-in"
-            />
-          }
-        </div>
-
-        <!-- Indicador de posición (solo si hay múltiples archivos) -->
-        @if (hasMultipleMediaFiles()) {
-          <div
-            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-60 text-white px-4 py-2 rounded-full text-sm sm:text-base"
-          >
-            {{ zoomedMediaIndex() + 1 }} /
-            {{ zoomedMediaProduct()?.files?.length || 1 }}
+        } @placeholder (minimum 500ms) {
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            @for (i of [1, 2, 3]; track i) {
+              <div class="animate-pulse">
+                <div class="aspect-[4/3] rounded-md bg-slate-100"></div>
+                <div class="space-y-3 pt-5">
+                  <div class="h-5 w-3/4 rounded-sm bg-slate-100"></div>
+                  <div class="h-3 w-full rounded-sm bg-slate-100"></div>
+                  <div class="h-3 w-5/6 rounded-sm bg-slate-100"></div>
+                  <div class="mt-4 h-8 w-1/3 rounded-sm bg-slate-100"></div>
+                </div>
+              </div>
+            }
           </div>
         }
       </div>
     </div>
-  }
+  </section>
 
-  <!-- Sección Línea de Productos -->
-  <div
+  <!-- =====================================================
+       POR QUÉ NOSOTROS
+       ===================================================== -->
+  <section
     #productsSection
-    class="products-container pt-4 pb-10 bg-white relative overflow-hidden border-t-2 border-amber-300 border-opacity-40"
+    class="products-container section relative bg-white"
     [ngClass]="productsAnimationClass()"
   >
-    <div class="w-full relative">
-      <div class="text-center mb-16">
-        <p
-          class="mt-6 text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm"
+    <div class="container-x">
+      <div class="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <!-- Encabezado -->
+        <div
+          class="lg:sticky lg:top-[120px]"
           appScrollReveal
           [revealAnimation]="'slide-up'"
           [revealDelay]="0"
         >
-          {{ "home.products.subtitle.first" | transloco }}
-          <span class="text-teal-800">{{
-            "home.products.subtitle.second" | transloco
-          }}</span>
-        </p>
-        <p
-          class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed"
+          <span class="eyebrow">{{ "ui.eyebrow.why" | transloco }}</span>
+          <h2 class="heading-lg mt-4">
+            {{ "home.products.subtitle.first" | transloco }}
+            <span class="text-brand-600">{{
+              "home.products.subtitle.second" | transloco
+            }}</span>
+          </h2>
+          <p class="lead mt-4">{{ "home.products.text" | transloco }}</p>
+        </div>
+
+        <!-- Puntos -->
+        <div
+          class="grid gap-px overflow-hidden rounded-md border border-slate-200 bg-slate-200"
           appScrollReveal
           [revealAnimation]="'slide-up'"
           [revealDelay]="100"
         >
-          {{ "home.products.text" | transloco }}
-        </p>
-      </div>
-
-      <div
-        class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch px-4 sm:px-6 lg:px-8"
-      >
-        <div class="space-y-8 flex">
-          <div
-            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(13, 148, 136,0.25)] transition-all duration-300"
-            appScrollReveal
-            [revealAnimation]="'slide-left'"
-            [revealDelay]="0"
-            appBorderBeam
-            [beamColor]="'rgba(13, 148, 136, 0.5)'"
-            [beamWidth]="'1.5px'"
-            [beamDuration]="'6s'"
-            [beamDelay]="'0s'"
-          >
-            <div class="flex items-center mb-6">
-              <div
-                class="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center shadow-lg"
-              >
-                <svg
-                  class="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="text-2xl font-bold text-teal-600 ml-4">
+          <div class="flex gap-6 bg-white p-7 sm:p-9">
+            <span class="text-4xl font-extrabold leading-none tracking-tight text-brand-600 tabular-nums">01</span>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight text-ink sm:text-xl">
                 {{ "home.products.square.left.title" | transloco }}
               </h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-slate-600">
+                {{ "home.products.square.left.text" | transloco }}
+              </p>
             </div>
-            <p class="text-slate-600 leading-relaxed flex-1 font-medium">
-              {{ "home.products.square.left.text" | transloco }}
-            </p>
           </div>
-        </div>
-
-        <div class="space-y-8 flex">
-          <div
-            class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 flex flex-col flex-1 hover:shadow-[0_0_30px_rgba(13, 148, 136,0.25)] transition-all duration-300"
-            appScrollReveal
-            [revealAnimation]="'slide-right'"
-            [revealDelay]="100"
-            appBorderBeam
-            [beamColor]="'rgba(13, 148, 136, 0.5)'"
-            [beamWidth]="'1.5px'"
-            [beamDuration]="'6s'"
-            [beamDelay]="'1.5s'"
-          >
-            <div class="flex items-center mb-6">
-              <div
-                class="w-12 h-12 bg-orange-400 rounded-xl flex items-center justify-center shadow-lg"
-              >
-                <svg
-                  class="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="text-2xl font-bold text-orange-500 ml-4">
+          <div class="flex gap-6 bg-white p-7 sm:p-9">
+            <span class="text-4xl font-extrabold leading-none tracking-tight text-coral-500 tabular-nums">02</span>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight text-ink sm:text-xl">
                 {{ "home.products.square.right.title" | transloco }}
               </h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-slate-600">
+                {{ "home.products.square.right.text" | transloco }}
+              </p>
             </div>
-            <p class="text-slate-600 leading-relaxed flex-1 font-medium">
-              {{ "home.products.square.right.text" | transloco }}
-            </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Sección de Reseñas -->
+  <!-- =====================================================
+       RESEÑAS (banda oscura)
+       ===================================================== -->
   @if (reviewsData().length > 0) {
-    <section
-      class="bg-white py-16 overflow-x-hidden border-t-2 border-amber-300 border-opacity-40"
-    >
-      <div class="w-full px-4 sm:px-6 lg:px-8">
-        <!-- Header de Reseñas -->
-        <div class="text-center mb-12 relative">
-          <h2
-            class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm relative z-10"
-            appScrollReveal
-            [revealAnimation]="'slide-up'"
-            [revealDelay]="0"
-          >
-            {{ "home.reviews.title" | transloco }}
-          </h2>
-          <p
-            class="mt-6 max-w-3xl text-xl text-slate-600 mx-auto leading-relaxed relative z-10"
-            appScrollReveal
-            [revealAnimation]="'slide-up'"
-            [revealDelay]="100"
-          >
-            {{ "home.reviews.text" | transloco }}
-          </p>
-        </div>
-
-        @if (reviewsData().length > 0) {
-          <div
-            class="text-center mb-8"
-            appScrollReveal
-            [revealAnimation]="'slide-up'"
-            [revealDelay]="150"
-          >
-            <div
-              class="inline-flex items-center gap-3 bg-white border border-amber-300 rounded-full px-6 py-2.5 shadow-[0_0_15px_rgba(13, 148, 136,0.1)] transition-all hover:shadow-[0_0_20px_rgba(13, 148, 136,0.15)] hover:border-amber-300"
-            >
-              <div class="flex items-center gap-1.5">
-                <svg class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20">
-                  <defs>
-                    <linearGradient id="avg-star-gradient">
-                      <stop
-                        [attr.offset]="(averageRating() / 5) * 100 + '%'"
-                        stop-color="currentColor"
-                      />
-                      <stop
-                        [attr.offset]="(averageRating() / 5) * 100 + '%'"
-                        stop-color="#D1D5DB"
-                      />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    fill="url(#avg-star-gradient)"
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  />
-                </svg>
-                <span class="text-xl font-bold text-teal-600">{{
-                  averageRating()
-                }}</span>
-              </div>
-              <span class="text-amber-300">|</span>
-              <span class="text-slate-600 font-medium"
-                >{{ reviewsCount() }}
-                {{ "home.reviews.count" | transloco }}</span
-              >
-            </div>
-          </div>
-        }
-
-        <!-- Reseñas con estructura de columnas @defer -->
-        @defer (on viewport; when !isReviewsLoading()) {
-          @if (reviewsData().length > 0) {
-            <div class="py-2 bg-white overflow-hidden">
-              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div
-                  class="grid grid-cols-1 gap-8 lg:grid-cols-3 sm:grid-cols-2 items-stretch"
-                >
-                  @for (
-                    review of reviewsData();
-                    track trackByReview($index, review);
-                    let i = $index
-                  ) {
-                    <div
-                      class="group relative transform transition-all duration-300 hover:-translate-y-2 flex"
-                      appScrollReveal
-                      [revealAnimation]="'slide-up'"
-                      [revealDelay]="i * 100"
-                    >
-                      <div
-                        class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 transition-all duration-300 hover:shadow-[0_0_30px_rgba(13, 148, 136,0.25)] hover:border-amber-300 w-full flex flex-col min-h-[280px]"
-                        appBorderBeam
-                        [beamColor]="'rgba(13, 148, 136, 0.5)'"
-                        [beamWidth]="'1.5px'"
-                        [beamDuration]="'6s'"
-                        [beamDelay]="i * 1000 + 'ms'"
-                      >
-                        <div class="mb-3">
-                          <div class="flex items-center flex-shrink-0">
-                            <div class="flex-shrink-0">
-                              @if (review.photo) {
-                                <img
-                                  [src]="getReviewImageUrl(review.photo)"
-                                  class="h-12 w-12 rounded-full ring-2 ring-amber-300 object-cover"
-                                  [alt]="review.title"
-                                  loading="lazy"
-                                  (error)="handleImageError($event)"
-                                />
-                              } @else {
-                                <div
-                                  class="h-12 w-12 rounded-full bg-teal-600 flex items-center justify-center ring-2 ring-amber-300"
-                                >
-                                  <svg
-                                    class="w-6 h-6 text-white"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-                                    />
-                                  </svg>
-                                </div>
-                              }
-                            </div>
-                            <div class="ml-4">
-                              <div
-                                class="text-base font-semibold text-teal-600"
-                              >
-                                {{ review.title }}
-                              </div>
-                            </div>
-                          </div>
-                          @if (review.star_rating) {
-                            <div class="flex mt-0.5">
-                              <div class="flex items-center gap-0.5 ml-16">
-                                @for (star of [1, 2, 3, 4, 5]; track star) {
-                                  <svg
-                                    class="w-5 h-5 text-yellow-400"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <defs>
-                                      <clipPath
-                                        [id]="
-                                          'clip-review-' +
-                                          review.id +
-                                          '-' +
-                                          star
-                                        "
-                                      >
-                                        <rect
-                                          x="0"
-                                          y="0"
-                                          [attr.width]="
-                                            getReviewStarWidth(
-                                              star,
-                                              review.star_rating
-                                            )
-                                          "
-                                          height="20"
-                                        />
-                                      </clipPath>
-                                    </defs>
-
-                                    <!-- Estrella de fondo (vacía / gris) -->
-                                    <path
-                                      class="text-gray-300"
-                                      fill="currentColor"
-                                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                    />
-
-                                    <!-- Estrella rellena (amarilla) encima con clipPath -->
-                                    <path
-                                      fill="currentColor"
-                                      [attr.clip-path]="
-                                        'url(#clip-review-' +
-                                        review.id +
-                                        '-' +
-                                        star +
-                                        ')'
-                                      "
-                                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                    />
-                                  </svg>
-                                }
-                                <span
-                                  class="text-xs font-semibold ml-1.5 text-slate-500"
-                                >
-                                  ({{ review.star_rating | number: "1.1-1" }})
-                                </span>
-                              </div>
-                            </div>
-                          }
-                        </div>
-                        <blockquote
-                          class="text-slate-600 text-base leading-relaxed mt-3 flex-grow whitespace-pre-line italic"
-                        >
-                          "{{ review.description }}"
-                        </blockquote>
-                      </div>
-                    </div>
-                  }
-                </div>
-              </div>
-            </div>
-          } @else if (!isReviewsLoading()) {
-            <!-- No hay reseñas -->
-            <div
-              class="text-center py-12"
+    <section class="section relative overflow-hidden bg-ink text-white">
+      <div
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(60rem_30rem_at_100%_0%,rgba(27,1,188,0.55),transparent_60%)]"
+      ></div>
+      <div class="container-x relative">
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <span class="eyebrow-light">{{ "ui.eyebrow.reviews" | transloco }}</span>
+            <h2
+              class="heading-lg mt-4 text-white"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="0"
             >
-              <div class="text-6xl mb-4">💬</div>
-              <h3 class="text-xl font-semibold text-slate-600 mb-2">
-                {{ "home.reviews.nodata" | transloco }}
-              </h3>
+              {{ "home.reviews.title" | transloco }}
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-white/70 sm:text-[17px]">
+              {{ "home.reviews.text" | transloco }}
+            </p>
+          </div>
+
+          <!-- Resumen de valoración -->
+          <div class="flex items-center gap-5 border-l-2 border-coral-400 pl-5">
+            <span class="text-6xl font-extrabold leading-none tracking-tight tabular-nums">
+              {{ averageRating() }}
+            </span>
+            <div>
+              <svg class="h-5 w-[100px]" viewBox="0 0 100 20">
+                <defs>
+                  <linearGradient id="avg-star-gradient" gradientUnits="userSpaceOnUse" x1="0" x2="100" y1="0" y2="0">
+                    <stop [attr.offset]="(averageRating() / 5) * 100 + '%'" stop-color="#faa180" />
+                    <stop [attr.offset]="(averageRating() / 5) * 100 + '%'" stop-color="rgba(255,255,255,0.2)" />
+                  </linearGradient>
+                </defs>
+                @for (s of [0, 1, 2, 3, 4]; track s) {
+                  <path
+                    fill="url(#avg-star-gradient)"
+                    [attr.transform]="'translate(' + s * 20 + ',0)'"
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                }
+              </svg>
+              <p class="mt-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                {{ reviewsCount() }} {{ "home.reviews.count" | transloco }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        @defer (on viewport; when !isReviewsLoading()) {
+          @if (reviewsData().length > 0) {
+            <div
+              class="custom-scrollbar custom-scrollbar-light -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8 lg:-mx-10 lg:gap-5 lg:px-10"
+            >
+              @for (
+                review of reviewsData();
+                track trackByReview($index, review);
+                let i = $index
+              ) {
+                <figure
+                  class="flex w-[86%] flex-shrink-0 snap-start flex-col rounded-md border border-white/10 bg-white/[0.04] p-7 transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.07] sm:w-[46%] sm:p-8 lg:w-[31.5%]"
+                  appScrollReveal
+                  [revealAnimation]="'slide-up'"
+                  [revealDelay]="i * 80"
+                >
+                  @if (review.star_rating) {
+                    <div class="flex items-center gap-0.5">
+                      @for (star of [1, 2, 3, 4, 5]; track star) {
+                        <svg class="h-4 w-4 text-coral-400" viewBox="0 0 20 20">
+                          <defs>
+                            <clipPath [id]="'clip-review-' + review.id + '-' + star">
+                              <rect x="0" y="0" [attr.width]="getReviewStarWidth(star, review.star_rating)" height="20" />
+                            </clipPath>
+                          </defs>
+                          <path
+                            fill="rgba(255,255,255,0.18)"
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                          />
+                          <path
+                            fill="currentColor"
+                            [attr.clip-path]="'url(#clip-review-' + review.id + '-' + star + ')'"
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                          />
+                        </svg>
+                      }
+                      <span class="ml-2 text-xs font-bold tabular-nums text-white/50">
+                        {{ review.star_rating | number: "1.1-1" }}
+                      </span>
+                    </div>
+                  }
+                  <blockquote
+                    class="custom-scrollbar custom-scrollbar-light mt-5 max-h-48 flex-grow overflow-y-auto whitespace-pre-line pr-2 text-[15px] leading-relaxed text-white/80"
+                  >
+                    “{{ review.description }}”
+                  </blockquote>
+                  <figcaption class="mt-7 flex items-center gap-3 border-t border-white/10 pt-5">
+                    @if (review.photo) {
+                      <img
+                        [src]="getReviewImageUrl(review.photo)"
+                        class="h-10 w-10 rounded-full object-cover"
+                        [alt]="review.title"
+                        loading="lazy"
+                        (error)="handleImageError($event)"
+                      />
+                    } @else {
+                      <div
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-sm font-bold uppercase text-white"
+                      >
+                        {{ review.title.charAt(0) }}
+                      </div>
+                    }
+                    <span class="text-sm font-bold tracking-tight text-white">
+                      {{ review.title }}
+                    </span>
+                  </figcaption>
+                </figure>
+              }
             </div>
           }
         } @placeholder (minimum 500ms) {
-          <!-- Skeleton de reseñas -->
-          <div class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div
-                class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3 sm:grid-cols-2 items-stretch"
-              >
-                @for (i of [1, 2, 3]; track i) {
-                  <div class="flex">
-                    <div
-                      class="bg-white rounded-xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 animate-pulse w-full flex flex-col min-h-[280px]"
-                    >
-                      <div class="flex items-center flex-shrink-0">
-                        <div
-                          class="h-12 w-12 rounded-full bg-gray-200 animate-pulse"
-                        ></div>
-                        <div class="ml-4">
-                          <div
-                            class="h-5 bg-gray-200 rounded w-32 mb-2 animate-pulse"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="mt-6 space-y-2 flex-grow">
-                        <div
-                          class="h-3 bg-gray-200 rounded w-full animate-pulse"
-                        ></div>
-                        <div
-                          class="h-3 bg-gray-200 rounded w-full animate-pulse"
-                        ></div>
-                        <div
-                          class="h-3 bg-gray-200 rounded w-5/6 animate-pulse"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                }
+          <div class="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-md bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+            @for (i of [1, 2, 3]; track i) {
+              <div class="min-h-[240px] animate-pulse space-y-3 bg-ink p-8">
+                <div class="h-3 w-24 rounded-sm bg-white/10"></div>
+                <div class="h-3 w-full rounded-sm bg-white/10"></div>
+                <div class="h-3 w-5/6 rounded-sm bg-white/10"></div>
+                <div class="h-3 w-2/3 rounded-sm bg-white/10"></div>
               </div>
-            </div>
+            }
           </div>
         }
       </div>
     </section>
   }
 
-  <!-- Sección de Formulario de Reseñas -->
-  <section
-    class="bg-white py-16 overflow-x-hidden border-t-2 border-amber-300 border-opacity-40"
-  >
-    <div class="w-full px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+  <!-- =====================================================
+       FORMULARIO DE RESEÑA
+       ===================================================== -->
+  <section class="section bg-cream">
+    <div class="container-x">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-16">
+        <div class="lg:pt-2">
+          <span class="eyebrow">{{ "ui.eyebrow.testimonial" | transloco }}</span>
           <h2
-            class="text-4xl font-extrabold text-teal-600 sm:text-5xl leading-tight drop-shadow-sm"
+            class="heading-lg mt-4"
             appScrollReveal
             [revealAnimation]="'slide-up'"
             [revealDelay]="0"
           >
             {{ "home.testimonial.form.title" | transloco }}
           </h2>
-          <p
-            class="mt-6 text-xl text-slate-600 leading-relaxed"
-            appScrollReveal
-            [revealAnimation]="'slide-up'"
-            [revealDelay]="100"
-          >
+          <p class="lead mt-4">
             {{ "home.testimonial.form.subtitle" | transloco }}
           </p>
         </div>
 
         <form
           id="testimonialForm"
-          class="bg-white rounded-2xl p-8 shadow-[0_0_20px_rgba(13, 148, 136,0.15),_0_0_40px_rgba(13, 148, 136,0.1)] border border-amber-300 grid grid-cols-1 lg:grid-cols-2 gap-8"
+          class="card-flat grid grid-cols-1 gap-6 p-6 sm:p-8 md:grid-cols-2 lg:p-10"
           appScrollReveal
           [revealAnimation]="'slide-up'"
-          [revealDelay]="150"
+          [revealDelay]="100"
           #testimonialForm
         >
-          <!-- Columna Izquierda -->
-          <div class="space-y-6">
-            <!-- Nombre/Título -->
-            <div>
-              <label class="block text-sm font-semibold text-teal-600 mb-2">
-                {{ "home.testimonial.form.nameLabel" | transloco }}
-              </label>
-              <input
-                type="text"
-                placeholder="{{
-                  'home.testimonial.form.namePlaceholder' | transloco
-                }}"
-                class="w-full px-4 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all duration-300"
-                #nameInput
-              />
-            </div>
+          <div>
+            <label class="field-label">
+              {{ "home.testimonial.form.nameLabel" | transloco }}
+            </label>
+            <input
+              type="text"
+              placeholder="{{ 'home.testimonial.form.namePlaceholder' | transloco }}"
+              class="field"
+              #nameInput
+            />
+          </div>
 
-            <!-- Calificación en Estrellas -->
-            <div>
-              <label class="block text-sm font-semibold text-teal-600 mb-3">
-                {{ "home.testimonial.form.ratingLabel" | transloco }}
-              </label>
-              <div
-                class="flex items-center gap-2"
-                (mouseleave)="onStarMouseLeave()"
-              >
-                @for (star of [1, 2, 3, 4, 5]; track star) {
-                  <button
-                    type="button"
-                    (mousemove)="onStarMouseMove($event, star)"
-                    (click)="onStarClick($event, star)"
-                    class="focus:outline-none transition-transform duration-150 hover:scale-125 cursor-pointer bg-transparent border-none p-0 relative"
-                    [title]="
-                      (hoverTestimonialRating() ?? testimonialRating()) +
-                      ' ' +
-                      ('home.testimonial.form.ratingLabel' | transloco)
-                    "
-                  >
-                    <svg
-                      class="w-8 h-8"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <defs>
-                        <clipPath [id]="'clip-testimonial-' + star">
-                          <rect
-                            x="0"
-                            y="0"
-                            [attr.width]="getTestimonialStarWidth(star)"
-                            height="20"
-                          />
-                        </clipPath>
-                      </defs>
-
-                      <!-- Estrella de fondo (vacía / gris) -->
-                      <path
-                        class="text-gray-300"
-                        fill="currentColor"
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-
-                      <!-- Estrella rellena (amarilla) con clipPath -->
-                      <path
-                        fill="#fbbf24"
-                        [attr.clip-path]="'url(#clip-testimonial-' + star + ')'"
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                  </button>
+          <div>
+            <label class="field-label">
+              {{ "home.testimonial.form.ratingLabel" | transloco }}
+            </label>
+            <div class="flex h-12 items-center gap-1.5" (mouseleave)="onStarMouseLeave()">
+              @for (star of [1, 2, 3, 4, 5]; track star) {
+                <button
+                  type="button"
+                  (mousemove)="onStarMouseMove($event, star)"
+                  (click)="onStarClick($event, star)"
+                  class="relative cursor-pointer border-none bg-transparent p-0 transition-transform duration-150 hover:scale-110 focus:outline-none"
+                  [title]="
+                    (hoverTestimonialRating() ?? testimonialRating()) +
+                    ' ' +
+                    ('home.testimonial.form.ratingLabel' | transloco)
+                  "
+                >
+                  <svg class="h-7 w-7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <clipPath [id]="'clip-testimonial-' + star">
+                        <rect x="0" y="0" [attr.width]="getTestimonialStarWidth(star)" height="20" />
+                      </clipPath>
+                    </defs>
+                    <path
+                      fill="#e2e8f0"
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    />
+                    <path
+                      fill="#faa180"
+                      [attr.clip-path]="'url(#clip-testimonial-' + star + ')'"
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    />
+                  </svg>
+                </button>
+              }
+              <span class="ml-2 text-sm font-semibold tabular-nums text-slate-500">
+                @if (testimonialRating() > 0) {
+                  {{ testimonialRating() }} / 5
+                } @else {
+                  {{ "home.testimonial.form.ratingNone" | transloco }}
                 }
-                <span class="text-sm font-medium text-slate-600">
-                  @if (testimonialRating() > 0) {
-                    {{ testimonialRating() }} / 5
-                  } @else {
-                    {{ "home.testimonial.form.ratingNone" | transloco }}
-                  }
-                </span>
-              </div>
+              </span>
             </div>
           </div>
 
-          <!-- Columna Derecha -->
-          <div class="space-y-6 flex flex-col">
-            <!-- Comentario -->
-            <div class="flex-1 flex flex-col">
-              <label class="block text-sm font-semibold text-teal-600 mb-2">
-                {{ "home.testimonial.form.messageLabel" | transloco }}
-              </label>
-              <textarea
-                placeholder="{{
-                  'home.testimonial.form.messagePlaceholder' | transloco
-                }}"
-                class="w-full px-4 py-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all duration-300 resize-none flex-1"
-                #messageInput
-              ></textarea>
-            </div>
+          <div class="md:col-span-2">
+            <label class="field-label">
+              {{ "home.testimonial.form.messageLabel" | transloco }}
+            </label>
+            <textarea
+              rows="5"
+              placeholder="{{ 'home.testimonial.form.messagePlaceholder' | transloco }}"
+              class="field resize-none"
+              #messageInput
+            ></textarea>
+          </div>
 
-            <!-- Botón de Envío -->
+          <div class="flex justify-end md:col-span-2">
             <button
               type="button"
               (click)="submitTestimonial(nameInput.value, messageInput.value)"
               [disabled]="isTestimonialSubmitting()"
-              class="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg disabled:cursor-not-allowed"
+              class="btn-primary w-full sm:w-auto sm:min-w-[200px]"
             >
               @if (isTestimonialSubmitting()) {
                 <span>{{ "common.sending" | transloco }}</span>
@@ -1287,75 +870,122 @@
     </div>
   </section>
 
-  <!-- Sección para ir a contact o a about -->
-  <div class="bg-gradient-to-r from-orange-400 to-orange-200">
+  <!-- =====================================================
+       CTA FINAL (composición CSS)
+       ===================================================== -->
+  <section class="cta-art relative isolate overflow-hidden bg-brand-700">
+    <div class="cta-dots" aria-hidden="true"></div>
+    <div class="cta-rings" aria-hidden="true"></div>
+    <div class="cta-sun" aria-hidden="true"></div>
     <div
-      class="w-full py-10 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
+      class="container-x relative py-20 sm:py-24 lg:py-28"
       appScrollReveal
       [revealAnimation]="'slide-up'"
-      [revealDelay]="200"
+      [revealDelay]="100"
     >
-      <h2
-        class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl px-4 sm:px-0 drop-shadow-lg"
-      >
-        <span class="block text-white p-2 sm:p-0">{{
-          "home.footer.text" | transloco
-        }}</span>
-      </h2>
-      <div
-        class="mt-8 flex lg:mt-0 lg:flex-shrink-0 justify-center lg:justify-end pr-4 sm:pr-0"
-      >
-        <div class="inline-flex rounded-lg shadow-xl group">
-          <div>
-            <a
-              [routerLink]="['/contact']"
-              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-l-lg text-white bg-orange-400 hover:bg-white hover:text-orange-400 transition-all duration-300 hover:shadow-lg"
-            >
-              {{ "home.footer.leftbutton" | transloco }}
-            </a>
-          </div>
-          <div class="inline-flex rounded-md shadow-xl">
-            <a
-              [routerLink]="['/about']"
-              class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-bold rounded-r-lg text-white bg-orange-400 hover:bg-white hover:text-orange-400 transition-all duration-300 hover:shadow-lg"
-            >
-              {{ "home.footer.rightbutton" | transloco }}
-            </a>
-          </div>
+      <div class="max-w-2xl">
+        <span class="eyebrow-light">{{ "ui.eyebrow.contact" | transloco }}</span>
+        <h2 class="mt-5 text-3xl font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-white sm:text-5xl lg:text-6xl">
+          {{ "home.footer.text" | transloco }}
+        </h2>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a [routerLink]="['/contact']" class="btn-accent">
+            {{ "home.footer.leftbutton" | transloco }}
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a [routerLink]="['/about']" class="btn-outline-light">
+            {{ "home.footer.rightbutton" | transloco }}
+          </a>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Modal de Zoom de Imagen/Video -->
+  </section>
 </div>
 
 <style>
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
 
+  /* ===== CTA final ===== */
+  .cta-art {
+    background:
+      radial-gradient(
+        60rem 30rem at 0% 100%,
+        rgba(27, 1, 188, 0.9),
+        transparent 60%
+      ),
+      linear-gradient(120deg, #120852 0%, #1f0e8f 55%, #1b01bc 100%);
+  }
+  .cta-dots {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.16) 1px,
+      transparent 1.2px
+    );
+    background-size: 24px 24px;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 70%);
+  }
+  .cta-rings {
+    position: absolute;
+    z-index: -1;
+    right: -12rem;
+    top: 50%;
+    width: 48rem;
+    aspect-ratio: 1;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+      circle,
+      transparent 0 38px,
+      rgba(255, 255, 255, 0.09) 38px 39px
+    );
+  }
+  .cta-sun {
+    position: absolute;
+    z-index: -1;
+    right: 6rem;
+    top: 50%;
+    width: 13rem;
+    aspect-ratio: 1;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: linear-gradient(180deg, #fde7df 0%, #faa180 60%, #f08560 100%);
+    box-shadow:
+      0 0 0 22px rgba(250, 161, 128, 0.12),
+      0 0 0 48px rgba(250, 161, 128, 0.06),
+      0 0 140px 30px rgba(250, 161, 128, 0.35);
+  }
+  @media (max-width: 1023px) {
+    .cta-sun {
+      right: -4rem;
+      width: 9rem;
+      opacity: 0.55;
+    }
+    .cta-rings {
+      right: -22rem;
+    }
+  }
   /* Embla Carousel */
   .embla__viewport {
     overflow: hidden;
     width: 100%;
   }
-
   .embla__container {
     display: flex;
     touch-action: pan-y pinch-zoom;
   }
-
   .embla__slide {
-    flex: 0 0 100%;
+    flex: 0 0 88%;
     min-width: 0;
   }
-
-  @media (min-width: 768px) {
+  @media (min-width: 640px) {
+    .embla__slide {
+      flex: 0 0 50%;
+    }
+  }
+  @media (min-width: 1024px) {
     .embla__slide {
       flex: 0 0 33.3333%;
     }
@@ -1368,183 +998,31 @@
     overflow: hidden;
   }
 
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* Mejoras adicionales para el scroll suave */
-  .scroll-smooth {
-    scroll-behavior: smooth;
-  }
-
-  /* Animación personalizada para los botones de navegación */
-  @keyframes pulse-subtle {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-  }
-
-  .group:hover .animate-pulse-subtle {
-    animation: pulse-subtle 2s infinite;
-  }
-
-  @keyframes left-bounce {
-    0%,
-    100% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(-4px);
-    }
-  }
-
-  @keyframes right-bounce {
-    0%,
-    100% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(4px);
-    }
-  }
-
-  .left-arrow-bounce {
-    animation: left-bounce 1.5s infinite ease-in-out;
-  }
-
-  .right-arrow-bounce {
-    animation: right-bounce 1.5s infinite ease-in-out;
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   @keyframes zoom-in {
     from {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.96);
     }
     to {
       opacity: 1;
       transform: scale(1);
     }
   }
-
-  .animate-fade-in {
-    animation: fade-in 0.3s ease-out;
-  }
-
   .animate-zoom-in {
-    animation: zoom-in 0.4s ease-out;
+    animation: zoom-in 0.35s ease-out;
   }
 
-  /* Título expandible del modal de productos */
-  .modal-title {
-    line-height: 1.4;
-  }
-  .title-collapsed {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    white-space: normal;
-  }
-  .title-expanded {
-    display: block;
-    -webkit-box-orient: unset;
-    overflow: visible;
-  }
-
-  /* Animaciones del carrusel */
-  @keyframes slide-in-title {
-    0% {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slide-in-description {
-    0% {
-      opacity: 0;
-      transform: translateX(100px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .slide-in-title {
-    animation: slide-in-title 1.5s ease-out forwards;
-  }
-
-  .slide-in-description {
-    animation: slide-in-description 1.5s ease-out forwards;
-    animation-delay: 0.3s;
-  }
-
-  /* Animaciones de categorías y productos */
-  @keyframes slide-in-from-right {
-    0% {
-      opacity: 0;
-      transform: translateX(100px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slide-in-from-left {
-    0% {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .slide-in-from-right {
-    animation: slide-in-from-right 2s ease-out forwards;
-  }
-
-  .slide-in-from-left {
-    animation: slide-in-from-left 1.8s ease-out forwards;
-  }
-
-  /* Animación de caída desde arriba para el header */
   @keyframes slide-down-on-load {
-    0% {
+    from {
       opacity: 0;
-      transform: translateY(-30px);
+      transform: translateY(-16px);
     }
-    100% {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
   .animate-slide-down-on-load {
-    animation: slide-down-on-load 0.8s ease-out forwards;
+    animation: slide-down-on-load 0.7s ease-out both;
   }
 </style>

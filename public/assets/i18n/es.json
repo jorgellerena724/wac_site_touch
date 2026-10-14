@@ -1,4 +1,38 @@
 {
+  "ui": {
+    "company": "Lo que nos define",
+    "detail": {
+      "back": "Volver a servicios",
+      "options": "Opciones disponibles",
+      "selected": "Opción seleccionada",
+      "about": "Sobre esta experiencia",
+      "notFound": "No encontramos este servicio",
+      "notFoundText": "Es posible que ya no esté disponible. Explora el resto de nuestras experiencias.",
+      "related": "También te puede interesar",
+      "help": "¿Tienes dudas? Nuestro equipo te asesora sin compromiso.",
+      "photos": "fotos",
+      "optionsCount": "opciones"
+    },
+    "search": {
+      "title": "Encuentra tu próximo viaje",
+      "category": "Tipo de experiencia",
+      "button": "Buscar"
+    },
+    "eyebrow": {
+      "services": "Experiencias destacadas",
+      "why": "Por qué viajar con nosotros",
+      "reviews": "Opiniones de viajeros",
+      "testimonial": "Tu opinión cuenta",
+      "about": "Nuestra historia",
+      "contact": "Atención personalizada"
+    },
+    "from": "Desde",
+    "perPerson": "Precio por paquete",
+    "viewAll": "Ver todo",
+    "whatsapp": "Escríbenos por WhatsApp",
+    "whatsappText": "Respuesta rápida de nuestro equipo de asesores de viaje.",
+    "explore": "Explorar"
+  },
   "notifications": {
     "success": {
       "message_sent": "Mensaje enviado correctamente",

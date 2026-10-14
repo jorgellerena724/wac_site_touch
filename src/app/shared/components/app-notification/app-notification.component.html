@@ -4,15 +4,15 @@
   @for (notification of notifications(); track notification.id) {
   <div
     [ngClass]="{
-      'bg-green-50/80 border-green-400 text-green-800':
+      'border-emerald-400 text-emerald-800':
         notification.type === 'success',
-      'bg-red-50/80 border-red-400 text-red-800': notification.type === 'error',
-      'bg-blue-50/80 border-blue-400 text-blue-800':
+      'border-rose-400 text-rose-800': notification.type === 'error',
+      'border-brand-600 text-brand-800':
         notification.type === 'info',
-      'bg-yellow-50/80 border-yellow-400 text-yellow-800':
+      'border-coral-400 text-yellow-800':
         notification.type === 'warning'
     }"
-    class="flex items-center w-full min-w-[320px] max-w-xs sm:max-w-sm lg:max-w-md p-4 mb-4 border-l-4 rounded-lg shadow-lg backdrop-blur-sm transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+    class="flex items-center w-full min-w-[300px] max-w-xs sm:max-w-sm lg:max-w-md p-4 mb-3 border-l-4 rounded-md bg-white shadow-[0_18px_40px_-12px_rgba(26,20,70,0.35)] ring-1 ring-slate-200 transition-all duration-300 animate-fade-in"
     role="alert"
   >
     <!-- Icon Container -->
@@ -20,7 +20,7 @@
       [ngClass]="{
         'text-green-600': notification.type === 'success',
         'text-red-600': notification.type === 'error',
-        'text-blue-600': notification.type === 'info',
+        'text-brand-600': notification.type === 'info',
         'text-yellow-600': notification.type === 'warning'
       }"
       class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg bg-opacity-10"
@@ -88,9 +88,9 @@
       type="button"
       (click)="removeNotification(notification)"
       [ngClass]="{
-        'text-green-600 hover:text-green-800': notification.type === 'success',
-        'text-red-600 hover:text-red-800': notification.type === 'error',
-        'text-blue-600 hover:text-blue-800': notification.type === 'info',
+        'text-green-600 hover:text-emerald-800': notification.type === 'success',
+        'text-red-600 hover:text-rose-800': notification.type === 'error',
+        'text-brand-600 hover:text-brand-800': notification.type === 'info',
         'text-yellow-600 hover:text-yellow-800': notification.type === 'warning'
       }"
       class="mx-2 -my-1.5 bg-transparent focus:outline-none"

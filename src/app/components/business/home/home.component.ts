@@ -28,7 +28,6 @@ import { ModalService } from '../../../shared/services/system/modal.service';
 import { NotificationService } from '../../../shared/services/system/notification.service';
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
-import { BorderBeamDirective } from '../../../shared/directives/border-beam.directive';
 import EmblaCarousel from 'embla-carousel';
 
 @Component({
@@ -39,7 +38,6 @@ import EmblaCarousel from 'embla-carousel';
     CommonModule,
     TranslocoModule,
     ScrollRevealDirective,
-    BorderBeamDirective,
   ],
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -678,6 +676,11 @@ export class HomeComponent {
   }
 
   // ===== IMÃGENES =====
+  getCardMinPrice(product: ProductData): number | null {
+    const variants = product.variants ?? [];
+    return variants.length ? Math.min(...variants.map((v) => v.price)) : null;
+  }
+
   getCardImageUrl(product: ProductData): string {
     return product.imageUrl || this.DEFAULT_IMAGE;
   }

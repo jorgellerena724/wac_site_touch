@@ -1,4 +1,38 @@
 {
+  "ui": {
+    "company": "What defines us",
+    "detail": {
+      "back": "Back to services",
+      "options": "Available options",
+      "selected": "Selected option",
+      "about": "About this experience",
+      "notFound": "We couldn't find this service",
+      "notFoundText": "It may no longer be available. Explore the rest of our experiences.",
+      "related": "You may also like",
+      "help": "Questions? Our team will advise you with no obligation.",
+      "photos": "photos",
+      "optionsCount": "options"
+    },
+    "search": {
+      "title": "Find your next trip",
+      "category": "Type of experience",
+      "button": "Search"
+    },
+    "eyebrow": {
+      "services": "Featured experiences",
+      "why": "Why travel with us",
+      "reviews": "Traveler reviews",
+      "testimonial": "Your opinion matters",
+      "about": "Our story",
+      "contact": "Personalized service"
+    },
+    "from": "From",
+    "perPerson": "Package price",
+    "viewAll": "View all",
+    "whatsapp": "Message us on WhatsApp",
+    "whatsappText": "A quick reply from our team of travel advisors.",
+    "explore": "Explore"
+  },
   "notifications": {
     "success": {
       "message_sent": "Message sent successfully",

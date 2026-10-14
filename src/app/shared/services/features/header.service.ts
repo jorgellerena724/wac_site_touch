@@ -30,7 +30,9 @@ export class HeaderService {
 
   // Cargar datos del header
   loadHeaderData(): void {
-    this._loading.set(true);
+    // Solo se muestra estado de carga la primera vez; las recargas son
+    // silenciosas para no hacer parpadear el logo del navbar.
+    this._loading.set(this._headerData() === null);
     this._error.set(null);
 
     const headers = new HttpHeaders({
@@ -46,7 +48,9 @@ export class HeaderService {
         map((data) => (data.length > 0 ? data[0] : null)),
         tap({
           next: (data) => {
-            this._headerData.set(data);
+            if (!this.isSameHeader(this._headerData(), data)) {
+              this._headerData.set(data);
+            }
             this._loading.set(false);
           },
           error: (error) => {
@@ -63,6 +67,12 @@ export class HeaderService {
         })
       )
       .subscribe();
+  }
+
+  private isSameHeader(a: HeaderData | null, b: HeaderData | null): boolean {
+    return (
+      a?.id === b?.id && a?.name === b?.name && a?.logo === b?.logo
+    );
   }
 
   // Setear datos manualmente (útil para testing o inicialización)

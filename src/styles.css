@@ -2,28 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #fafaf9;
+/* =========================================================
+   Base
+   ========================================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-ink;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background-color: #c8bff3;
+    color: #1f0e8f;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1b01bc;
+    outline-offset: 2px;
+  }
 }
 
+/* =========================================================
+   Componentes
+   ========================================================= */
+@layer components {
+  /* Layout */
+  .container-x {
+    @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-10;
+  }
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+  /* Compensa la altura del navbar fijo */
+  .pt-nav {
+    @apply pt-16 lg:pt-[72px];
+  }
+  .scroll-mt-nav {
+    @apply scroll-mt-16 lg:scroll-mt-[72px];
+  }
+
+  /* Tipografía */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600 sm:text-xs;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-coral-400;
+  }
+  .eyebrow-light {
+    @apply eyebrow text-coral-300;
+  }
+  .heading-xl {
+    @apply text-4xl font-extrabold uppercase leading-[0.98] tracking-[-0.02em] sm:text-6xl lg:text-7xl;
+  }
+  .heading-lg {
+    @apply text-3xl font-bold leading-[1.1] tracking-[-0.02em] sm:text-4xl lg:text-[44px];
+  }
+  .heading-md {
+    @apply text-2xl font-bold leading-tight tracking-[-0.015em] sm:text-3xl;
+  }
+  .lead {
+    @apply text-base leading-relaxed text-slate-600 sm:text-[17px];
+  }
+
+  /* Botones */
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2.5 rounded-[3px] px-7 text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600;
+  }
+  .btn-accent {
+    @apply btn bg-coral-400 text-ink hover:bg-coral-500 hover:text-white focus-visible:ring-coral-400;
+  }
+  .btn-light {
+    @apply btn bg-white text-brand-700 hover:bg-brand-50;
+  }
+  .btn-outline {
+    @apply btn border border-ink/20 bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-white;
+  }
+  .btn-outline-light {
+    @apply btn border border-white/50 bg-transparent text-white hover:border-white hover:bg-white hover:text-ink;
+  }
+
+  /* Enlaces con flecha */
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.1em] text-brand-600 transition-colors hover:text-brand-800;
+  }
+
+  /* Botones cuadrados de icono */
+  .icon-sq {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-[3px] border border-ink/15 bg-white text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-30;
+  }
+  .icon-sq-light {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-[3px] border border-white/40 bg-ink/20 text-white backdrop-blur-sm transition-colors duration-200 hover:border-white hover:bg-white hover:text-ink focus:outline-none;
+  }
+
+  /* Tarjetas */
+  .tile {
+    @apply relative overflow-hidden rounded-md bg-white;
+  }
+  .card-flat {
+    @apply rounded-md border border-slate-200 bg-white;
+  }
+
+  /* Formularios */
+  .field-label {
+    @apply mb-2 block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500;
+  }
+  .field {
+    @apply h-12 w-full rounded-[3px] border border-slate-300 bg-white px-4 text-[15px] text-ink placeholder-slate-400 transition-colors duration-200 focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600;
+  }
+  textarea.field {
+    @apply h-auto py-3;
+  }
+
+  /* Etiquetas */
+  .badge {
+    @apply inline-flex items-center rounded-[2px] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em];
+  }
+
+  /* Pestañas */
+  .tab {
+    @apply relative whitespace-nowrap px-1 pb-4 pt-2 text-[13px] font-bold uppercase tracking-[0.1em] text-slate-500 transition-colors duration-200 hover:text-ink;
+  }
+  .tab::after {
+    content: "";
+    @apply absolute inset-x-0 bottom-0 h-[3px] scale-x-0 bg-brand-600 transition-transform duration-300;
+  }
+  .tab-active {
+    @apply text-ink;
+  }
+  .tab-active::after {
+    @apply scale-x-100;
+  }
+}
+
+/* =========================================================
+   Utilidades
+   ========================================================= */
 .custom-scrollbar {
   scrollbar-width: thin;
+  scrollbar-color: rgba(26, 20, 70, 0.25) transparent;
   -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(26, 20, 70, 0.25);
+    border-radius: 999px;
   }
   &::-webkit-scrollbar-track {
     background: transparent;
   }
+}
+
+.custom-scrollbar-light {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 .dashboard-mobile-menu-button {
@@ -33,9 +193,68 @@ body {
   .dashboard-mobile-menu-button {
     display: block;
   }
-}
-@media (max-width: 767px) {
   aside {
     display: none;
+  }
+}
+
+/* Animaciones globales */
+@keyframes ui-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ui-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ui-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ui-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+.animate-fade-in {
+  animation: ui-fade-in 0.25s ease-out;
+}
+.animate-slide-down {
+  animation: ui-slide-down 0.25s ease-out;
+}
+.animate-rise {
+  animation: ui-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-kenburns {
+  animation: ui-kenburns 9s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

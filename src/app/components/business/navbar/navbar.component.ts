@@ -136,10 +136,17 @@ export class NavbarComponent {
       });
   }
 
+  private loadedLogoName: string | null = null;
+
   private loadLogoImage(logoName: string): void {
     if (this.isBrowser) {
       if (!logoName?.trim()) {
         this.logoError.set(true);
+        return;
+      }
+
+      // Evita mostrar el skeleton de nuevo si el logo ya está cargado
+      if (logoName === this.loadedLogoName && !this.logoError()) {
         return;
       }
 
@@ -154,6 +161,7 @@ export class NavbarComponent {
         img.src = imageUrl;
 
         img.onload = () => {
+          this.loadedLogoName = logoName;
           this.logoLoading.set(false);
         };
 

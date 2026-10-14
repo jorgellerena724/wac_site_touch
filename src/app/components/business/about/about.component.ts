@@ -17,7 +17,6 @@ import { ImageUrlService } from '../../../shared/services/system/image-url.servi
 import { HomeData } from '../../../shared/interfaces/homeData.interface';
 import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
-import { BorderBeamDirective } from '../../../shared/directives/border-beam.directive';
 
 // =========================================================
 // 1. COMPONENTE HIJO: EQUIPO (MANAGERS)
@@ -25,48 +24,28 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
 @Component({
   selector: 'app-about-team',
   standalone: true,
-  imports: [TranslocoModule, ScrollRevealDirective, BorderBeamDirective],
+  imports: [TranslocoModule, ScrollRevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [],
   template: `
     @if (isLoading()) {
-      <div class="py-16 bg-white/50 border-t border-surface">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center">
-            <div
-              class="h-8 bg-gray-200 rounded-full w-48 mx-auto mb-4 animate-pulse"
-            ></div>
-            <div
-              class="h-10 bg-gray-200 rounded w-3/4 mx-auto mb-2 animate-pulse"
-            ></div>
-            <div
-              class="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse"
-            ></div>
-          </div>
-          <div class="mt-20 flex flex-wrap justify-center gap-8">
-            @for (i of [1, 2, 3]; track i) {
-              <div class="text-center">
-                <div
-                  class="mx-auto h-56 w-56 rounded-full bg-gray-200 animate-pulse"
-                ></div>
-                <div class="mt-6">
-                  <div class="h-6 bg-gray-200 rounded w-32 mx-auto mb-2"></div>
-                  <div class="h-4 bg-gray-200 rounded w-24 mx-auto mb-4"></div>
-                  <div class="h-3 bg-gray-200 rounded w-48 mx-auto"></div>
-                </div>
-              </div>
+      <div class="section bg-cream">
+        <div class="container-x">
+          <div class="h-3 w-40 animate-pulse rounded-sm bg-slate-200"></div>
+          <div class="mt-4 h-10 w-2/3 animate-pulse rounded-sm bg-slate-200"></div>
+          <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            @for (i of [1, 2, 3, 4]; track i) {
+              <div class="aspect-[4/5] animate-pulse rounded-md bg-slate-200"></div>
             }
           </div>
         </div>
       </div>
     } @else if (hasData()) {
-      <div
-        class="py-16 bg-white/50 border-t border-surface overflow-hidden relative"
-      >
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div class="text-center">
+      <section class="section bg-cream">
+        <div class="container-x">
+          <div class="max-w-2xl">
             <h2
-              class="inline-block text-sm font-bold text-primary-dark tracking-wider uppercase bg-gradient-to-r from-primary-light to-accent-light px-4 py-2 rounded-full border border-surface"
+              class="eyebrow"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="0"
@@ -74,7 +53,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
               {{ 'about.team.title' | transloco }}
             </h2>
             <p
-              class="mt-4 text-3xl font-extrabold text-primary sm:text-4xl drop-shadow-sm"
+              class="heading-lg mt-4"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="100"
@@ -82,7 +61,7 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
               {{ 'about.team.subtitle' | transloco }}
             </p>
             <p
-              class="mt-4 max-w-2xl text-xl text-slate-600 mx-auto leading-relaxed"
+              class="lead mt-4"
               appScrollReveal
               [revealAnimation]="'slide-up'"
               [revealDelay]="200"
@@ -91,25 +70,20 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
             </p>
           </div>
 
-          <div class="mt-20 flex flex-wrap justify-center gap-8">
+          <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             @for (
               manager of managerData();
               track trackByFn($index, manager);
               let i = $index
             ) {
-              <div
-                class="group relative text-center max-w-[320px] transform transition-all duration-300 hover:-translate-y-2 mt-4 cursor-pointer"
+              <article
+                class="group flex flex-col"
                 appScrollReveal
                 [revealAnimation]="'slide-up'"
                 [revealDelay]="i * 100"
               >
                 <div
-                  class="relative mx-auto h-56 w-56 rounded-full overflow-hidden shadow-[0_0_20px_rgba(28, 119, 144,0.15)] ring-4 ring-surface group-hover:shadow-[0_0_30px_rgba(28, 119, 144,0.25)] group-hover:ring-accent transition-all duration-300 cursor-pointer"
-                  appBorderBeam
-                  [beamColor]="'rgba(28, 119, 144, 0.7)'"
-                  [beamWidth]="'3px'"
-                  [beamDuration]="'5s'"
-                  [beamDelay]="i * 0.6 + 's'"
+                  class="relative aspect-[4/5] cursor-zoom-in overflow-hidden rounded-md bg-slate-200"
                   (click)="
                     manager.imageUrl && !isUsingDefault(manager.imageUrl) &&
                     onZoom.emit({
@@ -121,40 +95,38 @@ import { BorderBeamDirective } from '../../../shared/directives/border-beam.dire
                   <img
                     [src]="manager.imageUrl"
                     (error)="handleImageError($event)"
-                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     [alt]="manager.title"
                     loading="lazy"
                   />
-                </div>
-
-                  <div class="mt-2 text-center">
-                  <div class="flex items-center justify-center gap-2">
-                    <h3
-                      class="text-xl font-semibold text-center text-primary-dark transition-colors duration-300 group-hover:text-primary-dark"
-                    >
+                  <div
+                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"
+                  ></div>
+                  <div class="absolute inset-x-0 bottom-0 p-5">
+                    <span class="badge bg-coral-400 text-ink">
+                      {{ manager.charge }}
+                    </span>
+                    <h3 class="mt-3 text-xl font-bold tracking-tight text-white">
                       {{ manager.title }}
                     </h3>
                   </div>
-                  <div
-                    class="mx-auto w-fit mt-1 px-3 py-1 bg-primary-light text-primary-dark rounded-full text-sm font-medium transition-colors duration-300 group-hover:bg-surface-light"
-                  >
-                    {{ manager.charge }}
-                  </div>
+                </div>
+                @if (manager.description) {
                   <p
-                    class="mt-4 text-base text-slate-600 leading-relaxed max-w-xs mx-auto whitespace-pre-line transition-colors duration-300 group-hover:text-slate-700"
+                    class="mt-4 whitespace-pre-line text-sm leading-relaxed text-slate-600"
                   >
                     {{ manager.description }}
                   </p>
-                </div>
-              </div>
+                }
+              </article>
             }
           </div>
         </div>
-      </div>
+      </section>
     } @else {
-      <div class="py-16 bg-white/50 border-t border-surface">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p class="text-slate-500 text-lg">
+      <div class="section bg-cream">
+        <div class="container-x text-center">
+          <p class="text-base text-slate-500">
             {{ 'about.nodata.team' | transloco }}
           </p>
         </div>

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
@@ -21,7 +21,9 @@ import { getSocialNetworkConfig } from '../../../shared/constants/social-network
 export class FooterComponent implements OnInit {
   currentYear: number = new Date().getFullYear();
   currentRoute = '';
-  companyName: string = '';
+  // Nombre de respaldo cuando el header no trae nombre de empresa
+  private readonly DEFAULT_COMPANY_NAME = 'ReefDMC';
+  readonly companyName = signal(this.DEFAULT_COMPANY_NAME);
 
   private contactState = inject(ContactStateService);
   private sanitizer = inject(DomSanitizer);
@@ -71,9 +73,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     this.contactState.loadContactData();
     this.headerService.headerData$.subscribe((data) => {
-      if (data) {
-        this.companyName = data.name;
-      }
+      this.companyName.set(data?.name?.trim() || this.DEFAULT_COMPANY_NAME);
     });
   }
 

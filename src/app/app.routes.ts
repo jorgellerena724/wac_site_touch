@@ -38,6 +38,18 @@ export const routes: Routes = [
       priority: 'low',
     },
   },
+  {
+    path: 'product/:id',
+    loadComponent: () =>
+      import(
+        '../app/components/business/product-detail/product-detail.component'
+      ).then((m) => m.ProductDetailComponent),
+    data: {
+      renderMode: RenderMode.Server,
+      preload: false,
+      priority: 'medium',
+    },
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
