@@ -30,14 +30,37 @@ const angularApp = new AngularNodeAppEngine();
  * Serve static files from /browser
  * Importante: `redirect: false` previene redirecciones internas;
  * `index: false` evita que directorios sin index.html busquen en rutas de la app.
+ *
+ * Políticas de cache:
+ * - Documento HTML (SSR): no-cache, para que el navegador siempre revalide
+ *   y cargue cuanto antes el bundle de la última versión.
+ * - Assets con ?v=BUILD_TS: inmutables 1 año (solo cambian con un deploy).
+ * - Bundles .js/.css: con outputHashing=all el nombre ya es único por build,
+ *   por lo que también son inmutables.
+ * - Resto sin ?v=: cache corto con revalidación (ETag/Last-Modified).
  */
+app.use((req, res, next) => {
+  res.locals['versioned'] = Boolean(req.query['v']);
+  res.setHeader('Cache-Control', 'no-cache');
+  next();
+});
+
+const IMMUTABLE_CACHE = 'public, max-age=31536000, immutable';
+const SHORT_CACHE = 'public, max-age=300, must-revalidate';
+
 app.use(
   express.static(browserDistFolder, {
-    maxAge: '1y',
     index: false,
     redirect: false,
     lastModified: true,
     etag: true,
+    setHeaders: (res, filePath) => {
+      const hashedBundle = /\.[cm]?js$/.test(filePath) || filePath.endsWith('.css');
+      res.setHeader(
+        'Cache-Control',
+        res.locals['versioned'] || hashedBundle ? IMMUTABLE_CACHE : SHORT_CACHE,
+      );
+    },
   }),
 );
 

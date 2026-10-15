@@ -15,7 +15,6 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { AboutStateService } from '../../../shared/services/features/about-state.service';
 import { ImageUrlService } from '../../../shared/services/system/image-url.service';
 import { HomeData } from '../../../shared/interfaces/homeData.interface';
-import { environment } from '../../../../environments/environment';
 import { ScrollRevealDirective } from '../../../shared/directives/scroll-reveal.directive';
 
 // =========================================================
@@ -221,7 +220,7 @@ export class AboutComponent {
 
   // Constantes
   protected readonly DEFAULT_IMAGE = this.imageUrls.defaultImage('content');
-  protected readonly path = environment.staticImgPath;
+  protected readonly heroImage = this.imageUrls.static('about.jpg');
 
   constructor() {
     // Cargar datos iniciales

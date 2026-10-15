@@ -9,7 +9,7 @@ export const environment = {
   api_security: `${apiUrl}auth/`,
   imgPath: imgPath,
   staticImgPath: staticImgPath,
-  BUILD_TS: 1791008108,
+  BUILD_TS: 1792070097,
   FRONT_TOKEN:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlZWZkbWNAc2hpcmthc29mdC5jb20iLCJmdWxsX25hbWUiOiJSZWVmIERNQyIsImNsaWVudCI6InJlZWZfZG1jIiwic291cmNlIjoid2Vic2l0ZSJ9.E0Fng2cCyslBndaqh8uMtH0tP33uQyDgnN7CaxXFJMw',
 };

@@ -30,6 +30,10 @@ export class ImageUrlService {
     return this.withVersion(this.resolve(name));
   }
 
+  static(name: string): string {
+    return `${this.staticImgPath}${name}${this.query()}`;
+  }
+
   defaultImage(kind: ImageKind = 'content'): string {
     return `${this.staticImgPath}${DEFAULT_FILES[kind]}${this.query()}`;
   }
