@@ -8,8 +8,6 @@ import {
   inject,
   PLATFORM_ID,
   effect,
-  afterNextRender,
-  Injector,
 } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
@@ -21,7 +19,6 @@ import { NotificationComponent } from './shared/components/app-notification/app-
 import { TranslocoModule } from '@jsverse/transloco';
 import { ChatWidgetComponent } from './shared/components/chat-widget/chat-widget.component';
 import { ModalComponent } from './shared/components/app-modal/app-modal.component';
-import { environment } from '../environments/environment';
 import { SeoService } from './shared/services/system/seo.service';
 
 @Component({
@@ -44,7 +41,6 @@ export class AppComponent {
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly seoService = inject(SeoService);
-  private readonly injector = inject(Injector);
 
   // ViewChild moderna con signal
   // Opcional: el widget vive dentro de un @defer y no existe hasta el primer click
@@ -55,7 +51,6 @@ export class AppComponent {
   // Signals para el estado
   readonly isBrowser = isPlatformBrowser(this.platformId);
   readonly currentRoute = signal('');
-  readonly showUpdateNotification = signal(false);
 
   // Convertir el observable de navegación a signal
   private readonly navigationEnd$ = this.router.events.pipe(
@@ -68,23 +63,6 @@ export class AppComponent {
   });
 
   constructor() {
-    if (this.isBrowser) {
-      afterNextRender(
-        () => {
-          // Verificar actualizaciones al cargar la app
-          this.checkForUpdates();
-
-          // Verificar cuando el usuario vuelve a la pestaña
-          document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-              this.checkForUpdates();
-            }
-          });
-        },
-        { injector: this.injector },
-      );
-    }
-
     // Abrir el chat en cuanto el bloque @defer termine de montar el widget
     effect(() => {
       const widget = this.chatWidget();
@@ -103,10 +81,6 @@ export class AppComponent {
       const url = this.currentUrl();
       if (url) {
         this.handleRouteChange(url);
-        // Verificar actualizaciones en cada cambio de ruta
-        if (this.isBrowser) {
-          this.checkForUpdates();
-        }
       }
     });
 
@@ -163,52 +137,5 @@ export class AppComponent {
   // Computed signal para el estado del chat
   get isChatOpen() {
     return this.chatWidget()?.isChatOpen() ?? false;
-  }
-
-  // Verificar si hay una nueva versión disponible
-  private checkForUpdates(): void {
-    if (!this.isBrowser) return;
-
-    const storedTs = localStorage.getItem('app-build-ts');
-    const currentTs = environment.BUILD_TS;
-
-    if (!currentTs) return;
-
-    // Primera visita: guardar y salir
-    if (!storedTs) {
-      localStorage.setItem('app-build-ts', String(currentTs));
-      return;
-    }
-
-    // Si el timestamp actual es diferente al guardado → nueva versión
-    if (String(currentTs) !== storedTs) {
-      this.showUpdateNotification.set(true);
-    }
-  }
-
-  // Recargar la aplicación para obtener la nueva versión
-  reloadApp(): void {
-    if (!this.isBrowser) return;
-
-    // Guardar el timestamp actual para no mostrar la notificación de nuevo
-    localStorage.setItem('app-build-ts', String(environment.BUILD_TS));
-
-    // Limpiar el cache del service worker si existe
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((registrations) => {
-        registrations.forEach((registration) => registration.unregister());
-      });
-    }
-
-    // Limpiar cache del navegador y recargar
-    caches?.keys().then((names) => {
-      names.forEach((name) => caches.delete(name));
-    });
-
-    // Ocultar la notificación
-    this.showUpdateNotification.set(false);
-
-    // Recargar forzando desde el servidor
-    window.location.reload();
   }
 }

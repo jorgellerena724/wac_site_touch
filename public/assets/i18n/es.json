@@ -24,6 +24,7 @@
       "reviews": "Opiniones de viajeros",
       "testimonial": "Tu opinión cuenta",
       "about": "Nuestra historia",
+      "company": "Nuestra esencia",
       "contact": "Atención personalizada"
     },
     "from": "Desde",
@@ -280,7 +281,6 @@
   "common": {
     "contact": "Contactar",
     "scrollTop": "Ir arriba",
-    "updateAvailable": "Nueva versi\u00f3n disponible - Actualizar",
     "loading": "Cargando...",
     "sending": "Enviando...",
     "videoNotSupported": "Tu navegador no soporta la etiqueta de video.",

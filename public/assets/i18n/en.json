@@ -24,6 +24,7 @@
       "reviews": "Traveler reviews",
       "testimonial": "Your opinion matters",
       "about": "Our story",
+      "company": "Our essence",
       "contact": "Personalized service"
     },
     "from": "From",
@@ -278,7 +279,6 @@
   "common": {
     "contact": "Contact",
     "scrollTop": "Go to top",
-    "updateAvailable": "New version available - Update",
     "loading": "Loading...",
     "sending": "Sending...",
     "videoNotSupported": "Your browser does not support the video tag.",

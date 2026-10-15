@@ -13,30 +13,6 @@
   <!-- Botón flotante para ir al navbar -->
   <!-- Contenedor principal de los botones flotantes -->
   <div class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 group z-50 flex flex-col items-center gap-3">
-    <!-- Botón de actualización de versión -->
-    @if (showUpdateNotification()) {
-      <button
-        (click)="reloadApp()"
-        class="w-12 h-12 bg-white text-ink border border-slate-200 rounded-[3px] shadow-[0_10px_30px_-10px_rgba(26,20,70,0.35)] transition-colors duration-200 flex items-center justify-center hover:border-ink"
-        [title]="'common.updateAvailable' | transloco"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 rotate-animation"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          />
-        </svg>
-      </button>
-    }
-
     <!-- Botón de scroll arriba -->
     <!-- 
     <button
@@ -159,18 +135,6 @@
     }
     .pulse-animation {
       animation: pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(-360deg);
-      }
-    }
-    .rotate-animation {
-      animation: rotate 2s linear infinite;
     }
 
     @keyframes colorPulse {
